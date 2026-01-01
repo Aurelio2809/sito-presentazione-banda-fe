@@ -1,0 +1,211 @@
+@reference "../../../../../styles.css";
+
+/* --- LAYOUT APPLE-STYLE (sticky + triggers) --- */
+.appleScroll {
+  @apply relative;
+}
+
+/* Ogni trigger = 100vh: costruisce lo scroll */
+.appleScroll__triggers {
+  @apply relative;
+}
+.appleScroll__trigger {
+  @apply h-screen;
+}
+
+/* Stack sticky: sempre fisso durante lo scroll */
+.appleScroll__stack {
+  @apply pointer-events-none sticky top-0 h-screen overflow-hidden;
+}
+
+/* Ogni slide è “sovrapposta” a schermo intero */
+.slide {
+  @apply pointer-events-none absolute inset-0 flex items-center;
+  @apply px-4 md:px-10;
+}
+
+/* contenitore centrale */
+.slide__inner {
+  @apply pointer-events-auto mx-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-2 md:gap-10;
+}
+
+/* Alternanza sx/dx (Apple vibe) */
+.slide[data-side="left"] .sketchCard { @apply md:order-1; }
+.slide[data-side="left"] .media      { @apply md:order-2; }
+
+.slide[data-side="right"] .sketchCard { @apply md:order-2; }
+.slide[data-side="right"] .media      { @apply md:order-1; }
+
+/* --- ANIMAZIONI: entra da sx/dx, esce e “sparisce” sopra --- */
+.slide {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0) scale(0.98);
+  filter: blur(6px);
+  transition:
+    opacity 420ms ease,
+    transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 650ms ease;
+  will-change: opacity, transform, filter;
+}
+
+/* Slide attiva = pienamente visibile */
+.slide.is-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+}
+
+/* Slide “prima” (quella sopra) deve sparire mentre scendi */
+.slide.is-before {
+  opacity: 0;
+  transform: translate3d(0, -22px, 0) scale(0.985);
+  filter: blur(8px);
+}
+
+/* Slide “dopo” resta pronta sotto */
+.slide.is-after {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0) scale(0.985);
+  filter: blur(8px);
+}
+
+/* Ingresso laterale per la card: Apple-like */
+/* La card ha sempre la transizione */
+.sketchCard {
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 420ms ease;
+  will-change: transform, opacity;
+}
+
+/* Stato attivo: centrata */
+.slide.is-active .sketchCard {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+/* Stato “dopo”: pronta ad entrare dal lato */
+.slide[data-side="left"].is-after .sketchCard {
+  transform: translate3d(-28px, 0, 0);
+  opacity: 0;
+}
+.slide[data-side="right"].is-after .sketchCard {
+  transform: translate3d(28px, 0, 0);
+  opacity: 0;
+}
+
+/* Stato “prima”: esce leggermente verso l’alto (mentre svanisce) */
+.slide.is-before .sketchCard {
+  transform: translate3d(0, -10px, 0);
+  opacity: 0;
+}
+
+/* --- CARD “SCHIZZO ARTISTICO GIALLO” --- */
+.sketchCard {
+  @apply relative overflow-hidden rounded-[28px] border border-white/10 p-6 md:p-8;
+  background: color-mix(in srgb, var(--color-banda-gold-400) 92%, white 8%);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+}
+
+/* bordi “irregolari” con clip-path */
+.sketchCard {
+  clip-path: polygon(
+    2% 6%, 10% 2%, 24% 3%, 40% 2%, 58% 3%, 72% 2%, 90% 4%, 98% 10%,
+    97% 28%, 99% 44%, 97% 62%, 98% 78%, 96% 92%, 88% 98%, 70% 97%,
+    52% 98%, 36% 97%, 18% 98%, 6% 94%, 2% 86%, 3% 70%, 2% 52%,
+    3% 34%
+  );
+}
+
+/* “texture” tipo marker/penna */
+.sketchCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      115deg,
+      rgba(0,0,0,0.05) 0px,
+      rgba(0,0,0,0.05) 2px,
+      rgba(255,255,255,0) 2px,
+      rgba(255,255,255,0) 10px
+    );
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* “bordo schizzato” sopra */
+.sketchCard::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 34px;
+  border: 2px solid rgba(0,0,0,0.18);
+  transform: rotate(-0.6deg);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.sketchCard__tag {
+  @apply inline-flex w-fit rounded-full border border-black/15 bg-black/5 px-3 py-1 text-xs font-semibold;
+  color: rgba(0,0,0,0.70);
+}
+
+.sketchCard__title {
+  @apply mt-4 text-2xl font-semibold tracking-tight md:text-4xl;
+  color: rgba(0,0,0,0.90);
+}
+
+.sketchCard__text {
+  @apply mt-4 text-sm leading-relaxed md:text-base;
+  color: rgba(0,0,0,0.72);
+}
+
+.sketchCard__actions {
+  @apply mt-6 flex flex-wrap gap-3;
+}
+
+.sketchBtn {
+  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold transition;
+  background: rgba(11,11,13,0.92);
+  color: white;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+}
+.sketchBtn:hover {
+  transform: translateY(-2px);
+  background: rgba(11,11,13,0.98);
+}
+.sketchBtn:active {
+  transform: translateY(0px);
+}
+
+/* --- MEDIA (immagine moderna) --- */
+.media__frame {
+  @apply overflow-hidden rounded-3xl border border-white/10;
+  background: radial-gradient(600px 240px at 30% 0%, rgba(255,255,255,0.06), rgba(0,0,0,0));
+  box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+}
+
+.media__img {
+  @apply h-[280px] w-full object-cover md:h-[520px];
+  transform: scale(1.02);
+  transition: transform 650ms ease;
+  filter: saturate(1.03) contrast(1.03);
+}
+.slide.is-active .media__img {
+  transform: scale(1.07);
+}
+
+/* Accessibilità */
+@media (prefers-reduced-motion: reduce) {
+  .slide,
+  .sketchCard,
+  .media__img,
+  .sketchBtn {
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

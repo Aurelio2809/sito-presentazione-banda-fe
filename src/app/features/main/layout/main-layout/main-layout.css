@@ -4,9 +4,14 @@
   @apply min-h-screen bg-banda-black text-banda-white;
 }
 
-/* HEADER */
+/* HEADER: ora rosso, più “barra” */
 .header {
-  @apply sticky top-0 z-50 border-b border-white/10 bg-banda-black/70 backdrop-blur;
+  @apply sticky top-0 z-50 border-b border-white/10 backdrop-blur;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-banda-red-700) 92%, black 8%),
+    color-mix(in srgb, var(--color-banda-red-500) 78%, black 22%)
+  );
 }
 
 .header__inner {
@@ -19,7 +24,12 @@
 }
 
 .brand__mark {
-  @apply relative h-9 w-9 rounded-xl bg-gradient-to-br from-banda-red-500 to-banda-gold-400;
+  @apply relative h-9 w-9 rounded-xl;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-banda-gold-400) 70%, white 30%),
+    color-mix(in srgb, var(--color-banda-gold-400) 35%, var(--color-banda-red-500) 65%)
+  );
   box-shadow: var(--shadow-soft);
   transition: transform 200ms ease, filter 200ms ease;
 }
@@ -31,21 +41,20 @@
   border-radius: 0.85rem;
   background: radial-gradient(
     120px 60px at 20% 20%,
-    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.35),
     rgba(255, 255, 255, 0) 60%
   );
-  opacity: 0.65;
-  transform: translateZ(0);
+  opacity: 0.7;
   transition: opacity 200ms ease, transform 500ms ease;
 }
 
 .brand:hover .brand__mark {
   transform: scale(1.04);
-  filter: saturate(1.05);
+  filter: saturate(1.08);
 }
 
 .brand:hover .brand__mark::after {
-  opacity: 0.9;
+  opacity: 0.95;
   transform: translate3d(2px, -2px, 0);
 }
 
@@ -58,35 +67,40 @@
 }
 
 .brand__subtitle {
-  @apply text-xs text-white/60;
+  @apply text-xs text-white/80;
 }
 
-/* NAV */
+/* NAV: su header rosso, quindi link più “chiari” e con pill hover */
 .nav {
-  @apply hidden items-center gap-2 md:flex;
+  @apply hidden items-center gap-1 md:flex;
 }
 
 .nav__link {
-  @apply rounded-xl px-3 py-2 text-sm text-white/80 transition;
-  @apply hover:bg-white/5 hover:text-white;
+  @apply relative rounded-xl px-3 py-2 text-sm text-white/90 transition;
+}
+
+.nav__link::before {
+  content: "";
+  @apply absolute inset-0 rounded-xl opacity-0 transition;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.nav__link:hover::before {
+  @apply opacity-100;
 }
 
 .nav__link.is-active {
-  @apply text-banda-gold-400;
+  @apply text-banda-white;
 }
 
-.nav__cta {
-  @apply ml-2 rounded-xl bg-banda-red-500 px-3 py-2 text-sm font-semibold text-banda-white transition;
-  box-shadow: var(--shadow-soft);
-}
-
-.nav__cta:hover {
-  @apply bg-banda-red-700;
-  transform: translateY(-2px);
-}
-
-.nav__cta:active {
-  transform: translateY(0px);
+.nav__link.is-active::before {
+  opacity: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.22),
+    rgba(255,255,255,0.10)
+  );
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
 }
 
 /* CONTENT */
@@ -94,9 +108,14 @@
   @apply mx-auto max-w-6xl px-4 py-8;
 }
 
-/* FOOTER */
+/* FOOTER: grigio “serio” */
 .footer {
   @apply border-t border-white/10;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.02)
+  );
 }
 
 .footer__inner {

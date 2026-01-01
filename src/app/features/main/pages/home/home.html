@@ -1,2 +1,45 @@
-<h1 class="text-2xl font-semibold">Home</h1>
-<p class="mt-2 opacity-80">Qui metteremo la presentazione, hero, news ed eventi.</p>
+<section class="appleScroll">
+  <!-- Triggers: occupano lo spazio di scroll (1 viewport per slide) -->
+  <div class="appleScroll__triggers" aria-hidden="true">
+    <div
+      class="appleScroll__trigger"
+      *ngFor="let s of slides; let i = index"
+      data-trigger
+      [attr.data-index]="i"
+    ></div>
+  </div>
+
+  <!-- Stack sticky: una slide alla volta, le altre svaniscono -->
+  <div class="appleScroll__stack">
+    <article
+      class="slide"
+      *ngFor="let s of slides; let i = index"
+      [class.is-active]="i === activeIndex"
+      [class.is-before]="i < activeIndex"
+      [class.is-after]="i > activeIndex"
+      [attr.data-side]="s.side"
+    >
+      <div class="slide__inner">
+        <!-- Card “schizzo giallo” -->
+        <div class="sketchCard">
+          <div class="sketchCard__tag">{{ s.tag }}</div>
+          <h2 class="sketchCard__title">{{ s.title }}</h2>
+          <p class="sketchCard__text">{{ s.text }}</p>
+
+          <div class="sketchCard__actions">
+            <a class="sketchBtn" routerLink="/about" *ngIf="i === 0">Chi siamo</a>
+            <a class="sketchBtn" routerLink="/events" *ngIf="i === 1">Eventi</a>
+            <a class="sketchBtn" routerLink="/contacts" *ngIf="i >= 2">Contatti</a>
+          </div>
+        </div>
+
+        <!-- Immagine -->
+        <div class="media">
+          <div class="media__frame">
+            <img class="media__img" [src]="s.img" [alt]="s.title" />
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
