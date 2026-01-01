@@ -1,0 +1,120 @@
+@reference "../../../../../styles.css";
+
+.shell {
+  @apply min-h-screen bg-banda-black text-banda-white;
+}
+
+/* HEADER */
+.header {
+  @apply sticky top-0 z-50 border-b border-white/10 bg-banda-black/70 backdrop-blur;
+}
+
+.header__inner {
+  @apply mx-auto flex max-w-6xl items-center justify-between px-4 py-3;
+}
+
+/* BRAND */
+.brand {
+  @apply flex items-center gap-3 select-none;
+}
+
+.brand__mark {
+  @apply relative h-9 w-9 rounded-xl bg-gradient-to-br from-banda-red-500 to-banda-gold-400;
+  box-shadow: var(--shadow-soft);
+  transition: transform 200ms ease, filter 200ms ease;
+}
+
+.brand__mark::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 0.85rem;
+  background: radial-gradient(
+    120px 60px at 20% 20%,
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0) 60%
+  );
+  opacity: 0.65;
+  transform: translateZ(0);
+  transition: opacity 200ms ease, transform 500ms ease;
+}
+
+.brand:hover .brand__mark {
+  transform: scale(1.04);
+  filter: saturate(1.05);
+}
+
+.brand:hover .brand__mark::after {
+  opacity: 0.9;
+  transform: translate3d(2px, -2px, 0);
+}
+
+.brand__text {
+  @apply leading-tight;
+}
+
+.brand__title {
+  @apply text-sm font-semibold tracking-wide text-banda-white;
+}
+
+.brand__subtitle {
+  @apply text-xs text-white/60;
+}
+
+/* NAV */
+.nav {
+  @apply hidden items-center gap-2 md:flex;
+}
+
+.nav__link {
+  @apply rounded-xl px-3 py-2 text-sm text-white/80 transition;
+  @apply hover:bg-white/5 hover:text-white;
+}
+
+.nav__link.is-active {
+  @apply text-banda-gold-400;
+}
+
+.nav__cta {
+  @apply ml-2 rounded-xl bg-banda-red-500 px-3 py-2 text-sm font-semibold text-banda-white transition;
+  box-shadow: var(--shadow-soft);
+}
+
+.nav__cta:hover {
+  @apply bg-banda-red-700;
+  transform: translateY(-2px);
+}
+
+.nav__cta:active {
+  transform: translateY(0px);
+}
+
+/* CONTENT */
+.content {
+  @apply mx-auto max-w-6xl px-4 py-8;
+}
+
+/* FOOTER */
+.footer {
+  @apply border-t border-white/10;
+}
+
+.footer__inner {
+  @apply mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 md:flex-row md:items-center md:justify-between;
+}
+
+.footer__copy {
+  @apply text-sm text-white/60;
+}
+
+.footer__links {
+  @apply flex items-center gap-3 text-sm;
+}
+
+.footer__link {
+  @apply text-white/60 transition hover:text-banda-gold-400;
+}
+
+.footer__dot {
+  @apply text-white/20;
+}

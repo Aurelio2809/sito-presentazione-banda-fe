@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+/* ✅ fondamentale: fai scansionare ad Angular/Tailwind i tuoi template */
+@source "src/app/**/*.{html,ts}";
+@source "./**/*.{html,ts}"; /* opzionale ma comodo */
+
+@theme {
+  --color-banda-black: #0b0b0d;
+  --color-banda-white: #ffffff;
+  --color-banda-red-500: #e11d48;
+  --color-banda-red-700: #be123c;
+  --color-banda-gold-400: #fbbf24;
+  --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+html, body { height: 100%; }
+body { background: var(--color-banda-black); }

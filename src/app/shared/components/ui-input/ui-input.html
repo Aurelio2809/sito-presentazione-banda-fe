@@ -1,0 +1,10 @@
+<label class="block text-sm font-medium text-gray-700">
+  <span *ngIf="label" class="mb-1 block">{{ label }}</span>
+  <input
+    class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-black"
+    [attr.type]="type"
+    [attr.name]="name"
+    [attr.placeholder]="placeholder"
+    [ngModel]="value"
+  />
+</label>
