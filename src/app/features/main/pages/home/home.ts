@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   NgZone,
@@ -26,13 +27,15 @@ type Section = {
 export class Home implements AfterViewInit, OnDestroy {
   @ViewChildren('sec', { read: ElementRef }) sectionRefs!: QueryList<ElementRef<HTMLElement>>;
 
-  activeSection = 0;
   animEnabled = false;
 
   private rafId: number | null = null;
-  private root: HTMLElement | Window = window;
+  private rootEl: HTMLElement | null = null;
 
-  constructor(private zone: NgZone) {}
+  constructor(
+    private zone: NgZone,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   readonly sections: Section[] = [
     {
@@ -95,23 +98,16 @@ export class Home implements AfterViewInit, OnDestroy {
     const els = this.sectionRefs.map(r => r.nativeElement);
     if (els.length === 0) return;
 
-    // trova il contenitore scrollabile (se c’è), altrimenti window
-    this.root = this.findScrollRoot(els[0]) ?? window;
+    this.rootEl = this.findScrollRoot(els[0]);
 
-    // 1) primo calcolo
-    this.computeActiveSection();
-
-    // 2) abilita animazioni dopo 1 frame così non rischi “tutto invisibile”
-    requestAnimationFrame(() => {
-      this.zone.run(() => {
-        this.animEnabled = true;
-      });
+    Promise.resolve().then(() => {
+      this.animEnabled = true;
+      this.cdr.detectChanges();
     });
 
-    // 3) loop leggero per aggiornare durante lo scroll (robusto sempre)
     this.zone.runOutsideAngular(() => {
       const tick = () => {
-        this.computeActiveSection();
+        this.applyProgressToElements();
         this.rafId = requestAnimationFrame(tick);
       };
       this.rafId = requestAnimationFrame(tick);
@@ -122,39 +118,40 @@ export class Home implements AfterViewInit, OnDestroy {
     if (this.rafId != null) cancelAnimationFrame(this.rafId);
   }
 
-  private computeActiveSection(): void {
+  private applyProgressToElements(): void {
     const els = this.sectionRefs.map(r => r.nativeElement);
     if (els.length === 0) return;
 
-    const centerY = this.getRootCenterY();
+    const centerY = this.getVisibleCenterY();
+    const viewH = this.getVisibleHeight();
 
-    let bestIdx = 0;
-    let bestDist = Number.POSITIVE_INFINITY;
+    // più stretto => effetto più evidente
+    const range = viewH * 0.35;
 
     for (let i = 0; i < els.length; i++) {
       const rect = els[i].getBoundingClientRect();
-      const sectionCenterY = rect.top + rect.height / 2;
-      const dist = Math.abs(sectionCenterY - centerY);
+      const secCenterY = rect.top + rect.height / 2;
+      const dist = Math.abs(secCenterY - centerY);
 
-      if (dist < bestDist) {
-        bestDist = dist;
-        bestIdx = i;
-      }
-    }
+      let p = 1 - dist / range;
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
 
-    if (bestIdx !== this.activeSection) {
-      this.zone.run(() => {
-        this.activeSection = bestIdx;
-      });
+      p = this.easeOutQuint(p);
+
+      els[i].style.setProperty('--p', p.toFixed(4));
     }
   }
 
-  private getRootCenterY(): number {
-    if (this.root instanceof Window) {
-      return window.innerHeight / 2;
-    }
-    const r = this.root.getBoundingClientRect();
+  private getVisibleCenterY(): number {
+    if (!this.rootEl) return window.innerHeight / 2;
+    const r = this.rootEl.getBoundingClientRect();
     return r.top + r.height / 2;
+  }
+
+  private getVisibleHeight(): number {
+    if (!this.rootEl) return window.innerHeight;
+    return this.rootEl.getBoundingClientRect().height;
   }
 
   private findScrollRoot(start: HTMLElement): HTMLElement | null {
@@ -168,5 +165,10 @@ export class Home implements AfterViewInit, OnDestroy {
       el = el.parentElement;
     }
     return null;
+  }
+
+  private easeOutQuint(t: number): number {
+    const x = 1 - t;
+    return 1 - x * x * x * x * x;
   }
 }

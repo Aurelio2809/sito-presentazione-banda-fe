@@ -4,7 +4,6 @@
     *ngFor="let s of sections; let i = index"
     #sec
     [attr.data-side]="i % 2 === 0 ? 'left' : 'right'"
-    [class.is-active]="i === activeSection"
   >
     <div class="section__inner">
       <div class="section__grid">
