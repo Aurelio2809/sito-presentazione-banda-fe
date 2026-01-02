@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SOCIAL_URLS } from '../../../../shared/constants/social-links';
 
 @Component({
   selector: 'app-main-layout',
@@ -8,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class MainLayout {
   currentYear = new Date().getFullYear();
+
+  readonly SOCIAL_URLS = SOCIAL_URLS;
 }

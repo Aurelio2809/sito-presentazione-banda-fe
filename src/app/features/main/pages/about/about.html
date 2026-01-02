@@ -1,1 +1,68 @@
-<p>about works!</p>
+<section class="about">
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__inner">
+      <div class="hero__tag">Chi siamo</div>
+      <h1 class="hero__title">Musica, tradizione e comunità</h1>
+      <p class="hero__desc">
+        La Banda Musicale “Città di Casali del Manco” promuove cultura musicale e partecipazione.
+        Ogni prova e ogni concerto sono un modo concreto per costruire territorio e legami.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" routerLink="/contacts">Contattaci</a>
+        <a class="btn btn--ghost" routerLink="/events">Vedi eventi</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat" *ngFor="let s of stats">
+          <div class="stat__value">{{ s.value }}</div>
+          <div class="stat__label">{{ s.label }}</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTIONS -->
+  <div class="blocks">
+    <article class="block" *ngFor="let s of sections" [attr.data-side]="s.side">
+      <div class="block__inner">
+        <div class="block__grid">
+          <div class="block__text">
+            <div class="block__tag">{{ s.tag }}</div>
+            <h2 class="block__title">{{ s.title }}</h2>
+            <p class="block__desc">{{ s.text }}</p>
+
+            <div class="block__actions">
+              <a class="btn btn--primary" [routerLink]="s.link">{{ s.cta }}</a>
+            </div>
+          </div>
+
+          <div class="block__media">
+            <div class="mediaFrame">
+              <img class="mediaImg" [src]="s.img" [alt]="s.title" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- CTA finale -->
+  <div class="cta">
+    <div class="cta__inner">
+      <div class="cta__text">
+        <div class="cta__tag">Entra in contatto</div>
+        <h3 class="cta__title">Vuoi suonare con noi o iscriverti alla scuola?</h3>
+        <p class="cta__desc">
+          Scrivici: ti rispondiamo con informazioni su prove, iscrizioni e attività.
+        </p>
+      </div>
+
+      <div class="cta__actions">
+        <a class="btn btn--primary" routerLink="/contacts">Scrivici</a>
+        <a class="btn btn--ghost" routerLink="/events">Prossimi eventi</a>
+      </div>
+    </div>
+  </div>
+</section>

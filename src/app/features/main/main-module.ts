@@ -9,9 +9,13 @@ import { Home } from './pages/home/home';
 import { About } from './pages/about/about';
 import { Events } from './pages/events/events';
 import { Contacts } from './pages/contacts/contacts';
+import { Gallery } from './pages/gallery/gallery';
+import { AboutHistory } from './pages/about-history/about-history';
+import { AboutToday } from './pages/about-today/about-today';
+import { AboutSchool } from './pages/about-school/about-school';
 
 @NgModule({
-  declarations: [MainLayout, Home, About, Events, Contacts],
+  declarations: [MainLayout, Home, About, Events, Contacts, Gallery, AboutHistory, AboutToday, AboutSchool],
   imports: [CommonModule, SharedModule, MainRoutingModule],
 })
 export class MainModule {}

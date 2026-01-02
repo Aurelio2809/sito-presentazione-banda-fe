@@ -1,1 +1,97 @@
-<p>contacts works!</p>
+<section class="contacts">
+  <header class="contactsHero">
+    <div class="contactsHero__tag">Contatti</div>
+    <h1 class="contactsHero__title">Restiamo in contatto</h1>
+    <p class="contactsHero__desc">
+      Seguici sui social per eventi, foto e aggiornamenti. Qui trovi i canali ufficiali della Banda Musicale.
+    </p>
+  </header>
+
+  <div class="contactsGrid">
+    <!-- CARD SOCIAL -->
+    <div class="card">
+      <h2 class="card__title">Social ufficiali</h2>
+      <p class="card__desc">Clicca un canale per aprirlo in una nuova scheda.</p>
+
+      <div class="socialList">
+        <a
+          class="socialBtn"
+          *ngFor="let s of socialLinks"
+          [href]="s.href"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="socialBtn__icon" [attr.data-icon]="s.key" aria-hidden="true">
+            <!-- ICONS (inline SVG) -->
+            <!-- Instagram -->
+            <svg *ngIf="s.key === 'instagram'" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Z"
+                stroke="currentColor" stroke-width="1.8"
+              />
+              <path
+                d="M12 16.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Z"
+                stroke="currentColor" stroke-width="1.8"
+              />
+              <path
+                d="M17.3 6.9h.01"
+                stroke="currentColor" stroke-width="3" stroke-linecap="round"
+              />
+            </svg>
+
+            <!-- Facebook -->
+            <svg *ngIf="s.key === 'facebook'" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M14 8.5V7.2c0-.9.5-1.2 1.2-1.2h1.6V3.2h-2.3c-2.6 0-4 1.6-4 4v1.3H8.2V11h2.3v9.8H14V11h2.6l.4-2.5H14Z"
+                fill="currentColor"
+              />
+            </svg>
+
+            <!-- TikTok -->
+            <svg *ngIf="s.key === 'tiktok'" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M14.5 3c.5 2.8 2.4 4.7 5.2 5.2v3.1c-1.9.1-3.6-.6-5.2-1.8v6.1c0 3.8-3.1 6.4-6.6 6.4-3.6 0-6.4-2.7-6.4-6.3 0-3.7 3.1-6.5 6.9-6.2v3.3c-1.8-.2-3.4 1.2-3.5 2.9-.1 1.7 1.3 3.1 3 3.1 1.7 0 2.9-1.1 3-2.8V3h3.6Z"
+                fill="currentColor"
+              />
+            </svg>
+
+            <!-- YouTube -->
+            <svg *ngIf="s.key === 'youtube'" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M21.6 8.1a3 3 0 0 0-2.1-2.2C17.6 5.4 12 5.4 12 5.4s-5.6 0-7.5.5A3 3 0 0 0 2.4 8.1 31 31 0 0 0 2 12a31 31 0 0 0 .4 3.9 3 3 0 0 0 2.1 2.2c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.2A31 31 0 0 0 22 12a31 31 0 0 0-.4-3.9Z"
+                fill="currentColor"
+              />
+              <path d="M10.2 14.8V9.2L15 12l-4.8 2.8Z" fill="#000000" opacity="0.35"/>
+            </svg>
+          </span>
+
+          <span class="socialBtn__text">
+            <span class="socialBtn__label">{{ s.label }}</span>
+            <span class="socialBtn__hint">Apri profilo</span>
+          </span>
+
+          <span class="socialBtn__chev" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- CARD INFO (placeholder, ti torna utile) -->
+    <div class="card card--soft">
+      <h2 class="card__title">Vuoi scriverci?</h2>
+      <p class="card__desc">
+        Placeholder: qui possiamo aggiungere email, indirizzo sede, orari prove e un form contatti in seguito.
+      </p>
+
+      <div class="pillRow">
+        <div class="pill">Eventi</div>
+        <div class="pill">Scuola di musica</div>
+        <div class="pill">Collaborazioni</div>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn--primary" routerLink="/events">Vedi eventi</a>
+        <a class="btn btn--ghost" routerLink="/about">Chi siamo</a>
+      </div>
+    </div>
+  </div>
+</section>
