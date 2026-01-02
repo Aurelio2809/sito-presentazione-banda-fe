@@ -1,0 +1,338 @@
+@reference "../../../../../styles.css";
+
+/* PAGE */
+.gallery{
+  @apply mx-auto max-w-6xl px-4 py-10;
+}
+
+.gallery__head{ @apply mb-8; }
+
+.gallery__tag{
+  @apply inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75;
+}
+
+.gallery__title{
+  @apply mt-4 text-3xl font-extrabold tracking-tight text-white md:text-5xl;
+}
+
+.gallery__desc{
+  @apply mt-3 max-w-3xl text-sm leading-relaxed text-white/65 md:text-base;
+}
+
+.gallery__spacer{ @apply h-20 md:h-32; }
+
+/* =========================
+   HERO MOSAIC (layout richiesto)
+   - 1 big rect (hero)
+   - 2 right
+   - 2 bottom
+   - 1 bottom-right corner
+   ========================= */
+.mosaic{
+  position: relative;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(8, minmax(0, 70px));
+}
+
+/* Tile base */
+.tile{
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.38);
+
+  transform: translate3d(0,0,0) scale(1);
+  transition:
+    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 260ms ease,
+    filter 220ms ease,
+    opacity 220ms ease;
+}
+
+.tile__img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.04);
+  filter: saturate(1.08) contrast(1.06);
+  transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 420ms ease;
+}
+
+.tile__overlay{
+  position: absolute;
+  inset: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.68) 100%);
+}
+
+.tile__kicker{
+  @apply mb-2 inline-flex w-fit rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white/85;
+}
+
+.tile__title{
+  @apply text-base font-extrabold text-white md:text-lg;
+  text-shadow: 0 12px 26px rgba(0,0,0,0.55);
+}
+
+/* Posizionamento desktop */
+.tile--hero   { grid-column: 1 / span 8;  grid-row: 1 / span 6; }
+.tile--right1 { grid-column: 9 / span 4;  grid-row: 1 / span 3; }
+.tile--right2 { grid-column: 9 / span 4;  grid-row: 4 / span 3; }
+
+.tile--bottom1{ grid-column: 1 / span 4;  grid-row: 7 / span 2; }
+.tile--bottom2{ grid-column: 5 / span 4;  grid-row: 7 / span 2; }
+.tile--corner { grid-column: 9 / span 4;  grid-row: 7 / span 2; }
+
+/* HOVER “focus mode” sul mosaico: oscurare le altre */
+.mosaic:hover .tile{
+  opacity: 0.48;
+  filter: brightness(0.70) saturate(0.92) blur(0.2px);
+  transform: translate3d(0,0,0) scale(0.992);
+}
+
+.mosaic:hover .tile:hover{
+  opacity: 1;
+  filter: none;
+  transform: translate3d(0,-12px,0) scale(1.08);
+  z-index: 6;
+  box-shadow: 0 38px 150px rgba(0,0,0,0.78);
+}
+
+.mosaic:hover .tile:hover .tile__img{
+  transform: scale(1.28);
+  filter: saturate(1.15) contrast(1.08);
+}
+
+/* Mobile: stack elegante */
+@media (max-width: 900px){
+  .mosaic{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .tile--hero,
+  .tile--right1,
+  .tile--right2,
+  .tile--bottom1,
+  .tile--bottom2,
+  .tile--corner{
+    grid-column: auto;
+    grid-row: auto;
+    height: 240px;
+  }
+
+  .tile--hero{ height: 340px; }
+}
+
+/* =========================
+   GRID sotto
+   ========================= */
+.grid{
+  position: relative;
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.gridCard{
+  @apply overflow-hidden rounded-3xl border border-white/10 bg-white/5 text-left;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.32);
+
+  transform: translate3d(0,0,0) scale(1);
+  transition:
+    transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 240ms ease,
+    filter 220ms ease,
+    opacity 220ms ease;
+}
+
+.gridCard__frame{ @apply overflow-hidden; }
+
+.gridCard__img{
+  @apply h-56 w-full object-cover md:h-64;
+  transform: scale(1.04);
+  transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 420ms ease;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.gridCard__meta{ @apply px-4 py-3; }
+
+.gridCard__title{ @apply text-sm font-extrabold text-white/85; }
+
+/* HOVER “focus mode” sulla griglia: oscurare le altre */
+.grid:hover .gridCard{
+  opacity: 0.52;
+  filter: brightness(0.72) saturate(0.92) blur(0.2px);
+  transform: translate3d(0,0,0) scale(0.992);
+}
+
+.grid:hover .gridCard:hover{
+  opacity: 1;
+  filter: none;
+  transform: translate3d(0,-12px,0) scale(1.07);
+  z-index: 6;
+  box-shadow: 0 36px 140px rgba(0,0,0,0.74);
+}
+
+.grid:hover .gridCard:hover .gridCard__img{
+  transform: scale(1.28);
+  filter: saturate(1.14) contrast(1.08);
+}
+
+/* =========================
+   VIEWER (modal con pannello destro)
+   ========================= */
+.viewer{
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.viewer__panel{
+  width: min(1100px, 100%);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(135deg, rgba(18,18,22,0.95), rgba(8,8,10,0.95));
+  box-shadow: 0 30px 120px rgba(0,0,0,0.65);
+  position: relative;
+  overflow: hidden;
+}
+
+.viewer__close{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.9);
+  font-size: 18px;
+  font-weight: 900;
+  transition: transform 180ms ease, background 180ms ease;
+}
+.viewer__close:hover{ transform: translateY(-2px); background: rgba(255,255,255,0.10); }
+
+.viewer__content{
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  min-height: 520px;
+}
+
+.viewer__media{
+  background: radial-gradient(900px 420px at 30% 0%, rgba(255,255,255,0.06), rgba(0,0,0,0));
+}
+
+.viewer__img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.01);
+}
+
+.viewer__info{
+  padding: 28px 26px;
+  border-left: 1px solid rgba(255,255,255,0.08);
+}
+
+.viewer__tag{
+  @apply inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/70;
+}
+
+.viewer__title{
+  @apply mt-4 text-2xl font-extrabold tracking-tight text-white md:text-3xl;
+}
+
+.viewer__desc{
+  @apply mt-3 text-sm leading-relaxed text-white/70 md:text-base;
+}
+
+@media (max-width: 900px){
+  .viewer__content{
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .viewer__info{
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .viewer__media{ height: 320px; }
+}
+/* ===== Viewer right panel layout ===== */
+.viewer__info{
+  padding: 28px 26px;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;              /* così su desktop ha “spazio” vero */
+}
+
+/* il testo può crescere, ma non deve spingere il meta attaccato */
+.viewer__desc{
+  margin-top: 12px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.70);
+}
+
+/* spacer elastico: questo è il trucco */
+.viewer__spacer{
+  flex: 1 1 auto;
+  min-height: 18px;
+}
+
+/* meta: sempre in fondo */
+.viewer__meta{
+  margin-top: 0;                  /* non serve più auto */
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  display: grid;
+  gap: 10px;
+}
+
+.metaItem{
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+}
+
+.metaItem__label{
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+.metaItem__value{
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.86);
+}
+
+/* Mobile: il pannello info va sotto, ha meno “spazio”, quindi niente min-height */
+@media (max-width: 900px){
+  .viewer__info{
+    min-height: auto;
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .viewer__spacer{
+    display: none; /* su mobile non serve: scorre naturalmente */
+  }
+}

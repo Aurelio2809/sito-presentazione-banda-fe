@@ -17,10 +17,30 @@
 .contactsHero__title{ @apply mt-4 text-3xl font-extrabold tracking-tight text-white md:text-6xl; }
 .contactsHero__desc{ @apply mt-4 max-w-3xl text-sm leading-relaxed text-white/65 md:text-base; }
 
+/* GRID: 2 colonne su desktop, stessa riga */
 .contactsGrid{
-  @apply mt-8 grid gap-4 md:grid-cols-2;
+  @apply mt-8 grid gap-4;
+}
+@media (min-width: 900px){
+  .contactsGrid{
+    grid-template-columns: 1fr 1.1fr;
+    align-items: start; /* ✅ non stretch: evita che la destra si allunghi */
+  }
 }
 
+.leftCol{
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+/* ✅ RIGHT: HUG (altezza naturale) */
+.rightCol{
+  height: auto;
+  display: block;
+}
+
+/* CARD base */
 .card{
   @apply rounded-[28px] border border-white/10 bg-white/5 p-6 md:p-8;
   box-shadow: 0 18px 55px rgba(0,0,0,0.34);
@@ -35,57 +55,169 @@
 .card__title{ @apply text-xl font-extrabold text-white md:text-2xl; }
 .card__desc{ @apply mt-2 text-sm leading-relaxed text-white/65 md:text-base; }
 
-/* SOCIAL LIST */
+/* SOCIAL LIST (non colorati) */
 .socialList{ @apply mt-6 grid gap-3; }
 
 .socialBtn{
-  @apply flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition;
-  box-shadow: 0 14px 34px rgba(0,0,0,0.26);
+  @apply relative flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.22);
+  transform: translateZ(0);
+  overflow: hidden;
 }
 
 .socialBtn:hover{
   @apply bg-white/10;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.30);
 }
-
 .socialBtn:active{ transform: translateY(0px); }
 
 .socialBtn__icon{
   @apply grid h-12 w-12 place-items-center rounded-2xl border border-white/10;
   background: rgba(255,255,255,0.06);
   color: rgba(255,255,255,0.92);
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  position: relative;
+  z-index: 1;
 }
-
 .socialBtn__icon svg{ width: 26px; height: 26px; }
 
-.socialBtn__text{ @apply flex flex-col; }
+.socialBtn__text{ @apply flex flex-col; position: relative; z-index: 1; }
 .socialBtn__label{ @apply text-sm font-extrabold text-white/90; }
 .socialBtn__hint{ @apply text-xs font-semibold text-white/55; }
+.socialBtn__chev{ @apply text-white/55 font-extrabold; position: relative; z-index: 1; transition: transform 180ms ease, opacity 180ms ease; }
+.socialBtn:hover .socialBtn__chev{ transform: translate3d(2px,-2px,0); opacity: 0.95; }
+.socialBtn:hover .socialBtn__icon{ transform: scale(1.08); background: rgba(255,255,255,0.08); }
 
-.socialBtn__chev{ @apply text-white/55 font-extrabold; }
+/* NOTE */
+.note{
+  @apply mt-6 flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4;
+}
+.note__dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  margin-top: 6px;
+  background: rgba(255,215,0,0.85);
+  box-shadow: 0 0 18px rgba(255,215,0,0.35);
+}
+.note__text{ @apply text-sm leading-relaxed text-white/65; }
+.note__strong{ color: rgba(255,255,255,0.86); font-weight: 800; }
 
-/* pills + buttons */
-.pillRow{ @apply mt-5 flex flex-wrap gap-2; }
+/* MAP CARD */
+.mapCard{ @apply p-6 md:p-8; }
+.mapBlock__head{ @apply mb-3; }
+.mapBlock__title{ @apply text-sm font-extrabold text-white/85; }
+.mapBlock__subtitle{ @apply mt-1 text-xs font-semibold text-white/55; }
 
-.pill{
-  @apply rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/70;
+.mapFrame{
+  @apply overflow-hidden rounded-3xl border border-white/10 bg-white/5;
+  box-shadow: 0 18px 55px rgba(0,0,0,0.34);
+  aspect-ratio: 16 / 9;
+}
+.mapFrame__iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  filter: saturate(1.05) contrast(1.02);
 }
 
-.actions{ @apply mt-6 flex flex-wrap gap-3; }
+.mapActions{ @apply mt-4 flex; }
 
+/* FORM */
+.contactForm{ @apply mt-6; }
+
+.formGrid{
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 900px){
+  .formGrid{
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+}
+
+.field{ @apply grid gap-2; }
+.field--full{ grid-column: 1 / -1; }
+.field__label{ @apply text-xs font-extrabold tracking-wide text-white/70; }
+
+.field__input,
+.field__textarea{
+  @apply w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/90 outline-none transition;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.18);
+}
+.field__textarea{ @apply min-h-[260px] resize-y; }
+.field__input::placeholder,
+.field__textarea::placeholder{ color: rgba(255,255,255,0.40); }
+
+.field__input:focus,
+.field__textarea:focus{
+  border-color: rgba(255,215,0,0.45);
+  box-shadow:
+    0 16px 60px rgba(0,0,0,0.30),
+    0 0 0 1px rgba(255,215,0,0.25),
+    0 0 40px rgba(255,215,0,0.10);
+}
+
+.formActions{ @apply mt-4 flex flex-wrap gap-3; }
+
+/* BOTTONI */
 .btn{
   @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-extrabold transition;
 }
+
+/* ✅ INVIA più evidente */
 .btn--primary{
-  background: rgba(11,11,13,0.92);
-  color: white;
-  box-shadow: 0 14px 34px rgba(0,0,0,0.32);
+  position: relative;
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    rgba(255,215,0,0.95),
+    rgba(170,0,0,0.92)
+  );
+  box-shadow:
+    0 18px 60px rgba(0,0,0,0.40),
+    0 0 0 1px rgba(255,255,255,0.10) inset,
+    0 0 46px rgba(255,215,0,0.16);
+  transform: translateZ(0);
 }
-.btn--primary:hover{ transform: translateY(-2px); background: rgba(11,11,13,0.98); }
-.btn--primary:active{ transform: translateY(0px); }
+
+.btn--primary::after{
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 1rem;
+  background: radial-gradient(140px 60px at 20% 10%, rgba(255,255,255,0.35), rgba(255,255,255,0) 60%);
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 400ms ease;
+}
+
+.btn--primary:hover{
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 24px 90px rgba(0,0,0,0.52),
+    0 0 0 1px rgba(255,215,0,0.22) inset,
+    0 0 60px rgba(255,215,0,0.22);
+}
+
+.btn--primary:hover::after{
+  opacity: 0.95;
+  transform: translate3d(2px,-2px,0);
+}
+
+.btn--primary:active{
+  transform: translateY(0px) scale(1.00);
+}
 
 .btn--ghost{
   @apply border border-white/10 bg-white/5 text-white/85;
 }
 .btn--ghost:hover{ @apply bg-white/10; transform: translateY(-2px); }
 .btn--ghost:active{ transform: translateY(0px); }
+
+/* padding fondo pagina */
+.contactsSpacer{ height: 84px; }
+@media (min-width: 768px){ .contactsSpacer{ height: 120px; } }

@@ -1,1 +1,239 @@
-<p>events works!</p>
+<section class="events">
+  <header class="eventsHero">
+    <div class="eventsHero__tag">Eventi</div>
+    <h1 class="eventsHero__title">Eventi, annunci e aggiornamenti</h1>
+    <p class="eventsHero__desc">
+      Qui trovi i prossimi appuntamenti, lo storico e comunicazioni importanti.
+      Clicca un elemento per vedere i dettagli.
+    </p>
+  </header>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button
+      class="tab"
+      type="button"
+      [class.is-active]="tab === 'upcoming'"
+      (click)="setTab('upcoming')"
+    >
+      Prossimi eventi
+      <span class="tab__badge">{{ upcomingEvents.length }}</span>
+    </button>
+
+    <button
+      class="tab"
+      type="button"
+      [class.is-active]="tab === 'past'"
+      (click)="setTab('past')"
+    >
+      Storico
+      <span class="tab__badge">{{ pastEvents.length }}</span>
+    </button>
+  </div>
+
+  <div class="layout">
+    <!-- LEFT: Events list -->
+    <div class="col">
+      <div class="sectionHead">
+        <h2 class="sectionHead__title">
+          {{ tab === 'upcoming' ? 'Prossimi eventi' : 'Storico eventi' }}
+        </h2>
+        <p class="sectionHead__desc">
+          {{ tab === 'upcoming'
+          ? 'Appuntamenti in arrivo. Apri un evento per vedere dettagli, luogo e allegati.'
+          : 'Eventi passati. Apri una scheda per rivedere le informazioni.' }}
+        </p>
+      </div>
+
+      <div class="ticketList" *ngIf="tab === 'upcoming'">
+        <button
+          class="ticket"
+          type="button"
+          *ngFor="let e of upcomingEvents"
+          [class.is-open]="openEventId === e.id"
+          (click)="toggleEvent(e.id)"
+        >
+          <div class="ticket__banner">
+            <img class="ticket__img" [src]="e.bannerSrc" [alt]="e.title" />
+            <div class="ticket__shade"></div>
+          </div>
+
+          <div class="ticket__body">
+            <div class="ticket__top">
+              <div class="ticket__title">{{ e.title }}</div>
+
+              <div class="ticket__meta">
+                <span class="metaPill">
+                  <span class="metaPill__label">Data</span>
+                  <span class="metaPill__value">{{ formatDate(e.dateISO) }}</span>
+                </span>
+
+                <span class="metaPill" *ngIf="e.time">
+                  <span class="metaPill__label">Ora</span>
+                  <span class="metaPill__value">{{ e.time }}</span>
+                </span>
+
+                <span class="metaPill">
+                  <span class="metaPill__label">Luogo</span>
+                  <span class="metaPill__value">{{ e.place }}</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="ticket__desc">{{ e.description }}</div>
+
+            <div class="ticket__tags" *ngIf="e.tags?.length">
+              <span class="tag" *ngFor="let t of e.tags">{{ t }}</span>
+            </div>
+
+            <div class="ticket__details" *ngIf="openEventId === e.id">
+              <div class="details__text">{{ e.details }}</div>
+
+              <div class="details__row">
+                <div class="details__place" *ngIf="e.cityLine">
+                  <span class="details__k">Zona</span>
+                  <span class="details__v">{{ e.cityLine }}</span>
+                </div>
+
+                <a
+                  class="attach"
+                  *ngIf="e.attachment"
+                  [href]="e.attachment.href"
+                  target="_blank"
+                  rel="noopener"
+                  (click)="$event.stopPropagation()"
+                >
+                  <span class="attach__dot" aria-hidden="true"></span>
+                  <span class="attach__label">{{ e.attachment.label }}</span>
+                  <span class="attach__chev" aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket__rail" aria-hidden="true">
+            <div class="ticket__cut ticket__cut--top"></div>
+            <div class="ticket__cut ticket__cut--bottom"></div>
+          </div>
+        </button>
+      </div>
+
+      <div class="ticketList" *ngIf="tab === 'past'">
+        <button
+          class="ticket"
+          type="button"
+          *ngFor="let e of pastEvents"
+          [class.is-open]="openEventId === e.id"
+          (click)="toggleEvent(e.id)"
+        >
+          <div class="ticket__banner">
+            <img class="ticket__img" [src]="e.bannerSrc" [alt]="e.title" />
+            <div class="ticket__shade"></div>
+          </div>
+
+          <div class="ticket__body">
+            <div class="ticket__top">
+              <div class="ticket__title">{{ e.title }}</div>
+
+              <div class="ticket__meta">
+                <span class="metaPill">
+                  <span class="metaPill__label">Data</span>
+                  <span class="metaPill__value">{{ formatDate(e.dateISO) }}</span>
+                </span>
+
+                <span class="metaPill" *ngIf="e.time">
+                  <span class="metaPill__label">Ora</span>
+                  <span class="metaPill__value">{{ e.time }}</span>
+                </span>
+
+                <span class="metaPill">
+                  <span class="metaPill__label">Luogo</span>
+                  <span class="metaPill__value">{{ e.place }}</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="ticket__desc">{{ e.description }}</div>
+
+            <div class="ticket__tags" *ngIf="e.tags?.length">
+              <span class="tag" *ngFor="let t of e.tags">{{ t }}</span>
+            </div>
+
+            <div class="ticket__details" *ngIf="openEventId === e.id">
+              <div class="details__text">{{ e.details }}</div>
+
+              <div class="details__row">
+                <div class="details__place" *ngIf="e.cityLine">
+                  <span class="details__k">Zona</span>
+                  <span class="details__v">{{ e.cityLine }}</span>
+                </div>
+
+                <a
+                  class="attach"
+                  *ngIf="e.attachment"
+                  [href]="e.attachment.href"
+                  target="_blank"
+                  rel="noopener"
+                  (click)="$event.stopPropagation()"
+                >
+                  <span class="attach__dot" aria-hidden="true"></span>
+                  <span class="attach__label">{{ e.attachment.label }}</span>
+                  <span class="attach__chev" aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket__rail" aria-hidden="true">
+            <div class="ticket__cut ticket__cut--top"></div>
+            <div class="ticket__cut ticket__cut--bottom"></div>
+          </div>
+        </button>
+      </div>
+
+      <div class="empty" *ngIf="tab === 'upcoming' && upcomingEvents.length === 0">
+        Nessun evento in programma al momento.
+      </div>
+
+      <div class="empty" *ngIf="tab === 'past' && pastEvents.length === 0">
+        Nessuno storico disponibile.
+      </div>
+    </div>
+
+    <!-- RIGHT: Announcements -->
+    <aside class="col">
+      <div class="card card--soft">
+        <h2 class="card__title">Annunci</h2>
+        <p class="card__desc">
+          Comunicazioni rapide. Clicca per leggere il testo completo.
+        </p>
+
+        <div class="annList">
+          <button
+            class="ann"
+            type="button"
+            *ngFor="let a of announcements"
+            [class.is-open]="openAnnouncementId === a.id"
+            (click)="toggleAnnouncement(a.id)"
+          >
+            <div class="ann__top">
+              <div class="ann__title">{{ a.title }}</div>
+              <div class="ann__date">{{ formatDate(a.dateISO) }}</div>
+            </div>
+
+            <div class="ann__short" *ngIf="openAnnouncementId !== a.id">{{ a.short }}</div>
+            <div class="ann__full" *ngIf="openAnnouncementId === a.id">{{ a.full }}</div>
+
+            <div class="ann__cta">
+              <span class="ann__btn">
+                {{ openAnnouncementId === a.id ? 'Chiudi' : 'Leggi' }}
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="eventsSpacer" aria-hidden="true"></div>
+</section>

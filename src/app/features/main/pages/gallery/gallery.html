@@ -1,0 +1,92 @@
+<section class="gallery">
+  <header class="gallery__head">
+    <div class="gallery__tag">Galleria</div>
+    <h1 class="gallery__title">Galleria fotografica</h1>
+    <p class="gallery__desc">
+      Preferite in alto (composizione a L), poi una griglia di foto. Passa col mouse per mettere in evidenza,
+      clicca per aprire i dettagli.
+    </p>
+  </header>
+
+  <div class="mosaic">
+    <button class="tile tile--hero" type="button" (click)="open(heroMain)">
+      <img class="tile__img" [src]="heroMain.src" [alt]="heroMain.title" />
+      <div class="tile__overlay">
+        <div class="tile__kicker">Preferita</div>
+        <div class="tile__title">{{ heroMain.title }}</div>
+      </div>
+    </button>
+
+    <button class="tile tile--right1" type="button" (click)="open(favorites[0])">
+      <img class="tile__img" [src]="favorites[0].src" [alt]="favorites[0].title" />
+      <div class="tile__overlay"><div class="tile__title">{{ favorites[0].title }}</div></div>
+    </button>
+
+    <button class="tile tile--right2" type="button" (click)="open(favorites[1])">
+      <img class="tile__img" [src]="favorites[1].src" [alt]="favorites[1].title" />
+      <div class="tile__overlay"><div class="tile__title">{{ favorites[1].title }}</div></div>
+    </button>
+
+    <button class="tile tile--bottom1" type="button" (click)="open(favorites[2])">
+      <img class="tile__img" [src]="favorites[2].src" [alt]="favorites[2].title" />
+      <div class="tile__overlay"><div class="tile__title">{{ favorites[2].title }}</div></div>
+    </button>
+
+    <button class="tile tile--bottom2" type="button" (click)="open(favorites[3])">
+      <img class="tile__img" [src]="favorites[3].src" [alt]="favorites[3].title" />
+      <div class="tile__overlay"><div class="tile__title">{{ favorites[3].title }}</div></div>
+    </button>
+
+    <button class="tile tile--corner" type="button" (click)="open(favorites[4])">
+      <img class="tile__img" [src]="favorites[4].src" [alt]="favorites[4].title" />
+      <div class="tile__overlay"><div class="tile__title">{{ favorites[4].title }}</div></div>
+    </button>
+  </div>
+
+  <div class="gallery__spacer"></div>
+
+  <div class="grid">
+    <button class="gridCard" type="button" *ngFor="let it of items" (click)="open(it)">
+      <div class="gridCard__frame">
+        <img class="gridCard__img" [src]="it.src" [alt]="it.title" loading="lazy" />
+      </div>
+      <div class="gridCard__meta">
+        <div class="gridCard__title">{{ it.title }}</div>
+      </div>
+    </button>
+  </div>
+</section>
+
+<div class="viewer" *ngIf="viewerOpen" (click)="close()">
+  <div class="viewer__panel" (click)="$event.stopPropagation()">
+    <button class="viewer__close" type="button" (click)="close()" aria-label="Chiudi">✕</button>
+
+    <div class="viewer__content" *ngIf="selected as s">
+      <div class="viewer__media">
+        <img class="viewer__img" [src]="s.src" [alt]="s.title" />
+      </div>
+
+      <aside class="viewer__info">
+        <div class="viewer__tag">Dettagli</div>
+        <h2 class="viewer__title">{{ s.title }}</h2>
+        <p class="viewer__desc">{{ s.description }}</p>
+
+        <div class="viewer__spacer" aria-hidden="true"></div>
+
+
+        <!-- NEW: luogo + data in basso -->
+        <div class="viewer__meta">
+          <div class="metaItem" *ngIf="s.place">
+            <div class="metaItem__label">Luogo</div>
+            <div class="metaItem__value">{{ s.place }}</div>
+          </div>
+
+          <div class="metaItem" *ngIf="s.date">
+            <div class="metaItem__label">Data</div>
+            <div class="metaItem__value">{{ s.date }}</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
