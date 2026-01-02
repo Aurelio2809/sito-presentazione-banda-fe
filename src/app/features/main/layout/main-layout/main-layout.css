@@ -1,11 +1,13 @@
 @reference "../../../../../styles.css";
 
-.shell {
+.shell{
   @apply min-h-screen bg-banda-black text-banda-white;
+  display: flex;
+  flex-direction: column;
 }
 
-/* HEADER: ora rosso, più “barra” */
-.header {
+/* HEADER */
+.header{
   @apply sticky top-0 z-50 border-b border-white/10 backdrop-blur;
   background: linear-gradient(
     180deg,
@@ -13,17 +15,13 @@
     color-mix(in srgb, var(--color-banda-red-500) 78%, black 22%)
   );
 }
-
-.header__inner {
+.header__inner{
   @apply mx-auto flex max-w-6xl items-center justify-between px-4 py-3;
 }
 
 /* BRAND */
-.brand {
-  @apply flex items-center gap-3 select-none;
-}
-
-.brand__mark {
+.brand{ @apply flex items-center gap-3 select-none; }
+.brand__mark{
   @apply relative h-9 w-9 rounded-xl;
   background: linear-gradient(
     135deg,
@@ -33,107 +31,52 @@
   box-shadow: var(--shadow-soft);
   transition: transform 200ms ease, filter 200ms ease;
 }
-
-.brand__mark::after {
+.brand__mark::after{
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: 0.85rem;
-  background: radial-gradient(
-    120px 60px at 20% 20%,
-    rgba(255, 255, 255, 0.35),
-    rgba(255, 255, 255, 0) 60%
-  );
+  background: radial-gradient(120px 60px at 20% 20%, rgba(255,255,255,0.35), rgba(255,255,255,0) 60%);
   opacity: 0.7;
   transition: opacity 200ms ease, transform 500ms ease;
 }
+.brand:hover .brand__mark{ transform: scale(1.04); filter: saturate(1.08); }
+.brand:hover .brand__mark::after{ opacity: 0.95; transform: translate3d(2px, -2px, 0); }
+.brand__text{ @apply leading-tight; }
+.brand__title{ @apply text-sm font-semibold tracking-wide text-banda-white; }
+.brand__subtitle{ @apply text-xs text-white/80; }
 
-.brand:hover .brand__mark {
-  transform: scale(1.04);
-  filter: saturate(1.08);
-}
-
-.brand:hover .brand__mark::after {
-  opacity: 0.95;
-  transform: translate3d(2px, -2px, 0);
-}
-
-.brand__text {
-  @apply leading-tight;
-}
-
-.brand__title {
-  @apply text-sm font-semibold tracking-wide text-banda-white;
-}
-
-.brand__subtitle {
-  @apply text-xs text-white/80;
-}
-
-/* NAV: su header rosso, quindi link più “chiari” e con pill hover */
-.nav {
-  @apply hidden items-center gap-1 md:flex;
-}
-
-.nav__link {
-  @apply relative rounded-xl px-3 py-2 text-sm text-white/90 transition;
-}
-
-.nav__link::before {
+/* NAV */
+.nav{ @apply hidden items-center gap-1 md:flex; }
+.nav__link{ @apply relative rounded-xl px-3 py-2 text-sm text-white/90 transition; }
+.nav__link::before{
   content: "";
   @apply absolute inset-0 rounded-xl opacity-0 transition;
   background: rgba(255, 255, 255, 0.12);
 }
-
-.nav__link:hover::before {
-  @apply opacity-100;
-}
-
-.nav__link.is-active {
-  @apply text-banda-white;
-}
-
-.nav__link.is-active::before {
+.nav__link:hover::before{ @apply opacity-100; }
+.nav__link.is-active{ @apply text-banda-white; }
+.nav__link.is-active::before{
   opacity: 1;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.22),
-    rgba(255,255,255,0.10)
-  );
+  background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.10));
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
 }
 
-/* CONTENT */
-.content {
-  @apply mx-auto max-w-6xl px-4 py-8;
+/* CONTENT: non “boxare” qui. */
+.content{
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
-/* FOOTER: grigio “serio” */
-.footer {
+/* FOOTER */
+.footer{
   @apply border-t border-white/10;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.04),
-    rgba(255,255,255,0.02)
-  );
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
 }
-
-.footer__inner {
+.footer__inner{
   @apply mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 md:flex-row md:items-center md:justify-between;
 }
-
-.footer__copy {
-  @apply text-sm text-white/60;
-}
-
-.footer__links {
-  @apply flex items-center gap-3 text-sm;
-}
-
-.footer__link {
-  @apply text-white/60 transition hover:text-banda-gold-400;
-}
-
-.footer__dot {
-  @apply text-white/20;
-}
+.footer__copy{ @apply text-sm text-white/60; }
+.footer__links{ @apply flex items-center gap-3 text-sm; }
+.footer__link{ @apply text-white/60 transition hover:text-banda-gold-400; }
+.footer__dot{ @apply text-white/20; }

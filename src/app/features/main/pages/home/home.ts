@@ -1,79 +1,172 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 
-type Side = 'left' | 'right';
+type Section = {
+  tag: string;
+  title: string;
+  text: string;
+  img: string;
+  ctaText: string;
+  ctaLink: string;
+};
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
-  standalone: false,
   styleUrls: ['./home.css'],
+  standalone: false,
 })
 export class Home implements AfterViewInit, OnDestroy {
-  activeIndex = 0;
-  private io?: IntersectionObserver;
+  @ViewChildren('sec', { read: ElementRef }) sectionRefs!: QueryList<ElementRef<HTMLElement>>;
 
-  readonly slides = [
+  activeSection = 0;
+  animEnabled = false;
+
+  private rafId: number | null = null;
+  private root: HTMLElement | Window = window;
+
+  constructor(private zone: NgZone) {}
+
+  readonly sections: Section[] = [
     {
-      side: 'left' as Side,
-      title: 'Una banda, una comunità',
+      tag: 'Associazione',
+      title: 'La nostra associazione',
       text:
-        'Musica, cultura e territorio. Organizziamo concerti e attività per diffondere la tradizione bandistica e creare comunità.',
+        'Siamo un’associazione no-profit che promuove cultura musicale, partecipazione e senso di comunità attraverso attività concertistiche e sociali.',
       img: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1800&q=75',
-      tag: 'Chi siamo',
+      ctaText: 'Scopri di più',
+      ctaLink: '/about',
     },
     {
-      side: 'right' as Side,
-      title: 'Eventi che “si sentono”',
+      tag: 'Sede',
+      title: 'La sede',
       text:
-        'Concerti, celebrazioni e serate speciali. Programmi curati e un repertorio che unisce classico e moderno.',
-      img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1800&q=75',
-      tag: 'Eventi',
-    },
-    {
-      side: 'left' as Side,
-      title: 'Crescita musicale, insieme',
-      text:
-        'Studio, prove, sezioni. La qualità arriva con costanza, metodo e passione condivisa.',
+        'Uno spazio di incontro, prove e organizzazione. Qui si costruiscono repertori, amicizie e progetti che poi arrivano sul palco.',
       img: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=1800&q=75',
-      tag: 'Formazione',
+      ctaText: 'Dove siamo',
+      ctaLink: '/contacts',
     },
     {
-      side: 'right' as Side,
-      title: 'Radici calabresi, suono aperto',
+      tag: 'Storia',
+      title: 'La nostra storia',
       text:
-        'Casali del Manco come punto di partenza. La musica come ponte tra generazioni e luoghi.',
-      img: 'https://images.unsplash.com/photo-1504805572947-34fad45aed93?auto=format&fit=crop&w=1800&q=75',
-      tag: 'Territorio',
+        'Un percorso fatto di persone, strumenti, impegno e tradizioni. Cresciamo anno dopo anno con eventi, concerti e nuove generazioni.',
+      img: 'https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=1800&q=75',
+      ctaText: 'Chi siamo',
+      ctaLink: '/about',
+    },
+    {
+      tag: 'Banda',
+      title: 'La banda musicale',
+      text:
+        'Un organico che unisce esperienza e nuove energie. Lavoriamo su repertori bandistici, colonne sonore, arrangiamenti e classici.',
+      img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1800&q=75',
+      ctaText: 'Eventi',
+      ctaLink: '/events',
+    },
+    {
+      tag: 'Scuola',
+      title: 'La scuola di musica',
+      text:
+        'Formazione, metodo e passione. Un percorso per avvicinarsi agli strumenti e crescere musicalmente, insieme.',
+      img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1800&q=75',
+      ctaText: 'Contatti',
+      ctaLink: '/contacts',
+    },
+    {
+      tag: 'Direttivo',
+      title: 'Il direttivo',
+      text:
+        'Organizzazione e visione: un gruppo che coordina attività, eventi e progetti, con trasparenza e spirito di servizio.',
+      img: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=75',
+      ctaText: 'Scrivici',
+      ctaLink: '/contacts',
     },
   ];
 
   ngAfterViewInit(): void {
-    const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-trigger]'));
+    const els = this.sectionRefs.map(r => r.nativeElement);
+    if (els.length === 0) return;
 
-    this.io = new IntersectionObserver(
-      (entries) => {
-        // scegliamo l’entry più “centrata” / stabile
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0))[0];
+    // trova il contenitore scrollabile (se c’è), altrimenti window
+    this.root = this.findScrollRoot(els[0]) ?? window;
 
-        if (!visible) return;
+    // 1) primo calcolo
+    this.computeActiveSection();
 
-        const idx = Number((visible.target as HTMLElement).dataset['index']);
-        if (!Number.isNaN(idx)) this.activeIndex = idx;
-      },
-      {
-        // “Apple feel”: cambio slide quando il trigger è ~ al centro viewport
-        root: null,
-        rootMargin: '-45% 0px -45% 0px',
-        threshold: [0.01, 0.25, 0.5, 0.75, 0.99],
-      }
-    );
+    // 2) abilita animazioni dopo 1 frame così non rischi “tutto invisibile”
+    requestAnimationFrame(() => {
+      this.zone.run(() => {
+        this.animEnabled = true;
+      });
+    });
 
-    triggers.forEach(t => this.io!.observe(t));
+    // 3) loop leggero per aggiornare durante lo scroll (robusto sempre)
+    this.zone.runOutsideAngular(() => {
+      const tick = () => {
+        this.computeActiveSection();
+        this.rafId = requestAnimationFrame(tick);
+      };
+      this.rafId = requestAnimationFrame(tick);
+    });
   }
 
   ngOnDestroy(): void {
-    this.io?.disconnect();
+    if (this.rafId != null) cancelAnimationFrame(this.rafId);
+  }
+
+  private computeActiveSection(): void {
+    const els = this.sectionRefs.map(r => r.nativeElement);
+    if (els.length === 0) return;
+
+    const centerY = this.getRootCenterY();
+
+    let bestIdx = 0;
+    let bestDist = Number.POSITIVE_INFINITY;
+
+    for (let i = 0; i < els.length; i++) {
+      const rect = els[i].getBoundingClientRect();
+      const sectionCenterY = rect.top + rect.height / 2;
+      const dist = Math.abs(sectionCenterY - centerY);
+
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestIdx = i;
+      }
+    }
+
+    if (bestIdx !== this.activeSection) {
+      this.zone.run(() => {
+        this.activeSection = bestIdx;
+      });
+    }
+  }
+
+  private getRootCenterY(): number {
+    if (this.root instanceof Window) {
+      return window.innerHeight / 2;
+    }
+    const r = this.root.getBoundingClientRect();
+    return r.top + r.height / 2;
+  }
+
+  private findScrollRoot(start: HTMLElement): HTMLElement | null {
+    let el: HTMLElement | null = start.parentElement;
+    while (el && el !== document.body) {
+      const style = getComputedStyle(el);
+      const overflowY = style.overflowY;
+      if (overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay') {
+        return el;
+      }
+      el = el.parentElement;
+    }
+    return null;
   }
 }

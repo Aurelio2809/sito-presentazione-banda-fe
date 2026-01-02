@@ -1,45 +1,31 @@
-<section class="appleScroll">
-  <!-- Triggers: occupano lo spazio di scroll (1 viewport per slide) -->
-  <div class="appleScroll__triggers" aria-hidden="true">
-    <div
-      class="appleScroll__trigger"
-      *ngFor="let s of slides; let i = index"
-      data-trigger
-      [attr.data-index]="i"
-    ></div>
-  </div>
+<div class="home" [attr.data-anim]="animEnabled ? 'on' : 'off'">
+  <section
+    class="heroSection"
+    *ngFor="let s of sections; let i = index"
+    #sec
+    [attr.data-side]="i % 2 === 0 ? 'left' : 'right'"
+    [class.is-active]="i === activeSection"
+  >
+    <div class="section__inner">
+      <div class="section__grid">
+        <!-- TEXT -->
+        <div class="section__text">
+          <div class="section__tag">{{ s.tag }}</div>
+          <h2 class="section__title">{{ s.title }}</h2>
+          <p class="section__desc">{{ s.text }}</p>
 
-  <!-- Stack sticky: una slide alla volta, le altre svaniscono -->
-  <div class="appleScroll__stack">
-    <article
-      class="slide"
-      *ngFor="let s of slides; let i = index"
-      [class.is-active]="i === activeIndex"
-      [class.is-before]="i < activeIndex"
-      [class.is-after]="i > activeIndex"
-      [attr.data-side]="s.side"
-    >
-      <div class="slide__inner">
-        <!-- Card “schizzo giallo” -->
-        <div class="sketchCard">
-          <div class="sketchCard__tag">{{ s.tag }}</div>
-          <h2 class="sketchCard__title">{{ s.title }}</h2>
-          <p class="sketchCard__text">{{ s.text }}</p>
-
-          <div class="sketchCard__actions">
-            <a class="sketchBtn" routerLink="/about" *ngIf="i === 0">Chi siamo</a>
-            <a class="sketchBtn" routerLink="/events" *ngIf="i === 1">Eventi</a>
-            <a class="sketchBtn" routerLink="/contacts" *ngIf="i >= 2">Contatti</a>
+          <div class="section__actions">
+            <a class="section__btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
           </div>
         </div>
 
-        <!-- Immagine -->
-        <div class="media">
-          <div class="media__frame">
-            <img class="media__img" [src]="s.img" [alt]="s.title" />
+        <!-- IMAGE -->
+        <div class="section__media">
+          <div class="mediaFrame">
+            <img class="mediaImg" [src]="s.img" [alt]="s.title" loading="lazy" />
           </div>
         </div>
       </div>
-    </article>
-  </div>
-</section>
+    </div>
+  </section>
+</div>

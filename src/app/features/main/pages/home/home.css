@@ -1,211 +1,174 @@
-@reference "../../../../../styles.css";
+.home{ width: 100%; }
 
-/* --- LAYOUT APPLE-STYLE (sticky + triggers) --- */
-.appleScroll {
-  @apply relative;
+/* 1 sezione = 1 viewport */
+.heroSection{
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(900px 520px at 20% 10%, rgba(255,215,0,0.10), rgba(0,0,0,0) 60%),
+    radial-gradient(760px 420px at 80% 30%, rgba(170,0,0,0.12), rgba(0,0,0,0) 60%),
+    linear-gradient(135deg, rgba(10,10,12,1), rgba(4,4,5,1));
+}
+@media (min-width: 768px){
+  .heroSection{ padding: 0 40px; }
 }
 
-/* Ogni trigger = 100vh: costruisce lo scroll */
-.appleScroll__triggers {
-  @apply relative;
-}
-.appleScroll__trigger {
-  @apply h-screen;
-}
-
-/* Stack sticky: sempre fisso durante lo scroll */
-.appleScroll__stack {
-  @apply pointer-events-none sticky top-0 h-screen overflow-hidden;
+/* contenitore centrato */
+.section__inner{
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
 }
 
-/* Ogni slide è “sovrapposta” a schermo intero */
-.slide {
-  @apply pointer-events-none absolute inset-0 flex items-center;
-  @apply px-4 md:px-10;
+/* grid */
+.section__grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: center;
+}
+@media (min-width: 900px){
+  .section__grid{
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 48px;
+  }
 }
 
-/* contenitore centrale */
-.slide__inner {
-  @apply pointer-events-auto mx-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-2 md:gap-10;
+/* alternanza */
+.heroSection[data-side="left"] .section__text{ order: 1; }
+.heroSection[data-side="left"] .section__media{ order: 2; }
+.heroSection[data-side="right"] .section__text{ order: 2; }
+.heroSection[data-side="right"] .section__media{ order: 1; }
+
+@media (max-width: 899px){
+  .heroSection[data-side="left"] .section__text,
+  .heroSection[data-side="left"] .section__media,
+  .heroSection[data-side="right"] .section__text,
+  .heroSection[data-side="right"] .section__media{ order: initial; }
 }
 
-/* Alternanza sx/dx (Apple vibe) */
-.slide[data-side="left"] .sketchCard { @apply md:order-1; }
-.slide[data-side="left"] .media      { @apply md:order-2; }
+/* ---- TIPOGRAFIA ---- */
+.section__tag{
+  display: inline-flex;
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.78);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.section__title{
+  margin-top: 14px;
+  font-size: clamp(26px, 3.4vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.05;
+}
+.section__desc{
+  margin-top: 14px;
+  max-width: 62ch;
+  font-size: clamp(14px, 1.35vw, 18px);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.72);
+}
+.section__actions{ margin-top: 22px; display: flex; gap: 12px; }
+.section__btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(11,11,13,0.92);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.32);
+  transition: transform 200ms ease, background 200ms ease;
+}
+.section__btn:hover{ transform: translateY(-2px); background: rgba(11,11,13,0.98); }
+.section__btn:active{ transform: translateY(0px); }
 
-.slide[data-side="right"] .sketchCard { @apply md:order-2; }
-.slide[data-side="right"] .media      { @apply md:order-1; }
+/* ---- MEDIA ---- */
+.mediaFrame{
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: radial-gradient(600px 240px at 30% 0%, rgba(255,255,255,0.06), rgba(0,0,0,0));
+  box-shadow: 0 18px 55px rgba(0,0,0,0.40);
+}
+.mediaImg{
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  transform: scale(1.02);
+  filter: saturate(1.05) contrast(1.05);
+  transition: transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (min-width: 900px){ .mediaImg{ height: 520px; } }
 
-/* --- ANIMAZIONI: entra da sx/dx, esce e “sparisce” sopra --- */
-.slide {
+/* =========================================================
+   ANIMAZIONI (abilitate solo quando data-anim="on")
+   ========================================================= */
+
+.home[data-anim="on"] .section__tag,
+.home[data-anim="on"] .section__title,
+.home[data-anim="on"] .section__desc,
+.home[data-anim="on"] .section__media{
   opacity: 0;
-  transform: translate3d(0, 18px, 0) scale(0.98);
-  filter: blur(6px);
+  filter: blur(8px);
   transition:
-    opacity 420ms ease,
-    transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    filter 650ms ease;
+    opacity 520ms ease,
+    transform 820ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 820ms ease;
   will-change: opacity, transform, filter;
 }
 
-/* Slide attiva = pienamente visibile */
-.slide.is-active {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  filter: blur(0);
+/* direzione */
+.home[data-anim="on"] .heroSection[data-side="left"] .section__tag,
+.home[data-anim="on"] .heroSection[data-side="left"] .section__title,
+.home[data-anim="on"] .heroSection[data-side="left"] .section__desc{
+  transform: translate3d(-34px, 0, 0);
+}
+.home[data-anim="on"] .heroSection[data-side="right"] .section__tag,
+.home[data-anim="on"] .heroSection[data-side="right"] .section__title,
+.home[data-anim="on"] .heroSection[data-side="right"] .section__desc{
+  transform: translate3d(34px, 0, 0);
+}
+.home[data-anim="on"] .heroSection[data-side="left"] .section__media{
+  transform: translate3d(34px, 0, 0) scale(0.985);
+}
+.home[data-anim="on"] .heroSection[data-side="right"] .section__media{
+  transform: translate3d(-34px, 0, 0) scale(0.985);
 }
 
-/* Slide “prima” (quella sopra) deve sparire mentre scendi */
-.slide.is-before {
-  opacity: 0;
-  transform: translate3d(0, -22px, 0) scale(0.985);
-  filter: blur(8px);
+/* attiva: mostra con delay */
+.home[data-anim="on"] .heroSection.is-active .section__tag{
+  opacity: 1; filter: blur(0); transform: translate3d(0,0,0);
+  transition-delay: 0ms;
 }
-
-/* Slide “dopo” resta pronta sotto */
-.slide.is-after {
-  opacity: 0;
-  transform: translate3d(0, 22px, 0) scale(0.985);
-  filter: blur(8px);
+.home[data-anim="on"] .heroSection.is-active .section__title{
+  opacity: 1; filter: blur(0); transform: translate3d(0,0,0);
+  transition-delay: 90ms;
 }
-
-/* Ingresso laterale per la card: Apple-like */
-/* La card ha sempre la transizione */
-.sketchCard {
-  transform: translate3d(0, 0, 0);
-  transition:
-    transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    opacity 420ms ease;
-  will-change: transform, opacity;
+.home[data-anim="on"] .heroSection.is-active .section__desc{
+  opacity: 1; filter: blur(0); transform: translate3d(0,0,0);
+  transition-delay: 180ms;
 }
-
-/* Stato attivo: centrata */
-.slide.is-active .sketchCard {
-  transform: translate3d(0, 0, 0);
-  opacity: 1;
+.home[data-anim="on"] .heroSection.is-active .section__media{
+  opacity: 1; filter: blur(0); transform: translate3d(0,0,0) scale(1);
+  transition-delay: 120ms;
 }
-
-/* Stato “dopo”: pronta ad entrare dal lato */
-.slide[data-side="left"].is-after .sketchCard {
-  transform: translate3d(-28px, 0, 0);
-  opacity: 0;
-}
-.slide[data-side="right"].is-after .sketchCard {
-  transform: translate3d(28px, 0, 0);
-  opacity: 0;
-}
-
-/* Stato “prima”: esce leggermente verso l’alto (mentre svanisce) */
-.slide.is-before .sketchCard {
-  transform: translate3d(0, -10px, 0);
-  opacity: 0;
-}
-
-/* --- CARD “SCHIZZO ARTISTICO GIALLO” --- */
-.sketchCard {
-  @apply relative overflow-hidden rounded-[28px] border border-white/10 p-6 md:p-8;
-  background: color-mix(in srgb, var(--color-banda-gold-400) 92%, white 8%);
-  box-shadow: 0 18px 50px rgba(0,0,0,0.35);
-}
-
-/* bordi “irregolari” con clip-path */
-.sketchCard {
-  clip-path: polygon(
-    2% 6%, 10% 2%, 24% 3%, 40% 2%, 58% 3%, 72% 2%, 90% 4%, 98% 10%,
-    97% 28%, 99% 44%, 97% 62%, 98% 78%, 96% 92%, 88% 98%, 70% 97%,
-    52% 98%, 36% 97%, 18% 98%, 6% 94%, 2% 86%, 3% 70%, 2% 52%,
-    3% 34%
-  );
-}
-
-/* “texture” tipo marker/penna */
-.sketchCard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    repeating-linear-gradient(
-      115deg,
-      rgba(0,0,0,0.05) 0px,
-      rgba(0,0,0,0.05) 2px,
-      rgba(255,255,255,0) 2px,
-      rgba(255,255,255,0) 10px
-    );
-  opacity: 0.22;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-}
-
-/* “bordo schizzato” sopra */
-.sketchCard::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 34px;
-  border: 2px solid rgba(0,0,0,0.18);
-  transform: rotate(-0.6deg);
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.sketchCard__tag {
-  @apply inline-flex w-fit rounded-full border border-black/15 bg-black/5 px-3 py-1 text-xs font-semibold;
-  color: rgba(0,0,0,0.70);
-}
-
-.sketchCard__title {
-  @apply mt-4 text-2xl font-semibold tracking-tight md:text-4xl;
-  color: rgba(0,0,0,0.90);
-}
-
-.sketchCard__text {
-  @apply mt-4 text-sm leading-relaxed md:text-base;
-  color: rgba(0,0,0,0.72);
-}
-
-.sketchCard__actions {
-  @apply mt-6 flex flex-wrap gap-3;
-}
-
-.sketchBtn {
-  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold transition;
-  background: rgba(11,11,13,0.92);
-  color: white;
-  box-shadow: 0 14px 30px rgba(0,0,0,0.25);
-}
-.sketchBtn:hover {
-  transform: translateY(-2px);
-  background: rgba(11,11,13,0.98);
-}
-.sketchBtn:active {
-  transform: translateY(0px);
-}
-
-/* --- MEDIA (immagine moderna) --- */
-.media__frame {
-  @apply overflow-hidden rounded-3xl border border-white/10;
-  background: radial-gradient(600px 240px at 30% 0%, rgba(255,255,255,0.06), rgba(0,0,0,0));
-  box-shadow: 0 18px 50px rgba(0,0,0,0.35);
-}
-
-.media__img {
-  @apply h-[280px] w-full object-cover md:h-[520px];
-  transform: scale(1.02);
-  transition: transform 650ms ease;
-  filter: saturate(1.03) contrast(1.03);
-}
-.slide.is-active .media__img {
+.home[data-anim="on"] .heroSection.is-active .mediaImg{
   transform: scale(1.07);
-}
-
-/* Accessibilità */
-@media (prefers-reduced-motion: reduce) {
-  .slide,
-  .sketchCard,
-  .media__img,
-  .sketchBtn {
-    transition: none !important;
-    transform: none !important;
-    filter: none !important;
-  }
 }
