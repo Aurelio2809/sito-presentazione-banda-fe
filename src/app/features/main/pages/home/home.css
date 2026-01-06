@@ -1,6 +1,4 @@
 .home{ width: 100%; }
-
-/* 1 sezione = 1 viewport */
 .heroSection{
   height: 100vh;
   min-height: 100vh;
@@ -10,12 +8,29 @@
   position: relative;
   overflow: hidden;
 
+  /* IMPORTANT: niente background pieno qui */
+  background: transparent;
+
+  --p: 0;
+}
+
+.heroSection::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+
   background:
     radial-gradient(900px 520px at 20% 10%, rgba(255,215,0,0.10), rgba(0,0,0,0) 60%),
     radial-gradient(760px 420px at 80% 30%, rgba(170,0,0,0.12), rgba(0,0,0,0) 60%),
-    linear-gradient(135deg, rgba(10,10,12,1), rgba(4,4,5,1));
+    linear-gradient(135deg, rgba(10,10,12,0.22), rgba(4,4,5,0.22)); /* era 0.38 */
+}
 
-  --p: 0;
+/* porta il contenuto sopra lo scrim */
+.heroSection > *{
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 768px){

@@ -4,36 +4,66 @@
   @apply min-h-screen text-banda-white;
   display: flex;
   flex-direction: column;
+  position: relative;
+  isolation: isolate;
 
+  /* altezza navbar (una sola fonte di verità) */
+  --header-h: 64px;
 
-  /* base scura + filigrana musicale */
+  /* base scura */
   background:
     radial-gradient(900px 520px at 20% 10%, rgba(255,215,0,0.06), rgba(0,0,0,0) 60%),
     radial-gradient(760px 420px at 80% 30%, rgba(170,0,0,0.08), rgba(0,0,0,0) 60%),
-    linear-gradient(135deg, rgba(10,10,12,1), rgba(4,4,5,1)),
-    url("/assets/bg/bg-musica.png");
-
-  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
-  background-size: auto, auto, auto, 540px; /* regola qui la “densità” */
-  background-position: center, center, center, top left;
-  background-attachment: fixed;
+    linear-gradient(135deg, rgba(10,10,12,1), rgba(4,4,5,1));
 }
 
-/* HEADER */
+/* filigrana dietro a tutto */
+.shell::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+
+  background-image: url("/assets/bg/bg-musica.png");
+  background-repeat: repeat;
+  background-size: 1024px;
+  background-position: top left;
+
+  opacity: 0.85;
+  filter: contrast(1.18) brightness(1.06);
+  mix-blend-mode: screen;
+}
+
+/* =========================================================
+   HEADER (FISSO)
+   ========================================================= */
 .header{
-  @apply sticky top-0 z-50 border-b border-white/10 backdrop-blur;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  z-index: 60;
+
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(12px);
+
   background: linear-gradient(
     180deg,
     color-mix(in srgb, var(--color-banda-red-700) 92%, black 8%),
     color-mix(in srgb, var(--color-banda-red-500) 78%, black 22%)
   );
 }
+
 .header__inner{
-  @apply mx-auto flex max-w-6xl items-center justify-between px-4 py-3;
+  @apply mx-auto flex max-w-6xl items-center justify-between px-4;
+  height: 100%;
 }
 
-/* BRAND */
+/* =========================================================
+   BRAND
+   ========================================================= */
 .brand{ @apply flex items-center gap-3 select-none; }
+
 .brand__mark{
   @apply relative h-9 w-9 rounded-xl;
   background: linear-gradient(
@@ -44,6 +74,7 @@
   box-shadow: var(--shadow-soft);
   transition: transform 200ms ease, filter 200ms ease;
 }
+
 .brand__mark::after{
   content: "";
   position: absolute;
@@ -53,42 +84,68 @@
   opacity: 0.7;
   transition: opacity 200ms ease, transform 500ms ease;
 }
+
 .brand:hover .brand__mark{ transform: scale(1.04); filter: saturate(1.08); }
 .brand:hover .brand__mark::after{ opacity: 0.95; transform: translate3d(2px, -2px, 0); }
+
 .brand__text{ @apply leading-tight; }
 .brand__title{ @apply text-sm font-semibold tracking-wide text-banda-white; }
 .brand__subtitle{ @apply text-xs text-white/80; }
 
-/* NAV */
+/* =========================================================
+   NAV
+   ========================================================= */
 .nav{ @apply hidden items-center gap-1 md:flex; }
+
 .nav__link{ @apply relative rounded-xl px-3 py-2 text-sm text-white/90 transition; }
+
 .nav__link::before{
   content: "";
   @apply absolute inset-0 rounded-xl opacity-0 transition;
   background: rgba(255, 255, 255, 0.12);
 }
+
 .nav__link:hover::before{ @apply opacity-100; }
 .nav__link.is-active{ @apply text-banda-white; }
+
 .nav__link.is-active::before{
   opacity: 1;
   background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.10));
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
 }
 
-/* CONTENT: non “boxare” qui. */
+/* =========================================================
+   CONTENT (compensazione SOTTO la navbar)
+   ========================================================= */
 .content{
   flex: 1 1 auto;
   min-height: 0;
+
+  /* ✅ spinge il contenuto sotto l’header fisso */
+  padding-top: var(--header-h);
 }
 
-/* FOOTER */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 .footer{
   @apply border-t border-white/10;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  position: relative;
+  z-index: 2;
+
+  background: linear-gradient(
+    180deg,
+    rgba(32,32,36,0.96),
+    rgba(20,20,24,0.96)
+  );
+
+  backdrop-filter: blur(10px) saturate(1.15);
 }
+
 .footer__inner{
   @apply mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 md:flex-row md:items-center md:justify-between;
 }
+
 .footer__copy{ @apply text-sm text-white/60; }
 .footer__links{ @apply flex items-center gap-3 text-sm; }
 .footer__link{ @apply text-white/60 transition hover:text-banda-gold-400; }
