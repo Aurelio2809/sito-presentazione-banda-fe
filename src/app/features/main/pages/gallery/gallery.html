@@ -1,3 +1,4 @@
+<!-- src/app/features/main/pages/gallery/gallery.html -->
 <section class="gallery">
   <header class="gallery__head">
     <div class="gallery__tag">Galleria</div>
@@ -19,34 +20,45 @@
 
     <button class="tile tile--right1" type="button" (click)="open(favorites[0])">
       <img class="tile__img" [src]="favorites[0].src" [alt]="favorites[0].title" />
-      <div class="tile__overlay"><div class="tile__title">{{ favorites[0].title }}</div></div>
+      <div class="tile__overlay">
+        <div class="tile__title">{{ favorites[0].title }}</div>
+      </div>
     </button>
 
     <button class="tile tile--right2" type="button" (click)="open(favorites[1])">
       <img class="tile__img" [src]="favorites[1].src" [alt]="favorites[1].title" />
-      <div class="tile__overlay"><div class="tile__title">{{ favorites[1].title }}</div></div>
+      <div class="tile__overlay">
+        <div class="tile__title">{{ favorites[1].title }}</div>
+      </div>
     </button>
 
     <button class="tile tile--bottom1" type="button" (click)="open(favorites[2])">
       <img class="tile__img" [src]="favorites[2].src" [alt]="favorites[2].title" />
-      <div class="tile__overlay"><div class="tile__title">{{ favorites[2].title }}</div></div>
+      <div class="tile__overlay">
+        <div class="tile__title">{{ favorites[2].title }}</div>
+      </div>
     </button>
 
     <button class="tile tile--bottom2" type="button" (click)="open(favorites[3])">
       <img class="tile__img" [src]="favorites[3].src" [alt]="favorites[3].title" />
-      <div class="tile__overlay"><div class="tile__title">{{ favorites[3].title }}</div></div>
+      <div class="tile__overlay">
+        <div class="tile__title">{{ favorites[3].title }}</div>
+      </div>
     </button>
 
     <button class="tile tile--corner" type="button" (click)="open(favorites[4])">
       <img class="tile__img" [src]="favorites[4].src" [alt]="favorites[4].title" />
-      <div class="tile__overlay"><div class="tile__title">{{ favorites[4].title }}</div></div>
+      <div class="tile__overlay">
+        <div class="tile__title">{{ favorites[4].title }}</div>
+      </div>
     </button>
   </div>
 
   <div class="gallery__spacer"></div>
 
+  <!-- GRID (paginata) -->
   <div class="grid">
-    <button class="gridCard" type="button" *ngFor="let it of items" (click)="open(it)">
+    <button class="gridCard" type="button" *ngFor="let it of pagedItems" (click)="open(it)">
       <div class="gridCard__frame">
         <img class="gridCard__img" [src]="it.src" [alt]="it.title" loading="lazy" />
       </div>
@@ -55,8 +67,20 @@
       </div>
     </button>
   </div>
+
+  <!-- NAVIGATORE PAGINE -->
+  <app-ui-simple-page-navigator
+    [totalItems]="items.length"
+    [page]="page"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[6, 9, 12, 18]"
+    [showPageSize]="true"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+  ></app-ui-simple-page-navigator>
 </section>
 
+<!-- VIEWER -->
 <div class="viewer" *ngIf="viewerOpen" (click)="close()">
   <div class="viewer__panel" (click)="$event.stopPropagation()">
     <button class="viewer__close" type="button" (click)="close()" aria-label="Chiudi">✕</button>
@@ -73,8 +97,6 @@
 
         <div class="viewer__spacer" aria-hidden="true"></div>
 
-
-        <!-- NEW: luogo + data in basso -->
         <div class="viewer__meta">
           <div class="metaItem" *ngIf="s.place">
             <div class="metaItem__label">Luogo</div>

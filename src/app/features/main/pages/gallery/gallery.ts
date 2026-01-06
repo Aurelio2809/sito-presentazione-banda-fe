@@ -1,3 +1,4 @@
+// src/app/features/main/pages/gallery/gallery.ts
 import { Component, HostListener } from '@angular/core';
 
 type GalleryItem = {
@@ -72,12 +73,34 @@ export class Gallery {
     id: `grid-${i + 1}`,
     src: `https://picsum.photos/seed/banda-grid-${i + 1}/1400/900`,
     title: `Foto ${i + 1}`,
-    description:
-      'Placeholder: qui inserirai titolo e descrizione reali (concerto, prova, evento, ecc.).',
+    description: 'Placeholder: qui inserirai titolo e descrizione reali (concerto, prova, evento, ecc.).',
     place: 'Casali del Manco (CS)',
     date: '2025',
   }));
 
+  // =========================
+  // PAGINAZIONE (solo griglia)
+  // =========================
+  page = 1;      // 1-based
+  pageSize = 9;  // default
+
+  get pagedItems(): GalleryItem[] {
+    const start = (this.page - 1) * this.pageSize;
+    return this.items.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(p: number): void {
+    this.page = p;
+  }
+
+  onPageSizeChange(size: number): void {
+    this.pageSize = size;
+    this.page = 1;
+  }
+
+  // =========================
+  // VIEWER
+  // =========================
   viewerOpen = false;
   selected: GalleryItem | null = null;
 

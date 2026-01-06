@@ -1,0 +1,71 @@
+@reference "../../../../styles.css";
+
+/* wrapper: niente card globale */
+.spn{
+  @apply mt-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between;
+}
+
+/* LEFT */
+.spn__left{
+  @apply flex flex-wrap items-center gap-3;
+}
+
+.spn__btn{
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white/85 font-extrabold;
+  transition: transform 180ms ease, background 180ms ease, opacity 180ms ease;
+}
+.spn__btn:hover{ @apply bg-white/10; transform: translateY(-1px); }
+.spn__btn:disabled{ @apply opacity-40; transform: none; }
+
+.spn__pages{
+  @apply flex items-center gap-2;
+}
+
+.spn__page{
+  @apply inline-flex h-10 min-w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-3 text-sm font-extrabold text-white/80;
+  transition: transform 180ms ease, background 180ms ease, opacity 180ms ease;
+}
+.spn__page:hover{ @apply bg-white/10; transform: translateY(-1px); }
+.spn__page:disabled{ @apply opacity-55; transform: none; }
+
+.spn__page.isActive{
+  @apply bg-white/15 text-white;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.25);
+}
+
+/* info label */
+.spn__info{
+  @apply ml-1 text-sm text-white/70;
+}
+.spn__strong{ @apply text-white/90 font-extrabold; }
+.spn__muted{ @apply text-white/55; }
+.spn__dot{ @apply mx-2 text-white/35; }
+
+/* RIGHT */
+.spn__right{
+  @apply flex items-center justify-end;
+}
+
+/* card SOLO per select */
+.spn__sizeCard{
+  @apply rounded-3xl border border-white/10 bg-white/5 px-4 py-3;
+  box-shadow: 0 18px 55px rgba(0,0,0,0.24);
+}
+
+.spn__size{
+  @apply flex items-center gap-3 text-sm;
+}
+
+.spn__select{
+  @apply rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-extrabold text-white/85 outline-none;
+}
+.spn__select:focus{
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+}
+
+/* mobile: card a tutta larghezza e sotto */
+@media (max-width: 768px){
+  .spn__right{ @apply w-full; }
+  .spn__sizeCard{ @apply w-full; }
+  .spn__size{ @apply w-full justify-between; }
+}

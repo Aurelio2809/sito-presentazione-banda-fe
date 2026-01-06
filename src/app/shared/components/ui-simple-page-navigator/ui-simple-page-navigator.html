@@ -1,0 +1,60 @@
+<div class="spn" *ngIf="totalItems > 0">
+  <!-- LEFT: navigazione + label (senza card) -->
+  <div class="spn__left">
+    <button
+      class="spn__btn"
+      type="button"
+      (click)="prev()"
+      [disabled]="page <= 1"
+      aria-label="Pagina precedente"
+    >
+      ‹
+    </button>
+
+    <div class="spn__pages" role="navigation" aria-label="Paginazione">
+      <button
+        *ngFor="let t of tokens; trackBy: trackToken"
+        class="spn__page"
+        type="button"
+        [class.isActive]="isActive(t)"
+        [disabled]="t === '…'"
+        (click)="onTokenClick(t)"
+        [attr.aria-current]="ariaCurrent(t)"
+      >
+        {{ t }}
+      </button>
+    </div>
+
+    <button
+      class="spn__btn"
+      type="button"
+      (click)="next()"
+      [disabled]="page >= pageCount"
+      aria-label="Pagina successiva"
+    >
+      ›
+    </button>
+
+    <div class="spn__info">
+      Pagina <span class="spn__strong">{{ page }}</span> di <span class="spn__strong">{{ pageCount }}</span>
+      <span class="spn__dot">•</span>
+      <span class="spn__muted">{{ totalItems }} foto</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: card SOLO per page size -->
+  <div class="spn__right" *ngIf="showPageSize">
+    <div class="spn__sizeCard">
+      <label class="spn__size">
+        <span class="spn__muted">Per pagina</span>
+        <select
+          class="spn__select"
+          [value]="pageSize"
+          (change)="onPageSizeSelect($any($event.target).value)"
+        >
+          <option *ngFor="let s of pageSizeOptions" [value]="s">{{ s }}</option>
+        </select>
+      </label>
+    </div>
+  </div>
+</div>

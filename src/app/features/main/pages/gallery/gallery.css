@@ -1,3 +1,4 @@
+/* src/app/features/main/pages/gallery/gallery.css */
 @reference "../../../../../styles.css";
 
 /* PAGE */
@@ -271,31 +272,29 @@
   }
   .viewer__media{ height: 320px; }
 }
+
 /* ===== Viewer right panel layout ===== */
 .viewer__info{
   padding: 28px 26px;
   border-left: 1px solid rgba(255,255,255,0.08);
   display: flex;
   flex-direction: column;
-  min-height: 520px;              /* così su desktop ha “spazio” vero */
+  min-height: 520px; /* desktop */
 }
 
-/* il testo può crescere, ma non deve spingere il meta attaccato */
 .viewer__desc{
   margin-top: 12px;
   line-height: 1.65;
   color: rgba(255,255,255,0.70);
 }
 
-/* spacer elastico: questo è il trucco */
 .viewer__spacer{
   flex: 1 1 auto;
   min-height: 18px;
 }
 
-/* meta: sempre in fondo */
 .viewer__meta{
-  margin-top: 0;                  /* non serve più auto */
+  margin-top: 0;
   padding-top: 18px;
   border-top: 1px solid rgba(255,255,255,0.10);
   display: grid;
@@ -325,7 +324,6 @@
   color: rgba(255,255,255,0.86);
 }
 
-/* Mobile: il pannello info va sotto, ha meno “spazio”, quindi niente min-height */
 @media (max-width: 900px){
   .viewer__info{
     min-height: auto;
@@ -333,6 +331,6 @@
     border-top: 1px solid rgba(255,255,255,0.08);
   }
   .viewer__spacer{
-    display: none; /* su mobile non serve: scorre naturalmente */
+    display: none;
   }
 }
