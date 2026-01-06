@@ -1,30 +1,65 @@
 @reference "../../../../../styles.css";
 
+/* =========================================================
+   GLASS TOKENS (come "Contatti")
+   ========================================================= */
+:root{
+  --glass-scrim: rgba(8, 8, 10, 0.78);
+  --glass-scrim-strong: rgba(8, 8, 10, 0.86);
+  --glass-top: rgba(255,255,255,0.06);
+}
+
 /* PAGE */
 .events{
   @apply mx-auto max-w-6xl px-4 py-10;
 }
 
-/* HERO */
+/* =========================================================
+   HERO (blur + padding allineato come Contatti)
+   ========================================================= */
 .eventsHero{
   @apply overflow-hidden rounded-[28px] border border-white/10 px-6 py-10 md:px-10 md:py-14;
+  position: relative;
+
   background:
-    radial-gradient(900px 520px at 20% 10%, rgba(255,215,0,0.10), rgba(0,0,0,0) 60%),
-    radial-gradient(760px 420px at 80% 30%, rgba(170,0,0,0.12), rgba(0,0,0,0) 60%),
-    linear-gradient(135deg, rgba(10,10,12,1), rgba(4,4,5,1));
+    radial-gradient(900px 520px at 20% 10%, rgba(255,215,0,0.12), rgba(0,0,0,0) 60%),
+    radial-gradient(760px 420px at 80% 30%, rgba(170,0,0,0.14), rgba(0,0,0,0) 60%),
+    linear-gradient(135deg, rgba(12,12,14,0.92), rgba(6,6,8,0.92));
+
+  /* vetro */
+  backdrop-filter: blur(14px) saturate(1.12);
+  -webkit-backdrop-filter: blur(14px) saturate(1.12);
+
   box-shadow: 0 24px 80px rgba(0,0,0,0.45);
 }
 
+.eventsHero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+
+  background:
+    radial-gradient(720px 320px at 30% 0%, rgba(255,255,255,0.10), rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  opacity: 0.95;
+}
+
+.eventsHero > *{ position: relative; z-index: 1; }
+
 .eventsHero__tag{
   @apply inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .eventsHero__title{ @apply mt-4 text-3xl font-extrabold tracking-tight text-white md:text-6xl; }
 .eventsHero__desc{ @apply mt-4 max-w-3xl text-sm leading-relaxed text-white/65 md:text-base; }
 
-/* TABS */
-.tabs{
-  @apply mt-8 flex flex-wrap gap-3;
-}
+/* =========================================================
+   TABS (restano leggeri)
+   ========================================================= */
+.tabs{ @apply mt-8 flex flex-wrap gap-3; }
 
 .tab{
   @apply relative inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-extrabold text-white/80 transition;
@@ -47,10 +82,10 @@
   @apply inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs font-extrabold text-white/70;
 }
 
-/* LAYOUT */
-.layout{
-  @apply mt-6 grid gap-4;
-}
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.layout{ @apply mt-6 grid gap-4; }
 @media (min-width: 900px){
   .layout{
     grid-template-columns: 1.35fr 0.65fr;
@@ -63,34 +98,93 @@
 .sectionHead__title{ @apply text-xl font-extrabold text-white md:text-2xl; }
 .sectionHead__desc{ @apply mt-1 text-sm leading-relaxed text-white/60; }
 
-/* RIGHT CARD */
+/* =========================================================
+   RIGHT CARD (Annunci) - blur stile Contatti
+   ========================================================= */
 .card{
-  @apply rounded-[28px] border border-white/10 bg-white/5 p-6 md:p-8;
+  @apply rounded-[28px] border border-white/10 p-6 md:p-8;
+  position: relative;
+  overflow: hidden;
+
+  /* scrim: blocca la filigrana */
+  background: var(--glass-scrim);
+
+  /* vetro */
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+
   box-shadow: 0 18px 55px rgba(0,0,0,0.34);
 }
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+
+  background:
+    radial-gradient(700px 280px at 30% 0%, rgba(255,255,255,0.10), rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  opacity: 0.95;
+}
+
+.card > *{ position: relative; z-index: 1; }
+
 .card--soft{
   background:
-    radial-gradient(700px 320px at 70% 10%, rgba(255,215,0,0.07), rgba(0,0,0,0) 60%),
-    linear-gradient(135deg, rgba(10,10,12,1), rgba(4,4,5,1));
+    radial-gradient(700px 320px at 70% 10%, rgba(255,215,0,0.12), rgba(0,0,0,0) 60%),
+    linear-gradient(135deg, rgba(14,14,16,0.90), rgba(8,8,10,0.88));
 }
+
 .card__title{ @apply text-xl font-extrabold text-white md:text-2xl; }
 .card__desc{ @apply mt-2 text-sm leading-relaxed text-white/65 md:text-base; }
 
-/* TICKETS LIST */
+/* =========================================================
+   TICKETS LIST
+   ========================================================= */
 .ticketList{ @apply grid gap-4; }
 
-/* TICKET */
+/* =========================================================
+   TICKET - più opaco (meno filigrana), NO blur (è contenuto con immagini)
+   ========================================================= */
 .ticket{
-  @apply relative w-full overflow-hidden rounded-[28px] border border-white/10 bg-white/5 text-left transition;
+  @apply relative w-full overflow-hidden rounded-[28px] border border-white/10 text-left transition;
+  position: relative;
+
+  /* più opaco rispetto a bg-white/5: blocca filigrana */
+  background: rgba(10,10,12,0.82);
+
   box-shadow: 0 18px 55px rgba(0,0,0,0.34);
   display: grid;
   grid-template-columns: 160px 1fr 34px;
   min-height: 132px;
   transform: translateZ(0);
+
+  transition:
+    transform 200ms ease,
+    box-shadow 240ms ease,
+    background 220ms ease,
+    border-color 220ms ease;
 }
 
+.ticket::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+
+  background:
+    radial-gradient(620px 220px at 22% 0%, rgba(255,255,255,0.06), rgba(255,255,255,0) 58%),
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  opacity: 0.9;
+}
+
+.ticket > *{ position: relative; z-index: 1; }
+
 .ticket:hover{
-  @apply bg-white/10;
+  background: rgba(14,14,16,0.86);
   transform: translateY(-4px);
   box-shadow: 0 30px 120px rgba(0,0,0,0.58);
 }
@@ -103,16 +197,11 @@
 }
 
 @media (max-width: 720px){
-  .ticket{
-    grid-template-columns: 1fr;
-  }
+  .ticket{ grid-template-columns: 1fr; }
 }
 
 /* banner */
-.ticket__banner{
-  position: relative;
-  overflow: hidden;
-}
+.ticket__banner{ position: relative; overflow: hidden; }
 .ticket__img{
   width: 100%;
   height: 100%;
@@ -124,13 +213,13 @@
 .ticket__shade{
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(0,0,0,0.10), rgba(0,0,0,0.58));
+  background: linear-gradient(90deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62));
 }
 .ticket:hover .ticket__img{ transform: scale(1.12); }
 
 @media (max-width: 720px){
   .ticket__banner{ height: 200px; }
-  .ticket__shade{ background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.70)); }
+  .ticket__shade{ background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.72)); }
 }
 
 /* body */
@@ -140,10 +229,7 @@
   gap: 10px;
 }
 
-.ticket__top{
-  display: grid;
-  gap: 10px;
-}
+.ticket__top{ display: grid; gap: 10px; }
 
 .ticket__title{
   @apply text-base font-extrabold text-white md:text-lg;
@@ -156,6 +242,7 @@
   gap: 8px;
 }
 
+/* pill più opache */
 .metaPill{
   display: inline-flex;
   gap: 8px;
@@ -163,7 +250,10 @@
   padding: 8px 10px;
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
+
+  background: rgba(10,10,12,0.66);
+  backdrop-filter: blur(10px) saturate(1.12);
+  -webkit-backdrop-filter: blur(10px) saturate(1.12);
 }
 .metaPill__label{
   font-size: 11px;
@@ -186,7 +276,10 @@
 /* tags */
 .ticket__tags{ display: flex; flex-wrap: wrap; gap: 8px; }
 .tag{
-  @apply inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/70;
+  @apply inline-flex w-fit rounded-full border border-white/10 px-3 py-1 text-xs font-semibold text-white/70;
+  background: rgba(10,10,12,0.62);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
 }
 
 /* details accordion */
@@ -197,9 +290,7 @@
   display: grid;
   gap: 12px;
 }
-.details__text{
-  @apply text-sm leading-relaxed text-white/70;
-}
+.details__text{ @apply text-sm leading-relaxed text-white/70; }
 
 .details__row{
   display: flex;
@@ -216,7 +307,10 @@
   padding: 10px 12px;
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
+
+  background: rgba(10,10,12,0.66);
+  backdrop-filter: blur(10px) saturate(1.12);
+  -webkit-backdrop-filter: blur(10px) saturate(1.12);
 }
 .details__k{
   font-size: 11px;
@@ -239,7 +333,11 @@
   padding: 10px 12px;
   border-radius: 18px;
   border: 1px solid rgba(255,215,0,0.28);
+
   background: rgba(255,215,0,0.10);
+  backdrop-filter: blur(10px) saturate(1.12);
+  -webkit-backdrop-filter: blur(10px) saturate(1.12);
+
   color: rgba(255,255,255,0.88);
   text-decoration: none;
   font-weight: 900;
@@ -273,7 +371,9 @@
   height: 18px;
   transform: translateX(-50%);
   border-radius: 999px;
-  background: rgba(10,10,12,1);
+
+  /* deve “bucare” il ticket, quindi usa un tono scuro ma non nerissimo */
+  background: rgba(10,10,12,0.92);
   box-shadow: 0 0 0 1px rgba(255,255,255,0.10);
 }
 .ticket__cut--top{ top: 16px; }
@@ -283,14 +383,40 @@
   .ticket__rail{ display: none; }
 }
 
-/* ANNOUNCEMENTS */
+/* =========================================================
+   ANNOUNCEMENTS (card già glass, gli item leggermente opachi + blur)
+   ========================================================= */
 .annList{ @apply mt-6 grid gap-3; }
 
 .ann{
-  @apply w-full text-left rounded-3xl border border-white/10 bg-white/5 p-4 transition;
+  @apply w-full text-left rounded-3xl border border-white/10 p-4 transition;
+  position: relative;
+  overflow: hidden;
+
+  background: rgba(10,10,12,0.74);
+  backdrop-filter: blur(12px) saturate(1.12);
+  -webkit-backdrop-filter: blur(12px) saturate(1.12);
+
   box-shadow: 0 14px 40px rgba(0,0,0,0.22);
 }
-.ann:hover{ @apply bg-white/10; transform: translateY(-3px); }
+.ann::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+
+  background:
+    radial-gradient(520px 220px at 25% 0%, rgba(255,255,255,0.08), rgba(255,255,255,0) 58%),
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+  opacity: 0.9;
+}
+.ann > *{ position: relative; z-index: 1; }
+
+.ann:hover{
+  background: rgba(14,14,16,0.80);
+  transform: translateY(-3px);
+}
 .ann.is-open{
   border-color: rgba(255,215,0,0.26);
   box-shadow:
@@ -312,12 +438,18 @@
 
 .ann__cta{ @apply mt-3; }
 .ann__btn{
-  @apply inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-extrabold text-white/75;
+  @apply inline-flex w-fit rounded-full border border-white/10 px-3 py-1 text-xs font-extrabold text-white/75;
+  background: rgba(10,10,12,0.60);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
 }
 
 /* Empty */
 .empty{
-  @apply rounded-3xl border border-white/10 bg-white/5 p-6 text-sm text-white/65;
+  @apply rounded-3xl border border-white/10 p-6 text-sm text-white/65;
+  background: rgba(10,10,12,0.72);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
 }
 
 /* Spacer */

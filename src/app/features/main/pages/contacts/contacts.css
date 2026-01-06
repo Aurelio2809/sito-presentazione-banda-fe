@@ -39,6 +39,18 @@
 .contactsHero__desc{ @apply mt-4 max-w-3xl text-sm leading-relaxed text-white/65 md:text-base; }
 
 /* =========================================================
+   SPACING: spazio sopra la hero "Restiamo in contatto"
+   ========================================================= */
+.contactsHero{
+  margin-top: 32px; /* spazio sopra la card */
+}
+
+@media (max-width: 900px){
+  .contactsHero{
+    margin-top: 12px;
+  }
+}
+/* =========================================================
    GRID
    ========================================================= */
 .contactsGrid{
@@ -324,3 +336,5 @@
    ========================================================= */
 .contactsSpacer{ height: 84px; }
 @media (min-width: 768px){ .contactsSpacer{ height: 120px; } }
+
+

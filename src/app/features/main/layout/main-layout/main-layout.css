@@ -30,7 +30,7 @@
   background-size: 1024px;
   background-position: top left;
 
-  opacity: 0.85;
+  opacity: 0.65;
   filter: contrast(1.18) brightness(1.06);
   mix-blend-mode: screen;
 }
