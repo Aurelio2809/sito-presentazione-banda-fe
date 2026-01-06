@@ -45,7 +45,7 @@
   z-index: 60;
 
   border-bottom: 1px solid rgba(255,255,255,0.10);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px) saturate(1.12);
 
   background: linear-gradient(
     180deg,
@@ -60,33 +60,96 @@
 }
 
 /* =========================================================
-   BRAND
+   BRAND (con stemma)
    ========================================================= */
-.brand{ @apply flex items-center gap-3 select-none; }
+.brand{
+  @apply flex items-center gap-3 select-none;
 
-.brand__mark{
-  @apply relative h-9 w-9 rounded-xl;
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--color-banda-gold-400) 70%, white 30%),
-    color-mix(in srgb, var(--color-banda-gold-400) 35%, var(--color-banda-red-500) 65%)
-  );
-  box-shadow: var(--shadow-soft);
-  transition: transform 200ms ease, filter 200ms ease;
 }
 
+.brand__mark{
+  /* ⬆️ un filo più grande: lo stemma respira */
+  width: 52px;
+  height: 52px;
+
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  border-radius: 14px;
+
+  /* ✅ placca più chiara (lo stemma stacca sul rosso) */
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,215,0,0.22);
+  backdrop-filter: blur(10px) saturate(1.15);
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.30),
+    0 0 0 1px rgba(255,255,255,0.06) inset;
+
+  transition: transform 200ms ease, filter 200ms ease, background 200ms ease, border-color 200ms ease;
+}
+
+/* base “medaglione” interna (clippata, non sporca i bordi) */
+.brand__mark::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    radial-gradient(120px 70px at 30% 20%, rgba(255,255,255,0.22), rgba(255,255,255,0.08) 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+  opacity: 0.95;
+}
+
+/* highlight sopra: clippato (NO inset:-1) */
 .brand__mark::after{
   content: "";
   position: absolute;
-  inset: -1px;
-  border-radius: 0.85rem;
-  background: radial-gradient(120px 60px at 20% 20%, rgba(255,255,255,0.35), rgba(255,255,255,0) 60%);
-  opacity: 0.7;
+  inset: 0;                 /* ✅ non sporge */
+  border-radius: inherit;   /* ✅ stesso radius */
+  pointer-events: none;
+  z-index: 2;
+
+  background: radial-gradient(120px 60px at 20% 20%, rgba(255,255,255,0.20), rgba(255,255,255,0) 60%);
+  opacity: 0.40;
   transition: opacity 200ms ease, transform 500ms ease;
 }
 
-.brand:hover .brand__mark{ transform: scale(1.04); filter: saturate(1.08); }
-.brand:hover .brand__mark::after{ opacity: 0.95; transform: translate3d(2px, -2px, 0); }
+.brand__crest{
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  padding: 0;               /* ✅ niente padding */
+  border-radius: inherit;   /* ✅ segue il radius del mark */
+  object-fit: cover;        /* ✅ riempie tutto (può tagliare un filo) */
+  transform: translateZ(0);
+
+  filter:
+    drop-shadow(0 10px 18px rgba(0,0,0,0.30))
+    contrast(1.10)
+    brightness(1.08)
+    saturate(1.05);
+}
+
+.brand:hover .brand__mark{
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,215,0,0.28);
+  filter: saturate(1.06);
+}
+
+.brand:hover .brand__mark::after{
+  opacity: 0.55;
+  transform: translate3d(2px, -2px, 0);
+}
 
 .brand__text{ @apply leading-tight; }
 .brand__title{ @apply text-sm font-semibold tracking-wide text-banda-white; }
@@ -120,8 +183,6 @@
 .content{
   flex: 1 1 auto;
   min-height: 0;
-
-  /* ✅ spinge il contenuto sotto l’header fisso */
   padding-top: var(--header-h);
 }
 
