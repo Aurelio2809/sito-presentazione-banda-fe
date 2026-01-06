@@ -9,13 +9,26 @@ import {
   ViewChildren,
 } from '@angular/core';
 
+type Layout =
+  | 'assocHero'
+  | 'sedeSplit'
+  | 'storyTriptych'
+  | 'bandStage'
+  | 'schoolDouble'
+  | 'boardPoster';
+
 type Section = {
+  key: 'associazione' | 'sede' | 'storia' | 'banda' | 'scuola' | 'direttivo';
   tag: string;
   title: string;
   text: string;
-  img: string;
   ctaText: string;
   ctaLink: string;
+
+  layout: Layout;
+  images: string[];
+
+  crestImg?: string;
 };
 
 @Component({
@@ -39,58 +52,88 @@ export class Home implements AfterViewInit, OnDestroy {
 
   readonly sections: Section[] = [
     {
+      key: 'associazione',
       tag: 'Associazione',
       title: 'La nostra associazione',
       text:
         'Siamo un’associazione no-profit che promuove cultura musicale, partecipazione e senso di comunità attraverso attività concertistiche e sociali.',
-      img: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1800&q=75',
       ctaText: 'Scopri di più',
       ctaLink: '/about',
+      layout: 'assocHero',
+      images: [
+        'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1800&q=75',
+      ],
+      crestImg: 'assets/stemma.png',
     },
     {
+      key: 'sede',
       tag: 'Sede',
       title: 'La sede',
       text:
         'Uno spazio di incontro, prove e organizzazione. Qui si costruiscono repertori, amicizie e progetti che poi arrivano sul palco.',
-      img: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=1800&q=75',
       ctaText: 'Dove siamo',
       ctaLink: '/contacts',
+      layout: 'sedeSplit',
+      images: [
+        'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=1800&q=75',
+      ],
     },
     {
+      key: 'storia',
       tag: 'Storia',
       title: 'La nostra storia',
       text:
         'Un percorso fatto di persone, strumenti, impegno e tradizioni. Cresciamo anno dopo anno con eventi, concerti e nuove generazioni.',
-      img: 'https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=1800&q=75',
       ctaText: 'Chi siamo',
       ctaLink: '/about',
+      layout: 'storyTriptych',
+      images: [
+        'https://images.unsplash.com/photo-1521337706264-a414f153a5e0?auto=format&fit=crop&w=1800&q=75',
+        'https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=1800&q=75',
+        'https://images.unsplash.com/photo-1521334726092-b509a19597c1?auto=format&fit=crop&w=1800&q=75',
+      ],
     },
     {
+      key: 'banda',
       tag: 'Banda',
       title: 'La banda musicale',
       text:
         'Un organico che unisce esperienza e nuove energie. Lavoriamo su repertori bandistici, colonne sonore, arrangiamenti e classici.',
-      img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1800&q=75',
       ctaText: 'Eventi',
       ctaLink: '/events',
+      layout: 'bandStage',
+      images: [
+        'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1800&q=75',
+        'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1800&q=75',
+        'https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1800&q=75',
+      ],
     },
     {
+      key: 'scuola',
       tag: 'Scuola',
       title: 'La scuola di musica',
       text:
         'Formazione, metodo e passione. Un percorso per avvicinarsi agli strumenti e crescere musicalmente, insieme.',
-      img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1800&q=75',
       ctaText: 'Contatti',
       ctaLink: '/contacts',
+      layout: 'schoolDouble',
+      images: [
+        'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1800&q=75',
+        'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1800&q=75',
+      ],
     },
     {
+      key: 'direttivo',
       tag: 'Direttivo',
       title: 'Il direttivo',
       text:
         'Organizzazione e visione: un gruppo che coordina attività, eventi e progetti, con trasparenza e spirito di servizio.',
-      img: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=75',
       ctaText: 'Scrivici',
       ctaLink: '/contacts',
+      layout: 'boardPoster',
+      images: [
+        'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=75',
+      ],
     },
   ];
 
@@ -124,8 +167,6 @@ export class Home implements AfterViewInit, OnDestroy {
 
     const centerY = this.getVisibleCenterY();
     const viewH = this.getVisibleHeight();
-
-    // più stretto => effetto più evidente
     const range = viewH * 0.60;
 
     for (let i = 0; i < els.length; i++) {
@@ -138,9 +179,6 @@ export class Home implements AfterViewInit, OnDestroy {
       if (p > 1) p = 1;
 
       p = this.easeOutCubic(p);
-
-      //p = this.easeOutQuint(p);
-
       els[i].style.setProperty('--p', p.toFixed(4));
     }
   }
@@ -167,11 +205,6 @@ export class Home implements AfterViewInit, OnDestroy {
       el = el.parentElement;
     }
     return null;
-  }
-
-  private easeOutQuint(t: number): number {
-    const x = 1 - t;
-    return 1 - x * x * x * x * x;
   }
 
   private easeOutCubic(t: number): number {
