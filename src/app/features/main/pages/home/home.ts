@@ -126,7 +126,7 @@ export class Home implements AfterViewInit, OnDestroy {
     const viewH = this.getVisibleHeight();
 
     // più stretto => effetto più evidente
-    const range = viewH * 0.35;
+    const range = viewH * 0.60;
 
     for (let i = 0; i < els.length; i++) {
       const rect = els[i].getBoundingClientRect();
@@ -137,7 +137,9 @@ export class Home implements AfterViewInit, OnDestroy {
       if (p < 0) p = 0;
       if (p > 1) p = 1;
 
-      p = this.easeOutQuint(p);
+      p = this.easeOutCubic(p);
+
+      //p = this.easeOutQuint(p);
 
       els[i].style.setProperty('--p', p.toFixed(4));
     }
@@ -170,5 +172,10 @@ export class Home implements AfterViewInit, OnDestroy {
   private easeOutQuint(t: number): number {
     const x = 1 - t;
     return 1 - x * x * x * x * x;
+  }
+
+  private easeOutCubic(t: number): number {
+    const x = 1 - t;
+    return 1 - x * x * x;
   }
 }
