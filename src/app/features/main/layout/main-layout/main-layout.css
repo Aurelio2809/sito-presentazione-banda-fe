@@ -1,9 +1,22 @@
 @reference "../../../../../styles.css";
 
 .shell{
-  @apply min-h-screen bg-banda-black text-banda-white;
+  @apply min-h-screen text-banda-white;
   display: flex;
   flex-direction: column;
+
+
+  /* base scura + filigrana musicale */
+  background:
+    radial-gradient(900px 520px at 20% 10%, rgba(255,215,0,0.06), rgba(0,0,0,0) 60%),
+    radial-gradient(760px 420px at 80% 30%, rgba(170,0,0,0.08), rgba(0,0,0,0) 60%),
+    linear-gradient(135deg, rgba(10,10,12,1), rgba(4,4,5,1)),
+    url("/assets/bg/bg-musica.png");
+
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: auto, auto, auto, 540px; /* regola qui la “densità” */
+  background-position: center, center, center, top left;
+  background-attachment: fixed;
 }
 
 /* HEADER */
