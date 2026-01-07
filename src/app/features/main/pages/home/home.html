@@ -10,24 +10,26 @@
     <div class="section__inner">
       <ng-container [ngSwitch]="s.layout">
 
-        <!-- 1) ASSOCIAZIONE: testo pulito + hero (NO card) -->
+        <!-- 1) ASSOCIAZIONE -->
         <ng-container *ngSwitchCase="'assocHero'">
           <div class="layout layout--assoc">
-            <div class="assoc__copy">
+            <div class="assoc__copy assoc__copy--enhanced">
+              <img
+                *ngIf="s.crestImg"
+                class="crestWatermark reveal"
+                style="--d:0.06;"
+                [src]="s.crestImg"
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+              />
+
               <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal" style="--d:0.16;">{{ s.title }}</h2>
+              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
               <p class="desc reveal" style="--d:0.28;">{{ s.text }}</p>
 
               <div class="actions reveal" style="--d:0.40;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
-              </div>
-
-              <div class="crestInline reveal" style="--d:0.52;" *ngIf="s.crestImg">
-                <img class="crestInline__img" [src]="s.crestImg" alt="Stemma" loading="lazy" />
-                <div class="crestInline__text">
-                  <div class="crestInline__kicker">Banda Musicale</div>
-                  <div class="crestInline__title">Città di Casali del Manco</div>
-                </div>
               </div>
             </div>
 
@@ -39,18 +41,26 @@
           </div>
         </ng-container>
 
-        <!-- 2) SEDE: split normale (NO label verticale) -->
+        <!-- 2) SEDE -->
         <ng-container *ngSwitchCase="'sedeSplit'">
-          <div class="layout layout--split">
-            <div class="split__media reveal" style="--d:0.12;">
-              <div class="frame frame--lg">
-                <img class="img img--lg" [src]="s.images[0]" [alt]="s.title" loading="lazy" />
+          <div class="layout layout--split layout--sede">
+            <div class="split__media sedeGallery2 reveal" style="--d:0.10;">
+              <div class="sedeGallery2__portrait">
+                <div class="frame frame--tall">
+                  <img class="img img--tall" [src]="s.images[1]" [alt]="s.title + ' foto verticale'" loading="lazy" />
+                </div>
+              </div>
+
+              <div class="sedeGallery2__landscape">
+                <div class="frame frame--lg">
+                  <img class="img img--lg" [src]="s.images[0]" [alt]="s.title + ' foto orizzontale'" loading="lazy" />
+                </div>
               </div>
             </div>
 
             <div class="split__copy">
               <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal" style="--d:0.16;">{{ s.title }}</h2>
+              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
               <p class="desc reveal" style="--d:0.28;">{{ s.text }}</p>
               <div class="actions reveal" style="--d:0.40;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
@@ -59,12 +69,12 @@
           </div>
         </ng-container>
 
-        <!-- 3) STORIA: header centrato + triptych sotto (layout che ti piaceva) -->
+        <!-- 3) STORIA -->
         <ng-container *ngSwitchCase="'storyTriptych'">
           <div class="layout layout--storyCentered">
             <div class="storyHeader">
               <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal" style="--d:0.16;">{{ s.title }}</h2>
+              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
               <p class="desc reveal storyClamp" style="--d:0.28;">{{ s.text }}</p>
               <div class="actions reveal" style="--d:0.40;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
@@ -93,61 +103,63 @@
           </div>
         </ng-container>
 
-        <!-- 4) BANDA: header + strip stage -->
+        <!-- 4) BANDA: 3 immagini uguali sulla stessa riga -->
         <ng-container *ngSwitchCase="'bandStage'">
-          <div class="layout layout--band">
-            <div class="band__top">
+          <div class="layout layout--band layout--bandReadable">
+            <div class="band__top band__top--readable">
               <div class="band__copy">
                 <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-                <h2 class="title reveal" style="--d:0.16;">{{ s.title }}</h2>
-                <p class="desc reveal bandClamp" style="--d:0.28;">{{ s.text }}</p>
+                <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
+                <p class="desc reveal bandClamp bandClamp--readable" style="--d:0.28;">{{ s.text }}</p>
               </div>
 
-              <div class="actions reveal" style="--d:0.40;">
+              <div class="actions reveal" style="--d:0.38;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
               </div>
             </div>
 
-            <div class="stage">
-              <div class="stage__tile reveal" style="--d:0.14;">
-                <div class="frame frame--stage">
-                  <img class="img img--stage" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
+            <div class="bandRow reveal" style="--d:0.18;">
+              <div class="bandRow__item">
+                <div class="frame frame--bandEqual">
+                  <img class="img img--bandEqual" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
                 </div>
               </div>
-              <div class="stage__tile reveal" style="--d:0.22;">
-                <div class="frame frame--stage">
-                  <img class="img img--stage" [src]="s.images[1]" [alt]="s.title + ' foto 2'" loading="lazy" />
+
+              <div class="bandRow__item">
+                <div class="frame frame--bandEqual">
+                  <img class="img img--bandEqual" [src]="s.images[1]" [alt]="s.title + ' foto 2'" loading="lazy" />
                 </div>
               </div>
-              <div class="stage__tile reveal" style="--d:0.30;">
-                <div class="frame frame--stage">
-                  <img class="img img--stage" [src]="s.images[2]" [alt]="s.title + ' foto 3'" loading="lazy" />
+
+              <div class="bandRow__item">
+                <div class="frame frame--bandEqual">
+                  <img class="img img--bandEqual" [src]="s.images[2]" [alt]="s.title + ' foto 3'" loading="lazy" />
                 </div>
               </div>
             </div>
           </div>
         </ng-container>
 
-        <!-- 5) SCUOLA: double grande con ritmo (senza overlap) -->
+        <!-- 5) SCUOLA -->
         <ng-container *ngSwitchCase="'schoolDouble'">
           <div class="layout layout--school">
             <div class="school__copy">
               <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal" style="--d:0.16;">{{ s.title }}</h2>
+              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
               <p class="desc reveal schoolClamp" style="--d:0.28;">{{ s.text }}</p>
               <div class="actions reveal" style="--d:0.40;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
               </div>
             </div>
 
-            <div class="school__media">
-              <div class="school__a reveal" style="--d:0.14;">
-                <div class="frame frame--lg">
-                  <img class="img img--lg" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
+            <div class="school__media schoolMosaic">
+              <div class="schoolMosaic__a reveal" style="--d:0.14;">
+                <div class="frame frame--tall">
+                  <img class="img img--tall" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
                 </div>
               </div>
 
-              <div class="school__b reveal" style="--d:0.24;">
+              <div class="schoolMosaic__b reveal" style="--d:0.24;">
                 <div class="frame frame--lg">
                   <img class="img img--lg" [src]="s.images[1]" [alt]="s.title + ' foto 2'" loading="lazy" />
                 </div>
@@ -156,12 +168,12 @@
           </div>
         </ng-container>
 
-        <!-- 6) DIRETTIVO: poster pulito -->
+        <!-- 6) DIRETTIVO -->
         <ng-container *ngSwitchCase="'boardPoster'">
           <div class="layout layout--board">
             <div class="board__copy">
               <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal" style="--d:0.16;">{{ s.title }}</h2>
+              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
               <p class="desc reveal boardClamp" style="--d:0.28;">{{ s.text }}</p>
               <div class="actions reveal" style="--d:0.40;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
