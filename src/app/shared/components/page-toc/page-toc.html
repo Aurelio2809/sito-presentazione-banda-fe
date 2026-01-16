@@ -1,0 +1,12 @@
+<nav class="toc" aria-label="Indice pagina">
+  <div class="toc__tag">{{ title }}</div>
+
+  <ul class="toc__list">
+    <li class="toc__item" *ngFor="let it of items">
+      <button type="button" class="toc__link" (click)="scrollTo(it.id)">
+        <span class="toc__dot" aria-hidden="true"></span>
+        <span class="toc__label">{{ it.label }}</span>
+      </button>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,23 @@
+<section class="chapter" [attr.id]="id">
+  <header class="chapter__head">
+    <div class="chapter__kicker" *ngIf="kicker">{{ kicker }}</div>
+    <h2 class="chapter__title">{{ title }}</h2>
+    <p class="chapter__subtitle" *ngIf="subtitle">{{ subtitle }}</p>
+  </header>
+
+  <div class="chapter__media" *ngIf="images?.length">
+    <div class="chapterGrid" [class.chapterGrid--2]="images.length >= 2">
+      <figure class="chapFig" *ngFor="let im of images; let i = index" [class.chapFig--wide]="i === 0">
+        <img class="chapImg" [src]="im.src" [alt]="im.alt" loading="lazy" />
+      </figure>
+    </div>
+  </div>
+
+  <div class="chapter__prose">
+    <p *ngFor="let p of paragraphs">{{ p }}</p>
+
+    <div class="chapter__callout" *ngIf="callout">
+      <p>{{ callout }}</p>
+    </div>
+  </div>
+</section>

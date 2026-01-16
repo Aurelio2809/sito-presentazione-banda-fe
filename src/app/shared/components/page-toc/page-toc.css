@@ -1,0 +1,60 @@
+@reference "../../../../../styles.css";
+
+/* indice glass, pensato per sticky laterale */
+.toc{
+  @apply rounded-[22px] border border-white/10 p-4 md:p-5;
+  background: rgba(10,10,12,0.22);
+  backdrop-filter: blur(12px) saturate(1.10);
+  -webkit-backdrop-filter: blur(12px) saturate(1.10);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.22);
+}
+
+.toc__tag{
+  @apply inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75;
+}
+
+.toc__list{
+  margin-top: 12px;
+  display: grid;
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.toc__link{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 10px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.toc__link:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.12);
+}
+
+.toc__dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,215,0,0.70), rgba(170,0,0,0.55));
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
+  flex: 0 0 auto;
+}
+
+.toc__label{
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.2;
+}

@@ -1,0 +1,24 @@
+<app-transparent-card ariaLabel="Fonti">
+  <header class="sourcesHead">
+    <div class="sourcesTag">{{ tag }}</div>
+
+    <div class="sourcesTitle">{{ title }}</div>
+
+    <p class="sourcesDesc" *ngIf="description">
+      {{ description }}
+    </p>
+  </header>
+
+  <ol class="sourcesList" *ngIf="items?.length">
+    <li *ngFor="let it of items">
+      <strong class="sourcesItemLabel">{{ it.label }}</strong>
+      <span class="sourcesItemDesc"> — {{ it.description }}</span>
+    </li>
+  </ol>
+
+  <div class="sourcesLinks" *ngIf="links?.length">
+    <a class="srcLink" *ngFor="let l of links" [href]="l.href" target="_blank" rel="noopener">
+      {{ l.label }}
+    </a>
+  </div>
+</app-transparent-card>

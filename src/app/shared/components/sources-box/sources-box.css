@@ -1,0 +1,81 @@
+/* qui NON serve @reference se non usi @apply */
+
+.sourcesHead{
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  margin-bottom: 12px;
+}
+
+.sourcesTag{
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.75);
+}
+
+.sourcesTitle{
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: 950;
+  color: rgba(255,255,255,0.92);
+}
+
+.sourcesDesc{
+  margin-top: 6px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* lista fonti */
+.sourcesList{
+  margin-top: 12px;
+  padding-left: 18px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.sourcesList li{
+  margin-top: 10px;
+}
+
+.sourcesItemLabel{
+  color: rgba(255,255,255,0.88);
+  font-weight: 900;
+}
+
+.sourcesItemDesc{
+  color: rgba(255,255,255,0.66);
+  font-weight: 600;
+}
+
+/* link */
+.sourcesLinks{
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.srcLink{
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.78);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+}
+
+.srcLink:hover{
+  background: rgba(255,255,255,0.09);
+  transform: translateY(-1px);
+  transition: transform 200ms ease, background 200ms ease;
+}
