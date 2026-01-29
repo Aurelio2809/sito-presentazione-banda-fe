@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import type { TocItem } from '../../../../shared/components/page-toc/page-toc';
 import type { SourceItem, SourceLink } from '../../../../shared/components/sources-box/sources-box';
+import { HistoryChapter } from '../../../../shared/components/history-chapter/history-chapter';
+import { PageHeaderAction } from '../../components/page-header/page-header';
 
 @Component({
   selector: 'app-about-history',
@@ -9,11 +11,18 @@ import type { SourceItem, SourceLink } from '../../../../shared/components/sourc
   standalone: false,
 })
 export class AboutHistory {
+  @ViewChildren('chapter') chapterRefs!: QueryList<HistoryChapter>;
+
+  headerActions: PageHeaderAction[] = [
+    { label: 'Torna a Chi siamo', routerLink: '/about', variant: 'ghost' },
+    { label: 'Eventi', routerLink: '/events', variant: 'primary' },
+  ];
+
   tocItems: TocItem[] = [
     { id: 'ottocento', label: '1. Ottocento' },
     { id: 'primo-novecento', label: '2. Primo Novecento' },
     { id: 'secondo-dopoguerra', label: '3. Secondo Dopoguerra' },
-    { id: 'fine-novecento', label: '4. Fine ’900 e inizio 2000' },
+    { id: 'fine-novecento', label: "4. Fine '900 e inizio 2000" },
     { id: 'tempi-recenti', label: '5. Tempi recenti (dal 2019)' },
     { id: 'fonti', label: 'Fonti principali' },
   ];
@@ -22,12 +31,12 @@ export class AboutHistory {
     {
       label: '[1]',
       description:
-        'ISSM “V. Bellini”, Creux — “Il mondo della banda musicale nell’Italia di oggi” (PDF).',
+        "ISSM \"V. Bellini\", Creux — \"Il mondo della banda musicale nell'Italia di oggi\" (PDF).",
     },
     {
       label: '[2]',
       description:
-        'U Campanaro Web — ricostruzione locale “Banda Città di Pedace” (timeline e date principali).',
+        'U Campanaro Web — ricostruzione locale "Banda Città di Pedace" (timeline e date principali).',
     },
     {
       label: '[3]',
@@ -66,4 +75,12 @@ export class AboutHistory {
     },
     { label: '[5] Pedace', href: 'https://it.wikipedia.org/wiki/Pedace' },
   ];
+
+  expandAll(): void {
+    this.chapterRefs.forEach(ch => ch.isOpen = true);
+  }
+
+  collapseAll(): void {
+    this.chapterRefs.forEach(ch => ch.isOpen = false);
+  }
 }

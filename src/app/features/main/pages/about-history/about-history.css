@@ -1,152 +1,221 @@
-/* about-history.css */
 @reference "../../../../../styles.css";
 
-.sub{ @apply w-full; }
-
-.padTop{ height: 32px; }
-.padBottom{ height: 32px; }
-
-.wrap{
-  @apply mx-auto max-w-6xl px-4;
+/* =========================================================
+   PAGE - Margini uniformi
+   ========================================================= */
+.historyPage {
+  @apply mx-auto max-w-6xl px-4 py-10;
 }
 
-/* =========================
-   HERO (sobrio)
-   ========================= */
-.hero{
-  @apply mt-2 overflow-hidden rounded-[20px] border border-white/10 px-6 py-8 md:px-10 md:py-10;
-  background: rgba(255,255,255,0.03);
-  box-shadow: 0 16px 55px rgba(0,0,0,0.30);
-}
-
-.hero__tag{ @apply inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75; }
-.hero__title{ @apply mt-4 text-3xl font-extrabold tracking-tight text-white md:text-5xl; }
-.hero__desc{ @apply mt-3 max-w-3xl text-sm leading-relaxed text-white/70 md:text-base; }
-.hero__actions{ @apply mt-5 flex flex-wrap gap-3; }
-
-.btn{
-  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-extrabold transition;
-}
-.btn--primary{
-  background: rgba(255,255,255,0.07);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.12);
-}
-.btn--primary:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.10); }
-
-.btn--ghost{
-  @apply border border-white/10 text-white/85;
-  background: rgba(255,255,255,0.04);
-}
-.btn--ghost:hover{ @apply bg-white/10; transform: translateY(-1px); }
-
-/* =========================
+/* =========================================================
    LAYOUT
-   ========================= */
-.page{ @apply mt-6; }
+   ========================================================= */
+.page {
+  @apply mt-8;
+}
 
-.layout{
+.layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 18px;
+  gap: 20px;
 }
 
-@media (min-width: 1024px){
-  .layout{
+@media (min-width: 1024px) {
+  .layout {
     grid-template-columns: 280px 1fr;
-    gap: 22px;
+    gap: 24px;
     align-items: start;
   }
 }
 
 /* colonna destra: content + sources card in verticale */
-.rightCol{
+.rightCol {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 18px;
+  gap: 20px;
 }
 
-/* =========================
-   TOC (sticky)  (wrapper esterno)
-   ========================= */
-.tocWrap{
-  @apply rounded-[16px] border border-white/10 p-4;
-  background: rgba(255,255,255,0.03);
+/* =========================================================
+   TOC (sticky wrapper)
+   ========================================================= */
+.tocWrap {
+  @apply rounded-[22px] border border-white/10 p-5;
+  background: rgba(10, 10, 12, 0.50);
+  backdrop-filter: blur(14px) saturate(1.12);
+  -webkit-backdrop-filter: blur(14px) saturate(1.12);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
 }
 
-@media (min-width: 1024px){
-  .tocWrap{
+@media (min-width: 1024px) {
+  .tocWrap {
     position: sticky;
     top: 96px;
   }
 }
 
-/* =========================
-   CONTENT: panel unico
-   ========================= */
-.content{
-  @apply rounded-[18px] border border-white/10 p-5 md:p-7;
-  background: rgba(255,255,255,0.03);
+/* Controlli espandi/comprimi */
+.tocControls {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-/* infobox */
-.infobox{
-  @apply rounded-[14px] border border-white/10 p-4;
-  background: rgba(0,0,0,0.18);
+.tocControl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
-.infobox__title{
+
+.tocControl:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.tocControl__icon {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 215, 0, 0.12);
+  color: rgba(255, 215, 0, 0.85);
+  font-size: 16px;
   font-weight: 900;
-  color: rgba(255,255,255,0.88);
-  margin-bottom: 10px;
+  line-height: 1;
 }
-.infobox__grid{
+
+/* =========================================================
+   INFOBOX (riepilogo)
+   ========================================================= */
+.infobox {
+  @apply rounded-[22px] border border-white/10 p-5 md:p-6;
+  background: rgba(10, 10, 12, 0.45);
+  backdrop-filter: blur(14px) saturate(1.12);
+  -webkit-backdrop-filter: blur(14px) saturate(1.12);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+}
+
+.infobox__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.infobox__icon {
+  width: 38px;
+  height: 38px;
   display: grid;
-  gap: 10px;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(255, 215, 0, 0.12);
+  color: rgba(255, 215, 0, 0.85);
 }
-.infobox__row{
+
+.infobox__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.infobox__title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.infobox__grid {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 10px;
-  align-items: baseline;
+  gap: 12px;
 }
-.infobox__row dt{
-  font-size: 12px;
+
+.infobox__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (min-width: 600px) {
+  .infobox__row {
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    align-items: baseline;
+  }
+}
+
+.infobox__row dt {
+  font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.60);
+  color: rgba(255, 215, 0, 0.70);
 }
-.infobox__row dd{
+
+.infobox__row dd {
   margin: 0;
-  color: rgba(255,255,255,0.78);
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   CONTENT (contenitore capitoli)
+   ========================================================= */
+.content {
+  display: grid;
+  gap: 0;
+}
+
+/* Stili per paragrafi e note passati via ng-content */
+.p {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.85;
+  max-width: 74ch;
   font-size: 0.95rem;
 }
 
-/* chapters (se usi HistoryChapter, questi restano utili al contenitore) */
-.chapter{ margin-top: 18px; }
-
-.chapter__title{
-  font-size: 1.35rem;
-  font-weight: 950;
-  color: rgba(255,255,255,0.92);
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.10);
+@media (min-width: 768px) {
+  .p {
+    font-size: 1rem;
+  }
 }
 
-.p{
-  margin-top: 12px;
-  color: rgba(255,255,255,0.74);
-  line-height: 1.85;
-  max-width: 80ch;
-  font-size: 0.98rem;
+.p:first-child {
+  margin-top: 0;
 }
 
-.note{
-  margin-top: 12px;
-  padding: 10px 12px;
-  border-left: 2px solid rgba(255,215,0,0.45);
-  background: rgba(0,0,0,0.16);
-  border-radius: 12px;
-  color: rgba(255,255,255,0.70);
+.note {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-left: 3px solid rgba(255, 215, 0, 0.50);
+  background: rgba(10, 10, 12, 0.40);
+  border-radius: 14px;
+  backdrop-filter: blur(10px) saturate(1.08);
+  -webkit-backdrop-filter: blur(10px) saturate(1.08);
+  color: rgba(255, 255, 255, 0.70);
   line-height: 1.7;
+  font-size: 0.92rem;
 }

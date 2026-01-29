@@ -1,168 +1,202 @@
-<section class="sub">
-  <div class="padTop"></div>
-
+<section class="historyPage">
   <!-- HERO -->
-  <div class="wrap">
-    <header class="hero">
-      <div class="hero__tag">Storia</div>
-      <h1 class="hero__title">La nostra storia</h1>
-      <p class="hero__desc">
-        Dalla tradizione di Pedace alla Banda Musicale “Città di Casali del Manco”: un percorso fatto di persone,
-        repertori, feste di paese e ripartenze dopo momenti difficili.
-      </p>
-
-      <div class="hero__actions">
-        <a class="btn btn--ghost" routerLink="/about">Torna a Chi siamo</a>
-        <a class="btn btn--primary" routerLink="/events">Eventi</a>
-      </div>
-    </header>
-  </div>
+  <app-page-header
+    tag="Storia"
+    title="La nostra storia"
+    description="Dalla tradizione di Pedace alla Banda Musicale 'Città di Casali del Manco': un percorso fatto di persone, repertori, feste di paese e ripartenze dopo momenti difficili."
+    [actions]="headerActions"
+  ></app-page-header>
 
   <!-- PAGINA -->
   <article class="page">
-    <div class="wrap">
-      <div class="layout">
+    <div class="layout">
 
-        <!-- INDICE -->
-        <aside class="tocWrap" aria-label="Indice dei contenuti">
-          <app-page-toc
-            title="Indice"
-            [items]="tocItems"
-            hint="Sezione lunga: l’indice resta visibile (desktop) mentre scorri."
-          ></app-page-toc>
-        </aside>
+      <!-- INDICE -->
+      <aside class="tocWrap" aria-label="Indice dei contenuti">
+        <app-page-toc
+          title="Indice"
+          [items]="tocItems"
+          hint="Clicca su un capitolo per espanderlo. L'indice resta visibile (desktop) mentre scorri."
+        ></app-page-toc>
 
-        <!-- COLONNA DESTRA -->
-        <div class="rightCol">
-
-          <!-- CONTENUTO -->
-          <main class="content" aria-label="Contenuto storia">
-            <section class="infobox" aria-label="Riepilogo">
-              <div class="infobox__title">Riepilogo</div>
-              <dl class="infobox__grid">
-                <div class="infobox__row">
-                  <dt>Territorio</dt>
-                  <dd>Pedace / Casali del Manco (CS)</dd>
-                </div>
-                <div class="infobox__row">
-                  <dt>Nucleo storico</dt>
-                  <dd>Banda “Città di Pedace” (tradizione locale)</dd>
-                </div>
-                <div class="infobox__row">
-                  <dt>Snodi ricorrenti</dt>
-                  <dd>Guerre, ripartenze, scuola musicale, concerti anni ’80–’90</dd>
-                </div>
-                <div class="infobox__row">
-                  <dt>Identità attuale</dt>
-                  <dd>Banda Musicale “Città di Casali del Manco” (dal 2019)</dd>
-                </div>
-              </dl>
-            </section>
-
-            <!-- CAPITOLI -->
-            <app-history-chapter id="ottocento" title="Ottocento">
-              <p class="p">
-                Le bande musicali, in Italia, non nascono come semplice “ornamento”: per oltre un secolo hanno rappresentato
-                uno dei principali strumenti di diffusione della cultura musicale tra la popolazione. Nell’Ottocento questi complessi
-                si affermano e si diffondono capillarmente, portando musica marciabile di tradizione militare e trascrizioni di opere liriche
-                negli spazi pubblici, durante cerimonie civili e religiose.
-              </p>
-
-              <p class="p">
-                La musica operistica era spesso legata ai teatri ed era più accessibile a pochi; le bande contribuirono a diffonderla
-                tramite arrangiamenti per organici di fiati e percussioni: legni (flauti/ottavini, clarinetti, sassofoni), ottoni
-                (trombe/cornette, corni, tromboni, flicorni, eufoni, tube) e percussioni (rullante, grancassa, piatti e accessori).
-              </p>
-
-              <p class="p">
-                Oltre al servizio musicale, la banda ha una funzione educativa e sociale: disciplina condivisa, lettura musicale, tecnica
-                strumentale, cooperazione e identità comunitaria.
-              </p>
-
-              <div class="note">
-                Nota: per Pedace si tramanda un’origine “antica” (ipotesi anche attorno al 1860, legata a datazioni di strumenti),
-                ma i punti cronologici più solidi arrivano con testimonianze e ricostruzioni del Novecento.
-              </div>
-            </app-history-chapter>
-
-            <app-history-chapter id="primo-novecento" title="Primo Novecento">
-              <p class="p">
-                Le prime tracce “forti” indicano una banda già attiva nei primi anni del Novecento, con interruzione dovuta al contesto
-                della Prima guerra mondiale e successiva ripresa sotto la direzione del Maestro Adamo Nachira (ricostruzioni locali).
-              </p>
-
-              <p class="p">
-                Negli anni Venti la banda diventa un punto di socialità e formazione in una comunità rurale: artigiani, reduci, contadini,
-                giovani si ritrovano nella musica come spazio di relazione e crescita. In questo periodo si collocano episodi identitari
-                legati a concorsi tra bande e alla tensione politica dell’epoca.
-              </p>
-
-              <p class="p">
-                Un episodio rimasto nella memoria collettiva riguarda una gara bandistica al Teatro Rendano di Cosenza (anni Venti),
-                con contestazioni e conseguenze per alcuni musicanti (ricostruzioni locali e fonti biografiche).
-              </p>
-            </app-history-chapter>
-
-            <app-history-chapter id="secondo-dopoguerra" title="Secondo Dopoguerra">
-              <p class="p">
-                La Seconda guerra mondiale segna un nuovo stop. Nel dopoguerra la banda riparte: tra fine anni Quaranta e anni Cinquanta
-                si alternano direzioni e fasi di rifioritura, con un progressivo ricambio generazionale e un lavoro importante sul tessuto
-                sociale (scuola, formazione, repertorio).
-              </p>
-
-              <p class="p">
-                Una fase significativa è associata alla direzione del Maestro Archimede Michienzi (con continuità per più anni secondo
-                le ricostruzioni locali), prima di una nuova disgregazione legata anche ai flussi migratori e alla trasformazione sociale
-                del territorio.
-              </p>
-            </app-history-chapter>
-
-            <app-history-chapter id="fine-novecento" title="Fine ’900 e inizio anni 2000">
-              <p class="p">
-                Tra la seconda metà degli anni Sessanta e gli anni Settanta la banda conosce una nuova rinascita: si rafforza l’idea della
-                “scuola musicale” e l’organizzazione interna, con figure di riferimento che tengono insieme formazione e attività pubblica.
-              </p>
-
-              <p class="p">
-                Negli anni Ottanta e Novanta la banda amplia il profilo concertistico (lirico e sinfonico, servizio di palco) e costruisce
-                reti e collaborazioni anche con musicisti di paesi vicini. Per alcuni giovani diventa un ponte verso studi musicali
-                strutturati e percorsi professionali.
-              </p>
-
-              <p class="p">
-                All’inizio del nuovo millennio compaiono iniziative simboliche come gemellaggi e riconoscimenti, che testimoniano la
-                continuità della banda come istituzione culturale del territorio.
-              </p>
-            </app-history-chapter>
-
-            <app-history-chapter id="tempi-recenti" title="Tempi recenti (dal 2019)">
-              <p class="p">
-                Con la nascita del Comune di Casali del Manco (fusione di più comuni avviata nel 2017), l’identità della banda si aggiorna:
-                nelle ricostruzioni locali, il nominativo “Banda Musicale Casali del Manco” si colloca intorno al 2019.
-              </p>
-
-              <p class="p">
-                In questa fase recente convivono due forze: da un lato le difficoltà organizzative ed economiche tipiche delle associazioni
-                culturali; dall’altro la presenza di giovani musicisti e la continuità della direzione artistica, che mantiene un legame
-                tra tradizione, formazione e attività pubblica.
-              </p>
-            </app-history-chapter>
-          </main>
-
-          <!-- FONTI -->
-          <app-sources-box
-            id="fonti"
-            tag="Fonti"
-            title="Fonti principali"
-            description="Riferimenti usati per le date e le ricostruzioni citate nella pagina."
-            [items]="sourcesItems"
-            [links]="sourcesLinks"
-          ></app-sources-box>
-
+        <!-- Controlli espandi/comprimi -->
+        <div class="tocControls">
+          <button class="tocControl" type="button" (click)="expandAll()">
+            <span class="tocControl__icon">+</span>
+            Espandi tutti
+          </button>
+          <button class="tocControl" type="button" (click)="collapseAll()">
+            <span class="tocControl__icon">−</span>
+            Comprimi tutti
+          </button>
         </div>
+      </aside>
+
+      <!-- COLONNA DESTRA -->
+      <div class="rightCol">
+
+        <!-- RIEPILOGO -->
+        <section class="infobox" aria-label="Riepilogo">
+          <div class="infobox__head">
+            <div class="infobox__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="infobox__title">Riepilogo</div>
+          </div>
+          <dl class="infobox__grid">
+            <div class="infobox__row">
+              <dt>Territorio</dt>
+              <dd>Pedace / Casali del Manco (CS)</dd>
+            </div>
+            <div class="infobox__row">
+              <dt>Nucleo storico</dt>
+              <dd>Banda "Città di Pedace" (tradizione locale)</dd>
+            </div>
+            <div class="infobox__row">
+              <dt>Snodi ricorrenti</dt>
+              <dd>Guerre, ripartenze, scuola musicale, concerti anni '80–'90</dd>
+            </div>
+            <div class="infobox__row">
+              <dt>Identità attuale</dt>
+              <dd>Banda Musicale "Città di Casali del Manco" (dal 2019)</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- CAPITOLI -->
+        <main class="content" aria-label="Contenuto storia">
+          <app-history-chapter
+            #chapter
+            id="ottocento"
+            kicker="Capitolo 1"
+            title="Ottocento"
+            [open]="true"
+          >
+            <p class="p">
+              Le bande musicali, in Italia, non nascono come semplice "ornamento": per oltre un secolo hanno rappresentato
+              uno dei principali strumenti di diffusione della cultura musicale tra la popolazione. Nell'Ottocento questi complessi
+              si affermano e si diffondono capillarmente, portando musica marciabile di tradizione militare e trascrizioni di opere liriche
+              negli spazi pubblici, durante cerimonie civili e religiose.
+            </p>
+
+            <p class="p">
+              La musica operistica era spesso legata ai teatri ed era più accessibile a pochi; le bande contribuirono a diffonderla
+              tramite arrangiamenti per organici di fiati e percussioni: legni (flauti/ottavini, clarinetti, sassofoni), ottoni
+              (trombe/cornette, corni, tromboni, flicorni, eufoni, tube) e percussioni (rullante, grancassa, piatti e accessori).
+            </p>
+
+            <p class="p">
+              Oltre al servizio musicale, la banda ha una funzione educativa e sociale: disciplina condivisa, lettura musicale, tecnica
+              strumentale, cooperazione e identità comunitaria.
+            </p>
+
+            <div class="note">
+              Nota: per Pedace si tramanda un'origine "antica" (ipotesi anche attorno al 1860, legata a datazioni di strumenti),
+              ma i punti cronologici più solidi arrivano con testimonianze e ricostruzioni del Novecento.
+            </div>
+          </app-history-chapter>
+
+          <app-history-chapter
+            #chapter
+            id="primo-novecento"
+            kicker="Capitolo 2"
+            title="Primo Novecento"
+            [open]="false"
+          >
+            <p class="p">
+              Le prime tracce "forti" indicano una banda già attiva nei primi anni del Novecento, con interruzione dovuta al contesto
+              della Prima guerra mondiale e successiva ripresa sotto la direzione del Maestro Adamo Nachira (ricostruzioni locali).
+            </p>
+
+            <p class="p">
+              Negli anni Venti la banda diventa un punto di socialità e formazione in una comunità rurale: artigiani, reduci, contadini,
+              giovani si ritrovano nella musica come spazio di relazione e crescita. In questo periodo si collocano episodi identitari
+              legati a concorsi tra bande e alla tensione politica dell'epoca.
+            </p>
+
+            <p class="p">
+              Un episodio rimasto nella memoria collettiva riguarda una gara bandistica al Teatro Rendano di Cosenza (anni Venti),
+              con contestazioni e conseguenze per alcuni musicanti (ricostruzioni locali e fonti biografiche).
+            </p>
+          </app-history-chapter>
+
+          <app-history-chapter
+            #chapter
+            id="secondo-dopoguerra"
+            kicker="Capitolo 3"
+            title="Secondo Dopoguerra"
+            [open]="false"
+          >
+            <p class="p">
+              La Seconda guerra mondiale segna un nuovo stop. Nel dopoguerra la banda riparte: tra fine anni Quaranta e anni Cinquanta
+              si alternano direzioni e fasi di rifioritura, con un progressivo ricambio generazionale e un lavoro importante sul tessuto
+              sociale (scuola, formazione, repertorio).
+            </p>
+
+            <p class="p">
+              Una fase significativa è associata alla direzione del Maestro Archimede Michienzi (con continuità per più anni secondo
+              le ricostruzioni locali), prima di una nuova disgregazione legata anche ai flussi migratori e alla trasformazione sociale
+              del territorio.
+            </p>
+          </app-history-chapter>
+
+          <app-history-chapter
+            #chapter
+            id="fine-novecento"
+            kicker="Capitolo 4"
+            title="Fine '900 e inizio anni 2000"
+            [open]="false"
+          >
+            <p class="p">
+              Tra la seconda metà degli anni Sessanta e gli anni Settanta la banda conosce una nuova rinascita: si rafforza l'idea della
+              "scuola musicale" e l'organizzazione interna, con figure di riferimento che tengono insieme formazione e attività pubblica.
+            </p>
+
+            <p class="p">
+              Negli anni Ottanta e Novanta la banda amplia il profilo concertistico (lirico e sinfonico, servizio di palco) e costruisce
+              reti e collaborazioni anche con musicisti di paesi vicini. Per alcuni giovani diventa un ponte verso studi musicali
+              strutturati e percorsi professionali.
+            </p>
+
+            <p class="p">
+              All'inizio del nuovo millennio compaiono iniziative simboliche come gemellaggi e riconoscimenti, che testimoniano la
+              continuità della banda come istituzione culturale del territorio.
+            </p>
+          </app-history-chapter>
+
+          <app-history-chapter
+            #chapter
+            id="tempi-recenti"
+            kicker="Capitolo 5"
+            title="Tempi recenti (dal 2019)"
+            [open]="false"
+          >
+            <p class="p">
+              Con la nascita del Comune di Casali del Manco (fusione di più comuni avviata nel 2017), l'identità della banda si aggiorna:
+              nelle ricostruzioni locali, il nominativo "Banda Musicale Casali del Manco" si colloca intorno al 2019.
+            </p>
+
+            <p class="p">
+              In questa fase recente convivono due forze: da un lato le difficoltà organizzative ed economiche tipiche delle associazioni
+              culturali; dall'altro la presenza di giovani musicisti e la continuità della direzione artistica, che mantiene un legame
+              tra tradizione, formazione e attività pubblica.
+            </p>
+          </app-history-chapter>
+        </main>
+
+        <!-- FONTI -->
+        <app-sources-box
+          id="fonti"
+          tag="Fonti"
+          title="Fonti principali"
+          description="Riferimenti usati per le date e le ricostruzioni citate nella pagina."
+          [items]="sourcesItems"
+          [links]="sourcesLinks"
+        ></app-sources-box>
+
       </div>
     </div>
   </article>
-
-  <div class="padBottom"></div>
 </section>

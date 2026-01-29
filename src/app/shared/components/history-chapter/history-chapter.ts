@@ -13,7 +13,18 @@ export class HistoryChapter {
   @Input() kicker: string = '';         // es: "Capitolo 1"
   @Input() title: string = '';          // es: "Ottocento"
   @Input() subtitle?: string;           // frase breve
-  @Input() paragraphs: string[] = [];   // corpo (array di paragrafi)
+  @Input() paragraphs: string[] = [];   // corpo (array di paragrafi) - legacy
   @Input() callout?: string;            // box singolo facoltativo
   @Input() images: ChapterImage[] = []; // 0..n immagini (layout semplice)
+  @Input() open: boolean = true;        // stato iniziale (aperto/chiuso)
+
+  isOpen = true;
+
+  ngOnInit(): void {
+    this.isOpen = this.open;
+  }
+
+  toggle(): void {
+    this.isOpen = !this.isOpen;
+  }
 }
