@@ -1,16 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TabItem } from '../../components/tab-switch/tab-switch';
-
-export type ManagedPhoto = {
-  id: number;
-  src: string;
-  title: string;
-  description: string;
-  location: string;
-  date: string;
-  isFavorite: boolean;
-  order?: number;
-};
+import { GalleryService } from '../../../../core/services';
+import { GalleryPhotoResponse, GalleryPhotoRequest } from '../../../../core/models';
 
 @Component({
   selector: 'app-gallery-management',
@@ -18,20 +9,43 @@ export type ManagedPhoto = {
   styleUrls: ['./gallery-management.css'],
   standalone: false,
 })
-export class GalleryManagement {
-  photos: ManagedPhoto[] = [
-    { id: 1, src: '', title: 'Concerto di Natale 2024', description: 'Esibizione in piazza', location: 'Piazza Casali del Manco', date: '2024-12-22', isFavorite: true, order: 1 },
-    { id: 2, src: '', title: 'Processione San Giovanni', description: 'Festa patronale', location: 'Centro storico Pedace', date: '2024-06-24', isFavorite: true, order: 2 },
-    { id: 3, src: '', title: 'Prove settimanali', description: 'Sezione fiati', location: 'Sede banda', date: '2024-10-15', isFavorite: false },
-    { id: 4, src: '', title: 'Concerto estivo', description: 'Festival della musica', location: 'Anfiteatro comunale', date: '2024-08-10', isFavorite: true, order: 3 },
-    { id: 5, src: '', title: 'Nuovi allievi', description: 'Lezione di gruppo', location: 'Sede banda', date: '2024-09-20', isFavorite: false },
-  ];
+export class GalleryManagement implements OnInit {
+  photos: GalleryPhotoResponse[] = [];
+  loading = false;
+  error: string | null = null;
 
-  selectedPhoto: ManagedPhoto | null = null;
+  selectedPhoto: GalleryPhotoResponse | null = null;
   showUploadModal = false;
   activeFilter = 'all';
   orderChanged = false;
-  savedOrderSnapshot: { id: number; order?: number }[] = [];
+  savedOrderSnapshot: { id: number; displayOrder?: number }[] = [];
+
+  // Upload form
+  uploadFile: File | null = null;
+  uploadMetadata: Partial<GalleryPhotoRequest> = {};
+
+  constructor(private galleryService: GalleryService) {}
+
+  ngOnInit(): void {
+    this.loadPhotos();
+  }
+
+  loadPhotos(): void {
+    this.loading = true;
+    this.error = null;
+
+    this.galleryService.getAll(0, 100).subscribe({
+      next: (page) => {
+        this.photos = page.content;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Errore nel caricamento delle foto';
+        this.loading = false;
+        console.error(err);
+      }
+    });
+  }
 
   get filterTabs(): TabItem[] {
     return [
@@ -44,10 +58,10 @@ export class GalleryManagement {
     return this.activeFilter === 'favorites';
   }
 
-  get filteredPhotos(): ManagedPhoto[] {
-    let result = this.filterFavorites ? this.photos.filter(p => p.isFavorite) : this.photos;
+  get filteredPhotos(): GalleryPhotoResponse[] {
+    let result = this.filterFavorites ? this.photos.filter(p => p.favorite) : this.photos;
     if (this.filterFavorites) {
-      result = result.sort((a, b) => (a.order || 999) - (b.order || 999));
+      result = result.sort((a, b) => (a.displayOrder || 999) - (b.displayOrder || 999));
     }
     return result;
   }
@@ -56,11 +70,11 @@ export class GalleryManagement {
     this.activeFilter = tabId;
   }
 
-  get favoritePhotos(): ManagedPhoto[] {
-    return this.photos.filter(p => p.isFavorite).sort((a, b) => (a.order || 999) - (b.order || 999));
+  get favoritePhotos(): GalleryPhotoResponse[] {
+    return this.photos.filter(p => p.favorite).sort((a, b) => (a.displayOrder || 999) - (b.displayOrder || 999));
   }
 
-  selectPhoto(photo: ManagedPhoto): void {
+  selectPhoto(photo: GalleryPhotoResponse): void {
     this.selectedPhoto = { ...photo };
   }
 
@@ -68,45 +82,113 @@ export class GalleryManagement {
     this.selectedPhoto = null;
   }
 
-  toggleFavorite(photo: ManagedPhoto): void {
-    photo.isFavorite = !photo.isFavorite;
-    if (!photo.isFavorite) {
-      photo.order = undefined;
-    } else {
-      photo.order = this.favoritePhotos.length + 1;
-    }
+  toggleFavorite(photo: GalleryPhotoResponse): void {
+    this.galleryService.toggleFavorite(photo.id).subscribe({
+      next: (updated) => {
+        const index = this.photos.findIndex(p => p.id === photo.id);
+        if (index >= 0) {
+          this.photos[index] = updated;
+        }
+      },
+      error: (err) => {
+        alert('Errore nel toggle preferito');
+        console.error(err);
+      }
+    });
   }
 
-  deletePhoto(photo: ManagedPhoto): void {
+  deletePhoto(photo: GalleryPhotoResponse): void {
     if (confirm(`Eliminare la foto "${photo.title}"?`)) {
-      this.photos = this.photos.filter(p => p.id !== photo.id);
-      if (this.selectedPhoto?.id === photo.id) {
-        this.selectedPhoto = null;
-      }
+      this.galleryService.delete(photo.id).subscribe({
+        next: () => {
+          this.photos = this.photos.filter(p => p.id !== photo.id);
+          if (this.selectedPhoto?.id === photo.id) {
+            this.selectedPhoto = null;
+          }
+        },
+        error: (err) => {
+          alert('Errore nell\'eliminazione della foto');
+          console.error(err);
+        }
+      });
     }
   }
 
   savePhoto(): void {
     if (!this.selectedPhoto) return;
-    const index = this.photos.findIndex(p => p.id === this.selectedPhoto!.id);
-    if (index >= 0) {
-      this.photos[index] = { ...this.selectedPhoto };
-    }
-    this.selectedPhoto = null;
+
+    const request: GalleryPhotoRequest = {
+      title: this.selectedPhoto.title,
+      description: this.selectedPhoto.description,
+      location: this.selectedPhoto.location,
+      photoDate: this.selectedPhoto.photoDate,
+      favorite: this.selectedPhoto.favorite,
+      displayOrder: this.selectedPhoto.displayOrder
+    };
+
+    this.galleryService.update(this.selectedPhoto.id, request).subscribe({
+      next: (updated) => {
+        const index = this.photos.findIndex(p => p.id === updated.id);
+        if (index >= 0) {
+          this.photos[index] = updated;
+        }
+        this.selectedPhoto = null;
+      },
+      error: (err) => {
+        alert('Errore nel salvataggio');
+        console.error(err);
+      }
+    });
   }
 
   openUpload(): void {
+    this.uploadFile = null;
+    this.uploadMetadata = { favorite: false };
     this.showUploadModal = true;
   }
 
   closeUpload(): void {
     this.showUploadModal = false;
+    this.uploadFile = null;
+    this.uploadMetadata = {};
   }
 
-  moveFavorite(photo: ManagedPhoto, direction: 'up' | 'down'): void {
-    // Save snapshot on first change
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.uploadFile = input.files[0];
+    }
+  }
+
+  uploadPhoto(): void {
+    if (!this.uploadFile) {
+      alert('Seleziona un file');
+      return;
+    }
+
+    const metadata: GalleryPhotoRequest = {
+      title: this.uploadMetadata.title || 'Senza titolo',
+      description: this.uploadMetadata.description,
+      location: this.uploadMetadata.location,
+      photoDate: this.uploadMetadata.photoDate,
+      favorite: this.uploadMetadata.favorite || false
+    };
+
+    this.galleryService.upload(this.uploadFile, metadata).subscribe({
+      next: (created) => {
+        this.photos = [created, ...this.photos];
+        this.closeUpload();
+      },
+      error: (err) => {
+        alert('Errore nell\'upload della foto');
+        console.error(err);
+      }
+    });
+  }
+
+  moveFavorite(photo: GalleryPhotoResponse, direction: 'up' | 'down'): void {
     if (!this.orderChanged) {
-      this.savedOrderSnapshot = this.favoritePhotos.map(p => ({ id: p.id, order: p.order }));
+      this.savedOrderSnapshot = this.favoritePhotos.map(p => ({ id: p.id, displayOrder: p.displayOrder }));
     }
 
     const favorites = this.favoritePhotos;
@@ -116,58 +198,65 @@ export class GalleryManagement {
     const newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
     if (newIndex < 0 || newIndex >= favorites.length) return;
 
-    // Swap orders
-    const tempOrder = favorites[currentIndex].order;
-    favorites[currentIndex].order = favorites[newIndex].order;
-    favorites[newIndex].order = tempOrder;
+    const tempOrder = favorites[currentIndex].displayOrder;
+    favorites[currentIndex].displayOrder = favorites[newIndex].displayOrder;
+    favorites[newIndex].displayOrder = tempOrder;
 
     this.orderChanged = true;
   }
 
-  moveToPosition(photo: ManagedPhoto, newPosition: number): void {
+  moveToPosition(photo: GalleryPhotoResponse, newPosition: number): void {
     if (!this.orderChanged) {
-      this.savedOrderSnapshot = this.favoritePhotos.map(p => ({ id: p.id, order: p.order }));
+      this.savedOrderSnapshot = this.favoritePhotos.map(p => ({ id: p.id, displayOrder: p.displayOrder }));
     }
 
     const favorites = this.favoritePhotos;
-    const currentOrder = photo.order || 0;
+    const currentOrder = photo.displayOrder || 0;
     
     if (newPosition < 1 || newPosition > favorites.length || newPosition === currentOrder) return;
 
-    // Shift other photos
     if (newPosition < currentOrder) {
-      // Moving up: shift others down
       favorites.forEach(p => {
-        if (p.id !== photo.id && p.order && p.order >= newPosition && p.order < currentOrder) {
-          p.order++;
+        if (p.id !== photo.id && p.displayOrder && p.displayOrder >= newPosition && p.displayOrder < currentOrder) {
+          p.displayOrder++;
         }
       });
     } else {
-      // Moving down: shift others up
       favorites.forEach(p => {
-        if (p.id !== photo.id && p.order && p.order <= newPosition && p.order > currentOrder) {
-          p.order--;
+        if (p.id !== photo.id && p.displayOrder && p.displayOrder <= newPosition && p.displayOrder > currentOrder) {
+          p.displayOrder--;
         }
       });
     }
 
-    photo.order = newPosition;
+    photo.displayOrder = newPosition;
     this.orderChanged = true;
   }
 
   saveOrder(): void {
-    // Here you would save to backend
-    this.orderChanged = false;
-    this.savedOrderSnapshot = [];
-    alert('Ordine salvato con successo!');
+    // Salva ogni ordine modificato
+    const updates = this.favoritePhotos.map(p => 
+      this.galleryService.updateOrder(p.id, p.displayOrder || 0)
+    );
+
+    // Esegui tutte le chiamate
+    Promise.all(updates.map(u => u.toPromise()))
+      .then(() => {
+        this.orderChanged = false;
+        this.savedOrderSnapshot = [];
+        alert('Ordine salvato con successo!');
+      })
+      .catch(err => {
+        alert('Errore nel salvataggio dell\'ordine');
+        console.error(err);
+      });
   }
 
   resetOrder(): void {
-    // Restore from snapshot
     this.savedOrderSnapshot.forEach(snap => {
       const photo = this.photos.find(p => p.id === snap.id);
       if (photo) {
-        photo.order = snap.order;
+        photo.displayOrder = snap.displayOrder;
       }
     });
     this.orderChanged = false;

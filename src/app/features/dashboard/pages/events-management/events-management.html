@@ -47,19 +47,19 @@
           <td class="table__td">
             <div class="itemInfo">
               <div class="itemInfo__title">{{ item.title }}</div>
-              <div class="itemInfo__desc">{{ item.description }}</div>
+              <div class="itemInfo__desc">{{ item.shortDescription }}</div>
             </div>
           </td>
           <td class="table__td" *ngIf="activeTab === 'events'">
             <div class="dateInfo">
-              <span class="dateInfo__date">{{ item.date }}</span>
-              <span class="dateInfo__time" *ngIf="item.time">{{ item.time }}</span>
+              <span class="dateInfo__date">{{ item.eventDate }}</span>
+              <span class="dateInfo__time" *ngIf="item.eventTime">{{ item.eventTime }}</span>
             </div>
           </td>
           <td class="table__td table__td--hide-mobile" *ngIf="activeTab === 'events'">{{ item.location }}</td>
           <td class="table__td table__td--center">
-            <button class="statusBadge" [class.statusBadge--published]="item.status === 'published'" (click)="toggleStatus(item)">
-              {{ item.status === 'published' ? 'Pubblicato' : 'Bozza' }}
+            <button class="statusBadge" [class.statusBadge--published]="item.status === 'PUBLISHED'" (click)="toggleStatus(item)">
+              {{ item.status === 'PUBLISHED' ? 'Pubblicato' : 'Bozza' }}
             </button>
           </td>
           <td class="table__td table__td--actions">
@@ -90,7 +90,7 @@
   <div class="modal" *ngIf="selectedItem" (click)="closeDetail()">
     <div class="modal__content modal__content--wide" (click)="$event.stopPropagation()">
       <div class="modal__header">
-        <h2 class="modal__title">Modifica {{ selectedItem.type === 'event' ? 'evento' : 'annuncio' }}</h2>
+        <h2 class="modal__title">Modifica {{ selectedItem.type === 'EVENT' ? 'evento' : 'annuncio' }}</h2>
         <button class="modal__close" (click)="closeDetail()">×</button>
       </div>
       <div class="modal__body">
@@ -99,20 +99,20 @@
           <input class="formInput" type="text" [(ngModel)]="selectedItem.title" placeholder="Titolo">
         </div>
         <div class="formGroup">
-          <label class="formLabel">Descrizione</label>
-          <textarea class="formTextarea" [(ngModel)]="selectedItem.description" placeholder="Descrizione"></textarea>
+          <label class="formLabel">Descrizione breve</label>
+          <textarea class="formTextarea" [(ngModel)]="selectedItem.shortDescription" placeholder="Descrizione"></textarea>
         </div>
-        <div class="formRow" *ngIf="selectedItem.type === 'event'">
+        <div class="formRow" *ngIf="selectedItem.type === 'EVENT'">
           <div class="formGroup">
             <label class="formLabel">Data</label>
-            <input class="formInput" type="date" [(ngModel)]="selectedItem.date">
+            <input class="formInput" type="date" [(ngModel)]="selectedItem.eventDate">
           </div>
           <div class="formGroup">
             <label class="formLabel">Ora</label>
-            <input class="formInput" type="time" [(ngModel)]="selectedItem.time">
+            <input class="formInput" type="time" [(ngModel)]="selectedItem.eventTime">
           </div>
         </div>
-        <div class="formGroup" *ngIf="selectedItem.type === 'event'">
+        <div class="formGroup" *ngIf="selectedItem.type === 'EVENT'">
           <label class="formLabel">Luogo</label>
           <input class="formInput" type="text" [(ngModel)]="selectedItem.location" placeholder="Indirizzo o nome del luogo">
         </div>
@@ -133,31 +133,31 @@
       </div>
       <div class="modal__body">
         <div class="formGroup">
-          <label class="formLabel">Titolo</label>
-          <input class="formInput" type="text" placeholder="Titolo">
+          <label class="formLabel">Titolo *</label>
+          <input class="formInput" type="text" [(ngModel)]="newItem.title" placeholder="Titolo">
         </div>
         <div class="formGroup">
-          <label class="formLabel">Descrizione</label>
-          <textarea class="formTextarea" placeholder="Descrizione"></textarea>
+          <label class="formLabel">Descrizione breve</label>
+          <textarea class="formTextarea" [(ngModel)]="newItem.shortDescription" placeholder="Descrizione"></textarea>
         </div>
         <div class="formRow" *ngIf="createType === 'event'">
           <div class="formGroup">
-            <label class="formLabel">Data</label>
-            <input class="formInput" type="date">
+            <label class="formLabel">Data *</label>
+            <input class="formInput" type="date" [(ngModel)]="newItem.eventDate">
           </div>
           <div class="formGroup">
             <label class="formLabel">Ora</label>
-            <input class="formInput" type="time">
+            <input class="formInput" type="time" [(ngModel)]="newItem.eventTime">
           </div>
         </div>
         <div class="formGroup" *ngIf="createType === 'event'">
           <label class="formLabel">Luogo</label>
-          <input class="formInput" type="text" placeholder="Indirizzo o nome del luogo">
+          <input class="formInput" type="text" [(ngModel)]="newItem.location" placeholder="Indirizzo o nome del luogo">
         </div>
       </div>
       <div class="modal__footer">
         <button class="btn btn--ghost" (click)="closeCreate()">Annulla</button>
-        <button class="btn btn--primary">Crea {{ createType === 'event' ? 'evento' : 'annuncio' }}</button>
+        <button class="btn btn--primary" (click)="createItem()">Crea {{ createType === 'event' ? 'evento' : 'annuncio' }}</button>
       </div>
     </div>
   </div>

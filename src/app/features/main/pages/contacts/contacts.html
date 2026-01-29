@@ -100,24 +100,48 @@
     <div class="card card--soft rightCol">
       <h2 class="card__title">Contattaci</h2>
       <p class="card__desc">
-        Compila i campi qui sotto. L'invio è un placeholder: lo colleghiamo al backend quando vuoi.
+        Compila i campi qui sotto per inviarci un messaggio. Ti risponderemo il prima possibile.
       </p>
+
+      <!-- Success message -->
+      <div class="alert alert--success" *ngIf="success">
+        ✓ Messaggio inviato con successo! Ti risponderemo presto.
+      </div>
+
+      <!-- Error message -->
+      <div class="alert alert--error" *ngIf="error">
+        ✗ {{ error }}
+      </div>
 
       <form class="contactForm" (submit)="onSubmit($event)">
         <div class="formGrid">
           <label class="field">
-            <span class="field__label">Mittente</span>
+            <span class="field__label">Nome *</span>
             <input
               class="field__input"
               type="text"
-              name="from"
-              placeholder="Nome o email"
-              [(ngModel)]="form.from"
+              name="name"
+              placeholder="Il tuo nome"
+              [(ngModel)]="form.name"
               autocomplete="name"
+              required
             />
           </label>
 
           <label class="field">
+            <span class="field__label">Email *</span>
+            <input
+              class="field__input"
+              type="email"
+              name="email"
+              placeholder="La tua email"
+              [(ngModel)]="form.email"
+              autocomplete="email"
+              required
+            />
+          </label>
+
+          <label class="field field--full">
             <span class="field__label">Oggetto</span>
             <input
               class="field__input"
@@ -130,19 +154,22 @@
           </label>
 
           <label class="field field--full">
-            <span class="field__label">Contenuto</span>
+            <span class="field__label">Messaggio *</span>
             <textarea
               class="field__textarea"
               name="message"
               placeholder="Scrivi il tuo messaggio..."
               [(ngModel)]="form.message"
               rows="10"
+              required
             ></textarea>
           </label>
         </div>
 
         <div class="formActions">
-          <button class="btn btn--primary" type="submit">Invia</button>
+          <button class="btn btn--primary" type="submit" [disabled]="sending">
+            {{ sending ? 'Invio in corso...' : 'Invia messaggio' }}
+          </button>
         </div>
       </form>
     </div>

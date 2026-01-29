@@ -7,9 +7,12 @@ import {
   MAPS_URL,
   MAPS_EMBED_URL,
 } from '../../../../shared/constants/sede-maps-link';
+import { MessageService } from '../../../../core/services';
+import { MessageRequest } from '../../../../core/models';
 
 type ContactForm = {
-  from: string;
+  name: string;
+  email: string;
   subject: string;
   message: string;
 };
@@ -30,18 +33,54 @@ export class Contacts {
   readonly mapEmbedSafeUrl: SafeResourceUrl;
 
   form: ContactForm = {
-    from: '',
+    name: '',
+    email: '',
     subject: '',
     message: '',
   };
 
-  constructor(private sanitizer: DomSanitizer) {
+  sending = false;
+  success = false;
+  error: string | null = null;
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private messageService: MessageService
+  ) {
     this.mapEmbedSafeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(MAPS_EMBED_URL);
   }
 
   onSubmit(ev: Event): void {
     ev.preventDefault();
-    alert('Messaggio pronto! (placeholder) Collegami a un backend per inviarlo davvero.');
-    this.form = { from: '', subject: '', message: '' };
+    
+    if (!this.form.name || !this.form.email || !this.form.message) {
+      this.error = 'Compila tutti i campi obbligatori';
+      return;
+    }
+
+    this.sending = true;
+    this.error = null;
+    this.success = false;
+
+    const request: MessageRequest = {
+      senderName: this.form.name,
+      senderEmail: this.form.email,
+      subject: this.form.subject || 'Messaggio dal sito',
+      content: this.form.message
+    };
+
+    this.messageService.send(request).subscribe({
+      next: () => {
+        this.success = true;
+        this.sending = false;
+        this.form = { name: '', email: '', subject: '', message: '' };
+        setTimeout(() => this.success = false, 5000);
+      },
+      error: (err) => {
+        this.error = 'Errore nell\'invio del messaggio. Riprova più tardi.';
+        this.sending = false;
+        console.error(err);
+      }
+    });
   }
 }

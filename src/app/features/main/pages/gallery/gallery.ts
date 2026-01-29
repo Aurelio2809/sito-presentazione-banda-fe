@@ -1,14 +1,7 @@
-// src/app/features/main/pages/gallery/gallery.ts
-import { Component, HostListener } from '@angular/core';
-
-type GalleryItem = {
-  id: string;
-  src: string;
-  title: string;
-  description: string;
-  place?: string;
-  date?: string; // formato libero (es. "25/12/2025" oppure "Dicembre 2025")
-};
+import { Component, HostListener, OnInit } from '@angular/core';
+import { GalleryService } from '../../../../core/services';
+import { GalleryPhotoResponse } from '../../../../core/models';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-gallery',
@@ -16,95 +9,83 @@ type GalleryItem = {
   styleUrls: ['./gallery.css'],
   standalone: false,
 })
-export class Gallery {
-  readonly heroMain: GalleryItem = {
-    id: 'hero-main',
-    src: 'https://picsum.photos/seed/banda-hero/1800/1100',
-    title: 'Gran concerto bandistico',
-    description: 'Scatto “hero” per raccontare l’impatto della banda: palco, pubblico e atmosfera.',
-    place: 'Casali del Manco (CS)',
-    date: 'Dicembre 2025',
-  };
+export class Gallery implements OnInit {
+  favorites: GalleryPhotoResponse[] = [];
+  items: GalleryPhotoResponse[] = [];
+  heroMain: GalleryPhotoResponse | null = null;
+  loading = true;
+  error: string | null = null;
 
-  readonly favorites: GalleryItem[] = [
-    {
-      id: 'fav-r1',
-      src: 'https://picsum.photos/seed/banda-fav-r1/1200/900',
-      title: 'Prove in sala',
-      description: 'La costruzione del suono: prove, sezioni e lavoro di insieme.',
-      place: 'Sede – Località Pedace',
-      date: 'Novembre 2025',
-    },
-    {
-      id: 'fav-r2',
-      src: 'https://picsum.photos/seed/banda-fav-r2/1200/900',
-      title: 'Dettagli e strumenti',
-      description: 'Il lato artigianale: strumenti, luci e dettagli ravvicinati.',
-      place: 'Casali del Manco (CS)',
-      date: 'Ottobre 2025',
-    },
-    {
-      id: 'fav-b1',
-      src: 'https://picsum.photos/seed/banda-fav-b1/1200/900',
-      title: 'Scuola di musica',
-      description: 'Formazione e nuove generazioni: il futuro passa da qui.',
-      place: 'Sede – Località Pedace',
-      date: 'Settembre 2025',
-    },
-    {
-      id: 'fav-b2',
-      src: 'https://picsum.photos/seed/banda-fav-b2/1200/900',
-      title: 'Comunità',
-      description: 'Musica come collante sociale: persone, sorrisi, territorio.',
-      place: 'Casali del Manco (CS)',
-      date: 'Agosto 2025',
-    },
-    {
-      id: 'fav-br',
-      src: 'https://picsum.photos/seed/banda-fav-br/1200/900',
-      title: 'Dietro le quinte',
-      description: 'Preparazione e organizzazione: ciò che non si vede sul palco.',
-      place: 'Backstage',
-      date: 'Dicembre 2025',
-    },
-  ];
+  // Paginazione
+  page = 0;
+  pageSize = 9;
+  totalElements = 0;
+  totalPages = 0;
 
-  readonly items: GalleryItem[] = Array.from({ length: 18 }).map((_, i) => ({
-    id: `grid-${i + 1}`,
-    src: `https://picsum.photos/seed/banda-grid-${i + 1}/1400/900`,
-    title: `Foto ${i + 1}`,
-    description: 'Placeholder: qui inserirai titolo e descrizione reali (concerto, prova, evento, ecc.).',
-    place: 'Casali del Manco (CS)',
-    date: '2025',
-  }));
+  // Viewer
+  viewerOpen = false;
+  selected: GalleryPhotoResponse | null = null;
 
-  // =========================
-  // PAGINAZIONE (solo griglia)
-  // =========================
-  page = 1;      // 1-based
-  pageSize = 9;  // default
+  constructor(private galleryService: GalleryService) {}
 
-  get pagedItems(): GalleryItem[] {
-    const start = (this.page - 1) * this.pageSize;
-    return this.items.slice(start, start + this.pageSize);
+  ngOnInit(): void {
+    this.loadFavorites();
+    this.loadPhotos();
+  }
+
+  loadFavorites(): void {
+    this.galleryService.getPublicFavorites().subscribe({
+      next: (photos) => {
+        this.favorites = photos;
+        // La prima foto preferita diventa hero
+        if (photos.length > 0) {
+          this.heroMain = photos[0];
+        }
+      },
+      error: (err) => console.error('Errore caricamento preferite', err)
+    });
+  }
+
+  loadPhotos(): void {
+    this.loading = true;
+    this.galleryService.getPublicPhotos(this.page, this.pageSize).subscribe({
+      next: (pageData) => {
+        this.items = pageData.content;
+        this.totalElements = pageData.totalElements;
+        this.totalPages = pageData.totalPages;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Errore nel caricamento della galleria';
+        this.loading = false;
+        console.error(err);
+      }
+    });
+  }
+
+  getPhotoUrl(photo: GalleryPhotoResponse): string {
+    if (photo.src?.startsWith('http')) {
+      return photo.src;
+    }
+    return `${environment.apiUrl}/gallery/photos/${photo.id}`;
+  }
+
+  get pagedItems(): GalleryPhotoResponse[] {
+    return this.items;
   }
 
   onPageChange(p: number): void {
-    this.page = p;
+    this.page = p - 1; // API usa 0-based
+    this.loadPhotos();
   }
 
   onPageSizeChange(size: number): void {
     this.pageSize = size;
-    this.page = 1;
+    this.page = 0;
+    this.loadPhotos();
   }
 
-  // =========================
-  // VIEWER
-  // =========================
-  viewerOpen = false;
-  selected: GalleryItem | null = null;
-
-  open(item: GalleryItem): void {
+  open(item: GalleryPhotoResponse): void {
     this.selected = item;
     this.viewerOpen = true;
     document.documentElement.style.overflow = 'hidden';

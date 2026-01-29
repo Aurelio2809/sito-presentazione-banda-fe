@@ -1,0 +1,454 @@
+/* =========================================================
+   LOGIN PAGE - Tema Banda Musicale
+   ========================================================= */
+
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  isolation: isolate;
+
+  /* Background identico al main site */
+  background:
+    radial-gradient(900px 520px at 20% 10%, rgba(251, 191, 36, 0.08), transparent 60%),
+    radial-gradient(760px 420px at 80% 30%, rgba(190, 18, 60, 0.12), transparent 60%),
+    radial-gradient(600px 400px at 50% 80%, rgba(251, 191, 36, 0.05), transparent 50%),
+    linear-gradient(135deg, #0b0b0d 0%, #0f0f12 50%, #0b0b0d 100%);
+}
+
+/* Filigrana musicale */
+.loginPage__watermark {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+
+  background-image: url("/assets/bg/bg-musica.png");
+  background-repeat: repeat;
+  background-size: 1024px;
+  background-position: top left;
+
+  opacity: 0.65;
+  filter: contrast(1.18) brightness(1.06);
+  mix-blend-mode: screen;
+}
+
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+.loginCard {
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  z-index: 1;
+
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 24, 0.95),
+    rgba(11, 11, 13, 0.98)
+  );
+  
+  border: 1px solid rgba(251, 191, 36, 0.15);
+  border-radius: 24px;
+  padding: 48px 44px;
+  
+  backdrop-filter: blur(24px) saturate(1.2);
+  
+  box-shadow:
+    0 0 80px rgba(190, 18, 60, 0.08),
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+}
+
+/* Glow effect sulla card */
+.loginCard::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(251, 191, 36, 0.5), 
+    transparent
+  );
+  border-radius: 50%;
+}
+
+.loginCard__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Logo con stesso stile del brand nel main */
+.loginCard__logo {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 24px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  
+  border-radius: 20px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.12), 
+    rgba(255, 255, 255, 0.05)
+  );
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 0 40px rgba(251, 191, 36, 0.08);
+    
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.loginCard__logo:hover {
+  transform: scale(1.03);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 0 50px rgba(251, 191, 36, 0.12);
+}
+
+.loginCard__logo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  
+  background:
+    radial-gradient(80px 50px at 30% 25%, rgba(255, 255, 255, 0.25), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent);
+}
+
+.loginCard__crest {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  object-fit: cover;
+  
+  filter:
+    drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35))
+    contrast(1.08)
+    brightness(1.05)
+    saturate(1.08);
+}
+
+.loginCard__title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+  
+  background: linear-gradient(135deg, #ffffff, rgba(251, 191, 36, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.loginCard__subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   LOGIN FORM
+   ========================================================= */
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(251, 191, 36, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.formInputWrapper {
+  position: relative;
+}
+
+.formInput__icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  transition: color 0.25s ease;
+}
+
+.formInput {
+  width: 100%;
+  padding: 16px 18px 16px 52px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.formInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 400;
+}
+
+.formInput:focus {
+  border-color: rgba(190, 18, 60, 0.6);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 
+    0 0 0 3px rgba(190, 18, 60, 0.15),
+    0 0 20px rgba(190, 18, 60, 0.1);
+}
+
+.formInputWrapper:focus-within .formInput__icon {
+  color: rgba(251, 191, 36, 0.9);
+}
+
+.formInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   LOGIN BUTTON - Stile Banda (Rosso + Oro)
+   ========================================================= */
+.loginBtn {
+  width: 100%;
+  padding: 18px 28px;
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  
+  background: linear-gradient(
+    180deg,
+    #be123c 0%,
+    #9f1239 50%,
+    #881337 100%
+  );
+  
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: 14px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  
+  box-shadow:
+    0 4px 16px rgba(190, 18, 60, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  
+  transition: all 0.25s ease;
+}
+
+/* Shimmer effect */
+.loginBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(251, 191, 36, 0.15),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.loginBtn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.loginBtn:hover:not(:disabled) {
+  background: linear-gradient(
+    180deg,
+    #db2757 0%,
+    #be123c 50%,
+    #9f1239 100%
+  );
+  border-color: rgba(251, 191, 36, 0.4);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 24px rgba(190, 18, 60, 0.45),
+    0 0 40px rgba(190, 18, 60, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 1px 0 rgba(255, 255, 255, 0.15) inset;
+}
+
+.loginBtn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 8px rgba(190, 18, 60, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+.loginBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loginBtn__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.loginBtn__spinner {
+  width: 20px;
+  height: 20px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   ALERT
+   ========================================================= */
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.alert__icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+}
+
+.alert--error {
+  background: rgba(190, 18, 60, 0.12);
+  border: 1px solid rgba(190, 18, 60, 0.3);
+  color: #fb7185;
+}
+
+/* =========================================================
+   FOOTER LINKS
+   ========================================================= */
+.loginCard__footer {
+  margin-top: 36px;
+  text-align: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.backLink:hover {
+  color: rgba(251, 191, 36, 1);
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+.backLink svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s ease;
+}
+
+.backLink:hover svg {
+  transform: translateX(-3px);
+}
+
+/* =========================================================
+   PAGE FOOTER
+   ========================================================= */
+.loginPage__footer {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 480px) {
+  .loginPage {
+    padding: 16px;
+  }
+  
+  .loginCard {
+    padding: 36px 28px;
+    border-radius: 20px;
+  }
+  
+  .loginCard__logo {
+    width: 72px;
+    height: 72px;
+  }
+  
+  .loginCard__title {
+    font-size: 24px;
+  }
+  
+  .loginBtn {
+    padding: 16px 24px;
+  }
+  
+  .loginPage__footer {
+    bottom: 16px;
+    font-size: 12px;
+  }
+}

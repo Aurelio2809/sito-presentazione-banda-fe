@@ -4,36 +4,76 @@
     <p class="pageHeader__desc">Gestisci il tuo profilo e le impostazioni</p>
   </header>
 
-  <div class="profileLayout">
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loadingState">
+    <p>Caricamento...</p>
+  </div>
+
+  <div class="profileLayout" *ngIf="!loading && user">
     <!-- PROFILO -->
     <section class="profileCard">
       <div class="profileCard__header">
         <div class="profileCard__avatar">
-          <svg viewBox="0 0 24 24" fill="none" *ngIf="!user.avatar">
+          <svg viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
             <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2"/>
           </svg>
         </div>
         <div class="profileCard__info">
-          <h2 class="profileCard__name">{{ user.name }}</h2>
-          <p class="profileCard__role">{{ user.role }}</p>
+          <h2 class="profileCard__name">{{ user.username }}</h2>
+          <p class="profileCard__role">{{ getRoleLabel(user.role) }}</p>
         </div>
       </div>
 
-      <div class="profileCard__details">
+      <!-- Vista normale -->
+      <div class="profileCard__details" *ngIf="!editMode">
         <div class="detailRow">
           <span class="detailRow__label">Email</span>
           <span class="detailRow__value">{{ user.email }}</span>
         </div>
         <div class="detailRow">
           <span class="detailRow__label">Membro dal</span>
-          <span class="detailRow__value">{{ user.joinDate }}</span>
+          <span class="detailRow__value">{{ formatDate(user.createdAt) }}</span>
         </div>
       </div>
 
-      <div class="profileCard__actions">
-        <button class="btn btn--ghost" type="button">Modifica profilo</button>
-        <button class="btn btn--ghost" type="button" (click)="changePassword()">Cambia password</button>
+      <!-- Form modifica profilo -->
+      <div class="profileCard__editForm" *ngIf="editMode">
+        <div class="formGroup">
+          <label class="formGroup__label">Email</label>
+          <input type="email" class="formGroup__input" [(ngModel)]="editEmail" placeholder="Email">
+        </div>
+        <div class="formGroup__actions">
+          <button class="btn btn--primary" type="button" (click)="saveProfile()">Salva</button>
+          <button class="btn btn--ghost" type="button" (click)="toggleEditMode()">Annulla</button>
+        </div>
+      </div>
+
+      <div class="profileCard__actions" *ngIf="!editMode && !showPasswordForm">
+        <button class="btn btn--ghost" type="button" (click)="toggleEditMode()">Modifica profilo</button>
+        <button class="btn btn--ghost" type="button" (click)="togglePasswordForm()">Cambia password</button>
+      </div>
+
+      <!-- Form cambio password -->
+      <div class="profileCard__passwordForm" *ngIf="showPasswordForm">
+        <h4 class="profileCard__formTitle">Cambia Password</h4>
+        <div class="formGroup">
+          <label class="formGroup__label">Password attuale</label>
+          <input type="password" class="formGroup__input" [(ngModel)]="currentPassword" placeholder="Password attuale">
+        </div>
+        <div class="formGroup">
+          <label class="formGroup__label">Nuova password</label>
+          <input type="password" class="formGroup__input" [(ngModel)]="newPassword" placeholder="Nuova password">
+        </div>
+        <div class="formGroup">
+          <label class="formGroup__label">Conferma nuova password</label>
+          <input type="password" class="formGroup__input" [(ngModel)]="confirmPassword" placeholder="Conferma password">
+        </div>
+        <p class="formError" *ngIf="passwordError">{{ passwordError }}</p>
+        <div class="formGroup__actions">
+          <button class="btn btn--primary" type="button" (click)="changePassword()">Cambia Password</button>
+          <button class="btn btn--ghost" type="button" (click)="togglePasswordForm()">Annulla</button>
+        </div>
       </div>
     </section>
 
@@ -81,8 +121,8 @@
     <!-- SESSIONE -->
     <section class="sessionCard">
       <h3 class="sessionCard__title">Sessione</h3>
-      <p class="sessionCard__desc">Sei connesso come amministratore. Per uscire dalla dashboard, usa il pulsante qui sotto.</p>
-      <button class="btn btn--danger" type="button">
+      <p class="sessionCard__desc">Sei connesso come <strong>{{ user.username }}</strong>. Per uscire dalla dashboard, usa il pulsante qui sotto.</p>
+      <button class="btn btn--danger" type="button" (click)="logout()">
         <svg viewBox="0 0 24 24" fill="none">
           <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>

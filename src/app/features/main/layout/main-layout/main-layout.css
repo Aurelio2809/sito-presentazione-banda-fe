@@ -211,3 +211,28 @@
 .footer__links{ @apply flex items-center gap-3 text-sm; }
 .footer__link{ @apply text-white/60 transition hover:text-banda-gold-400; }
 .footer__dot{ @apply text-white/20; }
+
+/* =========================================================
+   DASHBOARD BUTTON
+   ========================================================= */
+.dashboardBtn{
+  @apply flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: var(--color-banda-gold-400);
+}
+
+.dashboardBtn:hover{
+  background: rgba(255, 215, 0, 0.25);
+  border-color: rgba(255, 215, 0, 0.5);
+  color: var(--color-banda-gold-300);
+}
+
+.dashboardBtn__icon{
+  width: 18px;
+  height: 18px;
+}
+
+.dashboardBtn__text{
+  font-weight: 500;
+}

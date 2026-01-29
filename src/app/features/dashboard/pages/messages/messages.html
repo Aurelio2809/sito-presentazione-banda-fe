@@ -31,23 +31,23 @@
     <div class="messagesList">
       <div
         class="messageItem"
-        [class.messageItem--unread]="!message.isRead"
+        [class.messageItem--unread]="!message.read"
         [class.messageItem--selected]="selectedMessage?.id === message.id"
         *ngFor="let message of filteredMessages"
         (click)="selectMessage(message)"
       >
-        <div class="messageItem__indicator" *ngIf="!message.isRead"></div>
+        <div class="messageItem__indicator" *ngIf="!message.read"></div>
         <div class="messageItem__content">
           <div class="messageItem__header">
-            <span class="messageItem__name">{{ message.name }}</span>
-            <span class="messageItem__date">{{ message.date }}</span>
+            <span class="messageItem__name">{{ message.senderName }}</span>
+            <span class="messageItem__date">{{ message.receivedAt | date:'dd/MM/yyyy' }}</span>
           </div>
           <div class="messageItem__subject">{{ message.subject }}</div>
-          <div class="messageItem__preview">{{ message.message }}</div>
+          <div class="messageItem__preview">{{ message.content }}</div>
         </div>
         <div class="messageItem__actions">
-          <button class="messageItem__action" title="Segna come {{ message.isRead ? 'non letto' : 'letto' }}" (click)="toggleRead(message, $event)">
-            {{ message.isRead ? '○' : '●' }}
+          <button class="messageItem__action" title="Segna come {{ message.read ? 'non letto' : 'letto' }}" (click)="toggleRead(message, $event)">
+            {{ message.read ? '○' : '●' }}
           </button>
         </div>
       </div>
@@ -63,10 +63,10 @@
         <div class="messageDetail__info">
           <h2 class="messageDetail__subject">{{ selectedMessage.subject }}</h2>
           <div class="messageDetail__meta">
-            <span class="messageDetail__from">Da: <strong>{{ selectedMessage.name }}</strong></span>
-            <span class="messageDetail__email">&lt;{{ selectedMessage.email }}&gt;</span>
+            <span class="messageDetail__from">Da: <strong>{{ selectedMessage.senderName }}</strong></span>
+            <span class="messageDetail__email">&lt;{{ selectedMessage.senderEmail }}&gt;</span>
           </div>
-          <div class="messageDetail__date">{{ selectedMessage.date }}</div>
+          <div class="messageDetail__date">{{ selectedMessage.receivedAt | date:'dd/MM/yyyy HH:mm' }}</div>
         </div>
         <div class="messageDetail__actions">
           <button class="actionBtn actionBtn--danger" title="Elimina" (click)="deleteMessage(selectedMessage)">
@@ -78,10 +78,10 @@
         </div>
       </div>
       <div class="messageDetail__body">
-        <p>{{ selectedMessage.message }}</p>
+        <p>{{ selectedMessage.content }}</p>
       </div>
       <div class="messageDetail__footer">
-        <a class="btn btn--primary" [href]="'mailto:' + selectedMessage.email + '?subject=Re: ' + selectedMessage.subject">
+        <a class="btn btn--primary" [href]="'mailto:' + selectedMessage.senderEmail + '?subject=Re: ' + selectedMessage.subject">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M3 10l9 6 9-6M21 10v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>

@@ -5,8 +5,18 @@
     description="Qui trovi i prossimi appuntamenti, lo storico e comunicazioni importanti. Clicca un elemento per vedere i dettagli."
   ></app-page-header>
 
+  <!-- Loading state -->
+  <div class="events__loading" *ngIf="loading">
+    <p>Caricamento eventi...</p>
+  </div>
+
+  <!-- Error state -->
+  <div class="events__error" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
   <!-- Tabs -->
-  <div class="tabs">
+  <div class="tabs" *ngIf="!loading">
     <button
       class="tab"
       type="button"
@@ -28,7 +38,7 @@
     </button>
   </div>
 
-  <div class="layout">
+  <div class="layout" *ngIf="!loading">
     <!-- LEFT: Events list -->
     <div class="col">
       <div class="sectionHead">
@@ -50,7 +60,7 @@
           [class.is-open]="openEventId === e.id"
           (click)="toggleEvent(e.id)"
         >
-          <div class="ticket__banner">
+          <div class="ticket__banner" *ngIf="e.bannerSrc">
             <img class="ticket__img" [src]="e.bannerSrc" [alt]="e.title" />
             <div class="ticket__shade"></div>
           </div>
@@ -62,29 +72,29 @@
               <div class="ticket__meta">
                 <span class="metaPill">
                   <span class="metaPill__label">Data</span>
-                  <span class="metaPill__value">{{ formatDate(e.dateISO) }}</span>
+                  <span class="metaPill__value">{{ formatDate(e.eventDate) }}</span>
                 </span>
 
-                <span class="metaPill" *ngIf="e.time">
+                <span class="metaPill" *ngIf="e.eventTime">
                   <span class="metaPill__label">Ora</span>
-                  <span class="metaPill__value">{{ e.time }}</span>
+                  <span class="metaPill__value">{{ e.eventTime }}</span>
                 </span>
 
-                <span class="metaPill">
+                <span class="metaPill" *ngIf="e.location">
                   <span class="metaPill__label">Luogo</span>
-                  <span class="metaPill__value">{{ e.place }}</span>
+                  <span class="metaPill__value">{{ e.location }}</span>
                 </span>
               </div>
             </div>
 
-            <div class="ticket__desc">{{ e.description }}</div>
+            <div class="ticket__desc">{{ e.shortDescription }}</div>
 
             <div class="ticket__tags" *ngIf="e.tags?.length">
               <span class="tag" *ngFor="let t of e.tags">{{ t }}</span>
             </div>
 
             <div class="ticket__details" *ngIf="openEventId === e.id">
-              <div class="details__text">{{ e.details }}</div>
+              <div class="details__text">{{ e.fullDescription }}</div>
 
               <div class="details__row">
                 <div class="details__place" *ngIf="e.cityLine">
@@ -94,14 +104,14 @@
 
                 <a
                   class="attach"
-                  *ngIf="e.attachment"
-                  [href]="e.attachment.href"
+                  *ngIf="e.attachmentHref"
+                  [href]="e.attachmentHref"
                   target="_blank"
                   rel="noopener"
                   (click)="$event.stopPropagation()"
                 >
                   <span class="attach__dot" aria-hidden="true"></span>
-                  <span class="attach__label">{{ e.attachment.label }}</span>
+                  <span class="attach__label">{{ e.attachmentLabel || 'Allegato' }}</span>
                   <span class="attach__chev" aria-hidden="true">↗</span>
                 </a>
               </div>
@@ -123,7 +133,7 @@
           [class.is-open]="openEventId === e.id"
           (click)="toggleEvent(e.id)"
         >
-          <div class="ticket__banner">
+          <div class="ticket__banner" *ngIf="e.bannerSrc">
             <img class="ticket__img" [src]="e.bannerSrc" [alt]="e.title" />
             <div class="ticket__shade"></div>
           </div>
@@ -135,29 +145,29 @@
               <div class="ticket__meta">
                 <span class="metaPill">
                   <span class="metaPill__label">Data</span>
-                  <span class="metaPill__value">{{ formatDate(e.dateISO) }}</span>
+                  <span class="metaPill__value">{{ formatDate(e.eventDate) }}</span>
                 </span>
 
-                <span class="metaPill" *ngIf="e.time">
+                <span class="metaPill" *ngIf="e.eventTime">
                   <span class="metaPill__label">Ora</span>
-                  <span class="metaPill__value">{{ e.time }}</span>
+                  <span class="metaPill__value">{{ e.eventTime }}</span>
                 </span>
 
-                <span class="metaPill">
+                <span class="metaPill" *ngIf="e.location">
                   <span class="metaPill__label">Luogo</span>
-                  <span class="metaPill__value">{{ e.place }}</span>
+                  <span class="metaPill__value">{{ e.location }}</span>
                 </span>
               </div>
             </div>
 
-            <div class="ticket__desc">{{ e.description }}</div>
+            <div class="ticket__desc">{{ e.shortDescription }}</div>
 
             <div class="ticket__tags" *ngIf="e.tags?.length">
               <span class="tag" *ngFor="let t of e.tags">{{ t }}</span>
             </div>
 
             <div class="ticket__details" *ngIf="openEventId === e.id">
-              <div class="details__text">{{ e.details }}</div>
+              <div class="details__text">{{ e.fullDescription }}</div>
 
               <div class="details__row">
                 <div class="details__place" *ngIf="e.cityLine">
@@ -167,14 +177,14 @@
 
                 <a
                   class="attach"
-                  *ngIf="e.attachment"
-                  [href]="e.attachment.href"
+                  *ngIf="e.attachmentHref"
+                  [href]="e.attachmentHref"
                   target="_blank"
                   rel="noopener"
                   (click)="$event.stopPropagation()"
                 >
                   <span class="attach__dot" aria-hidden="true"></span>
-                  <span class="attach__label">{{ e.attachment.label }}</span>
+                  <span class="attach__label">{{ e.attachmentLabel || 'Allegato' }}</span>
                   <span class="attach__chev" aria-hidden="true">↗</span>
                 </a>
               </div>
@@ -215,11 +225,11 @@
           >
             <div class="ann__top">
               <div class="ann__title">{{ a.title }}</div>
-              <div class="ann__date">{{ formatDate(a.dateISO) }}</div>
+              <div class="ann__date">{{ formatDate(a.eventDate) }}</div>
             </div>
 
-            <div class="ann__short" *ngIf="openAnnouncementId !== a.id">{{ a.short }}</div>
-            <div class="ann__full" *ngIf="openAnnouncementId === a.id">{{ a.full }}</div>
+            <div class="ann__short" *ngIf="openAnnouncementId !== a.id">{{ a.shortDescription }}</div>
+            <div class="ann__full" *ngIf="openAnnouncementId === a.id">{{ a.fullDescription || a.shortDescription }}</div>
 
             <div class="ann__cta">
               <span class="ann__btn">
@@ -227,6 +237,10 @@
               </span>
             </div>
           </button>
+        </div>
+
+        <div class="empty" *ngIf="announcements.length === 0">
+          Nessun annuncio al momento.
         </div>
       </div>
     </aside>

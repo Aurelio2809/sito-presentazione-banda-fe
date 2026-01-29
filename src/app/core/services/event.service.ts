@@ -15,17 +15,17 @@ export class EventService extends ApiService {
 
   // ==================== PUBBLICI ====================
 
-  getUpcomingEvents(): Observable<EventResponse[]> {
+  getUpcoming(): Observable<EventResponse[]> {
     return this.http.get<EventResponse[]>(`${this.baseUrl}/events/public/upcoming`);
   }
 
-  getUpcomingAnnouncements(): Observable<EventResponse[]> {
-    return this.http.get<EventResponse[]>(`${this.baseUrl}/events/public/announcements`);
+  getPast(): Observable<EventResponse[]> {
+    return this.http.get<EventResponse[]>(`${this.baseUrl}/events/public/past`);
   }
 
-  getPastEvents(page = 0, size = 10): Observable<Page<EventResponse>> {
-    const params = this.buildParams({ page, size });
-    return this.http.get<Page<EventResponse>>(`${this.baseUrl}/events/public/past`, { params });
+  getPublicAll(type?: EventType, page = 0, size = 20): Observable<Page<EventResponse>> {
+    const params = this.buildParams({ type, page, size });
+    return this.http.get<Page<EventResponse>>(`${this.baseUrl}/events/public`, { params });
   }
 
   getPublicEvent(id: number): Observable<EventResponse> {

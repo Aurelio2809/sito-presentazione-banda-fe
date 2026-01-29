@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { GalleryService, EventService, MessageService, ActivityLogService } from '../../../../core/services';
+import { ActivityLogResponse } from '../../../../core/models';
 
 @Component({
   selector: 'app-overview',
@@ -6,18 +9,95 @@ import { Component } from '@angular/core';
   styleUrls: ['./overview.css'],
   standalone: false,
 })
-export class Overview {
+export class Overview implements OnInit {
   stats = [
-    { label: 'Foto in galleria', value: 24, icon: 'image', trend: '+3 questo mese' },
-    { label: 'Eventi pubblicati', value: 8, icon: 'calendar', trend: '2 in programma' },
-    { label: 'Annunci attivi', value: 3, icon: 'megaphone', trend: '1 nuovo' },
-    { label: 'Messaggi', value: 12, icon: 'mail', trend: '5 non letti' },
+    { label: 'Foto in galleria', value: 0, icon: 'image', trend: '' },
+    { label: 'Eventi pubblicati', value: 0, icon: 'calendar', trend: '' },
+    { label: 'Annunci attivi', value: 0, icon: 'megaphone', trend: '' },
+    { label: 'Messaggi', value: 0, icon: 'mail', trend: '' },
   ];
 
-  recentActivities = [
-    { type: 'photo', text: 'Aggiunta nuova foto alla galleria', time: '2 ore fa' },
-    { type: 'event', text: 'Creato evento "Concerto di Natale"', time: '1 giorno fa' },
-    { type: 'message', text: 'Nuovo messaggio da Mario Rossi', time: '2 giorni fa' },
-    { type: 'photo', text: 'Contrassegnata foto come preferita', time: '3 giorni fa' },
-  ];
+  recentActivities: ActivityLogResponse[] = [];
+  loading = false;
+
+  constructor(
+    private galleryService: GalleryService,
+    private eventService: EventService,
+    private messageService: MessageService,
+    private activityLogService: ActivityLogService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadStats();
+    this.loadRecentActivities();
+  }
+
+  loadStats(): void {
+    this.loading = true;
+
+    forkJoin({
+      photos: this.galleryService.getAll(0, 1),
+      events: this.eventService.getAll(0, 1, 'EVENT', 'PUBLISHED'),
+      announcements: this.eventService.getAll(0, 1, 'ANNOUNCEMENT', 'PUBLISHED'),
+      unreadCount: this.messageService.getUnreadCount(),
+      messages: this.messageService.getAll(0, 1)
+    }).subscribe({
+      next: (data) => {
+        this.stats[0].value = data.photos.totalElements;
+        this.stats[1].value = data.events.totalElements;
+        this.stats[2].value = data.announcements.totalElements;
+        this.stats[3].value = data.messages.totalElements;
+        this.stats[3].trend = `${data.unreadCount.count} non letti`;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Errore nel caricamento statistiche', err);
+        this.loading = false;
+      }
+    });
+  }
+
+  loadRecentActivities(): void {
+    this.activityLogService.getRecent(48).subscribe({
+      next: (activities) => {
+        this.recentActivities = activities.slice(0, 5);
+      },
+      error: (err) => console.error('Errore caricamento attività recenti', err)
+    });
+  }
+
+  getActivityIcon(type: string): string {
+    switch (type) {
+      case 'PHOTO': return 'image';
+      case 'EVENT': return 'calendar';
+      case 'ANNOUNCEMENT': return 'megaphone';
+      case 'MESSAGE': return 'mail';
+      default: return 'activity';
+    }
+  }
+
+  formatAction(action: string): string {
+    const actionMap: Record<string, string> = {
+      'CREATE': 'Creato',
+      'UPDATE': 'Modificato',
+      'DELETE': 'Eliminato',
+      'PUBLISH': 'Pubblicato',
+      'UPLOAD': 'Caricato',
+      'READ': 'Letto'
+    };
+    return actionMap[action] || action;
+  }
+
+  getTimeAgo(timestamp: string): string {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 60) return `${diffMins} minuti fa`;
+    if (diffHours < 24) return `${diffHours} ore fa`;
+    return `${diffDays} giorni fa`;
+  }
 }

@@ -78,27 +78,27 @@
             </div>
           </td>
           <td class="table__td table__td--hide-mobile">{{ photo.location }}</td>
-          <td class="table__td table__td--hide-mobile">{{ photo.date }}</td>
+          <td class="table__td table__td--hide-mobile">{{ photo.photoDate }}</td>
           <td class="table__td table__td--center">
-            <button class="starBtn" [class.starBtn--active]="photo.isFavorite" (click)="toggleFavorite(photo)">
-              {{ photo.isFavorite ? '★' : '☆' }}
+            <button class="starBtn" [class.starBtn--active]="photo.favorite" (click)="toggleFavorite(photo)">
+              {{ photo.favorite ? '★' : '☆' }}
             </button>
           </td>
           <td class="table__td table__td--center" *ngIf="filterFavorites">
             <div class="orderControl">
               <div class="orderControl__arrows">
-                <button class="orderArrow orderArrow--up" (click)="moveFavorite(photo, 'up')" [disabled]="photo.order === 1" title="Sposta su">
+                <button class="orderArrow orderArrow--up" (click)="moveFavorite(photo, 'up')" [disabled]="photo.displayOrder === 1" title="Sposta su">
                   <svg viewBox="0 0 24 24" fill="none">
                     <path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
-                <button class="orderArrow orderArrow--down" (click)="moveFavorite(photo, 'down')" [disabled]="photo.order === favoritePhotos.length" title="Sposta giù">
+                <button class="orderArrow orderArrow--down" (click)="moveFavorite(photo, 'down')" [disabled]="photo.displayOrder === favoritePhotos.length" title="Sposta giù">
                   <svg viewBox="0 0 24 24" fill="none">
                     <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
               </div>
-              <select class="orderSelect" [value]="photo.order" (change)="moveToPosition(photo, +$any($event.target).value)">
+              <select class="orderSelect" [value]="photo.displayOrder" (change)="moveToPosition(photo, +$any($event.target).value)">
                 <option *ngFor="let n of favoritePhotos; let i = index" [value]="i + 1">{{ i + 1 }}</option>
               </select>
             </div>
@@ -146,7 +146,7 @@
           </div>
           <div class="formGroup">
             <label class="formLabel">Data</label>
-            <input class="formInput" type="date" [(ngModel)]="selectedPhoto.date">
+            <input class="formInput" type="date" [(ngModel)]="selectedPhoto.photoDate">
           </div>
         </div>
       </div>
@@ -165,35 +165,43 @@
         <button class="modal__close" (click)="closeUpload()">×</button>
       </div>
       <div class="modal__body">
-        <div class="uploadZone">
+        <div class="uploadZone" (click)="fileInput.click()">
+          <input #fileInput type="file" accept="image/*" style="display:none" (change)="onFileSelected($event)">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <p>Trascina qui le foto o clicca per selezionare</p>
-          <span>PNG, JPG fino a 10MB</span>
+          <p *ngIf="!uploadFile">Clicca per selezionare una foto</p>
+          <p *ngIf="uploadFile" class="uploadZone__selected">{{ uploadFile.name }}</p>
+          <span>PNG, JPG, WEBP fino a 10MB</span>
         </div>
         <div class="formGroup">
-          <label class="formLabel">Titolo</label>
-          <input class="formInput" type="text" placeholder="Titolo della foto">
+          <label class="formLabel">Titolo *</label>
+          <input class="formInput" type="text" [(ngModel)]="uploadMetadata.title" placeholder="Titolo della foto">
         </div>
         <div class="formGroup">
           <label class="formLabel">Descrizione</label>
-          <textarea class="formTextarea" placeholder="Breve descrizione"></textarea>
+          <textarea class="formTextarea" [(ngModel)]="uploadMetadata.description" placeholder="Breve descrizione"></textarea>
         </div>
         <div class="formRow">
           <div class="formGroup">
             <label class="formLabel">Luogo</label>
-            <input class="formInput" type="text" placeholder="Dove è stata scattata">
+            <input class="formInput" type="text" [(ngModel)]="uploadMetadata.location" placeholder="Dove è stata scattata">
           </div>
           <div class="formGroup">
             <label class="formLabel">Data</label>
-            <input class="formInput" type="date">
+            <input class="formInput" type="date" [(ngModel)]="uploadMetadata.photoDate">
           </div>
+        </div>
+        <div class="formGroup formGroup--checkbox">
+          <label>
+            <input type="checkbox" [(ngModel)]="uploadMetadata.favorite">
+            Aggiungi ai preferiti
+          </label>
         </div>
       </div>
       <div class="modal__footer">
         <button class="btn btn--ghost" (click)="closeUpload()">Annulla</button>
-        <button class="btn btn--primary">Carica foto</button>
+        <button class="btn btn--primary" (click)="uploadPhoto()" [disabled]="!uploadFile">Carica foto</button>
       </div>
     </div>
   </div>

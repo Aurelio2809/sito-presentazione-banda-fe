@@ -8,11 +8,13 @@ import { EventsManagement } from './pages/events-management/events-management';
 import { Messages } from './pages/messages/messages';
 import { Profile } from './pages/profile/profile';
 import { ActivityLog } from './pages/activity-log/activity-log';
+// Login è gestito a livello app.routes come standalone component
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardLayout,
+    // AuthGuard è applicato a livello app.routes
     children: [
       { path: '', component: Overview },
       { path: 'gallery', component: GalleryManagement },

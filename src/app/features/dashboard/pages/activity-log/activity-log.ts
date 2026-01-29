@@ -1,15 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TabItem } from '../../components/tab-switch/tab-switch';
-
-export type ActivityEntry = {
-  id: number;
-  user: string;
-  action: string;
-  target: string;
-  targetType: 'photo' | 'event' | 'announcement' | 'message' | 'settings' | 'user';
-  timestamp: string;
-  details?: string;
-};
+import { ActivityLogService } from '../../../../core/services';
+import { ActivityLogResponse, TargetType } from '../../../../core/models';
 
 @Component({
   selector: 'app-activity-log',
@@ -17,57 +9,92 @@ export type ActivityEntry = {
   styleUrls: ['./activity-log.css'],
   standalone: false,
 })
-export class ActivityLog {
-  activities: ActivityEntry[] = [
-    { id: 1, user: 'Admin Banda', action: 'ha caricato', target: 'Concerto di Natale 2024', targetType: 'photo', timestamp: '2024-12-20 15:30', details: 'Aggiunta alla galleria' },
-    { id: 2, user: 'Admin Banda', action: 'ha modificato', target: 'Processione San Giovanni', targetType: 'event', timestamp: '2024-12-19 10:15', details: 'Aggiornato orario e luogo' },
-    { id: 3, user: 'Admin Banda', action: 'ha pubblicato', target: 'Iscrizioni scuola di musica', targetType: 'announcement', timestamp: '2024-12-18 09:00' },
-    { id: 4, user: 'Admin Banda', action: 'ha letto', target: 'Richiesta informazioni corso', targetType: 'message', timestamp: '2024-12-17 16:45', details: 'Messaggio da Mario Rossi' },
-    { id: 5, user: 'Admin Banda', action: 'ha eliminato', target: 'Foto prova 2023', targetType: 'photo', timestamp: '2024-12-16 14:20' },
-    { id: 6, user: 'Admin Banda', action: 'ha creato', target: 'Concerto di Capodanno', targetType: 'event', timestamp: '2024-12-15 11:30', details: 'Evento in bozza' },
-    { id: 7, user: 'Admin Banda', action: 'ha modificato', target: 'Impostazioni notifiche', targetType: 'settings', timestamp: '2024-12-14 08:00' },
-    { id: 8, user: 'Admin Banda', action: 'ha risposto a', target: 'Richiesta prenotazione', targetType: 'message', timestamp: '2024-12-13 17:30', details: 'Messaggio da Comune di Casali' },
-    { id: 9, user: 'Admin Banda', action: 'ha riordinato', target: 'Foto preferite', targetType: 'photo', timestamp: '2024-12-12 12:00', details: 'Nuovo ordine galleria' },
-    { id: 10, user: 'Admin Banda', action: 'ha archiviato', target: 'Annuncio scaduto', targetType: 'announcement', timestamp: '2024-12-11 10:00' },
-  ];
-
+export class ActivityLog implements OnInit {
+  activities: ActivityLogResponse[] = [];
+  loading = false;
+  error: string | null = null;
   activeFilter = 'all';
+
+  constructor(private activityLogService: ActivityLogService) {}
+
+  ngOnInit(): void {
+    this.loadActivities();
+  }
+
+  loadActivities(): void {
+    this.loading = true;
+    this.error = null;
+
+    const targetType = this.activeFilter !== 'all' ? this.activeFilter as TargetType : undefined;
+    
+    this.activityLogService.getAll(0, 100, targetType).subscribe({
+      next: (page) => {
+        this.activities = page.content;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Errore nel caricamento delle attività';
+        this.loading = false;
+        console.error(err);
+      }
+    });
+  }
 
   get filterTabs(): TabItem[] {
     return [
       { id: 'all', label: 'Tutte', count: this.activities.length },
-      { id: 'photo', label: 'Galleria', count: this.activities.filter(a => a.targetType === 'photo').length },
-      { id: 'event', label: 'Eventi', count: this.activities.filter(a => a.targetType === 'event').length },
-      { id: 'announcement', label: 'Annunci', count: this.activities.filter(a => a.targetType === 'announcement').length },
-      { id: 'message', label: 'Messaggi', count: this.activities.filter(a => a.targetType === 'message').length },
+      { id: 'PHOTO', label: 'Galleria', count: this.activities.filter(a => a.targetType === 'PHOTO').length },
+      { id: 'EVENT', label: 'Eventi', count: this.activities.filter(a => a.targetType === 'EVENT').length },
+      { id: 'ANNOUNCEMENT', label: 'Annunci', count: this.activities.filter(a => a.targetType === 'ANNOUNCEMENT').length },
+      { id: 'MESSAGE', label: 'Messaggi', count: this.activities.filter(a => a.targetType === 'MESSAGE').length },
     ];
   }
 
-  get filteredActivities(): ActivityEntry[] {
+  get filteredActivities(): ActivityLogResponse[] {
     if (this.activeFilter === 'all') return this.activities;
     return this.activities.filter(a => a.targetType === this.activeFilter);
   }
 
   onFilterChange(tabId: string): void {
     this.activeFilter = tabId;
+    // Ricarica dal server per filtro specifico
+    if (tabId !== 'all') {
+      this.loadActivities();
+    }
   }
 
   getIcon(type: string): string {
     switch (type) {
-      case 'photo': return 'image';
-      case 'event': return 'calendar';
-      case 'announcement': return 'megaphone';
-      case 'message': return 'mail';
-      case 'settings': return 'settings';
-      case 'user': return 'user';
+      case 'PHOTO': return 'image';
+      case 'EVENT': return 'calendar';
+      case 'ANNOUNCEMENT': return 'megaphone';
+      case 'MESSAGE': return 'mail';
+      case 'SETTINGS': return 'settings';
+      case 'USER': return 'user';
       default: return 'activity';
     }
   }
 
   getActionColor(action: string): string {
-    if (action.includes('eliminato') || action.includes('archiviato')) return 'danger';
-    if (action.includes('creato') || action.includes('caricato') || action.includes('pubblicato')) return 'success';
-    if (action.includes('modificato') || action.includes('riordinato')) return 'warning';
+    if (action === 'DELETE' || action === 'ARCHIVE') return 'danger';
+    if (action === 'CREATE' || action === 'UPLOAD' || action === 'PUBLISH') return 'success';
+    if (action === 'UPDATE') return 'warning';
     return 'default';
+  }
+
+  formatAction(action: string): string {
+    const actionMap: Record<string, string> = {
+      'CREATE': 'ha creato',
+      'UPDATE': 'ha modificato',
+      'DELETE': 'ha eliminato',
+      'PUBLISH': 'ha pubblicato',
+      'UNPUBLISH': 'ha rimosso dalla pubblicazione',
+      'ARCHIVE': 'ha archiviato',
+      'READ': 'ha letto',
+      'UPLOAD': 'ha caricato',
+      'LOGIN': 'ha effettuato l\'accesso',
+      'LOGOUT': 'ha effettuato il logout'
+    };
+    return actionMap[action] || action;
   }
 }

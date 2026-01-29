@@ -62,14 +62,18 @@
     <div class="activityList">
       <div class="activityItem" *ngFor="let activity of recentActivities">
         <div class="activityItem__dot" [ngClass]="{
-          'activityItem__dot--photo': activity.type === 'photo',
-          'activityItem__dot--event': activity.type === 'event',
-          'activityItem__dot--message': activity.type === 'message'
+          'activityItem__dot--photo': activity.targetType === 'PHOTO',
+          'activityItem__dot--event': activity.targetType === 'EVENT',
+          'activityItem__dot--message': activity.targetType === 'MESSAGE',
+          'activityItem__dot--announcement': activity.targetType === 'ANNOUNCEMENT'
         }"></div>
         <div class="activityItem__content">
-          <div class="activityItem__text">{{ activity.text }}</div>
-          <div class="activityItem__time">{{ activity.time }}</div>
+          <div class="activityItem__text">{{ formatAction(activity.action) }} {{ activity.targetName }}</div>
+          <div class="activityItem__time">{{ getTimeAgo(activity.timestamp) }}</div>
         </div>
+      </div>
+      <div class="emptyState" *ngIf="recentActivities.length === 0 && !loading">
+        <p>Nessuna attività recente</p>
       </div>
     </div>
   </section>
