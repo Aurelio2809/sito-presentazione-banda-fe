@@ -1,4 +1,4 @@
-@reference "../../../../../styles.css";
+@reference "../../../../styles.css";
 
 .chapter{
   @apply mt-8 rounded-[22px] border border-white/10 p-5 md:p-6;

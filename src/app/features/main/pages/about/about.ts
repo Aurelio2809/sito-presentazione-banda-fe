@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PageHeaderAction, PageHeaderStat } from '../../components/page-header/page-header';
 
 type AboutSection = {
   tag: string;
@@ -17,7 +18,16 @@ type AboutSection = {
   standalone: false,
 })
 export class About {
-  readonly stats = [
+  // Header
+  readonly headerDescription =
+    'La Banda Musicale "Città di Casali del Manco" promuove cultura musicale e partecipazione. Ogni prova e ogni concerto sono un modo concreto per costruire territorio e legami.';
+
+  readonly headerActions: PageHeaderAction[] = [
+    { label: 'Contattaci', routerLink: '/contacts', variant: 'primary' },
+    { label: 'Vedi eventi', routerLink: '/events', variant: 'ghost' },
+  ];
+
+  readonly stats: PageHeaderStat[] = [
     { label: 'Concerti / anno', value: '—' },
     { label: 'Componenti', value: '—' },
     { label: 'Allievi scuola', value: '—' },

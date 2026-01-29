@@ -1,11 +1,9 @@
 <section class="contacts">
-  <header class="contactsHero">
-    <div class="contactsHero__tag">Contatti</div>
-    <h1 class="contactsHero__title">Restiamo in contatto</h1>
-    <p class="contactsHero__desc">
-      Seguici sui social per eventi, foto e aggiornamenti. Oppure scrivici direttamente dal form qui sotto.
-    </p>
-  </header>
+  <app-page-header
+    tag="Contatti"
+    title="Restiamo in contatto"
+    description="Seguici sui social per eventi, foto e aggiornamenti. Oppure scrivici direttamente dal form qui sotto."
+  ></app-page-header>
 
   <div class="contactsGrid">
     <!-- LEFT COLUMN: social + map -->
@@ -102,7 +100,7 @@
     <div class="card card--soft rightCol">
       <h2 class="card__title">Contattaci</h2>
       <p class="card__desc">
-        Compila i campi qui sotto. L’invio è un placeholder: lo colleghiamo al backend quando vuoi.
+        Compila i campi qui sotto. L'invio è un placeholder: lo colleghiamo al backend quando vuoi.
       </p>
 
       <form class="contactForm" (submit)="onSubmit($event)">

@@ -1,27 +1,12 @@
 <section class="about">
   <!-- HERO -->
-  <header class="hero">
-    <div class="hero__inner">
-      <div class="hero__tag">Chi siamo</div>
-      <h1 class="hero__title">Musica, tradizione e comunità</h1>
-      <p class="hero__desc">
-        La Banda Musicale “Città di Casali del Manco” promuove cultura musicale e partecipazione.
-        Ogni prova e ogni concerto sono un modo concreto per costruire territorio e legami.
-      </p>
-
-      <div class="hero__actions">
-        <a class="btn btn--primary" routerLink="/contacts">Contattaci</a>
-        <a class="btn btn--ghost" routerLink="/events">Vedi eventi</a>
-      </div>
-
-      <div class="stats">
-        <div class="stat" *ngFor="let s of stats">
-          <div class="stat__value">{{ s.value }}</div>
-          <div class="stat__label">{{ s.label }}</div>
-        </div>
-      </div>
-    </div>
-  </header>
+  <app-page-header
+    tag="Chi siamo"
+    title="Musica, tradizione e comunità"
+    [description]="headerDescription"
+    [actions]="headerActions"
+    [stats]="stats"
+  ></app-page-header>
 
   <!-- SECTIONS -->
   <div class="blocks">

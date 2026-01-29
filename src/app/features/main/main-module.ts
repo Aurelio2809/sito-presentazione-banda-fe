@@ -14,8 +14,22 @@ import { AboutHistory } from './pages/about-history/about-history';
 import { AboutToday } from './pages/about-today/about-today';
 import { AboutSchool } from './pages/about-school/about-school';
 
+// Components
+import { PageHeader } from './components/page-header/page-header';
+
 @NgModule({
-  declarations: [MainLayout, Home, About, Events, Contacts, Gallery, AboutHistory, AboutToday, AboutSchool],
+  declarations: [
+    MainLayout,
+    Home,
+    About,
+    Events,
+    Contacts,
+    Gallery,
+    AboutHistory,
+    AboutToday,
+    AboutSchool,
+    PageHeader,
+  ],
   imports: [CommonModule, SharedModule, MainRoutingModule],
 })
 export class MainModule {}

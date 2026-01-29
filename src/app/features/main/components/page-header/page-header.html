@@ -1,0 +1,26 @@
+<header class="pageHeader">
+  <div class="pageHeader__inner">
+    <div class="pageHeader__tag">{{ tag }}</div>
+    <h1 class="pageHeader__title">{{ title }}</h1>
+    <p class="pageHeader__desc">{{ description }}</p>
+
+    <div class="pageHeader__actions" *ngIf="actions.length">
+      <a
+        *ngFor="let a of actions"
+        class="btn"
+        [class.btn--primary]="a.variant === 'primary'"
+        [class.btn--ghost]="a.variant === 'ghost'"
+        [routerLink]="a.routerLink"
+      >
+        {{ a.label }}
+      </a>
+    </div>
+
+    <div class="pageHeader__stats" *ngIf="stats.length">
+      <div class="stat" *ngFor="let s of stats">
+        <div class="stat__value">{{ s.value }}</div>
+        <div class="stat__label">{{ s.label }}</div>
+      </div>
+    </div>
+  </div>
+</header>
