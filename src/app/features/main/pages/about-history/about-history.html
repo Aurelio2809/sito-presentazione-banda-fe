@@ -16,7 +16,9 @@
         <app-page-toc
           title="Indice"
           [items]="tocItems"
-          hint="Clicca su un capitolo per espanderlo. L'indice resta visibile (desktop) mentre scorri."
+          [headerOffset]="100"
+          (itemClick)="onTocItemClick($event)"
+          hint="Clicca su un capitolo per espanderlo."
         ></app-page-toc>
 
         <!-- Controlli espandi/comprimi -->
@@ -87,6 +89,19 @@
               (trombe/cornette, corni, tromboni, flicorni, eufoni, tube) e percussioni (rullante, grancassa, piatti e accessori).
             </p>
 
+            <figure class="photoPlaceholder photoPlaceholder--float">
+              <div class="photoPlaceholder__img">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <figcaption class="photoPlaceholder__caption">
+                Strumenti d'epoca della banda di Pedace
+              </figcaption>
+            </figure>
+
             <p class="p">
               Oltre al servizio musicale, la banda ha una funzione educativa e sociale: disciplina condivisa, lettura musicale, tecnica
               strumentale, cooperazione e identità comunitaria.
@@ -105,6 +120,19 @@
             title="Primo Novecento"
             [open]="false"
           >
+            <figure class="photoPlaceholder photoPlaceholder--wide">
+              <div class="photoPlaceholder__img">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <figcaption class="photoPlaceholder__caption">
+                Foto di gruppo della banda nei primi anni del Novecento
+              </figcaption>
+            </figure>
+
             <p class="p">
               Le prime tracce "forti" indicano una banda già attiva nei primi anni del Novecento, con interruzione dovuta al contesto
               della Prima guerra mondiale e successiva ripresa sotto la direzione del Maestro Adamo Nachira (ricostruzioni locali).
@@ -115,6 +143,19 @@
               giovani si ritrovano nella musica come spazio di relazione e crescita. In questo periodo si collocano episodi identitari
               legati a concorsi tra bande e alla tensione politica dell'epoca.
             </p>
+
+            <figure class="photoPlaceholder photoPlaceholder--float">
+              <div class="photoPlaceholder__img">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <figcaption class="photoPlaceholder__caption">
+                Teatro Rendano di Cosenza
+              </figcaption>
+            </figure>
 
             <p class="p">
               Un episodio rimasto nella memoria collettiva riguarda una gara bandistica al Teatro Rendano di Cosenza (anni Venti),
@@ -135,6 +176,19 @@
               sociale (scuola, formazione, repertorio).
             </p>
 
+            <figure class="photoPlaceholder photoPlaceholder--float">
+              <div class="photoPlaceholder__img">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <figcaption class="photoPlaceholder__caption">
+                La banda negli anni '50 durante una processione
+              </figcaption>
+            </figure>
+
             <p class="p">
               Una fase significativa è associata alla direzione del Maestro Archimede Michienzi (con continuità per più anni secondo
               le ricostruzioni locali), prima di una nuova disgregazione legata anche ai flussi migratori e alla trasformazione sociale
@@ -154,11 +208,37 @@
               "scuola musicale" e l'organizzazione interna, con figure di riferimento che tengono insieme formazione e attività pubblica.
             </p>
 
+            <figure class="photoPlaceholder photoPlaceholder--float">
+              <div class="photoPlaceholder__img">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <figcaption class="photoPlaceholder__caption">
+                Lezione alla scuola musicale (anni '70)
+              </figcaption>
+            </figure>
+
             <p class="p">
               Negli anni Ottanta e Novanta la banda amplia il profilo concertistico (lirico e sinfonico, servizio di palco) e costruisce
               reti e collaborazioni anche con musicisti di paesi vicini. Per alcuni giovani diventa un ponte verso studi musicali
               strutturati e percorsi professionali.
             </p>
+
+            <figure class="photoPlaceholder photoPlaceholder--wide">
+              <div class="photoPlaceholder__img">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <figcaption class="photoPlaceholder__caption">
+                La banda al completo durante un concerto lirico-sinfonico (anni '90)
+              </figcaption>
+            </figure>
 
             <p class="p">
               All'inizio del nuovo millennio compaiono iniziative simboliche come gemellaggi e riconoscimenti, che testimoniano la
@@ -178,11 +258,51 @@
               nelle ricostruzioni locali, il nominativo "Banda Musicale Casali del Manco" si colloca intorno al 2019.
             </p>
 
+            <figure class="photoPlaceholder photoPlaceholder--wide">
+              <div class="photoPlaceholder__img">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <figcaption class="photoPlaceholder__caption">
+                La Banda Musicale "Città di Casali del Manco" oggi
+              </figcaption>
+            </figure>
+
             <p class="p">
               In questa fase recente convivono due forze: da un lato le difficoltà organizzative ed economiche tipiche delle associazioni
               culturali; dall'altro la presenza di giovani musicisti e la continuità della direzione artistica, che mantiene un legame
               tra tradizione, formazione e attività pubblica.
             </p>
+
+            <div class="photoGrid">
+              <figure class="photoPlaceholder">
+                <div class="photoPlaceholder__img">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <figcaption class="photoPlaceholder__caption">
+                  Giovani musicisti durante le prove
+                </figcaption>
+              </figure>
+              <figure class="photoPlaceholder">
+                <div class="photoPlaceholder__img">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <figcaption class="photoPlaceholder__caption">
+                  Processione patronale
+                </figcaption>
+              </figure>
+            </div>
           </app-history-chapter>
         </main>
 

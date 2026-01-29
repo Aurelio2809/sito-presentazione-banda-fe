@@ -83,4 +83,12 @@ export class AboutHistory {
   collapseAll(): void {
     this.chapterRefs.forEach(ch => ch.isOpen = false);
   }
+
+  onTocItemClick(id: string): void {
+    // Trova il capitolo corrispondente e lo espande
+    const chapter = this.chapterRefs.find(ch => ch.id === id);
+    if (chapter) {
+      chapter.isOpen = true;
+    }
+  }
 }

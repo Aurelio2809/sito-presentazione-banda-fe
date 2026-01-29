@@ -219,3 +219,88 @@
   line-height: 1.7;
   font-size: 0.92rem;
 }
+
+/* =========================================================
+   PHOTO PLACEHOLDER
+   ========================================================= */
+.photoPlaceholder {
+  margin: 20px 0;
+  max-width: 280px;
+}
+
+.photoPlaceholder--wide {
+  max-width: 100%;
+}
+
+/* Float: testo scorre attorno all'immagine */
+.photoPlaceholder--float {
+  float: right;
+  margin: 4px 0 16px 20px;
+  max-width: 200px;
+}
+
+@media (max-width: 600px) {
+  .photoPlaceholder--float {
+    float: none;
+    margin: 16px 0;
+    max-width: 100%;
+  }
+}
+
+.photoPlaceholder__img {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.25);
+  transition: border-color 200ms ease, background 200ms ease;
+}
+
+.photoPlaceholder--wide .photoPlaceholder__img {
+  aspect-ratio: 16 / 9;
+}
+
+.photoPlaceholder__img svg {
+  width: 48px;
+  height: 48px;
+}
+
+.photoPlaceholder:hover .photoPlaceholder__img {
+  border-color: rgba(255, 215, 0, 0.30);
+  background: rgba(255, 215, 0, 0.03);
+}
+
+.photoPlaceholder__caption {
+  margin-top: 10px;
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.50);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   PHOTO GRID (2 colonne)
+   ========================================================= */
+.photoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+@media (min-width: 540px) {
+  .photoGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.photoGrid .photoPlaceholder {
+  margin: 0;
+  max-width: none;
+}
+
+.photoGrid .photoPlaceholder__img {
+  aspect-ratio: 4 / 3;
+}
