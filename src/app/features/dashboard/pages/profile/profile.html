@@ -1,0 +1,93 @@
+<div class="profilePage">
+  <header class="pageHeader">
+    <h1 class="pageHeader__title">Area Personale</h1>
+    <p class="pageHeader__desc">Gestisci il tuo profilo e le impostazioni</p>
+  </header>
+
+  <div class="profileLayout">
+    <!-- PROFILO -->
+    <section class="profileCard">
+      <div class="profileCard__header">
+        <div class="profileCard__avatar">
+          <svg viewBox="0 0 24 24" fill="none" *ngIf="!user.avatar">
+            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="profileCard__info">
+          <h2 class="profileCard__name">{{ user.name }}</h2>
+          <p class="profileCard__role">{{ user.role }}</p>
+        </div>
+      </div>
+
+      <div class="profileCard__details">
+        <div class="detailRow">
+          <span class="detailRow__label">Email</span>
+          <span class="detailRow__value">{{ user.email }}</span>
+        </div>
+        <div class="detailRow">
+          <span class="detailRow__label">Membro dal</span>
+          <span class="detailRow__value">{{ user.joinDate }}</span>
+        </div>
+      </div>
+
+      <div class="profileCard__actions">
+        <button class="btn btn--ghost" type="button">Modifica profilo</button>
+        <button class="btn btn--ghost" type="button" (click)="changePassword()">Cambia password</button>
+      </div>
+    </section>
+
+    <!-- IMPOSTAZIONI -->
+    <section class="settingsCard">
+      <h3 class="settingsCard__title">Notifiche</h3>
+
+      <div class="settingsList">
+        <label class="settingItem">
+          <div class="settingItem__info">
+            <span class="settingItem__label">Notifiche email</span>
+            <span class="settingItem__desc">Ricevi aggiornamenti via email</span>
+          </div>
+          <input type="checkbox" class="settingItem__toggle" 
+                 [checked]="settings.emailNotifications" 
+                 (change)="settings.emailNotifications = !settings.emailNotifications">
+        </label>
+
+        <label class="settingItem">
+          <div class="settingItem__info">
+            <span class="settingItem__label">Avviso nuovi messaggi</span>
+            <span class="settingItem__desc">Notifica quando arriva un messaggio dal sito</span>
+          </div>
+          <input type="checkbox" class="settingItem__toggle" 
+                 [checked]="settings.newMessageAlert" 
+                 (change)="settings.newMessageAlert = !settings.newMessageAlert">
+        </label>
+
+        <label class="settingItem">
+          <div class="settingItem__info">
+            <span class="settingItem__label">Promemoria eventi</span>
+            <span class="settingItem__desc">Ricorda gli eventi in programma</span>
+          </div>
+          <input type="checkbox" class="settingItem__toggle" 
+                 [checked]="settings.eventReminders" 
+                 (change)="settings.eventReminders = !settings.eventReminders">
+        </label>
+      </div>
+
+      <div class="settingsCard__footer">
+        <button class="btn btn--primary" type="button" (click)="saveSettings()">Salva impostazioni</button>
+      </div>
+    </section>
+
+    <!-- SESSIONE -->
+    <section class="sessionCard">
+      <h3 class="sessionCard__title">Sessione</h3>
+      <p class="sessionCard__desc">Sei connesso come amministratore. Per uscire dalla dashboard, usa il pulsante qui sotto.</p>
+      <button class="btn btn--danger" type="button">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Esci
+      </button>
+    </section>
+  </div>
+</div>

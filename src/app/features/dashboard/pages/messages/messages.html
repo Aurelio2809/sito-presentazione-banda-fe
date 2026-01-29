@@ -1,0 +1,104 @@
+<div class="messagesMgmt">
+  <header class="pageHeader">
+    <div class="pageHeader__left">
+      <h1 class="pageHeader__title">Messaggi</h1>
+      <p class="pageHeader__desc">Messaggi ricevuti dal modulo contatti del sito</p>
+    </div>
+    <div class="pageHeader__actions" *ngIf="unreadCount > 0">
+      <button class="btn btn--ghost" type="button" (click)="markAllRead()">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Segna tutti come letti
+      </button>
+    </div>
+  </header>
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <button class="filterBtn" [class.filterBtn--active]="!filterUnread" (click)="filterUnread = false">
+      Tutti ({{ messages.length }})
+    </button>
+    <button class="filterBtn" [class.filterBtn--active]="filterUnread" (click)="filterUnread = true">
+      ✉️ Non letti ({{ unreadCount }})
+    </button>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="messagesLayout">
+    <!-- LIST -->
+    <div class="messagesList">
+      <div
+        class="messageItem"
+        [class.messageItem--unread]="!message.isRead"
+        [class.messageItem--selected]="selectedMessage?.id === message.id"
+        *ngFor="let message of filteredMessages"
+        (click)="selectMessage(message)"
+      >
+        <div class="messageItem__indicator" *ngIf="!message.isRead"></div>
+        <div class="messageItem__content">
+          <div class="messageItem__header">
+            <span class="messageItem__name">{{ message.name }}</span>
+            <span class="messageItem__date">{{ message.date }}</span>
+          </div>
+          <div class="messageItem__subject">{{ message.subject }}</div>
+          <div class="messageItem__preview">{{ message.message }}</div>
+        </div>
+        <div class="messageItem__actions">
+          <button class="messageItem__action" title="Segna come {{ message.isRead ? 'non letto' : 'letto' }}" (click)="toggleRead(message, $event)">
+            {{ message.isRead ? '○' : '●' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="emptyState" *ngIf="filteredMessages.length === 0">
+        <p>{{ filterUnread ? 'Nessun messaggio non letto' : 'Nessun messaggio' }}</p>
+      </div>
+    </div>
+
+    <!-- DETAIL -->
+    <div class="messageDetail" *ngIf="selectedMessage">
+      <div class="messageDetail__header">
+        <div class="messageDetail__info">
+          <h2 class="messageDetail__subject">{{ selectedMessage.subject }}</h2>
+          <div class="messageDetail__meta">
+            <span class="messageDetail__from">Da: <strong>{{ selectedMessage.name }}</strong></span>
+            <span class="messageDetail__email">&lt;{{ selectedMessage.email }}&gt;</span>
+          </div>
+          <div class="messageDetail__date">{{ selectedMessage.date }}</div>
+        </div>
+        <div class="messageDetail__actions">
+          <button class="actionBtn actionBtn--danger" title="Elimina" (click)="deleteMessage(selectedMessage)">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="messageDetail__close" (click)="closeMessage()">×</button>
+        </div>
+      </div>
+      <div class="messageDetail__body">
+        <p>{{ selectedMessage.message }}</p>
+      </div>
+      <div class="messageDetail__footer">
+        <a class="btn btn--primary" [href]="'mailto:' + selectedMessage.email + '?subject=Re: ' + selectedMessage.subject">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M3 10l9 6 9-6M21 10v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Rispondi via email
+        </a>
+      </div>
+    </div>
+
+    <!-- EMPTY DETAIL -->
+    <div class="messageDetail messageDetail--empty" *ngIf="!selectedMessage">
+      <div class="emptyDetail">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p>Seleziona un messaggio per leggerlo</p>
+      </div>
+    </div>
+  </div>
+</div>

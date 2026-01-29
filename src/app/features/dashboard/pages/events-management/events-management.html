@@ -1,0 +1,164 @@
+<div class="eventsMgmt">
+  <header class="pageHeader">
+    <div class="pageHeader__left">
+      <h1 class="pageHeader__title">Gestione Eventi e Annunci</h1>
+      <p class="pageHeader__desc">Crea, modifica e pubblica eventi e annunci per il sito</p>
+    </div>
+    <div class="pageHeader__actions">
+      <button class="btn btn--ghost" type="button" (click)="openCreate('announcement')">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Nuovo annuncio
+      </button>
+      <button class="btn btn--primary" type="button" (click)="openCreate('event')">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Nuovo evento
+      </button>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabsWrap">
+    <app-tab-switch
+      [tabs]="tabItems"
+      [activeTab]="activeTab"
+      (tabChange)="onTabChange($event)"
+    ></app-tab-switch>
+  </div>
+
+  <!-- TABLE -->
+  <div class="tableWrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="table__th">Titolo</th>
+          <th class="table__th" *ngIf="activeTab === 'events'">Data</th>
+          <th class="table__th table__th--hide-mobile" *ngIf="activeTab === 'events'">Luogo</th>
+          <th class="table__th table__th--center">Stato</th>
+          <th class="table__th table__th--actions">Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table__row" *ngFor="let item of currentItems">
+          <td class="table__td">
+            <div class="itemInfo">
+              <div class="itemInfo__title">{{ item.title }}</div>
+              <div class="itemInfo__desc">{{ item.description }}</div>
+            </div>
+          </td>
+          <td class="table__td" *ngIf="activeTab === 'events'">
+            <div class="dateInfo">
+              <span class="dateInfo__date">{{ item.date }}</span>
+              <span class="dateInfo__time" *ngIf="item.time">{{ item.time }}</span>
+            </div>
+          </td>
+          <td class="table__td table__td--hide-mobile" *ngIf="activeTab === 'events'">{{ item.location }}</td>
+          <td class="table__td table__td--center">
+            <button class="statusBadge" [class.statusBadge--published]="item.status === 'published'" (click)="toggleStatus(item)">
+              {{ item.status === 'published' ? 'Pubblicato' : 'Bozza' }}
+            </button>
+          </td>
+          <td class="table__td table__td--actions">
+            <div class="actionBtns">
+              <button class="actionBtn" title="Modifica" (click)="selectItem(item)">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="actionBtn actionBtn--danger" title="Elimina" (click)="deleteItem(item)">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="emptyState" *ngIf="currentItems.length === 0">
+      <p>Nessun {{ activeTab === 'events' ? 'evento' : 'annuncio' }} presente</p>
+    </div>
+  </div>
+
+  <!-- EDIT MODAL -->
+  <div class="modal" *ngIf="selectedItem" (click)="closeDetail()">
+    <div class="modal__content modal__content--wide" (click)="$event.stopPropagation()">
+      <div class="modal__header">
+        <h2 class="modal__title">Modifica {{ selectedItem.type === 'event' ? 'evento' : 'annuncio' }}</h2>
+        <button class="modal__close" (click)="closeDetail()">×</button>
+      </div>
+      <div class="modal__body">
+        <div class="formGroup">
+          <label class="formLabel">Titolo</label>
+          <input class="formInput" type="text" [(ngModel)]="selectedItem.title" placeholder="Titolo">
+        </div>
+        <div class="formGroup">
+          <label class="formLabel">Descrizione</label>
+          <textarea class="formTextarea" [(ngModel)]="selectedItem.description" placeholder="Descrizione"></textarea>
+        </div>
+        <div class="formRow" *ngIf="selectedItem.type === 'event'">
+          <div class="formGroup">
+            <label class="formLabel">Data</label>
+            <input class="formInput" type="date" [(ngModel)]="selectedItem.date">
+          </div>
+          <div class="formGroup">
+            <label class="formLabel">Ora</label>
+            <input class="formInput" type="time" [(ngModel)]="selectedItem.time">
+          </div>
+        </div>
+        <div class="formGroup" *ngIf="selectedItem.type === 'event'">
+          <label class="formLabel">Luogo</label>
+          <input class="formInput" type="text" [(ngModel)]="selectedItem.location" placeholder="Indirizzo o nome del luogo">
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" (click)="closeDetail()">Annulla</button>
+        <button class="btn btn--primary" (click)="saveItem()">Salva modifiche</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE MODAL -->
+  <div class="modal" *ngIf="showCreateModal" (click)="closeCreate()">
+    <div class="modal__content modal__content--wide" (click)="$event.stopPropagation()">
+      <div class="modal__header">
+        <h2 class="modal__title">Nuovo {{ createType === 'event' ? 'evento' : 'annuncio' }}</h2>
+        <button class="modal__close" (click)="closeCreate()">×</button>
+      </div>
+      <div class="modal__body">
+        <div class="formGroup">
+          <label class="formLabel">Titolo</label>
+          <input class="formInput" type="text" placeholder="Titolo">
+        </div>
+        <div class="formGroup">
+          <label class="formLabel">Descrizione</label>
+          <textarea class="formTextarea" placeholder="Descrizione"></textarea>
+        </div>
+        <div class="formRow" *ngIf="createType === 'event'">
+          <div class="formGroup">
+            <label class="formLabel">Data</label>
+            <input class="formInput" type="date">
+          </div>
+          <div class="formGroup">
+            <label class="formLabel">Ora</label>
+            <input class="formInput" type="time">
+          </div>
+        </div>
+        <div class="formGroup" *ngIf="createType === 'event'">
+          <label class="formLabel">Luogo</label>
+          <input class="formInput" type="text" placeholder="Indirizzo o nome del luogo">
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" (click)="closeCreate()">Annulla</button>
+        <button class="btn btn--primary">Crea {{ createType === 'event' ? 'evento' : 'annuncio' }}</button>
+      </div>
+    </div>
+  </div>
+</div>

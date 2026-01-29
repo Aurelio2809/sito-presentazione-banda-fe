@@ -1,1 +1,76 @@
-<p>overview works!</p>
+<div class="overview">
+  <header class="pageHeader">
+    <h1 class="pageHeader__title">Panoramica</h1>
+    <p class="pageHeader__desc">Riepilogo delle attività e statistiche del sito</p>
+  </header>
+
+  <!-- STATS -->
+  <section class="statsGrid">
+    <div class="statCard" *ngFor="let stat of stats">
+      <div class="statCard__icon">
+        <svg *ngIf="stat.icon === 'image'" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg *ngIf="stat.icon === 'calendar'" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <svg *ngIf="stat.icon === 'megaphone'" viewBox="0 0 24 24" fill="none">
+          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg *ngIf="stat.icon === 'mail'" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="statCard__content">
+        <div class="statCard__value">{{ stat.value }}</div>
+        <div class="statCard__label">{{ stat.label }}</div>
+        <div class="statCard__trend">{{ stat.trend }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK ACTIONS -->
+  <section class="section">
+    <h2 class="section__title">Azioni rapide</h2>
+    <div class="actionsGrid">
+      <a class="actionCard" routerLink="/dashboard/gallery">
+        <span class="actionCard__icon">📷</span>
+        <span class="actionCard__text">Carica foto</span>
+      </a>
+      <a class="actionCard" routerLink="/dashboard/events">
+        <span class="actionCard__icon">📅</span>
+        <span class="actionCard__text">Nuovo evento</span>
+      </a>
+      <a class="actionCard" routerLink="/dashboard/events">
+        <span class="actionCard__icon">📢</span>
+        <span class="actionCard__text">Nuovo annuncio</span>
+      </a>
+      <a class="actionCard" routerLink="/dashboard/messages">
+        <span class="actionCard__icon">✉️</span>
+        <span class="actionCard__text">Vedi messaggi</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- RECENT ACTIVITY -->
+  <section class="section">
+    <h2 class="section__title">Attività recenti</h2>
+    <div class="activityList">
+      <div class="activityItem" *ngFor="let activity of recentActivities">
+        <div class="activityItem__dot" [ngClass]="{
+          'activityItem__dot--photo': activity.type === 'photo',
+          'activityItem__dot--event': activity.type === 'event',
+          'activityItem__dot--message': activity.type === 'message'
+        }"></div>
+        <div class="activityItem__content">
+          <div class="activityItem__text">{{ activity.text }}</div>
+          <div class="activityItem__time">{{ activity.time }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

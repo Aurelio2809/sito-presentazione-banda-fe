@@ -1,0 +1,566 @@
+@reference "../../../../../styles.css";
+
+.galleryMgmt {
+  max-width: 1100px;
+}
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+.pageHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.pageHeader__title {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.pageHeader__desc {
+  margin-top: 4px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn--primary {
+  background: rgba(255, 215, 0, 0.90);
+  color: rgba(10, 10, 12, 0.95);
+  border: none;
+}
+
+.btn--primary:hover {
+  background: rgba(255, 215, 0, 1);
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.80);
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn--success {
+  background: rgba(34, 197, 94, 0.85);
+  color: rgba(255, 255, 255, 0.98);
+  border: none;
+}
+
+.btn--success:hover {
+  background: rgba(34, 197, 94, 1);
+  transform: translateY(-1px);
+}
+
+.btn--sm {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.btn--sm svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filters__left {
+  display: flex;
+  gap: 8px;
+}
+
+.filters__right {
+  display: flex;
+  gap: 8px;
+}
+
+
+/* =========================================================
+   ORDER INFO
+   ========================================================= */
+.orderInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: rgba(255, 215, 0, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.orderInfo svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  color: rgba(255, 215, 0, 0.70);
+}
+
+.orderInfo span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+.tableWrap {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table__th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.50);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  white-space: nowrap;
+}
+
+.table__th--preview {
+  width: 70px;
+}
+
+.table__th--center {
+  text-align: center;
+}
+
+.table__th--actions {
+  width: 100px;
+  text-align: right;
+}
+
+.table__th--hide-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .table__th--hide-mobile {
+    display: table-cell;
+  }
+}
+
+.table__row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.table__row:last-child {
+  border-bottom: none;
+}
+
+.table__row:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.table__td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.80);
+  vertical-align: middle;
+}
+
+.table__td--preview {
+  width: 70px;
+}
+
+.table__td--center {
+  text-align: center;
+}
+
+.table__td--actions {
+  text-align: right;
+}
+
+.table__td--hide-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .table__td--hide-mobile {
+    display: table-cell;
+  }
+}
+
+/* =========================================================
+   PHOTO THUMB
+   ========================================================= */
+.photoThumb {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.30);
+}
+
+.photoThumb svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* =========================================================
+   PHOTO INFO
+   ========================================================= */
+.photoInfo__title {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.photoInfo__desc {
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.50);
+}
+
+/* =========================================================
+   STAR BUTTON
+   ========================================================= */
+.starBtn {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.30);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 150ms ease, transform 150ms ease;
+}
+
+.starBtn:hover {
+  color: rgba(255, 215, 0, 0.70);
+  transform: scale(1.1);
+}
+
+.starBtn--active {
+  color: rgba(255, 215, 0, 0.90);
+}
+
+/* =========================================================
+   ORDER CONTROL
+   ========================================================= */
+.orderControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.orderControl__arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.orderArrow {
+  width: 26px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease, transform 100ms ease;
+}
+
+.orderArrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+.orderArrow:hover:not(:disabled) {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.30);
+  color: rgba(255, 215, 0, 0.95);
+}
+
+.orderArrow--up:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.orderArrow--down:hover:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.orderArrow:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.orderSelect {
+  width: 48px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 215, 0, 0.90);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 150ms ease, background 150ms ease;
+  appearance: none;
+}
+
+.orderSelect:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 215, 0, 0.25);
+}
+
+.orderSelect:focus {
+  border-color: rgba(255, 215, 0, 0.40);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.orderSelect option {
+  background: rgba(22, 22, 28, 0.98);
+  color: rgba(255, 255, 255, 0.90);
+}
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+.actionBtns {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.actionBtn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.60);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.actionBtn:hover {
+  background: rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.actionBtn--danger:hover {
+  background: rgba(220, 38, 38, 0.15);
+  border-color: rgba(220, 38, 38, 0.30);
+  color: rgba(248, 113, 113, 0.95);
+}
+
+.actionBtn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.70);
+  backdrop-filter: blur(4px);
+}
+
+.modal__content {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  background: rgba(22, 22, 28, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.50);
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal__title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.modal__close {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: rgba(255, 255, 255, 0.60);
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.modal__close:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.modal__body {
+  padding: 20px;
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.formGroup:last-child {
+  margin-bottom: 0;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.60);
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.90);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  border-color: rgba(255, 215, 0, 0.40);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.formTextarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* =========================================================
+   UPLOAD ZONE
+   ========================================================= */
+.uploadZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 32px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.50);
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.uploadZone:hover {
+  border-color: rgba(255, 215, 0, 0.30);
+  background: rgba(255, 215, 0, 0.03);
+}
+
+.uploadZone svg {
+  width: 40px;
+  height: 40px;
+  color: rgba(255, 215, 0, 0.60);
+}
+
+.uploadZone p {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.70);
+}
+
+.uploadZone span {
+  font-size: 12px;
+}

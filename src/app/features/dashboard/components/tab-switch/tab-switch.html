@@ -1,0 +1,11 @@
+<div class="tabSwitch">
+  <button
+    *ngFor="let tab of tabs"
+    class="tabSwitch__tab"
+    [class.tabSwitch__tab--active]="activeTab === tab.id"
+    (click)="selectTab(tab.id)"
+    type="button"
+  >
+    {{ tab.label }}<span class="tabSwitch__count" *ngIf="tab.count !== undefined"> ({{ tab.count }})</span>
+  </button>
+</div>
