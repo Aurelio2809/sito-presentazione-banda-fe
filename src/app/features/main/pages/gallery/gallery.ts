@@ -67,7 +67,9 @@ export class Gallery implements OnInit {
     if (photo.src?.startsWith('http')) {
       return photo.src;
     }
-    return `${environment.apiUrl}/gallery/photos/${photo.id}`;
+    // photo.src è /api/gallery/photos/filename.jpg - rimuovo /api dall'apiUrl
+    const baseUrl = environment.apiUrl.replace('/api', '');
+    return `${baseUrl}${photo.src}`;
   }
 
   get pagedItems(): GalleryPhotoResponse[] {

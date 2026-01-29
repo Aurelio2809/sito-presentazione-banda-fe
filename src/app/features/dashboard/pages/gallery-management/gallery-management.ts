@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TabItem } from '../../components/tab-switch/tab-switch';
 import { GalleryService } from '../../../../core/services';
 import { GalleryPhotoResponse, GalleryPhotoRequest } from '../../../../core/models';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-gallery-management',
@@ -261,5 +262,14 @@ export class GalleryManagement implements OnInit {
     });
     this.orderChanged = false;
     this.savedOrderSnapshot = [];
+  }
+
+  getPhotoUrl(photo: GalleryPhotoResponse): string {
+    if (photo.src?.startsWith('http')) {
+      return photo.src;
+    }
+    // photo.src è /api/gallery/photos/filename.jpg
+    const baseUrl = environment.apiUrl.replace('/api', '');
+    return `${baseUrl}${photo.src}`;
   }
 }

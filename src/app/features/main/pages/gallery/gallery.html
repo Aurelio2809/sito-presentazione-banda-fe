@@ -18,8 +18,9 @@
     <p>{{ error }}</p>
   </div>
 
-  <!-- Mosaic (foto preferite) -->
-  <div class="mosaic" *ngIf="!loading && heroMain && favorites.length >= 5">
+  <!-- Mosaic (foto preferite) - mostra se ci sono almeno 1 preferita -->
+  <div class="mosaic" *ngIf="!loading && heroMain && favorites.length >= 1" 
+       [class.mosaic--compact]="favorites.length < 5">
     <button class="tile tile--hero" type="button" (click)="open(heroMain)">
       <img class="tile__img" [src]="getPhotoUrl(heroMain)" [alt]="heroMain.title" />
       <div class="tile__overlay">
