@@ -14,6 +14,7 @@ export class Gallery implements OnInit {
   items: GalleryPhotoResponse[] = [];
   heroMain: GalleryPhotoResponse | null = null;
   loading = true;
+  loadingFavorites = true;
   error: string | null = null;
 
   // Paginazione
@@ -34,6 +35,7 @@ export class Gallery implements OnInit {
   }
 
   loadFavorites(): void {
+    this.loadingFavorites = true;
     this.galleryService.getPublicFavorites().subscribe({
       next: (photos) => {
         this.favorites = photos;
@@ -41,8 +43,12 @@ export class Gallery implements OnInit {
         if (photos.length > 0) {
           this.heroMain = photos[0];
         }
+        this.loadingFavorites = false;
       },
-      error: (err) => console.error('Errore caricamento preferite', err)
+      error: (err) => {
+        console.error('Errore caricamento preferite', err);
+        this.loadingFavorites = false;
+      }
     });
   }
 
@@ -70,6 +76,16 @@ export class Gallery implements OnInit {
     // photo.src è /api/gallery/photos/filename.jpg - rimuovo /api dall'apiUrl
     const baseUrl = environment.apiUrl.replace('/api', '');
     return `${baseUrl}${photo.src}`;
+  }
+
+  getThumbnailUrl(photo: GalleryPhotoResponse): string {
+    // Usa la thumbnail se disponibile, altrimenti usa l'immagine originale
+    const src = photo.thumbnailSrc || photo.src;
+    if (src?.startsWith('http')) {
+      return src;
+    }
+    const baseUrl = environment.apiUrl.replace('/api', '');
+    return `${baseUrl}${src}`;
   }
 
   get pagedItems(): GalleryPhotoResponse[] {

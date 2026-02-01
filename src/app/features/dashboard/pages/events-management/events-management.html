@@ -21,8 +21,16 @@
     </div>
   </header>
 
+  <!-- LOADING STATE -->
+  <app-loading-spinner *ngIf="loading" message="Caricamento dati..."></app-loading-spinner>
+
+  <!-- ERROR STATE -->
+  <div class="errorState" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
   <!-- TABS -->
-  <div class="tabsWrap">
+  <div class="tabsWrap" *ngIf="!loading">
     <app-tab-switch
       [tabs]="tabItems"
       [activeTab]="activeTab"
@@ -31,7 +39,7 @@
   </div>
 
   <!-- TABLE -->
-  <div class="tableWrap">
+  <div class="tableWrap" *ngIf="!loading">
     <table class="table">
       <thead>
         <tr>

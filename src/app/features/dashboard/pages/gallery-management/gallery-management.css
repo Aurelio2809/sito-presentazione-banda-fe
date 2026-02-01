@@ -571,3 +571,93 @@
 .uploadZone span {
   font-size: 12px;
 }
+
+.uploadZone__selected {
+  color: rgba(255, 215, 0, 0.90);
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.emptyState__icon {
+  width: 48px;
+  height: 48px;
+  color: rgba(255, 255, 255, 0.20);
+}
+
+.emptyState__text {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.emptyState__hint {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.40);
+}
+
+/* =========================================================
+   ERROR STATE
+   ========================================================= */
+.errorState {
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.10);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: rgba(248, 113, 113, 0.90);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   BUTTON SPINNER
+   ========================================================= */
+.btn__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: btnSpin 0.6s linear infinite;
+}
+
+@keyframes btnSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   CHECKBOX
+   ========================================================= */
+.formGroup--checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+}
+
+.formGroup--checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: rgba(255, 215, 0, 0.90);
+}

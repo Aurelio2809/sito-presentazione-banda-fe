@@ -15,8 +15,16 @@
     </div>
   </header>
 
+  <!-- LOADING STATE -->
+  <app-loading-spinner *ngIf="loading" message="Caricamento messaggi..."></app-loading-spinner>
+
+  <!-- ERROR STATE -->
+  <div class="errorState" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
   <!-- FILTERS -->
-  <div class="filters">
+  <div class="filters" *ngIf="!loading">
     <button class="filterBtn" [class.filterBtn--active]="!filterUnread" (click)="filterUnread = false">
       Tutti ({{ messages.length }})
     </button>
@@ -26,7 +34,7 @@
   </div>
 
   <!-- CONTENT -->
-  <div class="messagesLayout">
+  <div class="messagesLayout" *ngIf="!loading">
     <!-- LIST -->
     <div class="messagesList">
       <div

@@ -6,9 +6,7 @@
   ></app-page-header>
 
   <!-- Loading state -->
-  <div class="events__loading" *ngIf="loading">
-    <p>Caricamento eventi...</p>
-  </div>
+  <app-loading-spinner *ngIf="loading" message="Caricamento eventi..."></app-loading-spinner>
 
   <!-- Error state -->
   <div class="events__error" *ngIf="error">

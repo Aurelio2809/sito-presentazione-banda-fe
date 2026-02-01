@@ -35,6 +35,7 @@ export interface GalleryPhotoRequest {
 export interface GalleryPhotoResponse {
   id: number;
   src: string;
+  thumbnailSrc?: string;
   title: string;
   description?: string;
   location?: string;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { TabItem } from '../../components/tab-switch/tab-switch';
 import { GalleryService } from '../../../../core/services';
 import { GalleryPhotoResponse, GalleryPhotoRequest } from '../../../../core/models';
@@ -21,9 +22,18 @@ export class GalleryManagement implements OnInit {
   orderChanged = false;
   savedOrderSnapshot: { id: number; displayOrder?: number }[] = [];
 
+  // Loading states for operations
+  uploading = false;
+  saving = false;
+  deleting = false;
+  savingOrder = false;
+
   // Upload form
   uploadFile: File | null = null;
   uploadMetadata: Partial<GalleryPhotoRequest> = {};
+
+  // Max favorites limit
+  readonly MAX_FAVORITES = 7;
 
   constructor(private galleryService: GalleryService) {}
 
@@ -84,6 +94,12 @@ export class GalleryManagement implements OnInit {
   }
 
   toggleFavorite(photo: GalleryPhotoResponse): void {
+    // Verifica limite 7 preferite
+    if (!photo.favorite && this.favoritePhotos.length >= this.MAX_FAVORITES) {
+      alert(`Massimo ${this.MAX_FAVORITES} foto preferite consentite`);
+      return;
+    }
+
     this.galleryService.toggleFavorite(photo.id).subscribe({
       next: (updated) => {
         const index = this.photos.findIndex(p => p.id === photo.id);
@@ -92,7 +108,8 @@ export class GalleryManagement implements OnInit {
         }
       },
       error: (err) => {
-        alert('Errore nel toggle preferito');
+        const errorMsg = err.error?.message || 'Errore nel toggle preferito';
+        alert(errorMsg);
         console.error(err);
       }
     });
@@ -100,16 +117,19 @@ export class GalleryManagement implements OnInit {
 
   deletePhoto(photo: GalleryPhotoResponse): void {
     if (confirm(`Eliminare la foto "${photo.title}"?`)) {
+      this.deleting = true;
       this.galleryService.delete(photo.id).subscribe({
         next: () => {
           this.photos = this.photos.filter(p => p.id !== photo.id);
           if (this.selectedPhoto?.id === photo.id) {
             this.selectedPhoto = null;
           }
+          this.deleting = false;
         },
         error: (err) => {
           alert('Errore nell\'eliminazione della foto');
           console.error(err);
+          this.deleting = false;
         }
       });
     }
@@ -118,6 +138,7 @@ export class GalleryManagement implements OnInit {
   savePhoto(): void {
     if (!this.selectedPhoto) return;
 
+    this.saving = true;
     const request: GalleryPhotoRequest = {
       title: this.selectedPhoto.title,
       description: this.selectedPhoto.description,
@@ -134,10 +155,12 @@ export class GalleryManagement implements OnInit {
           this.photos[index] = updated;
         }
         this.selectedPhoto = null;
+        this.saving = false;
       },
       error: (err) => {
         alert('Errore nel salvataggio');
         console.error(err);
+        this.saving = false;
       }
     });
   }
@@ -167,6 +190,13 @@ export class GalleryManagement implements OnInit {
       return;
     }
 
+    // Verifica limite preferite se si sta caricando come preferita
+    if (this.uploadMetadata.favorite && this.favoritePhotos.length >= this.MAX_FAVORITES) {
+      alert(`Massimo ${this.MAX_FAVORITES} foto preferite consentite`);
+      return;
+    }
+
+    this.uploading = true;
     const metadata: GalleryPhotoRequest = {
       title: this.uploadMetadata.title || 'Senza titolo',
       description: this.uploadMetadata.description,
@@ -178,11 +208,14 @@ export class GalleryManagement implements OnInit {
     this.galleryService.upload(this.uploadFile, metadata).subscribe({
       next: (created) => {
         this.photos = [created, ...this.photos];
+        this.uploading = false;
         this.closeUpload();
       },
       error: (err) => {
-        alert('Errore nell\'upload della foto');
+        const errorMsg = err.error?.message || 'Errore nell\'upload della foto';
+        alert(errorMsg);
         console.error(err);
+        this.uploading = false;
       }
     });
   }
@@ -234,23 +267,24 @@ export class GalleryManagement implements OnInit {
     this.orderChanged = true;
   }
 
-  saveOrder(): void {
-    // Salva ogni ordine modificato
-    const updates = this.favoritePhotos.map(p => 
-      this.galleryService.updateOrder(p.id, p.displayOrder || 0)
-    );
+  async saveOrder(): Promise<void> {
+    this.savingOrder = true;
+    
+    try {
+      // Salva ogni ordine modificato usando firstValueFrom
+      const updates = this.favoritePhotos.map(p => 
+        firstValueFrom(this.galleryService.updateOrder(p.id, p.displayOrder || 0))
+      );
 
-    // Esegui tutte le chiamate
-    Promise.all(updates.map(u => u.toPromise()))
-      .then(() => {
-        this.orderChanged = false;
-        this.savedOrderSnapshot = [];
-        alert('Ordine salvato con successo!');
-      })
-      .catch(err => {
-        alert('Errore nel salvataggio dell\'ordine');
-        console.error(err);
-      });
+      await Promise.all(updates);
+      this.orderChanged = false;
+      this.savedOrderSnapshot = [];
+    } catch (err) {
+      alert('Errore nel salvataggio dell\'ordine');
+      console.error(err);
+    } finally {
+      this.savingOrder = false;
+    }
   }
 
   resetOrder(): void {
@@ -271,5 +305,15 @@ export class GalleryManagement implements OnInit {
     // photo.src è /api/gallery/photos/filename.jpg
     const baseUrl = environment.apiUrl.replace('/api', '');
     return `${baseUrl}${photo.src}`;
+  }
+
+  getThumbnailUrl(photo: GalleryPhotoResponse): string {
+    // Usa la thumbnail se disponibile, altrimenti usa l'immagine originale
+    const src = photo.thumbnailSrc || photo.src;
+    if (src?.startsWith('http')) {
+      return src;
+    }
+    const baseUrl = environment.apiUrl.replace('/api', '');
+    return `${baseUrl}${src}`;
   }
 }

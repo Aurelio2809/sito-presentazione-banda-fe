@@ -10,9 +10,10 @@ import { PageToc } from './components/page-toc/page-toc';
 import { HistoryChapter } from './components/history-chapter/history-chapter';
 import { SourcesBox } from './components/sources-box/sources-box';
 import { TransparentCard } from './components/transparent-card/transparent-card';
+import { LoadingSpinner } from './components/loading-spinner/loading-spinner';
 
 @NgModule({
-  declarations: [UiButton, UiInput, UiSimplePageNavigator, PageToc, HistoryChapter, SourcesBox, TransparentCard],
+  declarations: [UiButton, UiInput, UiSimplePageNavigator, PageToc, HistoryChapter, SourcesBox, TransparentCard, LoadingSpinner],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   exports: [
     CommonModule,
@@ -25,7 +26,8 @@ import { TransparentCard } from './components/transparent-card/transparent-card'
     PageToc,
     HistoryChapter,
     SourcesBox,
-    TransparentCard
+    TransparentCard,
+    LoadingSpinner
   ],
 })
 export class SharedModule {}
