@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { GalleryService } from '../../../../core/services';
 import { GalleryPhotoResponse } from '../../../../core/models';
 import { environment } from '../../../../../environments/environment';
@@ -14,7 +15,6 @@ export class Gallery implements OnInit {
   items: GalleryPhotoResponse[] = [];
   heroMain: GalleryPhotoResponse | null = null;
   loading = true;
-  loadingFavorites = true;
   error: string | null = null;
 
   // Paginazione
@@ -27,44 +27,78 @@ export class Gallery implements OnInit {
   viewerOpen = false;
   selected: GalleryPhotoResponse | null = null;
 
-  constructor(private galleryService: GalleryService) {}
+  constructor(
+    private galleryService: GalleryService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.loadFavorites();
-    this.loadPhotos();
+    this.loadData();
   }
 
-  loadFavorites(): void {
-    this.loadingFavorites = true;
-    this.galleryService.getPublicFavorites().subscribe({
-      next: (photos) => {
-        this.favorites = photos;
-        // La prima foto preferita diventa hero
-        if (photos.length > 0) {
-          this.heroMain = photos[0];
+  loadData(): void {
+    const startTime = performance.now();
+    console.log('[Gallery] loadData() START - loading =', this.loading);
+    this.loading = true;
+    this.error = null;
+
+    forkJoin({
+      favorites: this.galleryService.getPublicFavorites(),
+      photos: this.galleryService.getPublicPhotos(this.page, this.pageSize)
+    }).subscribe({
+      next: ({ favorites, photos }) => {
+        const responseTime = performance.now();
+        console.log('[Gallery] forkJoin RESPONSE ricevuta dopo', (responseTime - startTime).toFixed(2), 'ms');
+        console.log('[Gallery] favorites:', favorites.length, 'items');
+        console.log('[Gallery] photos:', photos.content.length, 'items');
+        
+        this.favorites = favorites;
+        if (favorites.length > 0) {
+          this.heroMain = favorites[0];
         }
-        this.loadingFavorites = false;
+        this.items = photos.content;
+        this.totalElements = photos.totalElements;
+        this.totalPages = photos.totalPages;
+        
+        console.log('[Gallery] Dati assegnati, imposto loading = false');
+        this.loading = false;
+        this.cdr.detectChanges(); // Forza aggiornamento UI in zoneless mode
+        
+        const endTime = performance.now();
+        console.log('[Gallery] loadData() COMPLETE - tempo totale:', (endTime - startTime).toFixed(2), 'ms');
       },
       error: (err) => {
-        console.error('Errore caricamento preferite', err);
-        this.loadingFavorites = false;
+        this.error = 'Errore nel caricamento della galleria';
+        this.loading = false;
+        this.cdr.detectChanges();
+        console.error('[Gallery] ERRORE:', err);
       }
     });
   }
 
   loadPhotos(): void {
+    const startTime = performance.now();
+    console.log('[Gallery] loadPhotos() START - page:', this.page);
     this.loading = true;
+    
     this.galleryService.getPublicPhotos(this.page, this.pageSize).subscribe({
       next: (pageData) => {
+        const responseTime = performance.now();
+        console.log('[Gallery] loadPhotos RESPONSE dopo', (responseTime - startTime).toFixed(2), 'ms');
+        
         this.items = pageData.content;
         this.totalElements = pageData.totalElements;
         this.totalPages = pageData.totalPages;
         this.loading = false;
+        this.cdr.detectChanges(); // Forza aggiornamento UI in zoneless mode
+        
+        console.log('[Gallery] loadPhotos() COMPLETE - tempo totale:', (performance.now() - startTime).toFixed(2), 'ms');
       },
       error: (err) => {
         this.error = 'Errore nel caricamento della galleria';
         this.loading = false;
-        console.error(err);
+        this.cdr.detectChanges();
+        console.error('[Gallery] loadPhotos ERRORE:', err);
       }
     });
   }

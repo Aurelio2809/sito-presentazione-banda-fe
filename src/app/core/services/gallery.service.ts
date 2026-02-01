@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ApiService } from './api.service';
 import { GalleryPhotoRequest, GalleryPhotoResponse, Page } from '../models';
 
@@ -16,22 +17,43 @@ export class GalleryService extends ApiService {
   // ==================== PUBBLICI ====================
 
   getPublicPhotos(page = 0, size = 12): Observable<Page<GalleryPhotoResponse>> {
+    const startTime = performance.now();
+    console.log('[GalleryService] getPublicPhotos() CHIAMATA HTTP START');
     const params = this.buildParams({ page, size });
-    return this.http.get<Page<GalleryPhotoResponse>>(`${this.baseUrl}/gallery/public`, { params });
+    return this.http.get<Page<GalleryPhotoResponse>>(`${this.baseUrl}/gallery/public`, { params }).pipe(
+      tap({
+        next: (data) => console.log('[GalleryService] getPublicPhotos() HTTP RESPONSE dopo', (performance.now() - startTime).toFixed(2), 'ms -', data.content.length, 'items'),
+        error: (err) => console.error('[GalleryService] getPublicPhotos() HTTP ERROR dopo', (performance.now() - startTime).toFixed(2), 'ms')
+      })
+    );
   }
 
   getPublicFavorites(): Observable<GalleryPhotoResponse[]> {
-    return this.http.get<GalleryPhotoResponse[]>(`${this.baseUrl}/gallery/public/favorites`);
+    const startTime = performance.now();
+    console.log('[GalleryService] getPublicFavorites() CHIAMATA HTTP START');
+    return this.http.get<GalleryPhotoResponse[]>(`${this.baseUrl}/gallery/public/favorites`).pipe(
+      tap({
+        next: (data) => console.log('[GalleryService] getPublicFavorites() HTTP RESPONSE dopo', (performance.now() - startTime).toFixed(2), 'ms -', data.length, 'items'),
+        error: (err) => console.error('[GalleryService] getPublicFavorites() HTTP ERROR dopo', (performance.now() - startTime).toFixed(2), 'ms')
+      })
+    );
   }
 
   // ==================== ADMIN ====================
 
   getAll(page = 0, size = 20): Observable<Page<GalleryPhotoResponse>> {
+    const startTime = performance.now();
+    console.log('[GalleryService] getAll() CHIAMATA HTTP START');
     const params = this.buildParams({ page, size });
     return this.http.get<Page<GalleryPhotoResponse>>(`${this.baseUrl}/gallery`, {
       params,
       withCredentials: true
-    });
+    }).pipe(
+      tap({
+        next: (data) => console.log('[GalleryService] getAll() HTTP RESPONSE dopo', (performance.now() - startTime).toFixed(2), 'ms -', data.content.length, 'items'),
+        error: (err) => console.error('[GalleryService] getAll() HTTP ERROR dopo', (performance.now() - startTime).toFixed(2), 'ms')
+      })
+    );
   }
 
   getById(id: number): Observable<GalleryPhotoResponse> {
@@ -57,9 +79,16 @@ export class GalleryService extends ApiService {
   }
 
   update(id: number, request: GalleryPhotoRequest): Observable<GalleryPhotoResponse> {
+    const startTime = performance.now();
+    console.log('[GalleryService] update() CHIAMATA HTTP PUT START - id:', id);
     return this.http.put<GalleryPhotoResponse>(`${this.baseUrl}/gallery/${id}`, request, {
       withCredentials: true
-    });
+    }).pipe(
+      tap({
+        next: (data) => console.log('[GalleryService] update() HTTP PUT RESPONSE dopo', (performance.now() - startTime).toFixed(2), 'ms'),
+        error: (err) => console.error('[GalleryService] update() HTTP PUT ERROR dopo', (performance.now() - startTime).toFixed(2), 'ms')
+      })
+    );
   }
 
   toggleFavorite(id: number): Observable<GalleryPhotoResponse> {

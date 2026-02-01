@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { EventService } from '../../../../core/services';
 import { EventResponse } from '../../../../core/models';
 
@@ -24,7 +25,10 @@ export class Events implements OnInit {
   openEventId: number | null = null;
   openAnnouncementId: number | null = null;
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -32,32 +36,24 @@ export class Events implements OnInit {
 
   loadData(): void {
     this.loading = true;
-    
-    // Carica eventi futuri
-    this.eventService.getUpcoming().subscribe({
-      next: (events) => {
-        this.upcomingEvents = events;
-      },
-      error: (err) => console.error('Errore eventi futuri', err)
-    });
+    this.error = null;
 
-    // Carica eventi passati
-    this.eventService.getPast().subscribe({
-      next: (events) => {
-        this.pastEvents = events;
-      },
-      error: (err) => console.error('Errore eventi passati', err)
-    });
-
-    // Carica annunci
-    this.eventService.getPublicAll('ANNOUNCEMENT').subscribe({
-      next: (page) => {
-        this.announcements = page.content;
+    forkJoin({
+      upcoming: this.eventService.getUpcoming(),
+      past: this.eventService.getPast(),
+      announcements: this.eventService.getPublicAll('ANNOUNCEMENT')
+    }).subscribe({
+      next: ({ upcoming, past, announcements }) => {
+        this.upcomingEvents = upcoming;
+        this.pastEvents = past;
+        this.announcements = announcements.content;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = 'Errore nel caricamento';
         this.loading = false;
+        this.cdr.detectChanges();
         console.error(err);
       }
     });

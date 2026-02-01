@@ -17,7 +17,7 @@
   </div>
 
   <!-- Mosaic (foto preferite) - mostra se ci sono almeno 1 preferita -->
-  <div class="mosaic" *ngIf="!loading && !loadingFavorites && heroMain && favorites.length >= 1" 
+  <div class="mosaic" *ngIf="!loading && heroMain && favorites.length >= 1" 
        [ngClass]="'mosaic--' + favorites.length">
     <button class="tile tile--hero" type="button" (click)="open(heroMain)">
       <img class="tile__img" [src]="getThumbnailUrl(heroMain)" [alt]="heroMain.title" loading="lazy" />

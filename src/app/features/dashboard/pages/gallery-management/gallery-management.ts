@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { TabItem } from '../../components/tab-switch/tab-switch';
 import { GalleryService } from '../../../../core/services';
@@ -35,25 +35,35 @@ export class GalleryManagement implements OnInit {
   // Max favorites limit
   readonly MAX_FAVORITES = 7;
 
-  constructor(private galleryService: GalleryService) {}
+  constructor(
+    private galleryService: GalleryService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadPhotos();
   }
 
   loadPhotos(): void {
+    const startTime = performance.now();
+    console.log('[GalleryMgmt] loadPhotos() START');
     this.loading = true;
     this.error = null;
 
     this.galleryService.getAll(0, 100).subscribe({
       next: (page) => {
+        const responseTime = performance.now();
+        console.log('[GalleryMgmt] loadPhotos() RESPONSE dopo', (responseTime - startTime).toFixed(2), 'ms -', page.content.length, 'items');
         this.photos = page.content;
         this.loading = false;
+        this.cdr.detectChanges();
+        console.log('[GalleryMgmt] loadPhotos() COMPLETE - tempo totale:', (performance.now() - startTime).toFixed(2), 'ms');
       },
       error: (err) => {
         this.error = 'Errore nel caricamento delle foto';
         this.loading = false;
-        console.error(err);
+        this.cdr.detectChanges();
+        console.error('[GalleryMgmt] loadPhotos() ERROR:', err);
       }
     });
   }
@@ -106,6 +116,7 @@ export class GalleryManagement implements OnInit {
         if (index >= 0) {
           this.photos[index] = updated;
         }
+        this.cdr.detectChanges();
       },
       error: (err) => {
         const errorMsg = err.error?.message || 'Errore nel toggle preferito';
@@ -125,11 +136,13 @@ export class GalleryManagement implements OnInit {
             this.selectedPhoto = null;
           }
           this.deleting = false;
+          this.cdr.detectChanges();
         },
         error: (err) => {
           alert('Errore nell\'eliminazione della foto');
           console.error(err);
           this.deleting = false;
+          this.cdr.detectChanges();
         }
       });
     }
@@ -138,6 +151,8 @@ export class GalleryManagement implements OnInit {
   savePhoto(): void {
     if (!this.selectedPhoto) return;
 
+    const startTime = performance.now();
+    console.log('[GalleryMgmt] savePhoto() START - saving =', this.saving);
     this.saving = true;
     const request: GalleryPhotoRequest = {
       title: this.selectedPhoto.title,
@@ -150,17 +165,23 @@ export class GalleryManagement implements OnInit {
 
     this.galleryService.update(this.selectedPhoto.id, request).subscribe({
       next: (updated) => {
+        const responseTime = performance.now();
+        console.log('[GalleryMgmt] savePhoto() RESPONSE dopo', (responseTime - startTime).toFixed(2), 'ms');
         const index = this.photos.findIndex(p => p.id === updated.id);
         if (index >= 0) {
           this.photos[index] = updated;
         }
         this.selectedPhoto = null;
+        console.log('[GalleryMgmt] savePhoto() imposto saving = false');
         this.saving = false;
+        this.cdr.detectChanges();
+        console.log('[GalleryMgmt] savePhoto() COMPLETE - tempo totale:', (performance.now() - startTime).toFixed(2), 'ms');
       },
       error: (err) => {
         alert('Errore nel salvataggio');
-        console.error(err);
+        console.error('[GalleryMgmt] savePhoto() ERROR:', err);
         this.saving = false;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -210,12 +231,14 @@ export class GalleryManagement implements OnInit {
         this.photos = [created, ...this.photos];
         this.uploading = false;
         this.closeUpload();
+        this.cdr.detectChanges();
       },
       error: (err) => {
         const errorMsg = err.error?.message || 'Errore nell\'upload della foto';
         alert(errorMsg);
         console.error(err);
         this.uploading = false;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -284,6 +307,7 @@ export class GalleryManagement implements OnInit {
       console.error(err);
     } finally {
       this.savingOrder = false;
+      this.cdr.detectChanges();
     }
   }
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { TabItem } from '../../components/tab-switch/tab-switch';
 import { EventService } from '../../../../core/services';
 import { EventResponse, EventRequest, EventType, EventStatus } from '../../../../core/models';
@@ -21,7 +22,10 @@ export class EventsManagement implements OnInit {
   createType: 'event' | 'announcement' = 'event';
   newItem: Partial<EventRequest> = {};
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -31,23 +35,20 @@ export class EventsManagement implements OnInit {
     this.loading = true;
     this.error = null;
 
-    // Carica eventi
-    this.eventService.getAll(0, 100, 'EVENT').subscribe({
-      next: (page) => {
-        this.events = page.content;
-      },
-      error: (err) => console.error('Errore caricamento eventi', err)
-    });
-
-    // Carica annunci
-    this.eventService.getAll(0, 100, 'ANNOUNCEMENT').subscribe({
-      next: (page) => {
-        this.announcements = page.content;
+    forkJoin({
+      events: this.eventService.getAll(0, 100, 'EVENT'),
+      announcements: this.eventService.getAll(0, 100, 'ANNOUNCEMENT')
+    }).subscribe({
+      next: ({ events, announcements }) => {
+        this.events = events.content;
+        this.announcements = announcements.content;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = 'Errore nel caricamento';
         this.loading = false;
+        this.cdr.detectChanges();
         console.error(err);
       }
     });
@@ -89,6 +90,7 @@ export class EventsManagement implements OnInit {
           if (this.selectedItem?.id === item.id) {
             this.selectedItem = null;
           }
+          this.cdr.detectChanges();
         },
         error: (err) => {
           alert('Errore nell\'eliminazione');
@@ -110,6 +112,7 @@ export class EventsManagement implements OnInit {
         if (index >= 0) {
           list[index] = updated;
         }
+        this.cdr.detectChanges();
       },
       error: (err) => {
         alert('Errore nel cambio stato');
@@ -145,6 +148,7 @@ export class EventsManagement implements OnInit {
           list[index] = updated;
         }
         this.selectedItem = null;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         alert('Errore nel salvataggio');
@@ -187,6 +191,7 @@ export class EventsManagement implements OnInit {
           this.announcements = [created, ...this.announcements];
         }
         this.closeCreate();
+        this.cdr.detectChanges();
       },
       error: (err) => {
         alert('Errore nella creazione');
