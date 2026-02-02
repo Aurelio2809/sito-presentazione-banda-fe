@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { finalize, timeout } from 'rxjs/operators';
 import { TabItem } from '../../components/tab-switch/tab-switch';
 import { GalleryService } from '../../../../core/services';
 import { GalleryPhotoResponse, GalleryPhotoRequest } from '../../../../core/models';
@@ -182,7 +183,13 @@ export class GalleryManagement implements OnInit {
       displayOrder: this.selectedPhoto.displayOrder ?? undefined
     };
 
-    this.galleryService.update(this.selectedPhoto.id, request).subscribe({
+    this.galleryService.update(this.selectedPhoto.id, request).pipe(
+      timeout(30000),
+      finalize(() => {
+        this.saving = false;
+        this.cdr.detectChanges();
+      })
+    ).subscribe({
       next: (updated) => {
         const responseTime = performance.now();
         console.log('[GalleryMgmt] savePhoto() RESPONSE dopo', (responseTime - startTime).toFixed(2), 'ms');
@@ -191,21 +198,19 @@ export class GalleryManagement implements OnInit {
           this.photos[index] = updated;
         }
         this.selectedPhoto = null;
-        console.log('[GalleryMgmt] savePhoto() imposto saving = false');
-        this.saving = false;
-        this.cdr.detectChanges();
         console.log('[GalleryMgmt] savePhoto() COMPLETE - tempo totale:', (performance.now() - startTime).toFixed(2), 'ms');
       },
       error: (err) => {
-        const msg = err?.error?.message ?? err?.message ?? 'Errore nel salvataggio';
+        const isTimeout = err?.name === 'TimeoutError' || err?.message?.includes('Timeout');
+        const msg = isTimeout
+          ? 'Salvataggio scaduto: il server non ha risposto in tempo. Riprova.'
+          : (err?.error?.message ?? err?.message ?? 'Errore nel salvataggio');
         const details = err?.error?.errors;
         const fullMsg = details
           ? `${msg}\n${Object.entries(details).map(([k, v]) => `${k}: ${v}`).join('\n')}`
           : msg;
         alert(fullMsg);
         console.error('[GalleryMgmt] savePhoto() ERROR:', err);
-        this.saving = false;
-        this.cdr.detectChanges();
       }
     });
   }
