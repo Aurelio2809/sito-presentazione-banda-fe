@@ -96,8 +96,21 @@ export class GalleryManagement implements OnInit {
     let result = this.filterFavorites ? this.photos.filter(p => p.favorite) : this.photos;
     if (this.filterFavorites) {
       result = result.sort((a, b) => (a.displayOrder || 999) - (b.displayOrder || 999));
+    } else {
+      result = [...result].sort((a, b) => {
+        const orderA = a.displayOrder ?? 999999;
+        const orderB = b.displayOrder ?? 999999;
+        if (orderA !== orderB) return orderA - orderB;
+        return (a.id ?? 0) - (b.id ?? 0);
+      });
     }
     return result;
+  }
+
+  /** Posizione 1-based nella lista corrente (preferite o tutte). */
+  getPosition(photo: GalleryPhotoResponse): number {
+    const i = this.filteredPhotos.findIndex(p => p.id === photo.id);
+    return i < 0 ? 1 : i + 1;
   }
 
   onFilterChange(tabId: string): void {
@@ -274,50 +287,36 @@ export class GalleryManagement implements OnInit {
     });
   }
 
-  moveFavorite(photo: GalleryPhotoResponse, direction: 'up' | 'down'): void {
+  movePhoto(photo: GalleryPhotoResponse, direction: 'up' | 'down'): void {
     if (!this.orderChanged) {
-      this.savedOrderSnapshot = this.favoritePhotos.map(p => ({ id: p.id, displayOrder: p.displayOrder }));
+      this.savedOrderSnapshot = this.filteredPhotos.map(p => ({ id: p.id, displayOrder: p.displayOrder }));
     }
 
-    const favorites = this.favoritePhotos;
-    const currentIndex = favorites.findIndex(p => p.id === photo.id);
+    const list = this.filteredPhotos;
+    const currentIndex = list.findIndex(p => p.id === photo.id);
     if (currentIndex < 0) return;
 
     const newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
-    if (newIndex < 0 || newIndex >= favorites.length) return;
+    if (newIndex < 0 || newIndex >= list.length) return;
 
-    const tempOrder = favorites[currentIndex].displayOrder;
-    favorites[currentIndex].displayOrder = favorites[newIndex].displayOrder;
-    favorites[newIndex].displayOrder = tempOrder;
-
+    const reordered = [...list];
+    [reordered[currentIndex], reordered[newIndex]] = [reordered[newIndex], reordered[currentIndex]];
+    reordered.forEach((p, k) => p.displayOrder = k + 1);
     this.orderChanged = true;
   }
 
   moveToPosition(photo: GalleryPhotoResponse, newPosition: number): void {
     if (!this.orderChanged) {
-      this.savedOrderSnapshot = this.favoritePhotos.map(p => ({ id: p.id, displayOrder: p.displayOrder }));
+      this.savedOrderSnapshot = this.filteredPhotos.map(p => ({ id: p.id, displayOrder: p.displayOrder }));
     }
 
-    const favorites = this.favoritePhotos;
-    const currentOrder = photo.displayOrder || 0;
-    
-    if (newPosition < 1 || newPosition > favorites.length || newPosition === currentOrder) return;
+    const list = this.filteredPhotos;
+    const currentPos = this.getPosition(photo);
+    if (newPosition < 1 || newPosition > list.length || newPosition === currentPos) return;
 
-    if (newPosition < currentOrder) {
-      favorites.forEach(p => {
-        if (p.id !== photo.id && p.displayOrder && p.displayOrder >= newPosition && p.displayOrder < currentOrder) {
-          p.displayOrder++;
-        }
-      });
-    } else {
-      favorites.forEach(p => {
-        if (p.id !== photo.id && p.displayOrder && p.displayOrder <= newPosition && p.displayOrder > currentOrder) {
-          p.displayOrder--;
-        }
-      });
-    }
-
-    photo.displayOrder = newPosition;
+    const reordered = list.filter(p => p.id !== photo.id);
+    reordered.splice(newPosition - 1, 0, photo);
+    reordered.forEach((p, k) => p.displayOrder = k + 1);
     this.orderChanged = true;
   }
 
@@ -325,25 +324,23 @@ export class GalleryManagement implements OnInit {
   applyOrderFromInput(photo: GalleryPhotoResponse, event: Event): void {
     const input = event.target as HTMLInputElement;
     const val = parseInt(input.value, 10);
-    const max = this.favoritePhotos.length;
+    const max = this.filteredPhotos.length;
     if (isNaN(val) || val < 1 || val > max) {
-      input.value = String(photo.displayOrder ?? '');
+      input.value = String(this.getPosition(photo));
       return;
     }
     this.moveToPosition(photo, val);
-    input.value = String(photo.displayOrder ?? '');
+    input.value = String(this.getPosition(photo));
     this.cdr.detectChanges();
   }
 
   async saveOrder(): Promise<void> {
     this.savingOrder = true;
-    
+    const list = this.filteredPhotos;
     try {
-      // Salva ogni ordine modificato usando firstValueFrom
-      const updates = this.favoritePhotos.map(p => 
-        firstValueFrom(this.galleryService.updateOrder(p.id, p.displayOrder || 0))
+      const updates = list.map(p =>
+        firstValueFrom(this.galleryService.updateOrder(p.id, p.displayOrder ?? 0))
       );
-
       await Promise.all(updates);
       this.orderChanged = false;
       this.savedOrderSnapshot = [];

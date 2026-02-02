@@ -23,7 +23,7 @@
         (tabChange)="onFilterChange($event)"
       ></app-tab-switch>
     </div>
-    <div class="filters__right" *ngIf="filterFavorites && orderChanged">
+    <div class="filters__right" *ngIf="orderChanged">
       <button class="btn btn--ghost btn--sm" (click)="resetOrder()" [disabled]="savingOrder">Annulla modifiche</button>
       <button class="btn btn--success btn--sm" (click)="saveOrder()" [disabled]="savingOrder">
         <svg *ngIf="!savingOrder" viewBox="0 0 24 24" fill="none">
@@ -46,7 +46,7 @@
   </div>
 
   <!-- ORDER INFO -->
-  <div class="orderInfo" *ngIf="!loading && filterFavorites">
+  <div class="orderInfo" *ngIf="!loading && filteredPhotos.length > 0">
     <svg viewBox="0 0 24 24" fill="none">
       <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
       <line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -76,7 +76,7 @@
           <th class="table__th table__th--hide-mobile">Luogo</th>
           <th class="table__th table__th--hide-mobile">Data</th>
           <th class="table__th table__th--center">Preferita</th>
-          <th class="table__th table__th--center" *ngIf="filterFavorites">Ordine</th>
+          <th class="table__th table__th--center">Ordine</th>
           <th class="table__th table__th--actions">Azioni</th>
         </tr>
       </thead>
@@ -100,23 +100,22 @@
               {{ photo.favorite ? '★' : '☆' }}
             </button>
           </td>
-          <td class="table__td table__td--center" *ngIf="filterFavorites">
+          <td class="table__td table__td--center">
             <div class="orderControl">
               <div class="orderControl__arrows">
-                <button class="orderArrow orderArrow--up" (click)="moveFavorite(photo, 'up')" [disabled]="photo.displayOrder === 1" title="Sposta su">
+                <button class="orderArrow orderArrow--up" (click)="movePhoto(photo, 'up')" [disabled]="getPosition(photo) === 1" title="Sposta su">
                   <svg viewBox="0 0 24 24" fill="none">
                     <path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
-                <button class="orderArrow orderArrow--down" (click)="moveFavorite(photo, 'down')" [disabled]="photo.displayOrder === favoritePhotos.length" title="Sposta giù">
+                <button class="orderArrow orderArrow--down" (click)="movePhoto(photo, 'down')" [disabled]="getPosition(photo) === filteredPhotos.length" title="Sposta giù">
                   <svg viewBox="0 0 24 24" fill="none">
                     <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
               </div>
               <div class="orderControl__indexWrap">
-                <input type="number" class="orderInput" [ngModel]="photo.displayOrder" (keydown.enter)="applyOrderFromInput(photo, $event)" min="1" [max]="favoritePhotos.length" placeholder="nº" title="Indice (Invio per applicare)">
-                <span class="orderControl__hint">Invio</span>
+                <input type="number" class="orderInput orderInput--noSpinner" [value]="getPosition(photo)" (keydown.enter)="applyOrderFromInput(photo, $event)" min="1" [attr.max]="filteredPhotos.length" placeholder="nº" title="Indice (Invio per applicare)">
               </div>
             </div>
           </td>

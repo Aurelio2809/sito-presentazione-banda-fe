@@ -367,9 +367,14 @@
   transition: border-color 150ms ease, background 150ms ease;
 }
 
-.orderInput::-webkit-inner-spin-button,
-.orderInput::-webkit-outer-spin-button {
-  opacity: 1;
+/* Nessuna freccia nel field indice */
+.orderInput--noSpinner::-webkit-inner-spin-button,
+.orderInput--noSpinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.orderInput--noSpinner {
+  -moz-appearance: textfield;
 }
 
 .orderInput:hover {
@@ -384,13 +389,6 @@
 
 .orderInput::placeholder {
   color: rgba(255, 255, 255, 0.35);
-}
-
-.orderControl__hint {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.40);
 }
 
 /* =========================================================
