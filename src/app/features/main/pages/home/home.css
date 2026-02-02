@@ -4,36 +4,6 @@
   --accent-red: 180, 45, 45;
 }
 
-/* =========================================================
-   DECORATIVE ELEMENTS - Premium Accents
-   ========================================================= */
-
-/* Section Corner Accents - solo desktop */
-.sectionAccent{
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  pointer-events: none;
-  z-index: 0;
-  opacity: calc(0.12 + var(--p) * 0.18);
-  transition: opacity 300ms ease;
-  display: none; /* Nascosto di default */
-}
-
-/* Mostra solo su desktop */
-@media (min-width: 1200px){
-  .sectionAccent{
-    display: block;
-  }
-}
-
-.sectionAccent--tl{
-  top: 32px;
-  left: 32px;
-  border-left: 1px solid rgba(255, 200, 87, 0.25);
-  border-top: 1px solid rgba(255, 200, 87, 0.25);
-}
-
 /* SEZIONE = 1 SCHERMATA (max width/height = viewport) */
 .heroSection{
   height: 100svh;
