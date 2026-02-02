@@ -164,21 +164,21 @@
         <div class="formRow formRow--date">
           <div class="formGroup formGroup--date">
             <label class="formLabel">Anno</label>
-            <select class="formInput formInput--select" [(ngModel)]="selectedPhoto.photoYear">
+            <select class="formInput formInput--select" name="photoYear" [(ngModel)]="selectedPhoto.photoYear">
               <option [ngValue]="null">--</option>
               <option *ngFor="let y of years" [ngValue]="y">{{ y }}</option>
             </select>
           </div>
           <div class="formGroup formGroup--date">
             <label class="formLabel">Mese</label>
-            <select class="formInput formInput--select" [(ngModel)]="selectedPhoto.photoMonth">
+            <select class="formInput formInput--select" name="photoMonth" [(ngModel)]="selectedPhoto.photoMonth">
               <option [ngValue]="null">--</option>
               <option *ngFor="let m of months" [ngValue]="m.value">{{ m.label }}</option>
             </select>
           </div>
           <div class="formGroup formGroup--date">
             <label class="formLabel">Giorno</label>
-            <select class="formInput formInput--select" [(ngModel)]="selectedPhoto.photoDay">
+            <select class="formInput formInput--select" name="photoDay" [(ngModel)]="selectedPhoto.photoDay">
               <option [ngValue]="null">--</option>
               <option *ngFor="let d of days" [ngValue]="d">{{ d }}</option>
             </select>
@@ -229,21 +229,21 @@
         <div class="formRow formRow--date">
           <div class="formGroup formGroup--date">
             <label class="formLabel">Anno</label>
-            <select class="formInput formInput--select" [(ngModel)]="uploadMetadata.photoYear">
+            <select class="formInput formInput--select" name="uploadPhotoYear" [(ngModel)]="uploadMetadata.photoYear">
               <option [ngValue]="null">--</option>
               <option *ngFor="let y of years" [ngValue]="y">{{ y }}</option>
             </select>
           </div>
           <div class="formGroup formGroup--date">
             <label class="formLabel">Mese</label>
-            <select class="formInput formInput--select" [(ngModel)]="uploadMetadata.photoMonth">
+            <select class="formInput formInput--select" name="uploadPhotoMonth" [(ngModel)]="uploadMetadata.photoMonth">
               <option [ngValue]="null">--</option>
               <option *ngFor="let m of months" [ngValue]="m.value">{{ m.label }}</option>
             </select>
           </div>
           <div class="formGroup formGroup--date">
             <label class="formLabel">Giorno</label>
-            <select class="formInput formInput--select" [(ngModel)]="uploadMetadata.photoDay">
+            <select class="formInput formInput--select" name="uploadPhotoDay" [(ngModel)]="uploadMetadata.photoDay">
               <option [ngValue]="null">--</option>
               <option *ngFor="let d of days" [ngValue]="d">{{ d }}</option>
             </select>

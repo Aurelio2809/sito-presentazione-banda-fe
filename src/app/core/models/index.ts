@@ -27,9 +27,9 @@ export interface GalleryPhotoRequest {
   title: string;
   description?: string;
   location?: string;
-  photoYear?: number;
-  photoMonth?: number;
-  photoDay?: number;
+  photoYear?: number | null;
+  photoMonth?: number | null;
+  photoDay?: number | null;
   favorite: boolean;
   displayOrder?: number;
 }

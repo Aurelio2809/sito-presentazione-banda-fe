@@ -108,7 +108,12 @@ export class GalleryManagement implements OnInit {
   }
 
   selectPhoto(photo: GalleryPhotoResponse): void {
-    this.selectedPhoto = { ...photo };
+    this.selectedPhoto = {
+      ...photo,
+      photoYear: photo.photoYear ?? undefined,
+      photoMonth: photo.photoMonth ?? undefined,
+      photoDay: photo.photoDay ?? undefined
+    };
   }
 
   closeDetail(): void {
@@ -168,13 +173,13 @@ export class GalleryManagement implements OnInit {
     this.saving = true;
     const request: GalleryPhotoRequest = {
       title: this.selectedPhoto.title,
-      description: this.selectedPhoto.description,
-      location: this.selectedPhoto.location,
-      photoYear: this.toNumberOrUndefined(this.selectedPhoto.photoYear),
-      photoMonth: this.toNumberOrUndefined(this.selectedPhoto.photoMonth),
-      photoDay: this.toNumberOrUndefined(this.selectedPhoto.photoDay),
+      description: this.selectedPhoto.description ?? undefined,
+      location: this.selectedPhoto.location ?? undefined,
+      photoYear: this.ensureNumberOrNull(this.selectedPhoto.photoYear),
+      photoMonth: this.ensureNumberOrNull(this.selectedPhoto.photoMonth),
+      photoDay: this.ensureNumberOrNull(this.selectedPhoto.photoDay),
       favorite: this.selectedPhoto.favorite,
-      displayOrder: this.selectedPhoto.displayOrder
+      displayOrder: this.selectedPhoto.displayOrder ?? undefined
     };
 
     this.galleryService.update(this.selectedPhoto.id, request).subscribe({
@@ -351,6 +356,17 @@ export class GalleryManagement implements OnInit {
     if (value == null || value === '') return undefined;
     const n = Number(value);
     return Number.isNaN(n) ? undefined : n;
+  }
+
+  /** Per la richiesta API: restituisce il numero o null (mai undefined, così la chiave è sempre inviata in JSON). */
+  private ensureNumberOrNull(value: number | string | null | undefined): number | null {
+    if (value == null || value === '') return null;
+    const n = Number(value);
+    return Number.isNaN(n) ? null : n;
+  }
+
+  private toNumberOrNull(value: number | string | null | undefined): number | null {
+    return this.ensureNumberOrNull(value);
   }
 
   formatPhotoDate(photo: GalleryPhotoResponse): string {

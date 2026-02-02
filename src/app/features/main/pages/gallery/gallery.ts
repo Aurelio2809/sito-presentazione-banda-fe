@@ -150,16 +150,21 @@ export class Gallery implements OnInit {
   }
 
   formatPhotoDate(photo: GalleryPhotoResponse): string {
-    if (photo.photoYear == null) return '';
+    const y = photo?.photoYear;
+    const m = photo?.photoMonth;
+    const d = photo?.photoDay;
+    if (y == null && m == null && d == null) return '';
     const monthNames = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
       'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
-    if (photo.photoDay != null && photo.photoMonth != null) {
-      return `${photo.photoDay} ${monthNames[photo.photoMonth - 1]} ${photo.photoYear}`;
+    if (d != null && m != null && y != null) {
+      return `${d} ${monthNames[m - 1]} ${y}`;
     }
-    if (photo.photoMonth != null) {
-      return `${monthNames[photo.photoMonth - 1]} ${photo.photoYear}`;
+    if (m != null && y != null) {
+      return `${monthNames[m - 1]} ${y}`;
     }
-    return `${photo.photoYear}`;
+    if (y != null) return `${y}`;
+    if (m != null) return monthNames[m - 1];
+    return String(d);
   }
 
   @HostListener('document:keydown', ['$event'])

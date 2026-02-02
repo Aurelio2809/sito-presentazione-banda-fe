@@ -71,7 +71,7 @@ export class GalleryService extends ApiService {
   upload(file: File, metadata: GalleryPhotoRequest): Observable<GalleryPhotoResponse> {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('metadata', JSON.stringify(metadata));
+    formData.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
 
     return this.http.post<GalleryPhotoResponse>(`${this.baseUrl}/gallery`, formData, {
       withCredentials: true
