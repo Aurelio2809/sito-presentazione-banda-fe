@@ -35,12 +35,24 @@ export class GalleryManagement implements OnInit {
   // Max favorites limit
   readonly MAX_FAVORITES = 7;
 
+  // Date selectors (anno obbligatorio, mese/giorno opzionali)
+  years: number[] = [];
+  readonly months: { value: number; label: string }[] = [
+    { value: 1, label: 'Gennaio' }, { value: 2, label: 'Febbraio' }, { value: 3, label: 'Marzo' },
+    { value: 4, label: 'Aprile' }, { value: 5, label: 'Maggio' }, { value: 6, label: 'Giugno' },
+    { value: 7, label: 'Luglio' }, { value: 8, label: 'Agosto' }, { value: 9, label: 'Settembre' },
+    { value: 10, label: 'Ottobre' }, { value: 11, label: 'Novembre' }, { value: 12, label: 'Dicembre' }
+  ];
+  readonly days: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
+
   constructor(
     private galleryService: GalleryService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    const currentYear = new Date().getFullYear();
+    this.years = Array.from({ length: currentYear - 1900 + 1 }, (_, i) => currentYear - i);
     this.loadPhotos();
   }
 
@@ -158,7 +170,9 @@ export class GalleryManagement implements OnInit {
       title: this.selectedPhoto.title,
       description: this.selectedPhoto.description,
       location: this.selectedPhoto.location,
-      photoDate: this.selectedPhoto.photoDate,
+      photoYear: this.selectedPhoto.photoYear ?? undefined,
+      photoMonth: this.selectedPhoto.photoMonth ?? undefined,
+      photoDay: this.selectedPhoto.photoDay ?? undefined,
       favorite: this.selectedPhoto.favorite,
       displayOrder: this.selectedPhoto.displayOrder
     };
@@ -222,7 +236,9 @@ export class GalleryManagement implements OnInit {
       title: this.uploadMetadata.title || 'Senza titolo',
       description: this.uploadMetadata.description,
       location: this.uploadMetadata.location,
-      photoDate: this.uploadMetadata.photoDate,
+      photoYear: this.uploadMetadata.photoYear ?? undefined,
+      photoMonth: this.uploadMetadata.photoMonth ?? undefined,
+      photoDay: this.uploadMetadata.photoDay ?? undefined,
       favorite: this.uploadMetadata.favorite || false
     };
 
@@ -234,9 +250,9 @@ export class GalleryManagement implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        const errorMsg = err.error?.message || 'Errore nell\'upload della foto';
+        const errorMsg = err.error?.message ?? err.error?.error ?? err.message ?? 'Errore nell\'upload della foto';
         alert(errorMsg);
-        console.error(err);
+        console.error('[GalleryMgmt] uploadPhoto() ERROR:', err);
         this.uploading = false;
         this.cdr.detectChanges();
       }
@@ -329,6 +345,19 @@ export class GalleryManagement implements OnInit {
     // photo.src è /api/gallery/photos/filename.jpg
     const baseUrl = environment.apiUrl.replace('/api', '');
     return `${baseUrl}${photo.src}`;
+  }
+
+  formatPhotoDate(photo: GalleryPhotoResponse): string {
+    if (photo.photoYear == null) return '';
+    const monthNames = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+      'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+    if (photo.photoDay != null && photo.photoMonth != null) {
+      return `${photo.photoDay} ${monthNames[photo.photoMonth - 1]} ${photo.photoYear}`;
+    }
+    if (photo.photoMonth != null) {
+      return `${monthNames[photo.photoMonth - 1]} ${photo.photoYear}`;
+    }
+    return `${photo.photoYear}`;
   }
 
   getThumbnailUrl(photo: GalleryPhotoResponse): string {

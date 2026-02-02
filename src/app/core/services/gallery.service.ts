@@ -71,7 +71,9 @@ export class GalleryService extends ApiService {
   upload(file: File, metadata: GalleryPhotoRequest): Observable<GalleryPhotoResponse> {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+    // File con type application/json assicura che Spring deserializzi correttamente @RequestPart("metadata")
+    const metadataBlob = new File([JSON.stringify(metadata)], 'metadata.json', { type: 'application/json' });
+    formData.append('metadata', metadataBlob);
 
     return this.http.post<GalleryPhotoResponse>(`${this.baseUrl}/gallery`, formData, {
       withCredentials: true

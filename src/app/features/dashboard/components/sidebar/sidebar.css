@@ -1,17 +1,77 @@
 @reference "../../../../../styles.css";
 
+/* Sidebar - Responsive */
 .sidebar {
-  display: flex;
+  display: none; /* Nascosta su mobile */
   flex-direction: column;
-  width: 240px;
+  width: var(--sidebar-w, 240px);
   height: 100%;
   background: rgba(18, 18, 22, 0.95);
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   transition: width 200ms ease;
+  flex-shrink: 0;
+}
+
+/* Laptop e superiori: mostra sidebar */
+@media (min-width: 900px){
+  .sidebar{
+    display: flex;
+  }
 }
 
 .sidebar--collapsed {
   width: 64px;
+}
+
+/* Mobile sidebar overlay */
+.sidebarOverlay{
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: var(--header-h, 56px);
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.sidebarOverlay.is-open{
+  display: block;
+}
+
+/* Laptop e superiori: nascondi overlay */
+@media (min-width: 900px){
+  .sidebarOverlay{
+    display: none !important;
+  }
+}
+
+/* Mobile sidebar drawer */
+.sidebarMobile{
+  display: none;
+  position: fixed;
+  top: var(--header-h, 56px);
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 85vw;
+  z-index: 55;
+  background: rgba(18, 18, 22, 0.98);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateX(-100%);
+  transition: transform 250ms ease;
+  flex-direction: column;
+}
+
+.sidebarMobile.is-open{
+  display: flex;
+  transform: translateX(0);
+}
+
+/* Laptop e superiori: nascondi mobile sidebar */
+@media (min-width: 900px){
+  .sidebarMobile{
+    display: none !important;
+  }
 }
 
 /* =========================================================

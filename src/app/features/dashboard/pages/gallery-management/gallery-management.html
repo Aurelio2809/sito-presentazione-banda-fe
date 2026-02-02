@@ -94,7 +94,7 @@
             </div>
           </td>
           <td class="table__td table__td--hide-mobile">{{ photo.location }}</td>
-          <td class="table__td table__td--hide-mobile">{{ photo.photoDate }}</td>
+          <td class="table__td table__td--hide-mobile">{{ formatPhotoDate(photo) }}</td>
           <td class="table__td table__td--center">
             <button class="starBtn" [class.starBtn--active]="photo.favorite" (click)="toggleFavorite(photo)">
               {{ photo.favorite ? '★' : '☆' }}
@@ -160,9 +160,28 @@
             <label class="formLabel">Luogo</label>
             <input class="formInput" type="text" [(ngModel)]="selectedPhoto.location" placeholder="Dove è stata scattata">
           </div>
-          <div class="formGroup">
-            <label class="formLabel">Data</label>
-            <input class="formInput" type="date" [(ngModel)]="selectedPhoto.photoDate">
+        </div>
+        <div class="formRow formRow--date">
+          <div class="formGroup formGroup--date">
+            <label class="formLabel">Anno</label>
+            <select class="formInput formInput--select" [(ngModel)]="selectedPhoto.photoYear">
+              <option [ngValue]="null">--</option>
+              <option *ngFor="let y of years" [ngValue]="y">{{ y }}</option>
+            </select>
+          </div>
+          <div class="formGroup formGroup--date">
+            <label class="formLabel">Mese</label>
+            <select class="formInput formInput--select" [(ngModel)]="selectedPhoto.photoMonth">
+              <option [ngValue]="null">--</option>
+              <option *ngFor="let m of months" [ngValue]="m.value">{{ m.label }}</option>
+            </select>
+          </div>
+          <div class="formGroup formGroup--date">
+            <label class="formLabel">Giorno</label>
+            <select class="formInput formInput--select" [(ngModel)]="selectedPhoto.photoDay">
+              <option [ngValue]="null">--</option>
+              <option *ngFor="let d of days" [ngValue]="d">{{ d }}</option>
+            </select>
           </div>
         </div>
       </div>
@@ -206,9 +225,28 @@
             <label class="formLabel">Luogo</label>
             <input class="formInput" type="text" [(ngModel)]="uploadMetadata.location" placeholder="Dove è stata scattata">
           </div>
-          <div class="formGroup">
-            <label class="formLabel">Data</label>
-            <input class="formInput" type="date" [(ngModel)]="uploadMetadata.photoDate">
+        </div>
+        <div class="formRow formRow--date">
+          <div class="formGroup formGroup--date">
+            <label class="formLabel">Anno</label>
+            <select class="formInput formInput--select" [(ngModel)]="uploadMetadata.photoYear">
+              <option [ngValue]="null">--</option>
+              <option *ngFor="let y of years" [ngValue]="y">{{ y }}</option>
+            </select>
+          </div>
+          <div class="formGroup formGroup--date">
+            <label class="formLabel">Mese</label>
+            <select class="formInput formInput--select" [(ngModel)]="uploadMetadata.photoMonth">
+              <option [ngValue]="null">--</option>
+              <option *ngFor="let m of months" [ngValue]="m.value">{{ m.label }}</option>
+            </select>
+          </div>
+          <div class="formGroup formGroup--date">
+            <label class="formLabel">Giorno</label>
+            <select class="formInput formInput--select" [(ngModel)]="uploadMetadata.photoDay">
+              <option [ngValue]="null">--</option>
+              <option *ngFor="let d of days" [ngValue]="d">{{ d }}</option>
+            </select>
           </div>
         </div>
         <div class="formGroup formGroup--checkbox">

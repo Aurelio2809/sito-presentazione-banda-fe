@@ -27,7 +27,9 @@ export interface GalleryPhotoRequest {
   title: string;
   description?: string;
   location?: string;
-  photoDate?: string;
+  photoYear?: number;
+  photoMonth?: number;
+  photoDay?: number;
   favorite: boolean;
   displayOrder?: number;
 }
@@ -39,7 +41,9 @@ export interface GalleryPhotoResponse {
   title: string;
   description?: string;
   location?: string;
-  photoDate?: string;
+  photoYear?: number;
+  photoMonth?: number;
+  photoDay?: number;
   favorite: boolean;
   displayOrder?: number;
 }

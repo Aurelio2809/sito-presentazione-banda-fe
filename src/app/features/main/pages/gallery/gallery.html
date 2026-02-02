@@ -125,9 +125,9 @@
             <div class="metaItem__value">{{ s.location }}</div>
           </div>
 
-          <div class="metaItem" *ngIf="s.photoDate">
+          <div class="metaItem" *ngIf="s.photoYear">
             <div class="metaItem__label">Data</div>
-            <div class="metaItem__value">{{ s.photoDate }}</div>
+            <div class="metaItem__value">{{ formatPhotoDate(s) }}</div>
           </div>
         </div>
       </aside>

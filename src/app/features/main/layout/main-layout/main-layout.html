@@ -12,6 +12,7 @@
         </span>
       </a>
 
+      <!-- Desktop Nav -->
       <nav class="nav">
         <a
           class="nav__link"
@@ -25,17 +26,55 @@
         <a class="nav__link" routerLink="/gallery" routerLinkActive="is-active">Galleria</a>
         <a class="nav__link" routerLink="/events" routerLinkActive="is-active">Eventi</a>
         <a class="nav__link" routerLink="/contacts" routerLinkActive="is-active">Contatti</a>
-        <a 
-          class="nav__link" 
-          routerLink="/dashboard" 
+        <a
+          class="nav__link"
+          routerLink="/dashboard"
           routerLinkActive="is-active"
           style="border: 1px solid rgba(255,255,255,0.3);"
         >
           Dashboard
         </a>
       </nav>
+
+      <!-- Mobile Menu Button -->
+      <button class="menuBtn" (click)="toggleMobileMenu()" [attr.aria-expanded]="mobileMenuOpen">
+        <svg *ngIf="!mobileMenuOpen" class="menuBtn__icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg *ngIf="mobileMenuOpen" class="menuBtn__icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
   </header>
+
+  <!-- Mobile Nav Overlay -->
+  <nav class="mobileNav" [class.is-open]="mobileMenuOpen">
+    <a
+      class="mobileNav__link"
+      routerLink="/"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="closeMobileMenu()"
+    >
+      Home
+    </a>
+    <a class="mobileNav__link" routerLink="/about" routerLinkActive="is-active" (click)="closeMobileMenu()">
+      Chi siamo
+    </a>
+    <a class="mobileNav__link" routerLink="/gallery" routerLinkActive="is-active" (click)="closeMobileMenu()">
+      Galleria
+    </a>
+    <a class="mobileNav__link" routerLink="/events" routerLinkActive="is-active" (click)="closeMobileMenu()">
+      Eventi
+    </a>
+    <a class="mobileNav__link" routerLink="/contacts" routerLinkActive="is-active" (click)="closeMobileMenu()">
+      Contatti
+    </a>
+    <a class="mobileNav__link" routerLink="/dashboard" routerLinkActive="is-active" (click)="closeMobileMenu()">
+      Dashboard
+    </a>
+  </nav>
 
   <main class="content">
     <router-outlet></router-outlet>

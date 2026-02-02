@@ -149,6 +149,19 @@ export class Gallery implements OnInit {
     document.documentElement.style.overflow = '';
   }
 
+  formatPhotoDate(photo: GalleryPhotoResponse): string {
+    if (photo.photoYear == null) return '';
+    const monthNames = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+      'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+    if (photo.photoDay != null && photo.photoMonth != null) {
+      return `${photo.photoDay} ${monthNames[photo.photoMonth - 1]} ${photo.photoYear}`;
+    }
+    if (photo.photoMonth != null) {
+      return `${monthNames[photo.photoMonth - 1]} ${photo.photoYear}`;
+    }
+    return `${photo.photoYear}`;
+  }
+
   @HostListener('document:keydown', ['$event'])
   onKeyDown(ev: KeyboardEvent): void {
     if (!this.viewerOpen) return;

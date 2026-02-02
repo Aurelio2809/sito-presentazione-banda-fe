@@ -1,101 +1,308 @@
 @reference "../../../../styles.css";
 
-/* wrapper: niente card globale */
+/* =========================================================
+   PAGE NAVIGATOR - Clean & Minimal
+   ========================================================= */
+
 .spn{
-  @apply mt-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between;
+  @apply mt-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between;
 }
 
-/* LEFT */
+/* =========================================================
+   LEFT SECTION - Navigation Controls
+   ========================================================= */
 .spn__left{
   @apply flex flex-wrap items-center gap-3;
 }
 
+/* Navigation Buttons (Prev/Next) */
 .spn__btn{
-  @apply inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white/85 font-extrabold;
-  transition: transform 180ms ease, background 180ms ease, opacity 180ms ease;
-}
-.spn__btn:hover{ @apply bg-white/10; transform: translateY(-1px); }
-.spn__btn:disabled{ @apply opacity-40; transform: none; }
-
-.spn__pages{
-  @apply flex items-center gap-2;
-}
-
-.spn__page{
-  @apply inline-flex h-10 min-w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-3 text-sm font-extrabold text-white/80;
-  transition: transform 180ms ease, background 180ms ease, opacity 180ms ease;
-}
-.spn__page:hover{ @apply bg-white/10; transform: translateY(-1px); }
-.spn__page:disabled{ @apply opacity-55; transform: none; }
-
-.spn__page.isActive{
-  @apply bg-white/15 text-white;
-  box-shadow: 0 18px 50px rgba(0,0,0,0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-/* info label */
-.spn__info{
-  @apply ml-1 text-sm text-white/70;
+.spn__btn:hover:not(:disabled){
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
-.spn__strong{ @apply text-white/90 font-extrabold; }
-.spn__muted{ @apply text-white/55; }
-.spn__dot{ @apply mx-2 text-white/35; }
 
-/* RIGHT */
-.spn__right{
-  @apply flex items-center justify-end;
+.spn__btn:active:not(:disabled){
+  transform: translateY(-1px);
+}
+
+.spn__btn:disabled{
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 /* =========================================================
-   CARD SOLO per select (blur “Contacts-style”)
-   - aumenta opacità (più leggibile), ma non “tappa” del tutto
+   PAGE NUMBERS
    ========================================================= */
+.spn__pages{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spn__page{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.spn__page:hover:not(:disabled):not(.isActive){
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
+
+.spn__page:disabled{
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Active Page */
+.spn__page.isActive{
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.20);
+  color: rgba(255, 255, 255, 1);
+  font-weight: 800;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================================
+   INFO LABEL
+   ========================================================= */
+.spn__info{
+  margin-left: 6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.spn__strong{
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 800;
+}
+
+.spn__muted{
+  color: rgba(255, 255, 255, 0.50);
+}
+
+.spn__dot{
+  margin: 0 8px;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+/* =========================================================
+   RIGHT SECTION - Page Size Selector (Liquid Glass)
+   ========================================================= */
+.spn__right{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Rimuoviamo la card, stile minimal */
 .spn__sizeCard{
-  @apply rounded-3xl border border-white/10 px-4 py-3;
-  position: relative;
-  overflow: hidden;
-
-  /* ✅ più opaco (prima era transparent) */
-  background: rgba(10,10,12,0.38);
-  backdrop-filter: blur(12px) saturate(1.12);
-
-  box-shadow: 0 18px 55px rgba(0,0,0,0.24);
+  display: contents;
 }
-
-.spn__sizeCard::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-
-  background:
-    radial-gradient(520px 220px at 25% 0%, rgba(255,255,255,0.10), rgba(255,255,255,0) 58%),
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
-  opacity: 0.9;
-}
-
-.spn__sizeCard > *{ position: relative; z-index: 1; }
 
 .spn__size{
-  @apply flex items-center gap-3 text-sm;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.50);
+  font-weight: 500;
 }
 
+/* =========================================================
+   SELECT - Liquid Glass Effect
+   ========================================================= */
 .spn__select{
-  @apply rounded-2xl border border-white/10 px-3 py-2 text-sm font-extrabold text-white/85 outline-none;
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  padding: 10px 38px 10px 16px;
+  border-radius: 14px;
+  
+  /* Liquid glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: 
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  
+  /* Arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='rgba(255,255,255,0.6)' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  
+  color: rgba(255, 255, 255, 0.90);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  outline: none;
+  
+  /* Subtle inner glow */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  
+  transition:
+    background 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease,
+    transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-  /* ✅ più opaco del select */
-  background: rgba(10,10,12,0.45);
-  backdrop-filter: blur(10px) saturate(1.1);
+.spn__select:hover{
+  border-color: rgba(255, 255, 255, 0.20);
+  background: 
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 50%,
+      rgba(255, 255, 255, 0.10) 100%
+    );
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='rgba(255,255,255,0.75)' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
 }
 
 .spn__select:focus{
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 0 3px rgba(255, 255, 255, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* mobile: card a tutta larghezza e sotto */
-@media (max-width: 768px){
-  .spn__right{ @apply w-full; }
-  .spn__sizeCard{ @apply w-full; }
-  .spn__size{ @apply w-full justify-between; }
+/* Select option styling */
+.spn__select option{
+  background: rgb(18, 18, 22);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE
+   ========================================================= */
+@media (max-width: 767px){
+  .spn{
+    gap: 16px;
+  }
+
+  .spn__left{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .spn__btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .spn__page{
+    min-width: 38px;
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .spn__pages{
+    gap: 5px;
+  }
+
+  .spn__info{
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-top: 4px;
+    order: 10;
+  }
+
+  .spn__right{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .spn__size{
+    justify-content: center;
+  }
+
+  .spn__select{
+    min-width: 100px;
+  }
+}
+
+/* Smartphone piccoli */
+@media (max-width: 380px){
+  .spn__pages{
+    gap: 4px;
+  }
+
+  .spn__page{
+    min-width: 34px;
+    height: 34px;
+    padding: 0 6px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  .spn__btn{
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .spn__info{
+    font-size: 12px;
+  }
 }

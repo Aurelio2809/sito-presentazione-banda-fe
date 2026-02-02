@@ -7,8 +7,8 @@
   position: relative;
   isolation: isolate;
 
-  /* altezza navbar (una sola fonte di verità) */
-  --header-h: 64px;
+  /* altezza navbar responsive */
+  --header-h: 56px;
 
   /* base scura */
   background:
@@ -16,6 +16,12 @@
     radial-gradient(760px 420px at 80% 30%, rgba(170,0,0,0.08), rgba(0,0,0,0) 60%),
     linear-gradient(135deg, rgba(10,10,12,1), rgba(4,4,5,1));
 }
+
+/* Header height responsive */
+@media (min-width: 600px){ .shell{ --header-h: 60px; } }
+@media (min-width: 900px){ .shell{ --header-h: 64px; } }
+@media (min-width: 1200px){ .shell{ --header-h: 68px; } }
+@media (min-width: 1600px){ .shell{ --header-h: 72px; } }
 
 /* filigrana dietro a tutto */
 .shell::before{
@@ -36,7 +42,7 @@
 }
 
 /* =========================================================
-   HEADER (FISSO)
+   HEADER (FISSO) - Responsive
    ========================================================= */
 .header{
   position: fixed;
@@ -55,39 +61,115 @@
 }
 
 .header__inner{
-  @apply mx-auto flex max-w-6xl items-center justify-between px-4;
+  @apply mx-auto flex items-center justify-between;
+  max-width: 100%;
   height: 100%;
+  padding: 0 12px;
+}
+
+/* Tablet e superiori */
+@media (min-width: 600px){
+  .header__inner{
+    padding: 0 16px;
+  }
+}
+
+/* Laptop e superiori */
+@media (min-width: 900px){
+  .header__inner{
+    padding: 0 24px;
+    max-width: 72rem;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .header__inner{
+    padding: 0 32px;
+    max-width: 80rem;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1600px){
+  .header__inner{
+    padding: 0 48px;
+    max-width: 96rem;
+  }
 }
 
 /* =========================================================
-   BRAND (con stemma)
+   BRAND (con stemma) - Responsive
    ========================================================= */
 .brand{
-  @apply flex items-center gap-3 select-none;
+  @apply flex items-center select-none;
+  gap: 8px;
+}
 
+/* Tablet e superiori */
+@media (min-width: 600px){
+  .brand{ gap: 10px; }
+}
+
+/* Laptop e superiori */
+@media (min-width: 900px){
+  .brand{ gap: 12px; }
 }
 
 .brand__mark{
-  /* ⬆️ un filo più grande: lo stemma respira */
-  width: 52px;
-  height: 52px;
+  width: 36px;
+  height: 36px;
 
   position: relative;
   overflow: hidden;
   isolation: isolate;
 
-  border-radius: 14px;
+  border-radius: 10px;
 
-  /* ✅ placca più chiara (lo stemma stacca sul rosso) */
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,215,0,0.22);
   backdrop-filter: blur(10px) saturate(1.15);
 
   box-shadow:
-    0 10px 26px rgba(0,0,0,0.30),
+    0 6px 16px rgba(0,0,0,0.25),
     0 0 0 1px rgba(255,255,255,0.06) inset;
 
   transition: transform 200ms ease, filter 200ms ease, background 200ms ease, border-color 200ms ease;
+  flex-shrink: 0;
+}
+
+/* Smartphone grandi (>400px) */
+@media (min-width: 400px){
+  .brand__mark{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 600px){
+  .brand__mark{
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+}
+
+/* Laptop e superiori */
+@media (min-width: 900px){
+  .brand__mark{
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .brand__mark{
+    width: 52px;
+    height: 52px;
+  }
 }
 
 /* base “medaglione” interna (clippata, non sporca i bordi) */
@@ -151,20 +233,133 @@
   transform: translate3d(2px, -2px, 0);
 }
 
-.brand__text{ @apply leading-tight; }
-.brand__title{ @apply text-sm font-semibold tracking-wide text-banda-white; }
-.brand__subtitle{ @apply text-xs text-white/80; }
+.brand__text{
+  @apply leading-tight;
+  display: block; /* Sempre visibile */
+}
+
+/* Laptop e superiori: titolo su una riga */
+@media (min-width: 900px){
+  .brand__text{
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    white-space: nowrap;
+  }
+}
+
+.brand__title{
+  @apply font-semibold tracking-wide text-banda-white;
+  font-size: 11px;
+}
+
+/* Tablet */
+@media (min-width: 600px){
+  .brand__title{
+    font-size: 12px;
+  }
+}
+
+/* Laptop e superiori */
+@media (min-width: 900px){
+  .brand__title{
+    font-size: 13px;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .brand__title{
+    font-size: 14px;
+  }
+}
+
+.brand__subtitle{
+  @apply text-white/80;
+  font-size: 9px;
+  display: none; /* Nascosto solo su smartphone piccoli */
+}
+
+/* Smartphone grandi (>400px) */
+@media (min-width: 400px){
+  .brand__subtitle{
+    display: block;
+  }
+}
+
+/* Tablet */
+@media (min-width: 600px){
+  .brand__subtitle{
+    font-size: 10px;
+  }
+}
+
+/* Laptop e superiori: inline con separatore */
+@media (min-width: 900px){
+  .brand__subtitle{
+    font-size: 11px;
+  }
+
+  .brand__subtitle::before{
+    content: "—";
+    margin-right: 6px;
+    opacity: 0.4;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .brand__subtitle{
+    font-size: 12px;
+  }
+}
 
 /* =========================================================
-   NAV
+   NAV - Responsive
    ========================================================= */
-.nav{ @apply hidden items-center gap-1 md:flex; }
 
-.nav__link{ @apply relative rounded-xl px-3 py-2 text-sm text-white/90 transition; }
+/* Desktop nav - nascosto su mobile */
+.nav{
+  @apply items-center;
+  display: none;
+  gap: 2px;
+}
+
+/* Laptop e superiori: mostra nav desktop */
+@media (min-width: 900px){
+  .nav{
+    display: flex;
+    gap: 4px;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .nav{
+    gap: 6px;
+  }
+}
+
+.nav__link{
+  @apply relative text-white/90 transition;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .nav__link{
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+}
 
 .nav__link::before{
   content: "";
-  @apply absolute inset-0 rounded-xl opacity-0 transition;
+  @apply absolute inset-0 opacity-0 transition;
+  border-radius: inherit;
   background: rgba(255, 255, 255, 0.12);
 }
 
@@ -178,6 +373,137 @@
 }
 
 /* =========================================================
+   MOBILE MENU BUTTON
+   ========================================================= */
+.menuBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 1);
+  transition: transform 180ms ease, background 180ms ease;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.menuBtn:hover,
+.menuBtn:active{
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.05);
+}
+
+.menuBtn__icon{
+  width: 24px;
+  height: 24px;
+}
+
+/* Tablet: un po' più grande */
+@media (min-width: 600px){
+  .menuBtn{
+    width: 46px;
+    height: 46px;
+  }
+}
+
+/* Nascosto su laptop e superiori */
+@media (min-width: 900px){
+  .menuBtn{
+    display: none;
+  }
+}
+
+/* =========================================================
+   MOBILE NAV OVERLAY
+   ========================================================= */
+.mobileNav{
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 55;
+
+  background: linear-gradient(
+    180deg,
+    rgba(20, 10, 12, 0.98) 0%,
+    rgba(8, 8, 10, 0.98) 100%
+  );
+  backdrop-filter: blur(24px) saturate(1.2);
+
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  gap: 6px;
+  overflow-y: auto;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 250ms ease, transform 250ms ease, visibility 0ms 250ms;
+}
+
+.mobileNav.is-open{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+/* Tablet: più padding */
+@media (min-width: 600px){
+  .mobileNav{
+    padding: 24px 20px;
+    gap: 8px;
+  }
+}
+
+/* Nascosto su laptop e superiori */
+@media (min-width: 900px){
+  .mobileNav{
+    display: none !important;
+  }
+}
+
+.mobileNav__link{
+  display: flex;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.90);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+/* Tablet: link più grandi */
+@media (min-width: 600px){
+  .mobileNav__link{
+    padding: 18px 20px;
+    font-size: 17px;
+    border-radius: 16px;
+  }
+}
+
+.mobileNav__link:hover,
+.mobileNav__link:active{
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.mobileNav__link.is-active{
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(170, 0, 0, 0.15));
+  border-color: rgba(255, 215, 0, 0.30);
+  color: rgba(255, 255, 255, 1);
+}
+
+/* =========================================================
    CONTENT (compensazione SOTTO la navbar)
    ========================================================= */
 .content{
@@ -187,7 +513,7 @@
 }
 
 /* =========================================================
-   FOOTER
+   FOOTER - Responsive
    ========================================================= */
 .footer{
   @apply border-t border-white/10;
@@ -204,13 +530,114 @@
 }
 
 .footer__inner{
-  @apply mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 md:flex-row md:items-center md:justify-between;
+  @apply mx-auto flex flex-col gap-3;
+  max-width: 100%;
+  padding: 16px 12px;
+  text-align: center;
 }
 
-.footer__copy{ @apply text-sm text-white/60; }
-.footer__links{ @apply flex items-center gap-3 text-sm; }
-.footer__link{ @apply text-white/60 transition hover:text-banda-gold-400; }
-.footer__dot{ @apply text-white/20; }
+/* Tablet e superiori */
+@media (min-width: 600px){
+  .footer__inner{
+    padding: 20px 16px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    gap: 16px;
+  }
+}
+
+/* Laptop e superiori */
+@media (min-width: 900px){
+  .footer__inner{
+    padding: 24px 24px;
+    max-width: 72rem;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .footer__inner{
+    padding: 24px 32px;
+    max-width: 80rem;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1600px){
+  .footer__inner{
+    padding: 28px 48px;
+    max-width: 96rem;
+  }
+}
+
+.footer__copy{
+  @apply text-white/60;
+  font-size: 11px;
+}
+
+/* Tablet e superiori */
+@media (min-width: 600px){
+  .footer__copy{
+    font-size: 12px;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .footer__copy{
+    font-size: 13px;
+  }
+}
+
+.footer__links{
+  @apply flex items-center justify-center flex-wrap;
+  gap: 8px;
+}
+
+/* Tablet e superiori */
+@media (min-width: 600px){
+  .footer__links{
+    gap: 12px;
+    justify-content: flex-end;
+  }
+}
+
+.footer__link{
+  @apply text-white/60 transition hover:text-banda-gold-400;
+  font-size: 11px;
+}
+
+/* Tablet e superiori */
+@media (min-width: 600px){
+  .footer__link{
+    font-size: 12px;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .footer__link{
+    font-size: 13px;
+  }
+}
+
+.footer__dot{
+  @apply text-white/20;
+  font-size: 10px;
+}
+
+/* Smartphone: nascondi i dot per un layout più pulito */
+@media (max-width: 599px){
+  .footer__dot{
+    display: none;
+  }
+
+  .footer__links{
+    gap: 12px;
+  }
+}
 
 /* =========================================================
    DASHBOARD BUTTON

@@ -1,7 +1,7 @@
 @reference "../../../../../styles.css";
 
 /* =========================================================
-   SHELL
+   SHELL - Responsive
    ========================================================= */
 .dashShell {
   @apply min-h-screen text-banda-white;
@@ -10,16 +10,46 @@
   position: relative;
   isolation: isolate;
 
-  /* altezza navbar (stessa del main) */
-  --header-h: 64px;
+  /* altezza navbar responsive */
+  --header-h: 56px;
+  --sidebar-w: 0px;
 
   background:
     radial-gradient(800px 400px at 20% 10%, rgba(255, 215, 0, 0.04), rgba(0, 0, 0, 0) 60%),
     linear-gradient(135deg, rgba(14, 14, 18, 1), rgba(8, 8, 10, 1));
 }
 
+/* Tablet e superiori */
+@media (min-width: 600px){
+  .dashShell{ --header-h: 60px; }
+}
+
+/* Laptop e superiori: sidebar visibile */
+@media (min-width: 900px){
+  .dashShell{
+    --header-h: 64px;
+    --sidebar-w: 240px;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .dashShell{
+    --header-h: 68px;
+    --sidebar-w: 260px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1600px){
+  .dashShell{
+    --header-h: 72px;
+    --sidebar-w: 280px;
+  }
+}
+
 /* =========================================================
-   HEADER (GOLD) - stessa struttura del main, colore diverso
+   HEADER (GOLD) - Responsive
    ========================================================= */
 .dashHeader {
   position: fixed;
@@ -39,32 +69,72 @@
 }
 
 .dashHeader__inner {
-  @apply mx-auto flex max-w-6xl items-center justify-between px-4;
+  @apply mx-auto flex items-center justify-between;
+  max-width: 100%;
   height: 100%;
+  padding: 0 12px;
+}
+
+/* Tablet e superiori */
+@media (min-width: 600px){
+  .dashHeader__inner{
+    padding: 0 16px;
+  }
+}
+
+/* Laptop e superiori */
+@media (min-width: 900px){
+  .dashHeader__inner{
+    padding: 0 24px;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .dashHeader__inner{
+    padding: 0 32px;
+    max-width: 100%;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1600px){
+  .dashHeader__inner{
+    padding: 0 48px;
+  }
 }
 
 /* =========================================================
-   BRAND (identico al main layout)
+   BRAND - Responsive
    ========================================================= */
 .brand {
-  @apply flex items-center gap-3 select-none;
+  @apply flex items-center select-none;
+  gap: 8px;
 }
 
+@media (min-width: 600px){ .brand{ gap: 10px; } }
+@media (min-width: 900px){ .brand{ gap: 12px; } }
+
 .brand__mark {
-  width: 52px;
-  height: 52px;
+  width: 40px;
+  height: 40px;
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  border-radius: 14px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.10);
   border: 1px solid rgba(255, 215, 0, 0.22);
   backdrop-filter: blur(10px) saturate(1.15);
   box-shadow:
-    0 10px 26px rgba(0, 0, 0, 0.30),
+    0 8px 20px rgba(0, 0, 0, 0.25),
     0 0 0 1px rgba(255, 255, 255, 0.06) inset;
   transition: transform 200ms ease, filter 200ms ease, background 200ms ease, border-color 200ms ease;
+  flex-shrink: 0;
 }
+
+@media (min-width: 600px){ .brand__mark{ width: 44px; height: 44px; border-radius: 12px; } }
+@media (min-width: 900px){ .brand__mark{ width: 48px; height: 48px; border-radius: 14px; } }
+@media (min-width: 1200px){ .brand__mark{ width: 52px; height: 52px; } }
 
 .brand__mark::before {
   content: "";
@@ -122,14 +192,58 @@
 
 .brand__text {
   @apply leading-tight;
+  display: none;
 }
+
+@media (min-width: 600px){ .brand__text{ display: block; } }
 
 .brand__title {
-  @apply text-sm font-semibold tracking-wide text-banda-white;
+  @apply font-semibold tracking-wide text-banda-white;
+  font-size: 12px;
 }
 
+@media (min-width: 900px){ .brand__title{ font-size: 13px; } }
+@media (min-width: 1200px){ .brand__title{ font-size: 14px; } }
+
 .brand__subtitle {
-  @apply text-xs text-white/80;
+  @apply text-white/80;
+  font-size: 10px;
+}
+
+@media (min-width: 900px){ .brand__subtitle{ font-size: 11px; } }
+@media (min-width: 1200px){ .brand__subtitle{ font-size: 12px; } }
+
+/* =========================================================
+   MOBILE MENU BUTTON (Dashboard)
+   ========================================================= */
+.dashMenuBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.dashMenuBtn:hover{
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.05);
+}
+
+.dashMenuBtn__icon{
+  width: 20px;
+  height: 20px;
+}
+
+/* Nascosto su laptop e superiori */
+@media (min-width: 900px){
+  .dashMenuBtn{
+    display: none;
+  }
 }
 
 /* =========================================================
@@ -138,7 +252,11 @@
 .dashHeader__actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+}
+
+@media (min-width: 600px){
+  .dashHeader__actions{ gap: 10px; }
 }
 
 .dashHeader__profileBtn {
@@ -165,18 +283,36 @@
 }
 
 .dashHeader__siteLink {
-  display: flex;
+  display: none; /* Nascosto su mobile */
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 10px;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
   background: rgba(255, 215, 0, 0.10);
   border: 1px solid rgba(255, 215, 0, 0.20);
   color: rgba(255, 215, 0, 0.90);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   text-decoration: none;
   transition: background 150ms ease, transform 150ms ease;
+}
+
+/* Tablet e superiori: mostra */
+@media (min-width: 600px){
+  .dashHeader__siteLink{
+    display: flex;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+}
+
+/* Desktop e superiori */
+@media (min-width: 1200px){
+  .dashHeader__siteLink{
+    padding: 8px 14px;
+    gap: 8px;
+  }
 }
 
 .dashHeader__siteLink:hover {
@@ -185,12 +321,19 @@
 }
 
 .dashHeader__siteLink svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
+}
+
+@media (min-width: 600px){
+  .dashHeader__siteLink svg{
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* =========================================================
-   BODY (sidebar + content)
+   BODY (sidebar + content) - Responsive
    ========================================================= */
 .dashBody {
   flex: 1;
@@ -200,17 +343,45 @@
 }
 
 /* =========================================================
-   CONTENT
+   CONTENT - Responsive
    ========================================================= */
 .dashContent {
   flex: 1;
   min-width: 0;
-  padding: 24px;
+  padding: 16px 12px;
   overflow-y: auto;
 }
 
+/* Tablet */
+@media (min-width: 600px){
+  .dashContent{
+    padding: 20px 16px;
+  }
+}
+
+/* Laptop */
+@media (min-width: 900px){
+  .dashContent{
+    padding: 24px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1200px){
+  .dashContent{
+    padding: 28px 32px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1600px){
+  .dashContent{
+    padding: 32px 48px;
+  }
+}
+
 /* =========================================================
-   FOOTER
+   FOOTER - Responsive
    ========================================================= */
 .dashFooter {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -218,19 +389,52 @@
 }
 
 .dashFooter__inner {
-  @apply flex flex-col gap-2 px-4 py-4 md:flex-row md:items-center md:justify-between;
+  @apply flex flex-col;
+  gap: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+/* Tablet e superiori */
+@media (min-width: 600px){
+  .dashFooter__inner{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    text-align: left;
+  }
+}
+
+/* Laptop e superiori */
+@media (min-width: 900px){
+  .dashFooter__inner{
+    padding: 16px 24px;
+  }
 }
 
 .dashFooter__copy {
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.45);
 }
+
+@media (min-width: 600px){ .dashFooter__copy{ font-size: 12px; } }
 
 .dashFooter__links {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11px;
+}
+
+@media (min-width: 600px){
+  .dashFooter__links{
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 12px;
+  }
 }
 
 .dashFooter__link {
@@ -245,4 +449,10 @@
 
 .dashFooter__dot {
   color: rgba(255, 255, 255, 0.20);
+}
+
+/* Smartphone: nascondi i dot */
+@media (max-width: 599px){
+  .dashFooter__dot{ display: none; }
+  .dashFooter__links{ gap: 10px; }
 }

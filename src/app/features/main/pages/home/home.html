@@ -6,7 +6,11 @@
     [attr.data-side]="i % 2 === 0 ? 'left' : 'right'"
     [attr.data-key]="s.key"
     [attr.data-layout]="s.layout"
+    [attr.data-index]="i"
   >
+    <!-- Decorative corner accent (solo sinistra) -->
+    <div class="sectionAccent sectionAccent--tl" aria-hidden="true"></div>
+
     <div class="section__inner">
       <ng-container [ngSwitch]="s.layout">
 
@@ -17,23 +21,23 @@
               <img
                 *ngIf="s.crestImg"
                 class="crestWatermark reveal"
-                style="--d:0.06;"
+                style="--d:0.04;"
                 [src]="s.crestImg"
                 alt=""
                 aria-hidden="true"
                 loading="lazy"
               />
 
-              <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
-              <p class="desc reveal" style="--d:0.28;">{{ s.text }}</p>
+              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
+              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
+              <p class="desc reveal" style="--d:0.24;">{{ s.text }}</p>
 
-              <div class="actions reveal" style="--d:0.40;">
+              <div class="actions reveal" style="--d:0.34;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
               </div>
             </div>
 
-            <div class="assoc__media reveal" style="--d:0.14;">
+            <div class="assoc__media reveal" style="--d:0.12;">
               <div class="frame frame--hero">
                 <img class="img img--hero" [src]="s.images[0]" [alt]="s.title" loading="lazy" />
               </div>
@@ -44,14 +48,14 @@
         <!-- 2) SEDE -->
         <ng-container *ngSwitchCase="'sedeSplit'">
           <div class="layout layout--split layout--sede">
-            <div class="split__media sedeGallery2 reveal" style="--d:0.10;">
-              <div class="sedeGallery2__portrait">
+            <div class="split__media sedeGallery2">
+              <div class="sedeGallery2__portrait reveal" style="--d:0.10;">
                 <div class="frame frame--tall">
                   <img class="img img--tall" [src]="s.images[1]" [alt]="s.title + ' foto verticale'" loading="lazy" />
                 </div>
               </div>
 
-              <div class="sedeGallery2__landscape">
+              <div class="sedeGallery2__landscape reveal" style="--d:0.18;">
                 <div class="frame frame--lg">
                   <img class="img img--lg" [src]="s.images[0]" [alt]="s.title + ' foto orizzontale'" loading="lazy" />
                 </div>
@@ -59,10 +63,10 @@
             </div>
 
             <div class="split__copy">
-              <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
-              <p class="desc reveal" style="--d:0.28;">{{ s.text }}</p>
-              <div class="actions reveal" style="--d:0.40;">
+              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
+              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
+              <p class="desc reveal" style="--d:0.24;">{{ s.text }}</p>
+              <div class="actions reveal" style="--d:0.34;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
               </div>
             </div>
@@ -73,28 +77,28 @@
         <ng-container *ngSwitchCase="'storyTriptych'">
           <div class="layout layout--storyCentered">
             <div class="storyHeader">
-              <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
-              <p class="desc reveal storyClamp" style="--d:0.28;">{{ s.text }}</p>
-              <div class="actions reveal" style="--d:0.40;">
+              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
+              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
+              <p class="desc reveal storyClamp" style="--d:0.24;">{{ s.text }}</p>
+              <div class="actions reveal" style="--d:0.34;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
               </div>
             </div>
 
             <div class="triptych triptych--centered">
-              <div class="triptych__a reveal" style="--d:0.14;">
+              <div class="triptych__a reveal" style="--d:0.12;">
                 <div class="frame frame--md">
                   <img class="img img--md" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
                 </div>
               </div>
 
-              <div class="triptych__b reveal" style="--d:0.22;">
+              <div class="triptych__b reveal" style="--d:0.18;">
                 <div class="frame frame--hero">
                   <img class="img img--heroCompact" [src]="s.images[1]" [alt]="s.title + ' foto 2'" loading="lazy" />
                 </div>
               </div>
 
-              <div class="triptych__c reveal" style="--d:0.30;">
+              <div class="triptych__c reveal" style="--d:0.24;">
                 <div class="frame frame--md">
                   <img class="img img--md" [src]="s.images[2]" [alt]="s.title + ' foto 3'" loading="lazy" />
                 </div>
@@ -108,30 +112,30 @@
           <div class="layout layout--band layout--bandReadable">
             <div class="band__top band__top--readable">
               <div class="band__copy">
-                <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-                <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
-                <p class="desc reveal bandClamp bandClamp--readable" style="--d:0.28;">{{ s.text }}</p>
+                <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
+                <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
+                <p class="desc reveal bandClamp bandClamp--readable" style="--d:0.24;">{{ s.text }}</p>
               </div>
 
-              <div class="actions reveal" style="--d:0.38;">
+              <div class="actions reveal" style="--d:0.32;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
               </div>
             </div>
 
-            <div class="bandRow reveal" style="--d:0.18;">
-              <div class="bandRow__item">
+            <div class="bandRow">
+              <div class="bandRow__item reveal" style="--d:0.14;">
                 <div class="frame frame--bandEqual">
                   <img class="img img--bandEqual" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
                 </div>
               </div>
 
-              <div class="bandRow__item">
+              <div class="bandRow__item reveal" style="--d:0.20;">
                 <div class="frame frame--bandEqual">
                   <img class="img img--bandEqual" [src]="s.images[1]" [alt]="s.title + ' foto 2'" loading="lazy" />
                 </div>
               </div>
 
-              <div class="bandRow__item">
+              <div class="bandRow__item reveal" style="--d:0.26;">
                 <div class="frame frame--bandEqual">
                   <img class="img img--bandEqual" [src]="s.images[2]" [alt]="s.title + ' foto 3'" loading="lazy" />
                 </div>
@@ -144,22 +148,22 @@
         <ng-container *ngSwitchCase="'schoolDouble'">
           <div class="layout layout--school">
             <div class="school__copy">
-              <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
-              <p class="desc reveal schoolClamp" style="--d:0.28;">{{ s.text }}</p>
-              <div class="actions reveal" style="--d:0.40;">
+              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
+              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
+              <p class="desc reveal schoolClamp" style="--d:0.24;">{{ s.text }}</p>
+              <div class="actions reveal" style="--d:0.34;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
               </div>
             </div>
 
             <div class="school__media schoolMosaic">
-              <div class="schoolMosaic__a reveal" style="--d:0.14;">
+              <div class="schoolMosaic__a reveal" style="--d:0.12;">
                 <div class="frame frame--tall">
                   <img class="img img--tall" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
                 </div>
               </div>
 
-              <div class="schoolMosaic__b reveal" style="--d:0.24;">
+              <div class="schoolMosaic__b reveal" style="--d:0.20;">
                 <div class="frame frame--lg">
                   <img class="img img--lg" [src]="s.images[1]" [alt]="s.title + ' foto 2'" loading="lazy" />
                 </div>
@@ -172,15 +176,15 @@
         <ng-container *ngSwitchCase="'boardPoster'">
           <div class="layout layout--board">
             <div class="board__copy">
-              <div class="label reveal" style="--d:0.08;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.16;">{{ s.title }}</h2>
-              <p class="desc reveal boardClamp" style="--d:0.28;">{{ s.text }}</p>
-              <div class="actions reveal" style="--d:0.40;">
+              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
+              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
+              <p class="desc reveal boardClamp" style="--d:0.24;">{{ s.text }}</p>
+              <div class="actions reveal" style="--d:0.34;">
                 <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
               </div>
             </div>
 
-            <div class="board__media reveal" style="--d:0.14;">
+            <div class="board__media reveal" style="--d:0.12;">
               <div class="frame frame--tall">
                 <img class="img img--tall" [src]="s.images[0]" [alt]="s.title" loading="lazy" />
               </div>

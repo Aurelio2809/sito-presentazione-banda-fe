@@ -1,25 +1,84 @@
 @reference "../../../../../styles.css";
 
-/* PAGE */
+/* PAGE - Responsive */
 .gallery{
-  @apply mx-auto max-w-6xl px-4 py-10;
+  @apply mx-auto;
+  max-width: 100%;
+  padding: 24px 12px;
 }
 
-.gallery__head{ @apply mb-8; }
+/* Tablet */
+@media (min-width: 600px){
+  .gallery{
+    padding: 32px 16px;
+  }
+}
+
+/* Laptop */
+@media (min-width: 900px){
+  .gallery{
+    max-width: 72rem;
+    padding: 40px 24px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1200px){
+  .gallery{
+    max-width: 80rem;
+    padding: 48px 32px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1600px){
+  .gallery{
+    max-width: 96rem;
+    padding: 56px 48px;
+  }
+}
+
+.gallery__head{
+  margin-bottom: 20px;
+}
+
+@media (min-width: 600px){ .gallery__head{ margin-bottom: 28px; } }
+@media (min-width: 900px){ .gallery__head{ margin-bottom: 32px; } }
 
 .gallery__tag{
-  @apply inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75;
+  @apply inline-flex w-fit rounded-full border border-white/10 bg-white/5 font-semibold text-white/75;
+  padding: 5px 10px;
+  font-size: 10px;
 }
+
+@media (min-width: 600px){ .gallery__tag{ padding: 6px 12px; font-size: 11px; } }
+@media (min-width: 900px){ .gallery__tag{ font-size: 12px; } }
 
 .gallery__title{
-  @apply mt-4 text-3xl font-extrabold tracking-tight text-white md:text-5xl;
+  @apply font-extrabold tracking-tight text-white;
+  margin-top: 12px;
+  font-size: clamp(22px, 5vw, 40px);
 }
+
+@media (min-width: 900px){ .gallery__title{ font-size: clamp(28px, 4vw, 48px); } }
 
 .gallery__desc{
-  @apply mt-3 max-w-3xl text-sm leading-relaxed text-white/65 md:text-base;
+  @apply leading-relaxed text-white/65;
+  margin-top: 10px;
+  max-width: 100%;
+  font-size: 13px;
 }
 
-.gallery__spacer{ @apply h-20 md:h-32; }
+@media (min-width: 600px){ .gallery__desc{ max-width: 48rem; font-size: 14px; } }
+@media (min-width: 900px){ .gallery__desc{ font-size: 15px; } }
+
+.gallery__spacer{
+  height: 48px;
+}
+
+@media (min-width: 600px){ .gallery__spacer{ height: 64px; } }
+@media (min-width: 900px){ .gallery__spacer{ height: 80px; } }
+@media (min-width: 1200px){ .gallery__spacer{ height: 100px; } }
 
 /* =========================
    HERO MOSAIC (layout adattivo 1-7 foto)

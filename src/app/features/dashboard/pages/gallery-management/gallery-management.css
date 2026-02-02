@@ -533,6 +533,23 @@
   gap: 12px;
 }
 
+/* Anno / Mese / Giorno in una riga allineati */
+.formRow--date {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+.formGroup--date {
+  margin-bottom: 0;
+}
+
+.formGroup--date .formInput--select {
+  width: 100%;
+}
+
 /* =========================================================
    UPLOAD ZONE
    ========================================================= */
@@ -647,6 +664,10 @@
 /* =========================================================
    CHECKBOX
    ========================================================= */
+.formGroup--checkbox {
+  margin-top: 4px;
+}
+
 .formGroup--checkbox label {
   display: flex;
   align-items: center;
