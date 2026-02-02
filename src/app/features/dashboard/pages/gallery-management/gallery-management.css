@@ -346,9 +346,16 @@
   cursor: not-allowed;
 }
 
-.orderSelect {
-  width: 48px;
-  padding: 6px 8px;
+.orderControl__indexWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.orderInput {
+  width: 44px;
+  padding: 6px 6px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.05);
@@ -356,25 +363,34 @@
   font-size: 14px;
   font-weight: 700;
   text-align: center;
-  cursor: pointer;
   outline: none;
   transition: border-color 150ms ease, background 150ms ease;
-  appearance: none;
 }
 
-.orderSelect:hover {
+.orderInput::-webkit-inner-spin-button,
+.orderInput::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.orderInput:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 215, 0, 0.25);
 }
 
-.orderSelect:focus {
+.orderInput:focus {
   border-color: rgba(255, 215, 0, 0.40);
   background: rgba(255, 255, 255, 0.08);
 }
 
-.orderSelect option {
-  background: rgba(22, 22, 28, 0.98);
-  color: rgba(255, 255, 255, 0.90);
+.orderInput::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.orderControl__hint {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.40);
 }
 
 /* =========================================================

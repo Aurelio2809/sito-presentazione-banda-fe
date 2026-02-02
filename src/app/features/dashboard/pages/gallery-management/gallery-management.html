@@ -52,7 +52,7 @@
       <line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       <line x1="12" y1="8" x2="12.01" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>
-    <span>Usa le frecce per riordinare le foto preferite. L'ordine determina la visualizzazione nella galleria pubblica.</span>
+    <span>Usa le frecce per spostare su/giù oppure inserisci l'indice nel campo e premi Invio: le foto si riordinano. Poi clicca "Salva ordine".</span>
   </div>
 
   <!-- EMPTY STATE -->
@@ -114,9 +114,10 @@
                   </svg>
                 </button>
               </div>
-              <select class="orderSelect" [value]="photo.displayOrder" (change)="moveToPosition(photo, +$any($event.target).value)">
-                <option *ngFor="let n of favoritePhotos; let i = index" [value]="i + 1">{{ i + 1 }}</option>
-              </select>
+              <div class="orderControl__indexWrap">
+                <input type="number" class="orderInput" [ngModel]="photo.displayOrder" (keydown.enter)="applyOrderFromInput(photo, $event)" min="1" [max]="favoritePhotos.length" placeholder="nº" title="Indice (Invio per applicare)">
+                <span class="orderControl__hint">Invio</span>
+              </div>
             </div>
           </td>
           <td class="table__td table__td--actions">

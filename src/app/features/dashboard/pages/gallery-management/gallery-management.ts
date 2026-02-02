@@ -197,7 +197,12 @@ export class GalleryManagement implements OnInit {
         console.log('[GalleryMgmt] savePhoto() COMPLETE - tempo totale:', (performance.now() - startTime).toFixed(2), 'ms');
       },
       error: (err) => {
-        alert('Errore nel salvataggio');
+        const msg = err?.error?.message ?? err?.message ?? 'Errore nel salvataggio';
+        const details = err?.error?.errors;
+        const fullMsg = details
+          ? `${msg}\n${Object.entries(details).map(([k, v]) => `${k}: ${v}`).join('\n')}`
+          : msg;
+        alert(fullMsg);
         console.error('[GalleryMgmt] savePhoto() ERROR:', err);
         this.saving = false;
         this.cdr.detectChanges();
@@ -309,6 +314,20 @@ export class GalleryManagement implements OnInit {
 
     photo.displayOrder = newPosition;
     this.orderChanged = true;
+  }
+
+  /** Applica la posizione dall'input al tasto Invio: la foto va alla posizione indicata e le altre scalano. */
+  applyOrderFromInput(photo: GalleryPhotoResponse, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const val = parseInt(input.value, 10);
+    const max = this.favoritePhotos.length;
+    if (isNaN(val) || val < 1 || val > max) {
+      input.value = String(photo.displayOrder ?? '');
+      return;
+    }
+    this.moveToPosition(photo, val);
+    input.value = String(photo.displayOrder ?? '');
+    this.cdr.detectChanges();
   }
 
   async saveOrder(): Promise<void> {
