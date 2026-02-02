@@ -460,7 +460,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 20px;
+  padding: 20px 24px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -489,31 +489,31 @@
 }
 
 .modal__body {
-  padding: 20px;
+  padding: 24px 24px 28px;
 }
 
 .modal__footer {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  padding: 16px 20px;
+  gap: 12px;
+  padding: 20px 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* =========================================================
-   FORM
+   FORM (modale carica/modifica foto)
    ========================================================= */
-.formGroup {
-  margin-bottom: 16px;
+.modal__body .formGroup {
+  margin-bottom: 20px;
 }
 
-.formGroup:last-child {
+.modal__body .formGroup:last-child {
   margin-bottom: 0;
 }
 
 .formLabel {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-size: 12px;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.60);
@@ -546,24 +546,35 @@
 .formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 16px;
 }
 
-/* Anno / Mese / Giorno in una riga allineati */
+/* Anno / Mese / Giorno in una stessa riga, spaziati dall'elemento sopra */
 .formRow--date {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  align-items: end;
-  margin-bottom: 16px;
+  gap: 14px;
+  align-items: stretch;
+  margin-top: 24px;
+  margin-bottom: 20px;
 }
 
 .formGroup--date {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 0;
+}
+
+.formGroup--date .formLabel {
+  flex-shrink: 0;
+  min-height: 20px;
+  margin-bottom: 8px;
 }
 
 .formGroup--date .formInput--select {
   width: 100%;
+  min-height: 42px;
+  box-sizing: border-box;
 }
 
 /* =========================================================
@@ -573,9 +584,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 32px;
-  margin-bottom: 20px;
+  gap: 12px;
+  padding: 36px 32px;
+  margin-bottom: 24px;
   border-radius: 12px;
   border: 2px dashed rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.02);
