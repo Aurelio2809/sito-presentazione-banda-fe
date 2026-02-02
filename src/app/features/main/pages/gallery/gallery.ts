@@ -17,6 +17,9 @@ export class Gallery implements OnInit {
   loading = true;
   error: string | null = null;
 
+  // Ordinamento: 'order' = indice (displayOrder), 'date' = cronologico (createdAt)
+  sortBy: 'order' | 'date' = 'order';
+
   // Paginazione
   page = 0;
   pageSize = 9;
@@ -44,7 +47,7 @@ export class Gallery implements OnInit {
 
     forkJoin({
       favorites: this.galleryService.getPublicFavorites(),
-      photos: this.galleryService.getPublicPhotos(this.page, this.pageSize)
+      photos: this.galleryService.getPublicPhotos(this.page, this.pageSize, this.sortBy)
     }).subscribe({
       next: ({ favorites, photos }) => {
         const responseTime = performance.now();
@@ -81,7 +84,7 @@ export class Gallery implements OnInit {
     console.log('[Gallery] loadPhotos() START - page:', this.page);
     this.loading = true;
     
-    this.galleryService.getPublicPhotos(this.page, this.pageSize).subscribe({
+    this.galleryService.getPublicPhotos(this.page, this.pageSize, this.sortBy).subscribe({
       next: (pageData) => {
         const responseTime = performance.now();
         console.log('[Gallery] loadPhotos RESPONSE dopo', (responseTime - startTime).toFixed(2), 'ms');
@@ -135,6 +138,12 @@ export class Gallery implements OnInit {
     this.pageSize = size;
     this.page = 0;
     this.loadPhotos();
+  }
+
+  onSortChange(sort: 'order' | 'date'): void {
+    this.sortBy = sort;
+    this.page = 0;
+    this.loadData();
   }
 
   open(item: GalleryPhotoResponse): void {

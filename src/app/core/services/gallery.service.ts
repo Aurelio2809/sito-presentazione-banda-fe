@@ -16,10 +16,10 @@ export class GalleryService extends ApiService {
 
   // ==================== PUBBLICI ====================
 
-  getPublicPhotos(page = 0, size = 12): Observable<Page<GalleryPhotoResponse>> {
+  getPublicPhotos(page = 0, size = 12, sort: 'order' | 'date' = 'order'): Observable<Page<GalleryPhotoResponse>> {
     const startTime = performance.now();
-    console.log('[GalleryService] getPublicPhotos() CHIAMATA HTTP START');
-    const params = this.buildParams({ page, size });
+    console.log('[GalleryService] getPublicPhotos() CHIAMATA HTTP START - sort:', sort);
+    const params = this.buildParams({ page, size, sort });
     return this.http.get<Page<GalleryPhotoResponse>>(`${this.baseUrl}/gallery/public`, { params }).pipe(
       tap({
         next: (data) => console.log('[GalleryService] getPublicPhotos() HTTP RESPONSE dopo', (performance.now() - startTime).toFixed(2), 'ms -', data.content.length, 'items'),
