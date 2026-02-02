@@ -170,9 +170,9 @@ export class GalleryManagement implements OnInit {
       title: this.selectedPhoto.title,
       description: this.selectedPhoto.description,
       location: this.selectedPhoto.location,
-      photoYear: this.selectedPhoto.photoYear ?? undefined,
-      photoMonth: this.selectedPhoto.photoMonth ?? undefined,
-      photoDay: this.selectedPhoto.photoDay ?? undefined,
+      photoYear: this.toNumberOrUndefined(this.selectedPhoto.photoYear),
+      photoMonth: this.toNumberOrUndefined(this.selectedPhoto.photoMonth),
+      photoDay: this.toNumberOrUndefined(this.selectedPhoto.photoDay),
       favorite: this.selectedPhoto.favorite,
       displayOrder: this.selectedPhoto.displayOrder
     };
@@ -236,9 +236,9 @@ export class GalleryManagement implements OnInit {
       title: this.uploadMetadata.title || 'Senza titolo',
       description: this.uploadMetadata.description,
       location: this.uploadMetadata.location,
-      photoYear: this.uploadMetadata.photoYear ?? undefined,
-      photoMonth: this.uploadMetadata.photoMonth ?? undefined,
-      photoDay: this.uploadMetadata.photoDay ?? undefined,
+      photoYear: this.toNumberOrUndefined(this.uploadMetadata.photoYear),
+      photoMonth: this.toNumberOrUndefined(this.uploadMetadata.photoMonth),
+      photoDay: this.toNumberOrUndefined(this.uploadMetadata.photoDay),
       favorite: this.uploadMetadata.favorite || false
     };
 
@@ -345,6 +345,12 @@ export class GalleryManagement implements OnInit {
     // photo.src è /api/gallery/photos/filename.jpg
     const baseUrl = environment.apiUrl.replace('/api', '');
     return `${baseUrl}${photo.src}`;
+  }
+
+  private toNumberOrUndefined(value: number | string | null | undefined): number | undefined {
+    if (value == null || value === '') return undefined;
+    const n = Number(value);
+    return Number.isNaN(n) ? undefined : n;
   }
 
   formatPhotoDate(photo: GalleryPhotoResponse): string {
