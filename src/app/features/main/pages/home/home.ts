@@ -146,7 +146,8 @@ export class Home implements AfterViewInit, OnDestroy {
       next: (val) => {
         const photosUrl = val.content.map(p => {
             const baseUrl = environment.apiUrl.replace('/api', '');
-            return p.src?.startsWith('http') ? p.src : `${baseUrl}${p.src}`; // Simplified, the proxy will handle it
+            const url = p.thumbnailSrc || p.src;
+            return url?.startsWith('http') ? url : `${baseUrl}${url}`; // Simplified, the proxy will handle it
         });
 
         if (photosUrl.length >= 3) {
