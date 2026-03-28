@@ -9,8 +9,8 @@ export type SocialLink = {
 export const SOCIAL_URLS = {
   facebook: 'https://www.facebook.com/profile.php?id=100015687872187',
   instagram: 'https://www.instagram.com/bandamusicalecasalidelmanco/?next=%2F',
-  youtube: 'https://www.youtube.com/@BandaMusicaleCitt%C3%A0diCasaliDelM',
-  tiktok: 'https://tiktok.com/@bandamusicalecasalidelm',
+  youtube: 'https://www.youtube.com/@BandaMusicaleCasaliDelManco',
+  tiktok: 'https://www.tiktok.com/@bandamusicalecasalidelm?',
 } as const;
 
 export const SOCIAL_LINKS: SocialLink[] = [
