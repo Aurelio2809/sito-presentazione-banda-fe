@@ -45,7 +45,7 @@ export class Home implements AfterViewInit, OnDestroy {
   private rafId: number | null = null;
   private rootEl: HTMLElement | null = null;
 
-  constructor(private zone: NgZone, private cdr: ChangeDetectorRef) {}
+  constructor(private zone: NgZone, private cdr: ChangeDetectorRef, private galleryService: import('../../../../core/services').GalleryService) {}
 
   readonly sections: Section[] = [
     {
@@ -58,7 +58,7 @@ export class Home implements AfterViewInit, OnDestroy {
       ctaLink: '/about',
       layout: 'assocHero',
       images: [
-        'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1800&q=75',
+        'assets/stemma/stemma_clean.png', // Temporary placeholder until API loads
       ],
       crestImg: 'assets/stemma/stemma_clean.png',
     },
@@ -72,10 +72,8 @@ export class Home implements AfterViewInit, OnDestroy {
       ctaLink: '/contacts',
       layout: 'sedeSplit',
       images: [
-        // ORIZZONTALE
-        'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=1800&q=75',
-        // VERTICALE (sceglila pure tu, qui ne metto una che regge bene in portrait)
-        'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1800&q=75',
+        'assets/stemma/stemma_clean.png',
+        'assets/stemma/stemma_clean.png',
       ],
     },
     {
@@ -88,9 +86,9 @@ export class Home implements AfterViewInit, OnDestroy {
       ctaLink: '/about',
       layout: 'storyTriptych',
       images: [
-        'https://images.unsplash.com/photo-1521337706264-a414f153a5e0?auto=format&fit=crop&w=1800&q=75',
-        'https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=1800&q=75',
-        'https://images.unsplash.com/photo-1521334726092-b509a19597c1?auto=format&fit=crop&w=1800&q=75',
+        'assets/stemma/stemma_clean.png',
+        'assets/stemma/stemma_clean.png',
+        'assets/stemma/stemma_clean.png',
       ],
     },
     {
@@ -103,9 +101,9 @@ export class Home implements AfterViewInit, OnDestroy {
       ctaLink: '/events',
       layout: 'bandStage',
       images: [
-        'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1800&q=75',
-        'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1800&q=75',
-        'https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1800&q=75',
+        'assets/stemma/stemma_clean.png',
+        'assets/stemma/stemma_clean.png',
+        'assets/stemma/stemma_clean.png',
       ],
     },
     {
@@ -118,8 +116,8 @@ export class Home implements AfterViewInit, OnDestroy {
       ctaLink: '/contacts',
       layout: 'schoolDouble',
       images: [
-        'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1800&q=75',
-        'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1800&q=75',
+        'assets/stemma/stemma_clean.png',
+        'assets/stemma/stemma_clean.png',
       ],
     },
     {
@@ -132,7 +130,7 @@ export class Home implements AfterViewInit, OnDestroy {
       ctaLink: '/contacts',
       layout: 'boardPoster',
       images: [
-        'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=75',
+        'assets/stemma/stemma_clean.png',
       ],
     },
   ];
@@ -140,6 +138,28 @@ export class Home implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     const els = this.sectionRefs.map((r) => r.nativeElement);
     if (els.length === 0) return;
+
+    // Fetch real gallery photos and assign them randomly/sequentially to sections
+    this.galleryService.getPublicPhotos(0, 15, 'order').subscribe({
+      next: (val) => {
+        const photosUrl = val.content.map(p => {
+            const baseUrl = import('../../../../../environments/environment').then(m => m.environment.apiUrl.replace('/api', ''));
+            return p.src?.startsWith('http') ? p.src : `/api${p.src}`; // Simplified, the proxy will handle it
+        });
+
+        if (photosUrl.length >= 3) {
+           let photoIdx = 0;
+           this.sections.forEach(s => {
+               for(let i=0; i<s.images.length; i++) {
+                   // Cycle through available photos
+                   s.images[i] = photosUrl[photoIdx % photosUrl.length];
+                   photoIdx++;
+               }
+           });
+           this.cdr.detectChanges();
+        }
+      }
+    });
 
     this.rootEl = this.findScrollRoot(els[0]);
 
