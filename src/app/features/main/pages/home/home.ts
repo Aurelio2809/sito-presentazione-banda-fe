@@ -8,6 +8,8 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import { GalleryService } from '../../../../core/services';
+import { environment } from '../../../../../environments/environment';
 
 type Layout =
   | 'assocHero'
@@ -45,7 +47,7 @@ export class Home implements AfterViewInit, OnDestroy {
   private rafId: number | null = null;
   private rootEl: HTMLElement | null = null;
 
-  constructor(private zone: NgZone, private cdr: ChangeDetectorRef, private galleryService: import('../../../../core/services').GalleryService) {}
+  constructor(private zone: NgZone, private cdr: ChangeDetectorRef, private galleryService: GalleryService) {}
 
   readonly sections: Section[] = [
     {
@@ -143,8 +145,8 @@ export class Home implements AfterViewInit, OnDestroy {
     this.galleryService.getPublicPhotos(0, 15, 'order').subscribe({
       next: (val) => {
         const photosUrl = val.content.map(p => {
-            const baseUrl = import('../../../../../environments/environment').then(m => m.environment.apiUrl.replace('/api', ''));
-            return p.src?.startsWith('http') ? p.src : `/api${p.src}`; // Simplified, the proxy will handle it
+            const baseUrl = environment.apiUrl.replace('/api', '');
+            return p.src?.startsWith('http') ? p.src : `${baseUrl}${p.src}`; // Simplified, the proxy will handle it
         });
 
         if (photosUrl.length >= 3) {
