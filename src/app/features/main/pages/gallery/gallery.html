@@ -115,7 +115,7 @@
 
     <div class="viewer__content" *ngIf="selected as s">
       <div class="viewer__media">
-        <img class="viewer__img" [src]="getPhotoUrl(s)" [alt]="s.title" decoding="async" fetchpriority="high" />
+        <img class="viewer__img" [src]="getThumbnailUrl(s)" [alt]="s.title" decoding="async" fetchpriority="high" />
       </div>
 
       <aside class="viewer__info">
