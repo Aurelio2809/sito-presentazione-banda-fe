@@ -1,20 +1,3 @@
-.home-spinner-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(11, 11, 13, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.home-spinner-overlay app-loading-spinner {
-  --color-primary: #fbbf24;
-  --color-text-secondary: rgba(255,255,255,0.6);
-}
-
 .home {
   width: 100%;
 }

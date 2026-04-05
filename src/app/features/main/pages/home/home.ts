@@ -8,8 +8,6 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { GalleryService } from '../../../../core/services';
-import { environment } from '../../../../../environments/environment';
 
 type Section = {
   key: 'associazione' | 'sede' | 'storia' | 'banda' | 'scuola' | 'direttivo';
@@ -32,12 +30,11 @@ export class Home implements AfterViewInit, OnDestroy {
   @ViewChildren('sec', { read: ElementRef }) sectionRefs!: QueryList<ElementRef<HTMLElement>>;
 
   animEnabled = false;
-  photosLoading = true;
 
   private rafId: number | null = null;
   private rootEl: HTMLElement | null = null;
 
-  constructor(private zone: NgZone, private cdr: ChangeDetectorRef, private galleryService: GalleryService) {}
+  constructor(private zone: NgZone, private cdr: ChangeDetectorRef) {}
 
   readonly sections: Section[] = [
     {
@@ -48,7 +45,7 @@ export class Home implements AfterViewInit, OnDestroy {
       ctaText: 'HOME.ASSOCIAZIONE.CTA',
       ctaLink: '/about',
       images: [
-        'assets/stemma/stemma_clean.png', // Temporary placeholder until API loads
+        'assets/stemma/stemma_clean.png',
       ],
       crestImg: 'assets/stemma/stemma_clean.png',
     },
@@ -60,8 +57,8 @@ export class Home implements AfterViewInit, OnDestroy {
       ctaText: 'HOME.SEDE.CTA',
       ctaLink: '/contacts',
       images: [
-        'assets/stemma/stemma_clean.png',
-        'assets/stemma/stemma_clean.png',
+        'assets/home/sede-1.jpg',
+        'assets/home/sede-2.jpg',
       ],
     },
     {
@@ -118,33 +115,6 @@ export class Home implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     const els = this.sectionRefs.map((r) => r.nativeElement);
     if (els.length === 0) return;
-
-    // Fetch real gallery photos and assign them randomly/sequentially to sections
-    this.galleryService.getPublicPhotos(0, 15, 'order').subscribe({
-      next: (val) => {
-        const photosUrl = val.content.map(p => {
-            const baseUrl = environment.apiUrl.replace('/api', '');
-            const url = p.thumbnailSrc || p.src;
-            return url?.startsWith('http') ? url : `${baseUrl}${url}`; // Simplified, the proxy will handle it
-        });
-
-        if (photosUrl.length >= 3) {
-          let photoIdx = 0;
-          this.sections.forEach(s => {
-            for (let i = 0; i < s.images.length; i++) {
-              s.images[i] = photosUrl[photoIdx % photosUrl.length];
-              photoIdx++;
-            }
-          });
-        }
-        this.photosLoading = false;
-        this.cdr.detectChanges();
-      },
-      error: () => {
-        this.photosLoading = false;
-        this.cdr.detectChanges();
-      }
-    });
 
     this.rootEl = this.findScrollRoot(els[0]);
 
