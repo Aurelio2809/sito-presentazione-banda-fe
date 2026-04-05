@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,10 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('fe');
+export class App implements OnInit {
+  constructor(private titleService: Title) {}
+
+  ngOnInit(): void {
+    this.titleService.setTitle('Banda Musicale Casali del Manco | Sito Ufficiale');
+  }
 }
