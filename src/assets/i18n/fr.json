@@ -1,0 +1,48 @@
+{
+  "NAV": {
+    "HOME": "Accueil",
+    "ABOUT": "À propos",
+    "GALLERY": "Galerie",
+    "EVENTS": "Événements",
+    "CONTACTS": "Contacts",
+    "DASHBOARD": "Tableau de bord"
+  },
+  "HOME": {
+    "ASSOCIAZIONE": {
+      "TAG": "Association",
+      "TITLE": "Notre association",
+      "TEXT": "Nous sommes une association à but non lucratif promouvant la culture et la tradition musicale des fanfares sur le territoire à travers des initiatives, des concerts et des activités sociales. Nos objectifs sont la préservation des racines historico-culturelles, la diffusion de la culture des fanfares et la création d'un esprit de communauté.",
+      "CTA": "En savoir plus"
+    },
+    "SEDE": {
+      "TAG": "Siège",
+      "TITLE": "Notre siège",
+      "TEXT": "Notre siège : Via traversa campanile 31, Casali del Manco (CS) loc. Pedace. Un lieu de rencontre où nous répétons, organisons notre école de musique et nous réunissons pour la planification future. Ici se construisent des répertoires, des amitiés et des projets.",
+      "CTA": "Où nous trouver"
+    },
+    "STORIA": {
+      "TAG": "Histoire",
+      "TITLE": "Notre histoire",
+      "TEXT": "Une tradition de plus d'un siècle. Nos origines résident dans l'ancienne fanfare de Pedace, dont les premiers témoignages remontent à 1925. En 2019, avec la fusion de Pedace et de quatre autres municipalités pour former Casali del Manco, la fanfare a également changé de nom. Nous grandissons d'année en année avec des événements et des concerts, et portons de nombreux grands projets pour l'avenir.",
+      "CTA": "Qui sommes-nous"
+    },
+    "BANDA": {
+      "TAG": "Fanfare",
+      "TITLE": "L'harmonie",
+      "TEXT": "Un ensemble unissant l'expérience des plus âgés à la nouvelle énergie des jeunes. Nous pouvons compter sur des solistes experts, des professionnels formés et des étudiants en conservatoire. Nous travaillons sur des répertoires de fanfare, des bandes sonores, des arrangements et des classiques. Le chef d'orchestre actuel de la fanfare est Franco Guglielmelli, assisté par Pietro Rizzo.",
+      "CTA": "Événements"
+    },
+    "SCUOLA": {
+      "TAG": "École",
+      "TITLE": "L'école de musique",
+      "TEXT": "Nous proposons des cours de formation, fournissant aux nouveaux membres la méthode et les bases de la théorie musicale, du solfège et des instruments. Un chemin pour aborder les instruments et grandir musicalement, ensemble. Les cours sont dispensés par : Pietro Rizzo, Gianmarco Scrivano, Daniela D'ambrosio et Mario Zicarelli.",
+      "CTA": "Contacts"
+    },
+    "DIRETTIVO": {
+      "TAG": "Conseil",
+      "TITLE": "Le conseil d'administration",
+      "TEXT": "Le conseil est l'organe de l'association chargé de prendre les décisions et de tracer la voie vers l'avenir. Un groupe coordonnant les activités, les événements et les projets avec transparence et au nom de tous les membres. Le président de l'association est actuellement Aurelio Marotta.",
+      "CTA": "Écrivez-nous"
+    }
+  }
+}

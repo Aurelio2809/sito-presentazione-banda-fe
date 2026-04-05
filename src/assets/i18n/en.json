@@ -1,0 +1,48 @@
+{
+  "NAV": {
+    "HOME": "Home",
+    "ABOUT": "About us",
+    "GALLERY": "Gallery",
+    "EVENTS": "Events",
+    "CONTACTS": "Contacts",
+    "DASHBOARD": "Dashboard"
+  },
+  "HOME": {
+    "ASSOCIAZIONE": {
+      "TAG": "Association",
+      "TITLE": "Our association",
+      "TEXT": "We are a non-profit association promoting musical band culture and tradition in the area through initiatives, concert, and social activities. Our goals are safeguarding historical-cultural roots, spreading band culture, and building a sense of community.",
+      "CTA": "Learn more"
+    },
+    "SEDE": {
+      "TAG": "Headquarters",
+      "TITLE": "Headquarters",
+      "TEXT": "Our location: Via traversa campanile 31, Casali del Manco (CS) loc. Pedace. A meeting place where we rehearse, run our music school, and gather for future planning. Here, repertoires, friendships, and projects are built.",
+      "CTA": "Find us"
+    },
+    "STORIA": {
+      "TAG": "History",
+      "TITLE": "Our history",
+      "TEXT": "A tradition stretching over a century. Our origins lie in the former musical band of Pedace, with the first records going back to 1925. In 2019, with the merging of Pedace and four other towns into the municipality of Casali del Manco, the band also changed its name. We grow year after year through events and concerts, holding many great projects for the future.",
+      "CTA": "Who we are"
+    },
+    "BANDA": {
+      "TAG": "Band",
+      "TITLE": "The marching band",
+      "TEXT": "An ensemble uniting the experience of the older members with the fresh energy of the youth. We rely on expert soloists, trained professionals, and conservatory students. We work on band repertoires, soundtracks, arrangements, and classics. The band's conductor is currently Franco Guglielmelli, assisted by Pietro Rizzo.",
+      "CTA": "Events"
+    },
+    "SCUOLA": {
+      "TAG": "School",
+      "TITLE": "The music school",
+      "TEXT": "We offer training courses, providing new members with the method and fundamentals of music theory, solfeggio, and instrument playing. A journey to approach instruments and grow musically, together. The courses are held by: Pietro Rizzo, Gianmarco Scrivano, Daniela D'ambrosio, and Mario Zicarelli.",
+      "CTA": "Contacts"
+    },
+    "DIRETTIVO": {
+      "TAG": "Board",
+      "TITLE": "The board of directors",
+      "TEXT": "The board is the association's body responsible for making decisions and charting the course for the future. A group coordinating activities, events, and projects transparently and on behalf of all members. The association's president is currently Aurelio Marotta.",
+      "CTA": "Contact us"
+    }
+  }
+}

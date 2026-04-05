@@ -1,195 +1,25 @@
 <div class="home" [attr.data-anim]="animEnabled ? 'on' : 'off'">
-  <section
-    class="heroSection"
+  <app-home-section
     *ngFor="let s of sections; let i = index"
     #sec
+    [key]="s.key"
     [attr.data-side]="i % 2 === 0 ? 'left' : 'right'"
-    [attr.data-key]="s.key"
     [attr.data-layout]="s.layout"
     [attr.data-index]="i"
+    class="heroSectionHost"
   >
-    <div class="section__inner">
-      <ng-container [ngSwitch]="s.layout">
-
-        <!-- 1) ASSOCIAZIONE -->
-        <ng-container *ngSwitchCase="'assocHero'">
-          <div class="layout layout--assoc">
-            <div class="assoc__copy assoc__copy--enhanced">
-              <img
-                *ngIf="s.crestImg"
-                class="crestWatermark reveal"
-                style="--d:0.04;"
-                [src]="s.crestImg"
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-              />
-
-              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
-              <p class="desc reveal" style="--d:0.24;">{{ s.text }}</p>
-
-              <div class="actions reveal" style="--d:0.34;">
-                <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
-              </div>
-            </div>
-
-            <div class="assoc__media reveal" style="--d:0.12;">
-              <div class="frame frame--hero">
-                <img class="img img--hero" [src]="s.images[0]" [alt]="s.title" loading="lazy" />
-              </div>
-            </div>
-          </div>
-        </ng-container>
-
-        <!-- 2) SEDE -->
-        <ng-container *ngSwitchCase="'sedeSplit'">
-          <div class="layout layout--split layout--sede">
-            <div class="split__media sedeGallery2">
-              <div class="sedeGallery2__portrait reveal" style="--d:0.10;">
-                <div class="frame frame--tall">
-                  <img class="img img--tall" [src]="s.images[1]" [alt]="s.title + ' foto verticale'" loading="lazy" />
-                </div>
-              </div>
-
-              <div class="sedeGallery2__landscape reveal" style="--d:0.18;">
-                <div class="frame frame--lg">
-                  <img class="img img--lg" [src]="s.images[0]" [alt]="s.title + ' foto orizzontale'" loading="lazy" />
-                </div>
-              </div>
-            </div>
-
-            <div class="split__copy">
-              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
-              <p class="desc reveal" style="--d:0.24;">{{ s.text }}</p>
-              <div class="actions reveal" style="--d:0.34;">
-                <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-
-        <!-- 3) STORIA -->
-        <ng-container *ngSwitchCase="'storyTriptych'">
-          <div class="layout layout--storyCentered">
-            <div class="storyHeader">
-              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
-              <p class="desc reveal storyClamp" style="--d:0.24;">{{ s.text }}</p>
-              <div class="actions reveal" style="--d:0.34;">
-                <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
-              </div>
-            </div>
-
-            <div class="triptych triptych--centered">
-              <div class="triptych__a reveal" style="--d:0.12;">
-                <div class="frame frame--md">
-                  <img class="img img--md" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
-                </div>
-              </div>
-
-              <div class="triptych__b reveal" style="--d:0.18;">
-                <div class="frame frame--hero">
-                  <img class="img img--heroCompact" [src]="s.images[1]" [alt]="s.title + ' foto 2'" loading="lazy" />
-                </div>
-              </div>
-
-              <div class="triptych__c reveal" style="--d:0.24;">
-                <div class="frame frame--md">
-                  <img class="img img--md" [src]="s.images[2]" [alt]="s.title + ' foto 3'" loading="lazy" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-
-        <!-- 4) BANDA: 3 immagini uguali sulla stessa riga -->
-        <ng-container *ngSwitchCase="'bandStage'">
-          <div class="layout layout--band layout--bandReadable">
-            <div class="band__top band__top--readable">
-              <div class="band__copy">
-                <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
-                <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
-                <p class="desc reveal bandClamp bandClamp--readable" style="--d:0.24;">{{ s.text }}</p>
-              </div>
-
-              <div class="actions reveal" style="--d:0.32;">
-                <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
-              </div>
-            </div>
-
-            <div class="bandRow">
-              <div class="bandRow__item reveal" style="--d:0.14;">
-                <div class="frame frame--bandEqual">
-                  <img class="img img--bandEqual" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
-                </div>
-              </div>
-
-              <div class="bandRow__item reveal" style="--d:0.20;">
-                <div class="frame frame--bandEqual">
-                  <img class="img img--bandEqual" [src]="s.images[1]" [alt]="s.title + ' foto 2'" loading="lazy" />
-                </div>
-              </div>
-
-              <div class="bandRow__item reveal" style="--d:0.26;">
-                <div class="frame frame--bandEqual">
-                  <img class="img img--bandEqual" [src]="s.images[2]" [alt]="s.title + ' foto 3'" loading="lazy" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-
-        <!-- 5) SCUOLA -->
-        <ng-container *ngSwitchCase="'schoolDouble'">
-          <div class="layout layout--school">
-            <div class="school__copy">
-              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
-              <p class="desc reveal schoolClamp" style="--d:0.24;">{{ s.text }}</p>
-              <div class="actions reveal" style="--d:0.34;">
-                <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
-              </div>
-            </div>
-
-            <div class="school__media schoolMosaic">
-              <div class="schoolMosaic__a reveal" style="--d:0.12;">
-                <div class="frame frame--tall">
-                  <img class="img img--tall" [src]="s.images[0]" [alt]="s.title + ' foto 1'" loading="lazy" />
-                </div>
-              </div>
-
-              <div class="schoolMosaic__b reveal" style="--d:0.20;">
-                <div class="frame frame--lg">
-                  <img class="img img--lg" [src]="s.images[1]" [alt]="s.title + ' foto 2'" loading="lazy" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-
-        <!-- 6) DIRETTIVO -->
-        <ng-container *ngSwitchCase="'boardPoster'">
-          <div class="layout layout--board">
-            <div class="board__copy">
-              <div class="label reveal" style="--d:0.06;">{{ s.tag }}</div>
-              <h2 class="title reveal title--ornament" style="--d:0.14;">{{ s.title }}</h2>
-              <p class="desc reveal boardClamp" style="--d:0.24;">{{ s.text }}</p>
-              <div class="actions reveal" style="--d:0.34;">
-                <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
-              </div>
-            </div>
-
-            <div class="board__media reveal" style="--d:0.12;">
-              <div class="frame frame--tall">
-                <img class="img img--tall" [src]="s.images[0]" [alt]="s.title" loading="lazy" />
-              </div>
-            </div>
-          </div>
-        </ng-container>
-
-      </ng-container>
+    <div class="copy-group reveal-group">
+      <div class="top-crest order-0 reveal" *ngIf="s.crestImg" style="--d:0.02;">
+        <img [src]="s.crestImg" alt="Stemma Associazione" loading="lazy" />
+      </div>
+      <app-home-title class="order-1 reveal" style="--d:0.10;" [text]="s.title | translate"></app-home-title>
+      <app-home-subtitle-text class="order-3 reveal" style="--d:0.24;" [tag]="s.tag | translate" [text]="s.text | translate"></app-home-subtitle-text>
+      <app-home-section-cta class="order-4 reveal" style="--d:0.34;" [text]="s.ctaText | translate" [link]="s.ctaLink"></app-home-section-cta>
     </div>
-  </section>
+
+    <div class="media-group order-2 reveal" style="--d:0.16;">
+      <app-home-image class="mobile-only" [images]="s.images" [alt]="s.title"></app-home-image>
+      <app-home-image-desktop class="desktop-only" [images]="s.images"></app-home-image-desktop>
+    </div>
+  </app-home-section>
 </div>

@@ -36,10 +36,11 @@
   background-size: 1024px;
   background-position: top left;
 
-  opacity: 0.65;
+  opacity: 0.45;
   filter: contrast(1.18) brightness(1.06);
   mix-blend-mode: screen;
 }
+
 
 /* =========================================================
    HEADER (FISSO) - Responsive
@@ -222,7 +223,6 @@
 }
 
 .brand:hover .brand__mark{
-  transform: scale(1.05);
   background: rgba(255,255,255,0.12);
   border-color: rgba(255,215,0,0.28);
   filter: saturate(1.06);
@@ -372,6 +372,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
 }
 
+
 /* =========================================================
    MOBILE MENU BUTTON
    ========================================================= */
@@ -393,7 +394,6 @@
 .menuBtn:hover,
 .menuBtn:active{
   background: rgba(255, 255, 255, 0.18);
-  transform: scale(1.05);
 }
 
 .menuBtn__icon{
@@ -434,12 +434,6 @@
   );
   backdrop-filter: blur(24px) saturate(1.2);
 
-  display: flex;
-  flex-direction: column;
-  padding: 20px 16px;
-  gap: 6px;
-  overflow-y: auto;
-
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
@@ -453,12 +447,19 @@
   transition: opacity 250ms ease, transform 250ms ease;
 }
 
-/* Tablet: più padding */
-@media (min-width: 600px){
-  .mobileNav{
-    padding: 24px 20px;
-    gap: 8px;
-  }
+.mobileNav__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 24px 20px;
+  overflow-y: auto;
+}
+
+.mobileNav__links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 /* Nascosto su laptop e superiori */
@@ -473,34 +474,61 @@
   align-items: center;
   padding: 16px 18px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
   color: rgba(255, 255, 255, 0.90);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   transition: background 180ms ease, transform 180ms ease, border-color 180ms ease;
 }
 
-/* Tablet: link più grandi */
-@media (min-width: 600px){
-  .mobileNav__link{
-    padding: 18px 20px;
-    font-size: 17px;
-    border-radius: 16px;
-  }
-}
-
 .mobileNav__link:hover,
 .mobileNav__link:active{
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.15);
 }
 
 .mobileNav__link.is-active{
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(170, 0, 0, 0.15));
-  border-color: rgba(255, 215, 0, 0.30);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-color: rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 1);
+  font-weight: 600;
+}
+
+.mobileNav__footer {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.mobileNav__dashboard-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(255, 200, 87, 0.2) 0%, rgba(180, 45, 45, 0.15) 100%);
+  border: 1px solid rgba(255, 200, 87, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.mobileNav__dashboard-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 200, 87, 0.3) 0%, rgba(180, 45, 45, 0.25) 100%);
+  border-color: rgba(255, 200, 87, 0.6);
+  transform: translateY(-2px);
 }
 
 /* =========================================================

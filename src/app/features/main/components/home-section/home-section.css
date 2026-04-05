@@ -1,0 +1,68 @@
+.home-section-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(32px, 6vw, 80px) clamp(16px, 4vw, 64px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.home-section-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Effetto trasparenza che copre il background sottostante */
+  background: linear-gradient(135deg, rgba(11, 11, 13, 0.85) 0%, rgba(4, 4, 5, 0.95) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.home-section-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 200, 87, 0.03) 0%,
+    rgba(180, 45, 45, 0.02) 30%,
+    transparent 70%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.home-section-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+}
+
+/* Modulare: la colonna interna su mobile usa display flex in quell'ordine prestabilito tramite flex direction, anche se gestito dai child component */
+.home-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  /* Su desktop allarghiamo lo spazio e alterniamo magari via classi utility nel parent */
+  .home-section-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  
+  /* Possiamo invertire l'ordine nei layout alternati usando n-th child o classi */
+  :host([data-side="right"]) .home-section-content {
+    flex-direction: row-reverse;
+  }
+}

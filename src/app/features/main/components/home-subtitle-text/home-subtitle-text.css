@@ -1,0 +1,26 @@
+.subtitle-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Tutto justificato a manca */
+  gap: 12px;
+  text-align: left;
+}
+
+.label {
+  display: block;
+  color: rgba(255, 200, 87, 0.9);
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: -2px;
+}
+
+.desc {
+  margin: 0;
+  max-width: 55ch;
+  font-size: clamp(14px, 1.5vw, 17px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 400;
+}

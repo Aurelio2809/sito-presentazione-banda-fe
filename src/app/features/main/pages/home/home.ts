@@ -52,11 +52,10 @@ export class Home implements AfterViewInit, OnDestroy {
   readonly sections: Section[] = [
     {
       key: 'associazione',
-      tag: 'Associazione',
-      title: 'La nostra associazione',
-      text:
-        'Siamo un’associazione no-profit che promuove la cultura e la tradizione musicale bandistica nel territorio, attraverso iniziative e attività concertistiche e sociali. I nostri obbiettivi sono la tutela delle radici storico-culturali, la diffusione della cultura bandistica e la creazione di un senso di comunità.',
-      ctaText: 'Scopri di più',
+      tag: 'HOME.ASSOCIAZIONE.TAG',
+      title: 'HOME.ASSOCIAZIONE.TITLE',
+      text: 'HOME.ASSOCIAZIONE.TEXT',
+      ctaText: 'HOME.ASSOCIAZIONE.CTA',
       ctaLink: '/about',
       layout: 'assocHero',
       images: [
@@ -66,11 +65,10 @@ export class Home implements AfterViewInit, OnDestroy {
     },
     {
       key: 'sede',
-      tag: 'Sede',
-      title: 'La sede',
-      text:
-        'La nostra sede: Via traversa campanile 31, Casali del Manco (CS) loc. Pedace. Uno spazio di incontro, dove svolgiamo le prove, eroghiamo le attività di scuola musica e ci riuniamo per la pianificazione futura. Qui si costruiscono repertori, amicizie e progetti.',
-      ctaText: 'Dove siamo',
+      tag: 'HOME.SEDE.TAG',
+      title: 'HOME.SEDE.TITLE',
+      text: 'HOME.SEDE.TEXT',
+      ctaText: 'HOME.SEDE.CTA',
       ctaLink: '/contacts',
       layout: 'sedeSplit',
       images: [
@@ -80,11 +78,10 @@ export class Home implements AfterViewInit, OnDestroy {
     },
     {
       key: 'storia',
-      tag: 'Storia',
-      title: 'La nostra storia',
-      text:
-        "Una tradizione lunga più di un secolo. Le nostre origini risiedono nell'ex banda musicale di Pedace, le cui prime testimonianze risalgono al 1925. Nel 2019, con l'unione del comune di Pedace insieme ad altri quattro a formare il comune di Casali del Manco, anche la banda cambia nominativo. Cresciamo anno dopo anno con eventi, concerti ed abbiamo tanti progetti in mente per il futuro.",
-      ctaText: 'Chi siamo',
+      tag: 'HOME.STORIA.TAG',
+      title: 'HOME.STORIA.TITLE',
+      text: 'HOME.STORIA.TEXT',
+      ctaText: 'HOME.STORIA.CTA',
       ctaLink: '/about',
       layout: 'storyTriptych',
       images: [
@@ -95,11 +92,10 @@ export class Home implements AfterViewInit, OnDestroy {
     },
     {
       key: 'banda',
-      tag: 'Banda',
-      title: 'La banda musicale',
-      text:
-        "Un organico che unisce l'esperienza dei più grandi alle nuove energie dei giovani. Possiamo contare su solisti esperti, professionisti formati e studenti in conservatorio. Lavoriamo su repertori bandistici, colonne sonore, arrangiamenti e classici. Attualmente il maestro della banda è Franco Guglielmelli coadiuvato da Rizzo Pietro.",
-      ctaText: 'Eventi',
+      tag: 'HOME.BANDA.TAG',
+      title: 'HOME.BANDA.TITLE',
+      text: 'HOME.BANDA.TEXT',
+      ctaText: 'HOME.BANDA.CTA',
       ctaLink: '/events',
       layout: 'bandStage',
       images: [
@@ -110,11 +106,10 @@ export class Home implements AfterViewInit, OnDestroy {
     },
     {
       key: 'scuola',
-      tag: 'Scuola',
-      title: 'La scuola di musica',
-      text:
-        "Offriamo corsi di formazione, forniamo alle nuove leve metodo e fondamenti di teoria, solfeggio e strumento. Un percorso per avvicinarsi agli strumenti e crescere musicalmente, insieme. I corsi sono tenuti da: Rizzo Pietro, Scrivano Gianmarco, D'ambrosio Daniela, Zicarelli Mario.",
-      ctaText: 'Contatti',
+      tag: 'HOME.SCUOLA.TAG',
+      title: 'HOME.SCUOLA.TITLE',
+      text: 'HOME.SCUOLA.TEXT',
+      ctaText: 'HOME.SCUOLA.CTA',
       ctaLink: '/contacts',
       layout: 'schoolDouble',
       images: [
@@ -124,11 +119,10 @@ export class Home implements AfterViewInit, OnDestroy {
     },
     {
       key: 'direttivo',
-      tag: 'Direttivo',
-      title: 'Il direttivo',
-      text:
-        "Il direttivo è l'organo dell'associazione predisposto a prendere le decisioni e tracciare la strada verso il futuro. Un gruppo che coordina attività, eventi e progetti, con trasparenza e in rappresentanza dei soci tutti. Attualmente il presidente dell'associazione è Aurelio Marotta.",
-      ctaText: 'Scrivici',
+      tag: 'HOME.DIRETTIVO.TAG',
+      title: 'HOME.DIRETTIVO.TITLE',
+      text: 'HOME.DIRETTIVO.TEXT',
+      ctaText: 'HOME.DIRETTIVO.CTA',
       ctaLink: '/contacts',
       layout: 'boardPoster',
       images: [
@@ -146,7 +140,7 @@ export class Home implements AfterViewInit, OnDestroy {
       next: (val) => {
         const photosUrl = val.content.map(p => {
             const baseUrl = environment.apiUrl.replace('/api', '');
-            const url = p.thumbnailSrc || p.src;
+            const url = p.src || p.thumbnailSrc;
             return url?.startsWith('http') ? url : `${baseUrl}${url}`; // Simplified, the proxy will handle it
         });
 

@@ -11,15 +11,17 @@ import { HistoryChapter } from './components/history-chapter/history-chapter';
 import { SourcesBox } from './components/sources-box/sources-box';
 import { TransparentCard } from './components/transparent-card/transparent-card';
 import { LoadingSpinner } from './components/loading-spinner/loading-spinner';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [UiButton, UiInput, UiSimplePageNavigator, PageToc, HistoryChapter, SourcesBox, TransparentCard, LoadingSpinner],
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, TranslateModule],
   exports: [
     CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
     UiButton,
     UiInput,
     UiSimplePageNavigator,

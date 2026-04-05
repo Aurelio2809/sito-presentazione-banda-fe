@@ -14,26 +14,19 @@
 
       <!-- Desktop Nav -->
       <nav class="nav">
-        <a
-          class="nav__link"
-          routerLink="/"
-          routerLinkActive="is-active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          Home
+        <a class="nav__link" routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">
+          {{ 'NAV.HOME' | translate }}
         </a>
-        <a class="nav__link" routerLink="/about" routerLinkActive="is-active">Chi siamo</a>
-        <a class="nav__link" routerLink="/gallery" routerLinkActive="is-active">Galleria</a>
-        <a class="nav__link" routerLink="/events" routerLinkActive="is-active">Eventi</a>
-        <a class="nav__link" routerLink="/contacts" routerLinkActive="is-active">Contatti</a>
-        <a
-          class="nav__link"
-          routerLink="/dashboard"
-          routerLinkActive="is-active"
-          style="border: 1px solid rgba(255,255,255,0.3);"
-        >
-          Dashboard
+        <a class="nav__link" routerLink="/about" routerLinkActive="is-active">{{ 'NAV.ABOUT' | translate }}</a>
+        <a class="nav__link" routerLink="/gallery" routerLinkActive="is-active">{{ 'NAV.GALLERY' | translate }}</a>
+        <a class="nav__link" routerLink="/events" routerLinkActive="is-active">{{ 'NAV.EVENTS' | translate }}</a>
+        <a class="nav__link" routerLink="/contacts" routerLinkActive="is-active">{{ 'NAV.CONTACTS' | translate }}</a>
+        <a class="nav__link" routerLink="/dashboard" routerLinkActive="is-active" style="border: 1px solid rgba(255,255,255,0.3);">
+          {{ 'NAV.DASHBOARD' | translate }}
         </a>
+
+        <!-- Desktop Lang Select -->
+        <app-lang-selector variant="desktop"></app-lang-selector>
       </nav>
 
       <!-- Mobile Menu Button -->
@@ -50,30 +43,33 @@
 
   <!-- Mobile Nav Overlay -->
   <nav class="mobileNav" [class.is-open]="mobileMenuOpen">
-    <a
-      class="mobileNav__link"
-      routerLink="/"
-      routerLinkActive="is-active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (click)="closeMobileMenu()"
-    >
-      Home
-    </a>
-    <a class="mobileNav__link" routerLink="/about" routerLinkActive="is-active" (click)="closeMobileMenu()">
-      Chi siamo
-    </a>
-    <a class="mobileNav__link" routerLink="/gallery" routerLinkActive="is-active" (click)="closeMobileMenu()">
-      Galleria
-    </a>
-    <a class="mobileNav__link" routerLink="/events" routerLinkActive="is-active" (click)="closeMobileMenu()">
-      Eventi
-    </a>
-    <a class="mobileNav__link" routerLink="/contacts" routerLinkActive="is-active" (click)="closeMobileMenu()">
-      Contatti
-    </a>
-    <a class="mobileNav__link" routerLink="/dashboard" routerLinkActive="is-active" (click)="closeMobileMenu()">
-      Dashboard
-    </a>
+    <div class="mobileNav__content">
+      <div class="mobileNav__links">
+        <a class="mobileNav__link" routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">
+          {{ 'NAV.HOME' | translate }}
+        </a>
+        <a class="mobileNav__link" routerLink="/about" routerLinkActive="is-active" (click)="closeMobileMenu()">
+          {{ 'NAV.ABOUT' | translate }}
+        </a>
+        <a class="mobileNav__link" routerLink="/gallery" routerLinkActive="is-active" (click)="closeMobileMenu()">
+          {{ 'NAV.GALLERY' | translate }}
+        </a>
+        <a class="mobileNav__link" routerLink="/events" routerLinkActive="is-active" (click)="closeMobileMenu()">
+          {{ 'NAV.EVENTS' | translate }}
+        </a>
+        <a class="mobileNav__link" routerLink="/contacts" routerLinkActive="is-active" (click)="closeMobileMenu()">
+          {{ 'NAV.CONTACTS' | translate }}
+        </a>
+      </div>
+
+      <div class="mobileNav__footer">
+        <app-lang-selector variant="mobile"></app-lang-selector>
+        
+        <a class="mobileNav__dashboard-btn" routerLink="/dashboard" routerLinkActive="is-active" (click)="closeMobileMenu()">
+          {{ 'NAV.DASHBOARD' | translate }}
+        </a>
+      </div>
+    </div>
   </nav>
 
   <main class="content">

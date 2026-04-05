@@ -1,0 +1,19 @@
+<div class="lang-selector-wrapper" [ngClass]="variant">
+  <button class="lang-toggle" (click)="toggle()" [attr.aria-expanded]="isOpen" aria-label="Seleziona lingua">
+    <span class="lang-text">{{ currentLang | uppercase }}</span>
+    <svg class="chevron" [class.rotated]="isOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <ul class="lang-dropdown" [class.open]="isOpen">
+    <li *ngFor="let lang of languages">
+      <button 
+        class="lang-option" 
+        [class.active]="currentLang === lang.code"
+        (click)="selectLang(lang.code)">
+        {{ lang.label }}
+      </button>
+    </li>
+  </ul>
+</div>

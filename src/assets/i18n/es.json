@@ -1,0 +1,10 @@
+{
+  "NAV": {
+    "HOME": "Inicio",
+    "ABOUT": "Quiénes somos",
+    "GALLERY": "Galería",
+    "EVENTS": "Eventos",
+    "CONTACTS": "Contactos",
+    "DASHBOARD": "Panel"
+  }
+}

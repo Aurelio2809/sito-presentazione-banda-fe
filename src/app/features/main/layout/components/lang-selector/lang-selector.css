@@ -1,0 +1,132 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+.lang-selector-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.desktop.lang-selector-wrapper {
+  margin-left: 8px;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.desktop .lang-toggle {
+  /* Match dashboard button exact padding to equal height */
+  padding: 8px 12px;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1200px) {
+  .desktop .lang-toggle {
+    padding: 8px 14px;
+    font-size: 14px;
+    height: 40px;
+    border-radius: 12px;
+  }
+}
+
+.mobile .lang-toggle {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 15px;
+  justify-content: space-between;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.lang-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: 100%; /* Partiamo dal fondo esatto ignorando i calcoli complessi */
+  margin-top: 8px; /* Offset via margin al posto di top var */
+  right: 0;
+  background: rgba(18, 18, 22, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  list-style: none;
+  padding: 6px;
+  margin: 0;
+  min-width: 140px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 100;
+}
+
+.mobile .lang-dropdown {
+  position: static;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.lang-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-option {
+  width: 100%;
+  display: block;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile .lang-option {
+  font-size: 15px;
+  padding: 12px 18px;
+  text-align: center;
+}
+
+.lang-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.lang-option.active {
+  background: rgba(255, 215, 0, 0.15);
+  color: var(--color-banda-gold-400);
+  font-weight: 600;
+}
