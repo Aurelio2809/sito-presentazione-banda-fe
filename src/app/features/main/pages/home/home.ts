@@ -32,6 +32,7 @@ export class Home implements AfterViewInit, OnDestroy {
   @ViewChildren('sec', { read: ElementRef }) sectionRefs!: QueryList<ElementRef<HTMLElement>>;
 
   animEnabled = false;
+  photosLoading = true;
 
   private rafId: number | null = null;
   private rootEl: HTMLElement | null = null;
@@ -128,16 +129,20 @@ export class Home implements AfterViewInit, OnDestroy {
         });
 
         if (photosUrl.length >= 3) {
-           let photoIdx = 0;
-           this.sections.forEach(s => {
-               for(let i=0; i<s.images.length; i++) {
-                   // Cycle through available photos
-                   s.images[i] = photosUrl[photoIdx % photosUrl.length];
-                   photoIdx++;
-               }
-           });
-           this.cdr.detectChanges();
+          let photoIdx = 0;
+          this.sections.forEach(s => {
+            for (let i = 0; i < s.images.length; i++) {
+              s.images[i] = photosUrl[photoIdx % photosUrl.length];
+              photoIdx++;
+            }
+          });
         }
+        this.photosLoading = false;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.photosLoading = false;
+        this.cdr.detectChanges();
       }
     });
 

@@ -1,3 +1,7 @@
+<div class="home-spinner-overlay" *ngIf="photosLoading">
+  <app-loading-spinner [overlay]="false" size="lg" message="Caricamento..."></app-loading-spinner>
+</div>
+
 <div class="home" [attr.data-anim]="animEnabled ? 'on' : 'off'">
   <app-home-section
     *ngFor="let s of sections; let i = index"
