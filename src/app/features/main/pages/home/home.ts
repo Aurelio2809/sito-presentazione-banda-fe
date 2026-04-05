@@ -11,14 +11,6 @@ import {
 import { GalleryService } from '../../../../core/services';
 import { environment } from '../../../../../environments/environment';
 
-type Layout =
-  | 'assocHero'
-  | 'sedeSplit'
-  | 'storyTriptych'
-  | 'bandStage'
-  | 'schoolDouble'
-  | 'boardPoster';
-
 type Section = {
   key: 'associazione' | 'sede' | 'storia' | 'banda' | 'scuola' | 'direttivo';
   tag: string;
@@ -26,10 +18,7 @@ type Section = {
   text: string;
   ctaText: string;
   ctaLink: string;
-
-  layout: Layout;
   images: string[];
-
   crestImg?: string;
 };
 
@@ -57,7 +46,6 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.ASSOCIAZIONE.TEXT',
       ctaText: 'HOME.ASSOCIAZIONE.CTA',
       ctaLink: '/about',
-      layout: 'assocHero',
       images: [
         'assets/stemma/stemma_clean.png', // Temporary placeholder until API loads
       ],
@@ -70,7 +58,6 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.SEDE.TEXT',
       ctaText: 'HOME.SEDE.CTA',
       ctaLink: '/contacts',
-      layout: 'sedeSplit',
       images: [
         'assets/stemma/stemma_clean.png',
         'assets/stemma/stemma_clean.png',
@@ -83,7 +70,6 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.STORIA.TEXT',
       ctaText: 'HOME.STORIA.CTA',
       ctaLink: '/about',
-      layout: 'storyTriptych',
       images: [
         'assets/stemma/stemma_clean.png',
         'assets/stemma/stemma_clean.png',
@@ -97,7 +83,6 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.BANDA.TEXT',
       ctaText: 'HOME.BANDA.CTA',
       ctaLink: '/events',
-      layout: 'bandStage',
       images: [
         'assets/stemma/stemma_clean.png',
         'assets/stemma/stemma_clean.png',
@@ -111,7 +96,6 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.SCUOLA.TEXT',
       ctaText: 'HOME.SCUOLA.CTA',
       ctaLink: '/contacts',
-      layout: 'schoolDouble',
       images: [
         'assets/stemma/stemma_clean.png',
         'assets/stemma/stemma_clean.png',
@@ -124,7 +108,6 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.DIRETTIVO.TEXT',
       ctaText: 'HOME.DIRETTIVO.CTA',
       ctaLink: '/contacts',
-      layout: 'boardPoster',
       images: [
         'assets/stemma/stemma_clean.png',
       ],
