@@ -8,6 +8,14 @@
     "DASHBOARD": "Tableau de bord"
   },
   "HOME": {
+    "HERO": {
+      "EYEBROW": "Depuis 1925",
+      "TITLE": "Un siècle de musique et de tradition",
+      "SUBTITLE": "La fanfare de Casali del Manco : passion, communauté et culture musicale qui grandit d'année en année.",
+      "CTA": "En savoir plus",
+      "CTA_EVENTS": "Nos événements",
+      "SCROLL": "Défiler"
+    },
     "ASSOCIAZIONE": {
       "TAG": "Association",
       "TITLE": "Notre association",

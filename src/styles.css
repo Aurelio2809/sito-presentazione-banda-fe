@@ -27,3 +27,30 @@ body { background: var(--color-banda-black); }
 button, input, select, textarea {
   font-family: inherit;
 }
+
+/* Selezione testo on-brand (oro) */
+::selection {
+  background: rgba(255, 200, 87, 0.28);
+  color: #fff;
+}
+
+/* Scrollbar discreta e coerente col tema scuro */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 200, 87, 0.35) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 200, 87, 0.28);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: rgba(255, 200, 87, 0.45); background-clip: padding-box; }
+
+/* Focus visibile per accessibilità (tastiera) */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid rgba(255, 200, 87, 0.7);
+  outline-offset: 2px;
+  border-radius: 6px;
+}

@@ -1,10 +1,38 @@
 <div class="home" [attr.data-anim]="animEnabled ? 'on' : 'off'">
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="hero__inner">
+      <div class="hero__emblem" aria-hidden="true">
+        <span class="hero__halo"></span>
+        <img src="assets/stemma/stemma_clean.png" alt="" loading="eager" />
+      </div>
+
+      <span class="hero__eyebrow">{{ 'HOME.HERO.EYEBROW' | translate }}</span>
+      <h1 class="hero__title">{{ 'HOME.HERO.TITLE' | translate }}</h1>
+      <p class="hero__subtitle">{{ 'HOME.HERO.SUBTITLE' | translate }}</p>
+
+      <div class="hero__actions">
+        <a class="hero__btn hero__btn--primary" routerLink="/about">{{ 'HOME.HERO.CTA' | translate }}</a>
+        <a class="hero__btn" routerLink="/events">{{ 'HOME.HERO.CTA_EVENTS' | translate }}</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>{{ 'HOME.HERO.SCROLL' | translate }}</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </div>
+  </header>
+
+  <!-- ============ SEZIONI ============ -->
   <app-home-section
     *ngFor="let s of sections; let i = index"
     #sec
     [key]="s.key"
     [attr.data-side]="i % 2 === 0 ? 'left' : 'right'"
-[attr.data-index]="i"
+    [attr.data-index]="i"
     class="heroSectionHost"
   >
     <div class="copy-group reveal-group">
@@ -17,8 +45,18 @@
     </div>
 
     <div class="media-group order-2 reveal" style="--d:0.16;">
-      <app-home-image class="mobile-only" [images]="s.images" [alt]="s.title"></app-home-image>
-      <app-home-image-desktop class="desktop-only" [images]="s.images"></app-home-image-desktop>
+      <!-- Sezioni con foto reali -->
+      <ng-container *ngIf="!s.decor">
+        <app-home-image class="mobile-only" [images]="s.images" [alt]="s.title"></app-home-image>
+        <app-home-image-desktop class="desktop-only" [images]="s.images"></app-home-image-desktop>
+      </ng-container>
+
+      <!-- Sezioni senza foto: emblema decorativo on-brand -->
+      <div class="section-emblem" *ngIf="s.decor" aria-hidden="true">
+        <span class="section-emblem__ring"></span>
+        <span class="section-emblem__glow"></span>
+        <img [src]="s.images[0]" alt="" loading="lazy" />
+      </div>
     </div>
   </app-home-section>
 </div>

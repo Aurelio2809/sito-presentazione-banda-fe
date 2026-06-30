@@ -8,6 +8,14 @@
     "DASHBOARD": "Panel"
   },
   "HOME": {
+    "HERO": {
+      "EYEBROW": "Desde 1925",
+      "TITLE": "Un siglo de música y tradición",
+      "SUBTITLE": "La banda musical de Casali del Manco: pasión, comunidad y cultura bandística que crece año tras año.",
+      "CTA": "Descubre más",
+      "CTA_EVENTS": "Nuestros eventos",
+      "SCROLL": "Desliza"
+    },
     "ASSOCIAZIONE": {
       "TAG": "Asociación",
       "TITLE": "Nuestra asociación",

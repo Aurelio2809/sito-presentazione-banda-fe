@@ -8,6 +8,14 @@
     "DASHBOARD": "Dashboard"
   },
   "HOME": {
+    "HERO": {
+      "EYEBROW": "Since 1925",
+      "TITLE": "A century of music and tradition",
+      "SUBTITLE": "The town band of Casali del Manco: passion, community and band culture growing year after year.",
+      "CTA": "Learn more",
+      "CTA_EVENTS": "Our events",
+      "SCROLL": "Scroll"
+    },
     "ASSOCIAZIONE": {
       "TAG": "Association",
       "TITLE": "Our association",

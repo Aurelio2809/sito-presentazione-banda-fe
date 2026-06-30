@@ -8,6 +8,14 @@
     "DASHBOARD": "Dashboard"
   },
   "HOME": {
+    "HERO": {
+      "EYEBROW": "Dal 1925",
+      "TITLE": "Un secolo di musica e tradizione",
+      "SUBTITLE": "La banda musicale di Casali del Manco: passione, comunità e cultura bandistica che cresce di anno in anno.",
+      "CTA": "Scopri di più",
+      "CTA_EVENTS": "I nostri eventi",
+      "SCROLL": "Scorri"
+    },
     "ASSOCIAZIONE": {
       "TAG": "Associazione",
       "TITLE": "La nostra associazione",

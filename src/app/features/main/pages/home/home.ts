@@ -18,6 +18,8 @@ type Section = {
   ctaLink: string;
   images: string[];
   crestImg?: string;
+  /** Sezioni senza foto reali: mostrano un emblema curato invece di una griglia di loghi ripetuti. */
+  decor?: boolean;
 };
 
 @Component({
@@ -44,10 +46,7 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.ASSOCIAZIONE.TEXT',
       ctaText: 'HOME.ASSOCIAZIONE.CTA',
       ctaLink: '/about',
-      images: [
-        'assets/stemma/stemma_clean.png',
-      ],
-      crestImg: 'assets/stemma/stemma_clean.png',
+      images: ['assets/home/associazione.jpg'],
     },
     {
       key: 'sede',
@@ -68,11 +67,7 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.STORIA.TEXT',
       ctaText: 'HOME.STORIA.CTA',
       ctaLink: '/about',
-      images: [
-        'assets/stemma/stemma_clean.png',
-        'assets/stemma/stemma_clean.png',
-        'assets/stemma/stemma_clean.png',
-      ],
+      images: ['assets/home/storia.jpg'],
     },
     {
       key: 'banda',
@@ -81,11 +76,7 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.BANDA.TEXT',
       ctaText: 'HOME.BANDA.CTA',
       ctaLink: '/events',
-      images: [
-        'assets/stemma/stemma_clean.png',
-        'assets/stemma/stemma_clean.png',
-        'assets/stemma/stemma_clean.png',
-      ],
+      images: ['assets/home/banda.jpg'],
     },
     {
       key: 'scuola',
@@ -94,10 +85,7 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.SCUOLA.TEXT',
       ctaText: 'HOME.SCUOLA.CTA',
       ctaLink: '/contacts',
-      images: [
-        'assets/stemma/stemma_clean.png',
-        'assets/stemma/stemma_clean.png',
-      ],
+      images: ['assets/home/scuola.jpg'],
     },
     {
       key: 'direttivo',
@@ -106,9 +94,7 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.DIRETTIVO.TEXT',
       ctaText: 'HOME.DIRETTIVO.CTA',
       ctaLink: '/contacts',
-      images: [
-        'assets/stemma/stemma_clean.png',
-      ],
+      images: ['assets/home/direttivo.jpg'],
     },
   ];
 
