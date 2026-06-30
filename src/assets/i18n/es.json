@@ -6,5 +6,43 @@
     "EVENTS": "Eventos",
     "CONTACTS": "Contactos",
     "DASHBOARD": "Panel"
+  },
+  "HOME": {
+    "ASSOCIAZIONE": {
+      "TAG": "Asociación",
+      "TITLE": "Nuestra asociación",
+      "TEXT": "Somos una asociación sin ánimo de lucro que promueve la cultura y la tradición musical de banda en el territorio, mediante iniciativas y actividades de concierto y sociales. Nuestros objetivos son la protección de las raíces histórico-culturales, la difusión de la cultura bandística y la creación de un sentido de comunidad.",
+      "CTA": "Descubre más"
+    },
+    "SEDE": {
+      "TAG": "Sede",
+      "TITLE": "La sede",
+      "TEXT": "Nuestra sede: Via traversa campanile 31, Casali del Manco (CS) loc. Pedace. Un espacio de encuentro donde realizamos los ensayos, impartimos las actividades de la escuela de música y nos reunimos para planificar el futuro. Aquí se construyen repertorios, amistades y proyectos.",
+      "CTA": "Dónde estamos"
+    },
+    "STORIA": {
+      "TAG": "Historia",
+      "TITLE": "Nuestra historia",
+      "TEXT": "Una tradición de más de un siglo. Nuestros orígenes residen en la antigua banda musical de Pedace, cuyos primeros testimonios se remontan a 1925. En 2019, con la unión del municipio de Pedace junto a otros cuatro para formar el municipio de Casali del Manco, la banda también cambió de nombre. Crecemos año tras año con eventos y conciertos, y tenemos muchos proyectos en mente para el futuro.",
+      "CTA": "Quiénes somos"
+    },
+    "BANDA": {
+      "TAG": "Banda",
+      "TITLE": "La banda musical",
+      "TEXT": "Una formación que une la experiencia de los más mayores con la nueva energía de los jóvenes. Contamos con solistas expertos, profesionales formados y estudiantes de conservatorio. Trabajamos repertorios de banda, bandas sonoras, arreglos y clásicos. Actualmente el maestro de la banda es Franco Guglielmelli, asistido por Pietro Rizzo.",
+      "CTA": "Eventos"
+    },
+    "SCUOLA": {
+      "TAG": "Escuela",
+      "TITLE": "La escuela de música",
+      "TEXT": "Ofrecemos cursos de formación, proporcionando a las nuevas generaciones el método y los fundamentos de teoría, solfeo e instrumento. Un recorrido para acercarse a los instrumentos y crecer musicalmente, juntos. Los cursos están a cargo de: Pietro Rizzo, Gianmarco Scrivano, Daniela D'ambrosio, Mario Zicarelli.",
+      "CTA": "Contactos"
+    },
+    "DIRETTIVO": {
+      "TAG": "Junta directiva",
+      "TITLE": "La junta directiva",
+      "TEXT": "La junta directiva es el órgano de la asociación encargado de tomar las decisiones y trazar el camino hacia el futuro. Un grupo que coordina actividades, eventos y proyectos, con transparencia y en representación de todos los socios. Actualmente el presidente de la asociación es Aurelio Marotta.",
+      "CTA": "Escríbenos"
+    }
   }
 }
