@@ -61,3 +61,15 @@ a:focus-visible, button:focus-visible {
    rompere sticky e i contenitori con object-fit: cover.)
    ========================================================= */
 img, svg, video, canvas, iframe { max-width: 100%; }
+
+/* =========================================================
+   Schermi large / ultra-wide / TV (4K)
+   I container principali sono in rem (max-width 72–96rem) e i blocchi di
+   testo in ch: scalando il font-size di root la pagina cresce in modo
+   proporzionale e riempie gli schermi grandi senza stirarsi né perdersi
+   nel vuoto. I breakpoint delle media query restano in px (fisici).
+   ========================================================= */
+@media (min-width: 1800px) { html { font-size: 17.5px; } }
+@media (min-width: 2200px) { html { font-size: 19px; } }
+@media (min-width: 2800px) { html { font-size: 21px; } }
+@media (min-width: 3400px) { html { font-size: 23.5px; } }
