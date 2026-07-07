@@ -18,51 +18,45 @@ type AboutSection = {
   standalone: false,
 })
 export class About {
-  // Header
-  readonly headerDescription =
-    'La Banda Musicale "Città di Casali del Manco" promuove cultura musicale e partecipazione. Ogni prova e ogni concerto sono un modo concreto per costruire territorio e legami.';
-
+  // Header (le stringhe sono chiavi i18n, tradotte in template / page-header)
   readonly headerActions: PageHeaderAction[] = [
-    { label: 'Contattaci', routerLink: '/contacts', variant: 'primary' },
-    { label: 'Vedi eventi', routerLink: '/events', variant: 'ghost' },
+    { label: 'ABOUT.ACT_CONTACT', routerLink: '/contacts', variant: 'primary' },
+    { label: 'ABOUT.ACT_EVENTS', routerLink: '/events', variant: 'ghost' },
   ];
 
   readonly stats: PageHeaderStat[] = [
-    { label: 'Concerti / anno', value: '—' },
-    { label: 'Componenti', value: '—' },
-    { label: 'Allievi scuola', value: '—' },
-    { label: 'Anni di attività', value: '—' },
+    { label: 'ABOUT.STAT_CONCERTS', value: '—' },
+    { label: 'ABOUT.STAT_MEMBERS', value: '—' },
+    { label: 'ABOUT.STAT_STUDENTS', value: '—' },
+    { label: 'ABOUT.STAT_YEARS', value: '—' },
   ];
 
   readonly sections: AboutSection[] = [
     {
-      tag: 'Storia',
-      title: 'La nostra storia',
-      text:
-        'La Banda Musicale “Città di Casali del Manco” nasce dalla volontà di custodire e far crescere una tradizione del territorio. Nel tempo è diventata un punto di riferimento culturale: un luogo dove la musica unisce generazioni, crea amicizie e costruisce comunità.',
+      tag: 'ABOUT.SEC_STORIA_TAG',
+      title: 'ABOUT.SEC_STORIA_TITLE',
+      text: 'ABOUT.SEC_STORIA_TEXT',
       img: 'assets/about/storia-medaglia-oro.jpg',
       link: '/about/history',
-      cta: 'Scopri di più',
+      cta: 'ABOUT.CTA',
       side: 'left',
     },
     {
-      tag: 'Oggi',
-      title: 'La banda oggi',
-      text:
-        'Oggi la banda è un gruppo vivo e in crescita: prove, studio e repertori curati con attenzione. Portiamo in scena musica bandistica, arrangiamenti moderni, colonne sonore e classici, cercando sempre equilibrio tra qualità e partecipazione.',
+      tag: 'ABOUT.SEC_OGGI_TAG',
+      title: 'ABOUT.SEC_OGGI_TITLE',
+      text: 'ABOUT.SEC_OGGI_TEXT',
       img: 'assets/about/oggi-concerto-estivo.jpg',
       link: '/about/today',
-      cta: 'Scopri di più',
+      cta: 'ABOUT.CTA',
       side: 'right',
     },
     {
-      tag: 'Scuola',
-      title: 'Scuola di musica',
-      text:
-        'La scuola di musica è il nostro investimento sul futuro: un percorso per avvicinare bambini, ragazzi e adulti allo studio di uno strumento con gradualità e obiettivi chiari. Qui nasce la passione — e la continuità della banda.',
+      tag: 'ABOUT.SEC_SCUOLA_TAG',
+      title: 'ABOUT.SEC_SCUOLA_TITLE',
+      text: 'ABOUT.SEC_SCUOLA_TEXT',
       img: 'assets/about/scuola-lezione-giovanissimi.jpg',
       link: '/about/school',
-      cta: 'Scopri di più',
+      cta: 'ABOUT.CTA',
       side: 'left',
     },
   ];

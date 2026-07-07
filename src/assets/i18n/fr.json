@@ -118,5 +118,30 @@
     "ANN_READ": "Lire",
     "ANN_EMPTY": "Aucune annonce pour le moment.",
     "ERR": "Erreur lors du chargement"
+  },
+  "ABOUT": {
+    "HEADER_TAG": "À propos",
+    "HEADER_TITLE": "Musique, tradition et communauté",
+    "HEADER_DESC": "La fanfare « Città di Casali del Manco » promeut la culture musicale et la participation. Chaque répétition et chaque concert sont un moyen concret de construire le territoire et les liens.",
+    "ACT_CONTACT": "Contactez-nous",
+    "ACT_EVENTS": "Voir les événements",
+    "STAT_CONCERTS": "Concerts / an",
+    "STAT_MEMBERS": "Membres",
+    "STAT_STUDENTS": "Élèves de l'école",
+    "STAT_YEARS": "Années d'activité",
+    "CTA": "En savoir plus",
+    "SEC_STORIA_TAG": "Histoire",
+    "SEC_STORIA_TITLE": "Notre histoire",
+    "SEC_STORIA_TEXT": "La fanfare « Città di Casali del Manco » est née de la volonté de préserver et de faire grandir une tradition du territoire. Au fil du temps, elle est devenue un repère culturel : un lieu où la musique unit les générations, crée des amitiés et construit une communauté.",
+    "SEC_OGGI_TAG": "Aujourd'hui",
+    "SEC_OGGI_TITLE": "La fanfare aujourd'hui",
+    "SEC_OGGI_TEXT": "Aujourd'hui, la fanfare est un groupe vivant et en pleine croissance : répétitions, étude et répertoires soignés. Nous jouons de la musique d'harmonie, des arrangements modernes, des bandes originales et des classiques, en cherchant toujours l'équilibre entre qualité et participation.",
+    "SEC_SCUOLA_TAG": "École",
+    "SEC_SCUOLA_TITLE": "École de musique",
+    "SEC_SCUOLA_TEXT": "L'école de musique est notre investissement pour l'avenir : un parcours pour initier enfants, jeunes et adultes à l'étude d'un instrument, progressivement et avec des objectifs clairs. C'est ici que naît la passion — et la continuité de la fanfare.",
+    "FINAL_TAG": "Entrer en contact",
+    "FINAL_TITLE": "Envie de jouer avec nous ou de rejoindre l'école ?",
+    "FINAL_DESC": "Écrivez-nous : nous répondons avec des informations sur les répétitions, les inscriptions et les activités.",
+    "FINAL_CTA": "Écrivez-nous"
   }
 }

@@ -118,5 +118,30 @@
     "ANN_READ": "Read",
     "ANN_EMPTY": "No announcements at the moment.",
     "ERR": "Error while loading"
+  },
+  "ABOUT": {
+    "HEADER_TAG": "About us",
+    "HEADER_TITLE": "Music, tradition and community",
+    "HEADER_DESC": "The “Città di Casali del Manco” town band promotes musical culture and participation. Every rehearsal and every concert is a concrete way to build community and bonds.",
+    "ACT_CONTACT": "Contact us",
+    "ACT_EVENTS": "See events",
+    "STAT_CONCERTS": "Concerts / year",
+    "STAT_MEMBERS": "Members",
+    "STAT_STUDENTS": "School students",
+    "STAT_YEARS": "Years of activity",
+    "CTA": "Learn more",
+    "SEC_STORIA_TAG": "History",
+    "SEC_STORIA_TITLE": "Our history",
+    "SEC_STORIA_TEXT": "The “Città di Casali del Manco” town band was born from the will to preserve and grow a local tradition. Over time it has become a cultural landmark: a place where music unites generations, creates friendships and builds community.",
+    "SEC_OGGI_TAG": "Today",
+    "SEC_OGGI_TITLE": "The band today",
+    "SEC_OGGI_TEXT": "Today the band is a lively and growing group: rehearsals, study and carefully curated repertoires. We perform band music, modern arrangements, soundtracks and classics, always seeking a balance between quality and participation.",
+    "SEC_SCUOLA_TAG": "School",
+    "SEC_SCUOLA_TITLE": "Music school",
+    "SEC_SCUOLA_TEXT": "The music school is our investment in the future: a path to introduce children, teenagers and adults to studying an instrument, step by step and with clear goals. This is where passion — and the band's continuity — begins.",
+    "FINAL_TAG": "Get in touch",
+    "FINAL_TITLE": "Want to play with us or join the school?",
+    "FINAL_DESC": "Write to us: we'll reply with information about rehearsals, enrolment and activities.",
+    "FINAL_CTA": "Write to us"
   }
 }

@@ -12,14 +12,14 @@
         [class.btn--ghost]="a.variant === 'ghost'"
         [routerLink]="a.routerLink"
       >
-        {{ a.label }}
+        {{ a.label | translate }}
       </a>
     </div>
 
     <div class="pageHeader__stats" *ngIf="stats.length">
       <div class="stat" *ngFor="let s of stats">
-        <div class="stat__value">{{ s.value }}</div>
-        <div class="stat__label">{{ s.label }}</div>
+        <div class="stat__value">{{ s.value | translate }}</div>
+        <div class="stat__label">{{ s.label | translate }}</div>
       </div>
     </div>
   </div>

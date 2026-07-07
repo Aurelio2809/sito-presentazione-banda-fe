@@ -118,5 +118,30 @@
     "ANN_READ": "Leggi",
     "ANN_EMPTY": "Nessun annuncio al momento.",
     "ERR": "Errore nel caricamento"
+  },
+  "ABOUT": {
+    "HEADER_TAG": "Chi siamo",
+    "HEADER_TITLE": "Musica, tradizione e comunità",
+    "HEADER_DESC": "La Banda Musicale “Città di Casali del Manco” promuove cultura musicale e partecipazione. Ogni prova e ogni concerto sono un modo concreto per costruire territorio e legami.",
+    "ACT_CONTACT": "Contattaci",
+    "ACT_EVENTS": "Vedi eventi",
+    "STAT_CONCERTS": "Concerti / anno",
+    "STAT_MEMBERS": "Componenti",
+    "STAT_STUDENTS": "Allievi scuola",
+    "STAT_YEARS": "Anni di attività",
+    "CTA": "Scopri di più",
+    "SEC_STORIA_TAG": "Storia",
+    "SEC_STORIA_TITLE": "La nostra storia",
+    "SEC_STORIA_TEXT": "La Banda Musicale “Città di Casali del Manco” nasce dalla volontà di custodire e far crescere una tradizione del territorio. Nel tempo è diventata un punto di riferimento culturale: un luogo dove la musica unisce generazioni, crea amicizie e costruisce comunità.",
+    "SEC_OGGI_TAG": "Oggi",
+    "SEC_OGGI_TITLE": "La banda oggi",
+    "SEC_OGGI_TEXT": "Oggi la banda è un gruppo vivo e in crescita: prove, studio e repertori curati con attenzione. Portiamo in scena musica bandistica, arrangiamenti moderni, colonne sonore e classici, cercando sempre equilibrio tra qualità e partecipazione.",
+    "SEC_SCUOLA_TAG": "Scuola",
+    "SEC_SCUOLA_TITLE": "Scuola di musica",
+    "SEC_SCUOLA_TEXT": "La scuola di musica è il nostro investimento sul futuro: un percorso per avvicinare bambini, ragazzi e adulti allo studio di uno strumento con gradualità e obiettivi chiari. Qui nasce la passione — e la continuità della banda.",
+    "FINAL_TAG": "Entra in contatto",
+    "FINAL_TITLE": "Vuoi suonare con noi o iscriverti alla scuola?",
+    "FINAL_DESC": "Scrivici: ti rispondiamo con informazioni su prove, iscrizioni e attività.",
+    "FINAL_CTA": "Scrivici"
   }
 }

@@ -118,5 +118,30 @@
     "ANN_READ": "Leer",
     "ANN_EMPTY": "No hay anuncios por el momento.",
     "ERR": "Error al cargar"
+  },
+  "ABOUT": {
+    "HEADER_TAG": "Quiénes somos",
+    "HEADER_TITLE": "Música, tradición y comunidad",
+    "HEADER_DESC": "La Banda Musical “Città di Casali del Manco” promueve la cultura musical y la participación. Cada ensayo y cada concierto son una forma concreta de construir territorio y vínculos.",
+    "ACT_CONTACT": "Contáctanos",
+    "ACT_EVENTS": "Ver eventos",
+    "STAT_CONCERTS": "Conciertos / año",
+    "STAT_MEMBERS": "Componentes",
+    "STAT_STUDENTS": "Alumnos de la escuela",
+    "STAT_YEARS": "Años de actividad",
+    "CTA": "Descubre más",
+    "SEC_STORIA_TAG": "Historia",
+    "SEC_STORIA_TITLE": "Nuestra historia",
+    "SEC_STORIA_TEXT": "La Banda Musical “Città di Casali del Manco” nace de la voluntad de custodiar y hacer crecer una tradición del territorio. Con el tiempo se ha convertido en un punto de referencia cultural: un lugar donde la música une generaciones, crea amistades y construye comunidad.",
+    "SEC_OGGI_TAG": "Hoy",
+    "SEC_OGGI_TITLE": "La banda hoy",
+    "SEC_OGGI_TEXT": "Hoy la banda es un grupo vivo y en crecimiento: ensayos, estudio y repertorios cuidados con atención. Llevamos a escena música bandística, arreglos modernos, bandas sonoras y clásicos, buscando siempre el equilibrio entre calidad y participación.",
+    "SEC_SCUOLA_TAG": "Escuela",
+    "SEC_SCUOLA_TITLE": "Escuela de música",
+    "SEC_SCUOLA_TEXT": "La escuela de música es nuestra inversión en el futuro: un recorrido para acercar a niños, jóvenes y adultos al estudio de un instrumento con gradualidad y objetivos claros. Aquí nace la pasión — y la continuidad de la banda.",
+    "FINAL_TAG": "Ponte en contacto",
+    "FINAL_TITLE": "¿Quieres tocar con nosotros o inscribirte en la escuela?",
+    "FINAL_DESC": "Escríbenos: te respondemos con información sobre ensayos, inscripciones y actividades.",
+    "FINAL_CTA": "Escríbenos"
   }
 }

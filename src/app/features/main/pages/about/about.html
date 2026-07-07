@@ -1,9 +1,9 @@
 <section class="about">
   <!-- HERO -->
   <app-page-header
-    tag="Chi siamo"
-    title="Musica, tradizione e comunità"
-    [description]="headerDescription"
+    [tag]="'ABOUT.HEADER_TAG' | translate"
+    [title]="'ABOUT.HEADER_TITLE' | translate"
+    [description]="'ABOUT.HEADER_DESC' | translate"
     [actions]="headerActions"
     [stats]="stats"
   ></app-page-header>
@@ -14,18 +14,18 @@
       <div class="block__inner">
         <div class="block__grid">
           <div class="block__text">
-            <div class="block__tag">{{ s.tag }}</div>
-            <h2 class="block__title">{{ s.title }}</h2>
-            <p class="block__desc">{{ s.text }}</p>
+            <div class="block__tag">{{ s.tag | translate }}</div>
+            <h2 class="block__title">{{ s.title | translate }}</h2>
+            <p class="block__desc">{{ s.text | translate }}</p>
 
             <div class="block__actions">
-              <a class="btn btn--primary" [routerLink]="s.link">{{ s.cta }}</a>
+              <a class="btn btn--primary" [routerLink]="s.link">{{ s.cta | translate }}</a>
             </div>
           </div>
 
           <div class="block__media">
             <div class="mediaFrame">
-              <img class="mediaImg" [src]="s.img" [alt]="s.title" loading="lazy" />
+              <img class="mediaImg" [src]="s.img" [alt]="s.title | translate" loading="lazy" />
             </div>
           </div>
         </div>
@@ -37,15 +37,15 @@
   <div class="cta">
     <div class="cta__inner">
       <div class="cta__text">
-        <div class="cta__tag">Entra in contatto</div>
-        <h3 class="cta__title">Vuoi suonare con noi o iscriverti alla scuola?</h3>
+        <div class="cta__tag">{{ 'ABOUT.FINAL_TAG' | translate }}</div>
+        <h3 class="cta__title">{{ 'ABOUT.FINAL_TITLE' | translate }}</h3>
         <p class="cta__desc">
-          Scrivici: ti rispondiamo con informazioni su prove, iscrizioni e attività.
+          {{ 'ABOUT.FINAL_DESC' | translate }}
         </p>
       </div>
 
       <div class="cta__actions">
-        <a class="btn btn--primary" routerLink="/contacts">Scrivici</a>
+        <a class="btn btn--primary" routerLink="/contacts">{{ 'ABOUT.FINAL_CTA' | translate }}</a>
       </div>
     </div>
   </div>
