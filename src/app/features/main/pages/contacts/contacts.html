@@ -1,8 +1,8 @@
 <section class="contacts">
   <app-page-header
-    tag="Contatti"
-    title="Restiamo in contatto"
-    description="Seguici sui social per eventi, foto e aggiornamenti. Oppure scrivici direttamente dal form qui sotto."
+    [tag]="'CONTACTS.TAG' | translate"
+    [title]="'CONTACTS.TITLE' | translate"
+    [description]="'CONTACTS.DESC' | translate"
   ></app-page-header>
 
   <div class="contactsGrid">
@@ -10,8 +10,8 @@
     <div class="leftCol">
       <!-- SOCIAL CARD -->
       <div class="card">
-        <h2 class="card__title">Social ufficiali</h2>
-        <p class="card__desc">Apri il profilo in una nuova scheda.</p>
+        <h2 class="card__title">{{ 'CONTACTS.SOCIAL_TITLE' | translate }}</h2>
+        <p class="card__desc">{{ 'CONTACTS.SOCIAL_DESC' | translate }}</p>
 
         <div class="socialList">
           <a
@@ -66,7 +66,7 @@
 
             <span class="socialBtn__text">
               <span class="socialBtn__label">{{ s.label }}</span>
-              <span class="socialBtn__hint">Apri profilo</span>
+              <span class="socialBtn__hint">{{ 'CONTACTS.SOCIAL_OPEN' | translate }}</span>
             </span>
 
             <span class="socialBtn__chev" aria-hidden="true">↗</span>
@@ -77,7 +77,7 @@
       <!-- MAP CARD (separata) -->
       <div class="card mapCard">
         <div class="mapBlock__head">
-          <div class="mapBlock__title">Dove siamo</div>
+          <div class="mapBlock__title">{{ 'CONTACTS.WHERE_TITLE' | translate }}</div>
           <div class="mapBlock__subtitle">{{ BAND_ADDRESS_FULL }}</div>
         </div>
 
@@ -91,21 +91,21 @@
         </div>
 
         <div class="mapActions">
-          <a class="btn btn--ghost" [href]="MAPS_URL" target="_blank" rel="noopener">Apri su Maps</a>
+          <a class="btn btn--ghost" [href]="MAPS_URL" target="_blank" rel="noopener">{{ 'CONTACTS.MAPS_OPEN' | translate }}</a>
         </div>
       </div>
     </div>
 
     <!-- RIGHT COLUMN: full height contact card -->
     <div class="card card--soft rightCol">
-      <h2 class="card__title">Contattaci</h2>
+      <h2 class="card__title">{{ 'CONTACTS.FORM_TITLE' | translate }}</h2>
       <p class="card__desc">
-        Compila i campi qui sotto per inviarci un messaggio. Ti risponderemo il prima possibile.
+        {{ 'CONTACTS.FORM_DESC' | translate }}
       </p>
 
       <!-- Success message -->
       <div class="alert alert--success" *ngIf="success">
-        ✓ Messaggio inviato con successo! Ti risponderemo presto.
+        {{ 'CONTACTS.SUCCESS' | translate }}
       </div>
 
       <!-- Error message -->
@@ -116,12 +116,12 @@
       <form class="contactForm" (submit)="onSubmit($event)">
         <div class="formGrid">
           <label class="field">
-            <span class="field__label">Nome *</span>
+            <span class="field__label">{{ 'CONTACTS.FIELD_NAME' | translate }}</span>
             <input
               class="field__input"
               type="text"
               name="name"
-              placeholder="Il tuo nome"
+              [placeholder]="'CONTACTS.PH_NAME' | translate"
               [(ngModel)]="form.name"
               autocomplete="name"
               required
@@ -129,12 +129,12 @@
           </label>
 
           <label class="field">
-            <span class="field__label">Email *</span>
+            <span class="field__label">{{ 'CONTACTS.FIELD_EMAIL' | translate }}</span>
             <input
               class="field__input"
               type="email"
               name="email"
-              placeholder="La tua email"
+              [placeholder]="'CONTACTS.PH_EMAIL' | translate"
               [(ngModel)]="form.email"
               autocomplete="email"
               required
@@ -142,23 +142,23 @@
           </label>
 
           <label class="field field--full">
-            <span class="field__label">Oggetto</span>
+            <span class="field__label">{{ 'CONTACTS.FIELD_SUBJECT' | translate }}</span>
             <input
               class="field__input"
               type="text"
               name="subject"
-              placeholder="Es. Informazioni su eventi / scuola di musica"
+              [placeholder]="'CONTACTS.PH_SUBJECT' | translate"
               [(ngModel)]="form.subject"
               autocomplete="off"
             />
           </label>
 
           <label class="field field--full">
-            <span class="field__label">Messaggio *</span>
+            <span class="field__label">{{ 'CONTACTS.FIELD_MESSAGE' | translate }}</span>
             <textarea
               class="field__textarea"
               name="message"
-              placeholder="Scrivi il tuo messaggio..."
+              [placeholder]="'CONTACTS.PH_MESSAGE' | translate"
               [(ngModel)]="form.message"
               rows="10"
               required
@@ -168,7 +168,7 @@
 
         <div class="formActions">
           <button class="btn btn--primary" type="submit" [disabled]="sending">
-            {{ sending ? 'Invio in corso...' : 'Invia messaggio' }}
+            {{ (sending ? 'CONTACTS.SENDING' : 'CONTACTS.SEND') | translate }}
           </button>
         </div>
       </form>

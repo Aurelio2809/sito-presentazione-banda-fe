@@ -1,12 +1,12 @@
 <section class="events">
   <app-page-header
-    tag="Eventi"
-    title="Eventi, annunci e aggiornamenti"
-    description="Qui trovi i prossimi appuntamenti, lo storico e comunicazioni importanti. Clicca un elemento per vedere i dettagli."
+    [tag]="'EVENTS.TAG' | translate"
+    [title]="'EVENTS.TITLE' | translate"
+    [description]="'EVENTS.DESC' | translate"
   ></app-page-header>
 
   <!-- Loading state -->
-  <app-loading-spinner *ngIf="loading" message="Caricamento eventi..."></app-loading-spinner>
+  <app-loading-spinner *ngIf="loading" [message]="'EVENTS.LOADING' | translate"></app-loading-spinner>
 
   <!-- Error state -->
   <div class="events__error" *ngIf="error">
@@ -21,7 +21,7 @@
       [class.is-active]="tab === 'upcoming'"
       (click)="setTab('upcoming')"
     >
-      Prossimi eventi
+      {{ 'EVENTS.TAB_UPCOMING' | translate }}
       <span class="tab__badge">{{ upcomingEvents.length }}</span>
     </button>
 
@@ -31,7 +31,7 @@
       [class.is-active]="tab === 'past'"
       (click)="setTab('past')"
     >
-      Storico
+      {{ 'EVENTS.TAB_PAST' | translate }}
       <span class="tab__badge">{{ pastEvents.length }}</span>
     </button>
   </div>
@@ -41,12 +41,10 @@
     <div class="col">
       <div class="sectionHead">
         <h2 class="sectionHead__title">
-          {{ tab === 'upcoming' ? 'Prossimi eventi' : 'Storico eventi' }}
+          {{ (tab === 'upcoming' ? 'EVENTS.HEAD_UPCOMING' : 'EVENTS.HEAD_PAST') | translate }}
         </h2>
         <p class="sectionHead__desc">
-          {{ tab === 'upcoming'
-          ? 'Appuntamenti in arrivo. Apri un evento per vedere dettagli, luogo e allegati.'
-          : 'Eventi passati. Apri una scheda per rivedere le informazioni.' }}
+          {{ (tab === 'upcoming' ? 'EVENTS.HEAD_UPCOMING_DESC' : 'EVENTS.HEAD_PAST_DESC') | translate }}
         </p>
       </div>
 
@@ -69,17 +67,17 @@
 
               <div class="ticket__meta">
                 <span class="metaPill">
-                  <span class="metaPill__label">Data</span>
+                  <span class="metaPill__label">{{ 'EVENTS.META_DATE' | translate }}</span>
                   <span class="metaPill__value">{{ formatDate(e.eventDate) }}</span>
                 </span>
 
                 <span class="metaPill" *ngIf="e.eventTime">
-                  <span class="metaPill__label">Ora</span>
+                  <span class="metaPill__label">{{ 'EVENTS.META_TIME' | translate }}</span>
                   <span class="metaPill__value">{{ e.eventTime }}</span>
                 </span>
 
                 <span class="metaPill" *ngIf="e.location">
-                  <span class="metaPill__label">Luogo</span>
+                  <span class="metaPill__label">{{ 'EVENTS.META_PLACE' | translate }}</span>
                   <span class="metaPill__value">{{ e.location }}</span>
                 </span>
               </div>
@@ -96,7 +94,7 @@
 
               <div class="details__row">
                 <div class="details__place" *ngIf="e.cityLine">
-                  <span class="details__k">Zona</span>
+                  <span class="details__k">{{ 'EVENTS.META_ZONE' | translate }}</span>
                   <span class="details__v">{{ e.cityLine }}</span>
                 </div>
 
@@ -109,7 +107,7 @@
                   (click)="$event.stopPropagation()"
                 >
                   <span class="attach__dot" aria-hidden="true"></span>
-                  <span class="attach__label">{{ e.attachmentLabel || 'Allegato' }}</span>
+                  <span class="attach__label">{{ e.attachmentLabel || ('EVENTS.ATTACH' | translate) }}</span>
                   <span class="attach__chev" aria-hidden="true">↗</span>
                 </a>
               </div>
@@ -142,17 +140,17 @@
 
               <div class="ticket__meta">
                 <span class="metaPill">
-                  <span class="metaPill__label">Data</span>
+                  <span class="metaPill__label">{{ 'EVENTS.META_DATE' | translate }}</span>
                   <span class="metaPill__value">{{ formatDate(e.eventDate) }}</span>
                 </span>
 
                 <span class="metaPill" *ngIf="e.eventTime">
-                  <span class="metaPill__label">Ora</span>
+                  <span class="metaPill__label">{{ 'EVENTS.META_TIME' | translate }}</span>
                   <span class="metaPill__value">{{ e.eventTime }}</span>
                 </span>
 
                 <span class="metaPill" *ngIf="e.location">
-                  <span class="metaPill__label">Luogo</span>
+                  <span class="metaPill__label">{{ 'EVENTS.META_PLACE' | translate }}</span>
                   <span class="metaPill__value">{{ e.location }}</span>
                 </span>
               </div>
@@ -169,7 +167,7 @@
 
               <div class="details__row">
                 <div class="details__place" *ngIf="e.cityLine">
-                  <span class="details__k">Zona</span>
+                  <span class="details__k">{{ 'EVENTS.META_ZONE' | translate }}</span>
                   <span class="details__v">{{ e.cityLine }}</span>
                 </div>
 
@@ -182,7 +180,7 @@
                   (click)="$event.stopPropagation()"
                 >
                   <span class="attach__dot" aria-hidden="true"></span>
-                  <span class="attach__label">{{ e.attachmentLabel || 'Allegato' }}</span>
+                  <span class="attach__label">{{ e.attachmentLabel || ('EVENTS.ATTACH' | translate) }}</span>
                   <span class="attach__chev" aria-hidden="true">↗</span>
                 </a>
               </div>
@@ -197,20 +195,20 @@
       </div>
 
       <div class="empty" *ngIf="tab === 'upcoming' && upcomingEvents.length === 0">
-        Nessun evento in programma al momento.
+        {{ 'EVENTS.EMPTY_UPCOMING' | translate }}
       </div>
 
       <div class="empty" *ngIf="tab === 'past' && pastEvents.length === 0">
-        Nessuno storico disponibile.
+        {{ 'EVENTS.EMPTY_PAST' | translate }}
       </div>
     </div>
 
     <!-- RIGHT: Announcements -->
     <aside class="col">
       <div class="card card--soft">
-        <h2 class="card__title">Annunci</h2>
+        <h2 class="card__title">{{ 'EVENTS.ANN_TITLE' | translate }}</h2>
         <p class="card__desc">
-          Comunicazioni rapide. Clicca per leggere il testo completo.
+          {{ 'EVENTS.ANN_DESC' | translate }}
         </p>
 
         <div class="annList">
@@ -231,14 +229,14 @@
 
             <div class="ann__cta">
               <span class="ann__btn">
-                {{ openAnnouncementId === a.id ? 'Chiudi' : 'Leggi' }}
+                {{ (openAnnouncementId === a.id ? 'EVENTS.ANN_CLOSE' : 'EVENTS.ANN_READ') | translate }}
               </span>
             </div>
           </button>
         </div>
 
         <div class="empty" *ngIf="announcements.length === 0">
-          Nessun annuncio al momento.
+          {{ 'EVENTS.ANN_EMPTY' | translate }}
         </div>
       </div>
     </aside>

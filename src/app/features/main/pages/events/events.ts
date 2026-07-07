@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { EventService } from '../../../../core/services';
 import { EventResponse } from '../../../../core/models';
+import { TranslateService } from '@ngx-translate/core';
 
 type EventsTab = 'upcoming' | 'past';
 
@@ -27,7 +28,8 @@ export class Events implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +53,7 @@ export class Events implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        this.error = 'Errore nel caricamento';
+        this.error = this.translate.instant('EVENTS.ERR');
         this.loading = false;
         this.cdr.detectChanges();
         console.error(err);

@@ -9,6 +9,7 @@ import {
 } from '../../../../shared/constants/sede-maps-link';
 import { MessageService } from '../../../../core/services';
 import { MessageRequest } from '../../../../core/models';
+import { TranslateService } from '@ngx-translate/core';
 
 type ContactForm = {
   name: string;
@@ -45,7 +46,8 @@ export class Contacts {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private translate: TranslateService
   ) {
     this.mapEmbedSafeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(MAPS_EMBED_URL);
   }
@@ -54,7 +56,7 @@ export class Contacts {
     ev.preventDefault();
     
     if (!this.form.name || !this.form.email || !this.form.message) {
-      this.error = 'Compila tutti i campi obbligatori';
+      this.error = this.translate.instant('CONTACTS.ERR_REQUIRED');
       return;
     }
 
@@ -65,7 +67,7 @@ export class Contacts {
     const request: MessageRequest = {
       senderName: this.form.name,
       senderEmail: this.form.email,
-      subject: this.form.subject || 'Messaggio dal sito',
+      subject: this.form.subject || this.translate.instant('CONTACTS.DEFAULT_SUBJECT'),
       content: this.form.message
     };
 
@@ -77,7 +79,7 @@ export class Contacts {
         setTimeout(() => this.success = false, 5000);
       },
       error: (err) => {
-        this.error = 'Errore nell\'invio del messaggio. Riprova più tardi.';
+        this.error = this.translate.instant('CONTACTS.ERR_SEND');
         this.sending = false;
         console.error(err);
       }

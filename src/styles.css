@@ -54,3 +54,10 @@ a:focus-visible, button:focus-visible {
   outline-offset: 2px;
   border-radius: 6px;
 }
+
+/* =========================================================
+   Guardia mobile: le immagini non devono mai sforare in orizzontale.
+   (Niente overflow-x:hidden su body né height:auto globale, per non
+   rompere sticky e i contenitori con object-fit: cover.)
+   ========================================================= */
+img, svg, video, canvas, iframe { max-width: 100%; }

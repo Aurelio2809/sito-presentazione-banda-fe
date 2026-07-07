@@ -3,6 +3,7 @@ import { forkJoin } from 'rxjs';
 import { GalleryService } from '../../../../core/services';
 import { GalleryPhotoResponse } from '../../../../core/models';
 import { environment } from '../../../../../environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-gallery',
@@ -32,7 +33,8 @@ export class Gallery implements OnInit {
 
   constructor(
     private galleryService: GalleryService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +73,7 @@ export class Gallery implements OnInit {
         console.log('[Gallery] loadData() COMPLETE - tempo totale:', (endTime - startTime).toFixed(2), 'ms');
       },
       error: (err) => {
-        this.error = 'Errore nel caricamento della galleria';
+        this.error = this.translate.instant('GALLERY.ERR');
         this.loading = false;
         this.cdr.detectChanges();
         console.error('[Gallery] ERRORE:', err);
