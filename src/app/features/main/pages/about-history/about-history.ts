@@ -31,12 +31,12 @@ export class AboutHistory {
     {
       label: '[1]',
       description:
-        "ISSM \"V. Bellini\", Creux — \"Il mondo della banda musicale nell'Italia di oggi\" (PDF).",
+        'ISSM “V. Bellini”, Creux — “Il mondo della banda musicale nell\'Italia di oggi” (PDF).',
     },
     {
       label: '[2]',
       description:
-        'U Campanaro Web — ricostruzione locale "Banda Città di Pedace" (timeline e date principali).',
+        'U Campanaro Web — ricostruzione locale “Banda Città di Pedace” (timeline e date principali).',
     },
     {
       label: '[3]',
