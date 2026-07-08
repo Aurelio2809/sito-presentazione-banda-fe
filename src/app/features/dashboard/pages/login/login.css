@@ -45,20 +45,39 @@
   max-width: 420px;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 
   background: linear-gradient(
     180deg,
     rgba(24, 24, 28, 0.97),
     rgba(16, 16, 18, 0.99)
   );
-  
+
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   padding: 44px 40px;
-  
+
   backdrop-filter: blur(16px);
-  
+
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Sottile luce radiale in alto, coerente con gli altri pannelli del sito
+   (page-header, home-section): dà profondità invece di una card piatta. */
+.loginCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(360px 220px at 50% -10%, rgba(255, 200, 87, 0.10), transparent 60%),
+    radial-gradient(280px 200px at 100% 0%, rgba(190, 18, 60, 0.10), transparent 55%);
+}
+
+.loginCard > * {
+  position: relative;
+  z-index: 1;
 }
 
 .loginCard__header {
@@ -66,48 +85,54 @@
   margin-bottom: 40px;
 }
 
-/* Logo */
+/* Logo: stemma con alone dorato, coerente con l'hero della home
+   (niente più riquadro piatto: l'emblema "respira" su un bagliore radiale). */
 .loginCard__logo {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 20px;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 22px;
   position: relative;
-  overflow: hidden;
-  
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  display: grid;
+  place-items: center;
 }
 
-.loginCard__logo::before {
-  content: "";
+.loginCard__halo {
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
+  inset: -30%;
   z-index: 0;
-  
-  background:
-    radial-gradient(80px 50px at 30% 25%, rgba(255, 255, 255, 0.25), transparent 60%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 200, 87, 0.22) 0%,
+    rgba(190, 18, 60, 0.12) 45%,
+    transparent 72%
+  );
+  filter: blur(6px);
+  animation: loginHaloPulse 6s ease-in-out infinite;
+}
+
+@keyframes loginHaloPulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.06); }
 }
 
 .loginCard__crest {
   position: relative;
   z-index: 1;
-  width: 100%;
-  height: 100%;
+  width: 72px;
+  height: 72px;
   display: block;
-  border-radius: inherit;
-  object-fit: cover;
-  
+  object-fit: contain;
+
   filter:
-    drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 10px 22px rgba(0, 0, 0, 0.4))
     contrast(1.08)
     brightness(1.05)
     saturate(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loginCard__halo { animation: none; }
 }
 
 .loginCard__title {
@@ -116,11 +141,38 @@
   color: #ffffff;
   margin: 0 0 10px;
   letter-spacing: -0.02em;
-  
+
   background: linear-gradient(135deg, #ffffff, rgba(251, 191, 36, 0.9));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Sottolineatura ornamentale oro->rosso, coerente con i titoli della home. */
+.loginCard__title--ornament {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+}
+
+.loginCard__title--ornament::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(190, 18, 60, 0) 0%,
+    rgba(255, 200, 87, 0.85) 50%,
+    rgba(190, 18, 60, 0) 100%
+  );
+  box-shadow: 0 0 16px rgba(255, 200, 87, 0.45);
 }
 
 .loginCard__subtitle {
