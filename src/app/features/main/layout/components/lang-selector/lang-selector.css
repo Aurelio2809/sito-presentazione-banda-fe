@@ -42,15 +42,6 @@
   }
 }
 
-.mobile .lang-toggle {
-  width: 100%;
-  padding: 14px 18px;
-  font-size: 15px;
-  justify-content: space-between;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.05);
-}
-
 .lang-toggle:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.3);
@@ -87,12 +78,6 @@
   z-index: 100;
 }
 
-.mobile .lang-dropdown {
-  position: static;
-  width: 100%;
-  margin-top: 8px;
-}
-
 .lang-dropdown.open {
   opacity: 1;
   visibility: visible;
@@ -114,12 +99,6 @@
   transition: all 0.2s ease;
 }
 
-.mobile .lang-option {
-  font-size: 15px;
-  padding: 12px 18px;
-  text-align: center;
-}
-
 .lang-option:hover {
   background: rgba(255, 255, 255, 0.1);
   color: white;
@@ -129,4 +108,45 @@
   background: rgba(255, 215, 0, 0.15);
   color: var(--color-banda-gold-400);
   font-weight: 600;
+}
+
+/* =========================================================
+   MOBILE: riga segmentata compatta (IT | EN | FR | ES)
+   Niente espansione/push del layout: elimina l'overflow verticale che il
+   dropdown classico causava su schermi piccoli (es. iPhone SE).
+   ========================================================= */
+.mobile.lang-selector-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.lang-segmented {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.lang-segment {
+  flex: 1 1 0;
+  padding: 12px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-segment:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.lang-segment.active {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.35);
+  color: var(--color-banda-gold-400);
 }

@@ -26,7 +26,7 @@
   <div class="mosaic" *ngIf="!loading && heroMain && favorites.length >= 1" 
        [ngClass]="'mosaic--' + favorites.length">
     <button class="tile tile--hero" type="button" (click)="open(heroMain)">
-      <img class="tile__img" [src]="getThumbnailUrl(heroMain)" [alt]="heroMain.title" loading="lazy" />
+      <img class="tile__img" [src]="getThumbnailUrl(heroMain)" [alt]="heroMain.title" loading="eager" fetchpriority="high" decoding="async" />
       <div class="tile__overlay">
         <div class="tile__kicker">{{ 'GALLERY.FAVORITE' | translate }}</div>
         <div class="tile__title">{{ heroMain.title }}</div>
@@ -34,42 +34,42 @@
     </button>
 
     <button class="tile tile--right1" type="button" (click)="open(favorites[1])" *ngIf="favorites[1]">
-      <img class="tile__img" [src]="getThumbnailUrl(favorites[1])" [alt]="favorites[1].title" loading="lazy" />
+      <img class="tile__img" [src]="getThumbnailUrl(favorites[1])" [alt]="favorites[1].title" loading="lazy" decoding="async" />
       <div class="tile__overlay">
         <div class="tile__title">{{ favorites[1].title }}</div>
       </div>
     </button>
 
     <button class="tile tile--right2" type="button" (click)="open(favorites[2])" *ngIf="favorites[2]">
-      <img class="tile__img" [src]="getThumbnailUrl(favorites[2])" [alt]="favorites[2].title" loading="lazy" />
+      <img class="tile__img" [src]="getThumbnailUrl(favorites[2])" [alt]="favorites[2].title" loading="lazy" decoding="async" />
       <div class="tile__overlay">
         <div class="tile__title">{{ favorites[2].title }}</div>
       </div>
     </button>
 
     <button class="tile tile--bottom1" type="button" (click)="open(favorites[3])" *ngIf="favorites[3]">
-      <img class="tile__img" [src]="getThumbnailUrl(favorites[3])" [alt]="favorites[3].title" loading="lazy" />
+      <img class="tile__img" [src]="getThumbnailUrl(favorites[3])" [alt]="favorites[3].title" loading="lazy" decoding="async" />
       <div class="tile__overlay">
         <div class="tile__title">{{ favorites[3].title }}</div>
       </div>
     </button>
 
     <button class="tile tile--bottom2" type="button" (click)="open(favorites[4])" *ngIf="favorites[4]">
-      <img class="tile__img" [src]="getThumbnailUrl(favorites[4])" [alt]="favorites[4].title" loading="lazy" />
+      <img class="tile__img" [src]="getThumbnailUrl(favorites[4])" [alt]="favorites[4].title" loading="lazy" decoding="async" />
       <div class="tile__overlay">
         <div class="tile__title">{{ favorites[4].title }}</div>
       </div>
     </button>
 
     <button class="tile tile--bottom3" type="button" (click)="open(favorites[5])" *ngIf="favorites[5]">
-      <img class="tile__img" [src]="getThumbnailUrl(favorites[5])" [alt]="favorites[5].title" loading="lazy" />
+      <img class="tile__img" [src]="getThumbnailUrl(favorites[5])" [alt]="favorites[5].title" loading="lazy" decoding="async" />
       <div class="tile__overlay">
         <div class="tile__title">{{ favorites[5].title }}</div>
       </div>
     </button>
 
     <button class="tile tile--bottom4" type="button" (click)="open(favorites[6])" *ngIf="favorites[6]">
-      <img class="tile__img" [src]="getThumbnailUrl(favorites[6])" [alt]="favorites[6].title" loading="lazy" />
+      <img class="tile__img" [src]="getThumbnailUrl(favorites[6])" [alt]="favorites[6].title" loading="lazy" decoding="async" />
       <div class="tile__overlay">
         <div class="tile__title">{{ favorites[6].title }}</div>
       </div>
@@ -82,7 +82,7 @@
   <div class="grid" *ngIf="!loading && items.length > 0">
     <button class="gridCard" type="button" *ngFor="let it of pagedItems" (click)="open(it)">
       <div class="gridCard__frame">
-        <img class="gridCard__img" [src]="getThumbnailUrl(it)" [alt]="it.title" loading="lazy" />
+        <img class="gridCard__img" [src]="getThumbnailUrl(it)" [alt]="it.title" loading="lazy" decoding="async" />
       </div>
       <div class="gridCard__meta">
         <div class="gridCard__title">{{ it.title }}</div>
@@ -115,7 +115,7 @@
 
     <div class="viewer__content" *ngIf="selected as s">
       <div class="viewer__media">
-        <img class="viewer__img" [src]="getThumbnailUrl(s)" [alt]="s.title" decoding="async" fetchpriority="high" />
+        <img class="viewer__img" [src]="getPhotoUrl(s)" [alt]="s.title" decoding="async" fetchpriority="high" />
       </div>
 
       <aside class="viewer__info">

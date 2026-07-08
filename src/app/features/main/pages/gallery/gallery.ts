@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { GalleryService } from '../../../../core/services';
 import { GalleryPhotoResponse } from '../../../../core/models';
 import { environment } from '../../../../../environments/environment';
@@ -41,69 +42,56 @@ export class Gallery implements OnInit {
     this.loadData();
   }
 
+  /**
+   * Le due chiamate sono indipendenti tra loro: un hiccup transitorio su una
+   * (es. favorites, puramente decorativa) non deve azzerare tutta la pagina.
+   * Solo il fallimento di "photos" (il contenuto principale) è un errore reale.
+   */
   loadData(): void {
-    const startTime = performance.now();
-    console.log('[Gallery] loadData() START - loading =', this.loading);
     this.loading = true;
     this.error = null;
 
     forkJoin({
-      favorites: this.galleryService.getPublicFavorites(),
-      photos: this.galleryService.getPublicPhotos(this.page, this.pageSize, this.sortBy)
-    }).subscribe({
-      next: ({ favorites, photos }) => {
-        const responseTime = performance.now();
-        console.log('[Gallery] forkJoin RESPONSE ricevuta dopo', (responseTime - startTime).toFixed(2), 'ms');
-        console.log('[Gallery] favorites:', favorites.length, 'items');
-        console.log('[Gallery] photos:', photos.content.length, 'items');
-        
-        this.favorites = favorites;
-        if (favorites.length > 0) {
-          this.heroMain = favorites[0];
-        }
+      favorites: this.galleryService.getPublicFavorites().pipe(
+        catchError(() => of<GalleryPhotoResponse[]>([]))
+      ),
+      photos: this.galleryService.getPublicPhotos(this.page, this.pageSize, this.sortBy).pipe(
+        catchError(() => of(null))
+      ),
+    }).subscribe(({ favorites, photos }) => {
+      this.favorites = favorites;
+      this.heroMain = favorites.length > 0 ? favorites[0] : null;
+
+      if (photos) {
         this.items = photos.content;
         this.totalElements = photos.totalElements;
         this.totalPages = photos.totalPages;
-        
-        console.log('[Gallery] Dati assegnati, imposto loading = false');
-        this.loading = false;
-        this.cdr.detectChanges(); // Forza aggiornamento UI in zoneless mode
-        
-        const endTime = performance.now();
-        console.log('[Gallery] loadData() COMPLETE - tempo totale:', (endTime - startTime).toFixed(2), 'ms');
-      },
-      error: (err) => {
+        this.error = null;
+      } else {
         this.error = this.translate.instant('GALLERY.ERR');
-        this.loading = false;
-        this.cdr.detectChanges();
-        console.error('[Gallery] ERRORE:', err);
       }
+
+      this.loading = false;
+      this.cdr.detectChanges(); // Forza aggiornamento UI in zoneless mode
     });
   }
 
   loadPhotos(): void {
-    const startTime = performance.now();
-    console.log('[Gallery] loadPhotos() START - page:', this.page);
     this.loading = true;
-    
+
     this.galleryService.getPublicPhotos(this.page, this.pageSize, this.sortBy).subscribe({
       next: (pageData) => {
-        const responseTime = performance.now();
-        console.log('[Gallery] loadPhotos RESPONSE dopo', (responseTime - startTime).toFixed(2), 'ms');
-        
         this.items = pageData.content;
         this.totalElements = pageData.totalElements;
         this.totalPages = pageData.totalPages;
+        this.error = null;
         this.loading = false;
         this.cdr.detectChanges(); // Forza aggiornamento UI in zoneless mode
-        
-        console.log('[Gallery] loadPhotos() COMPLETE - tempo totale:', (performance.now() - startTime).toFixed(2), 'ms');
       },
-      error: (err) => {
-        this.error = 'Errore nel caricamento della galleria';
+      error: () => {
+        this.error = this.translate.instant('GALLERY.ERR');
         this.loading = false;
         this.cdr.detectChanges();
-        console.error('[Gallery] loadPhotos ERRORE:', err);
       }
     });
   }

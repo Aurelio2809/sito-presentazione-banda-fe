@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { EventService } from '../../../../core/services';
-import { EventResponse } from '../../../../core/models';
+import { EventResponse, Page } from '../../../../core/models';
 import { TranslateService } from '@ngx-translate/core';
 
 type EventsTab = 'upcoming' | 'past';
@@ -36,28 +37,35 @@ export class Events implements OnInit {
     this.loadData();
   }
 
+  /**
+   * Le tre chiamate sono indipendenti: un hiccup transitorio su una sola
+   * (es. gli annunci) non deve azzerare l'intera pagina eventi.
+   */
   loadData(): void {
     this.loading = true;
     this.error = null;
+    let anyFailed = false;
 
     forkJoin({
-      upcoming: this.eventService.getUpcoming(),
-      past: this.eventService.getPast(),
-      announcements: this.eventService.getPublicAll('ANNOUNCEMENT')
-    }).subscribe({
-      next: ({ upcoming, past, announcements }) => {
-        this.upcomingEvents = upcoming;
-        this.pastEvents = past;
-        this.announcements = announcements.content;
-        this.loading = false;
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        this.error = this.translate.instant('EVENTS.ERR');
-        this.loading = false;
-        this.cdr.detectChanges();
-        console.error(err);
-      }
+      upcoming: this.eventService.getUpcoming().pipe(
+        catchError(() => { anyFailed = true; return of<EventResponse[]>([]); })
+      ),
+      past: this.eventService.getPast().pipe(
+        catchError(() => { anyFailed = true; return of<EventResponse[]>([]); })
+      ),
+      announcements: this.eventService.getPublicAll('ANNOUNCEMENT').pipe(
+        catchError(() => { anyFailed = true; return of<Page<EventResponse> | null>(null); })
+      ),
+    }).subscribe(({ upcoming, past, announcements }) => {
+      this.upcomingEvents = upcoming;
+      this.pastEvents = past;
+      this.announcements = announcements?.content ?? [];
+      // Errore visibile solo se non abbiamo alcun dato utile da mostrare
+      this.error = anyFailed && upcoming.length === 0 && past.length === 0 && !announcements
+        ? this.translate.instant('EVENTS.ERR')
+        : null;
+      this.loading = false;
+      this.cdr.detectChanges();
     });
   }
 

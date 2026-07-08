@@ -51,6 +51,12 @@
       "TITLE": "Il direttivo",
       "TEXT": "Il direttivo è l'organo dell'associazione predisposto a prendere le decisioni e tracciare la strada verso il futuro. Un gruppo che coordina attività, eventi e progetti, con trasparenza e in rappresentanza dei soci tutti. Attualmente il presidente dell'associazione è Aurelio Marotta.",
       "CTA": "Scrivici"
+    },
+    "EVENT_CTA": {
+      "TAG": "Organizza con noi",
+      "TITLE": "Un evento, una festa o un concerto su richiesta?",
+      "DESC": "Organizziamo la banda per feste patronali, ricorrenze e concerti su richiesta: raccontaci la tua idea, la realizziamo insieme.",
+      "CTA": "Contattaci"
     }
   },
   "CONTACTS": {

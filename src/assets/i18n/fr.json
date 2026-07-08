@@ -51,6 +51,12 @@
       "TITLE": "Le conseil d'administration",
       "TEXT": "Le conseil est l'organe de l'association chargé de prendre les décisions et de tracer la voie vers l'avenir. Un groupe coordonnant les activités, les événements et les projets avec transparence et au nom de tous les membres. Le président de l'association est actuellement Aurelio Marotta.",
       "CTA": "Écrivez-nous"
+    },
+    "EVENT_CTA": {
+      "TAG": "Organisons ensemble",
+      "TITLE": "Un événement, une fête ou un concert sur demande ?",
+      "DESC": "Nous mobilisons la fanfare pour les fêtes patronales, les commémorations et les concerts sur demande : parlez-nous de votre projet, nous le réalisons ensemble.",
+      "CTA": "Contactez-nous"
     }
   },
   "CONTACTS": {

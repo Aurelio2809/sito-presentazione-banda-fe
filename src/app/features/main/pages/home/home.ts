@@ -66,7 +66,7 @@ export class Home implements AfterViewInit, OnDestroy {
       title: 'HOME.STORIA.TITLE',
       text: 'HOME.STORIA.TEXT',
       ctaText: 'HOME.STORIA.CTA',
-      ctaLink: '/about',
+      ctaLink: '/about/history',
       images: ['assets/home/storia.jpg'],
     },
     {
@@ -84,7 +84,7 @@ export class Home implements AfterViewInit, OnDestroy {
       title: 'HOME.SCUOLA.TITLE',
       text: 'HOME.SCUOLA.TEXT',
       ctaText: 'HOME.SCUOLA.CTA',
-      ctaLink: '/contacts',
+      ctaLink: '/about/school',
       images: ['assets/home/scuola.jpg'],
     },
     {

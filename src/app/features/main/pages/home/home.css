@@ -328,6 +328,76 @@
 }
 
 /* =========================================================
+   CTA EVENTI / CONCERTI SU RICHIESTA
+   ========================================================= */
+.eventCta {
+  position: relative;
+  overflow: hidden;
+  margin: 24px 0 clamp(48px, 8vh, 96px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(900px 520px at 70% 10%, rgba(255, 200, 87, 0.10), rgba(0, 0, 0, 0) 60%),
+    radial-gradient(760px 420px at 20% 40%, rgba(190, 18, 60, 0.12), rgba(0, 0, 0, 0) 60%),
+    linear-gradient(135deg, rgba(12, 12, 14, 0.92), rgba(6, 6, 8, 0.90));
+  backdrop-filter: blur(14px) saturate(1.12);
+  box-shadow: var(--shadow-soft, 0 24px 80px rgba(0, 0, 0, 0.45));
+}
+
+.eventCta__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: clamp(28px, 5vw, 48px) clamp(24px, 5vw, 56px);
+}
+
+@media (min-width: 900px) {
+  .eventCta__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+}
+
+.eventCta__tag {
+  display: inline-flex;
+  width: fit-content;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 200, 87, 0.28);
+  background: rgba(255, 200, 87, 0.05);
+  color: rgba(255, 200, 87, 0.92);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eventCta__title {
+  margin: 14px 0 0;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.eventCta__desc {
+  margin: 10px 0 0;
+  max-width: 52ch;
+  font-size: clamp(14px, 1.6vw, 16px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.eventCta__actions {
+  flex-shrink: 0;
+}
+
+/* =========================================================
    Rispetto delle preferenze di movimento ridotto
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {

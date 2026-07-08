@@ -51,6 +51,12 @@
       "TITLE": "The board of directors",
       "TEXT": "The board is the association's body responsible for making decisions and charting the course for the future. A group coordinating activities, events, and projects transparently and on behalf of all members. The association's president is currently Aurelio Marotta.",
       "CTA": "Contact us"
+    },
+    "EVENT_CTA": {
+      "TAG": "Organise with us",
+      "TITLE": "An event, a festivity or a concert on request?",
+      "DESC": "We can bring the band to patron saint festivals, anniversaries and commissioned concerts: tell us your idea and let's make it happen together.",
+      "CTA": "Contact us"
     }
   },
   "CONTACTS": {

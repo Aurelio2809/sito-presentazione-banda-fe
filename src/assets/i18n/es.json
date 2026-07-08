@@ -51,6 +51,12 @@
       "TITLE": "La junta directiva",
       "TEXT": "La junta directiva es el órgano de la asociación encargado de tomar las decisiones y trazar el camino hacia el futuro. Un grupo que coordina actividades, eventos y proyectos, con transparencia y en representación de todos los socios. Actualmente el presidente de la asociación es Aurelio Marotta.",
       "CTA": "Escríbenos"
+    },
+    "EVENT_CTA": {
+      "TAG": "Organiza con nosotros",
+      "TITLE": "¿Un evento, una fiesta o un concierto por encargo?",
+      "DESC": "Llevamos la banda a fiestas patronales, aniversarios y conciertos por encargo: cuéntanos tu idea y la hacemos realidad juntos.",
+      "CTA": "Contáctanos"
     }
   },
   "CONTACTS": {
