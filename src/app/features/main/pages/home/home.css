@@ -113,7 +113,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: clamp(32px, 6vh, 72px) clamp(20px, 6vw, 64px) clamp(56px, 8vh, 96px);
+  /* Padding inferiore maggiore del superiore: lascia sempre spazio all'indicatore
+     "Scorri" (assoluto, ancorato al fondo) senza sovrapporsi ai CTA sopra di esso
+     (su laptop 1280-1366px di altezza il vecchio valore li faceva toccare/sovrapporre). */
+  padding: clamp(32px, 6vh, 72px) clamp(20px, 6vw, 64px) clamp(112px, 17vh, 170px);
   box-sizing: border-box;
   overflow: hidden;
 }

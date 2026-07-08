@@ -9,7 +9,7 @@
   },
   "HOME": {
     "HERO": {
-      "EYEBROW": "Desde 1925",
+      "EYEBROW": "Más de un siglo",
       "TITLE": "Un siglo de música y tradición",
       "SUBTITLE": "La banda musical de Casali del Manco: pasión, comunidad y cultura bandística que crece año tras año.",
       "CTA": "Descubre más",
@@ -131,10 +131,8 @@
     "HEADER_DESC": "La Banda Musical “Città di Casali del Manco” promueve la cultura musical y la participación. Cada ensayo y cada concierto son una forma concreta de construir territorio y vínculos.",
     "ACT_CONTACT": "Contáctanos",
     "ACT_EVENTS": "Ver eventos",
-    "STAT_CONCERTS": "Conciertos / año",
     "STAT_MEMBERS": "Componentes",
     "STAT_STUDENTS": "Alumnos de la escuela",
-    "STAT_YEARS": "Años de actividad",
     "CTA": "Descubre más",
     "SEC_STORIA_TAG": "Historia",
     "SEC_STORIA_TITLE": "Nuestra historia",

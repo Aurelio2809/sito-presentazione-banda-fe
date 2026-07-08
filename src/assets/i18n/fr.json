@@ -9,7 +9,7 @@
   },
   "HOME": {
     "HERO": {
-      "EYEBROW": "Depuis 1925",
+      "EYEBROW": "Plus d'un siècle",
       "TITLE": "Un siècle de musique et de tradition",
       "SUBTITLE": "La fanfare de Casali del Manco : passion, communauté et culture musicale qui grandit d'année en année.",
       "CTA": "En savoir plus",
@@ -131,10 +131,8 @@
     "HEADER_DESC": "La fanfare « Città di Casali del Manco » promeut la culture musicale et la participation. Chaque répétition et chaque concert sont un moyen concret de construire le territoire et les liens.",
     "ACT_CONTACT": "Contactez-nous",
     "ACT_EVENTS": "Voir les événements",
-    "STAT_CONCERTS": "Concerts / an",
     "STAT_MEMBERS": "Membres",
     "STAT_STUDENTS": "Élèves de l'école",
-    "STAT_YEARS": "Années d'activité",
     "CTA": "En savoir plus",
     "SEC_STORIA_TAG": "Histoire",
     "SEC_STORIA_TITLE": "Notre histoire",

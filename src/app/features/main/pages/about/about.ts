@@ -25,10 +25,8 @@ export class About {
   ];
 
   readonly stats: PageHeaderStat[] = [
-    { label: 'ABOUT.STAT_CONCERTS', value: '—' },
-    { label: 'ABOUT.STAT_MEMBERS', value: '—' },
-    { label: 'ABOUT.STAT_STUDENTS', value: '—' },
-    { label: 'ABOUT.STAT_YEARS', value: '—' },
+    { label: 'ABOUT.STAT_MEMBERS', value: '32' },
+    { label: 'ABOUT.STAT_STUDENTS', value: '15' },
   ];
 
   readonly sections: AboutSection[] = [

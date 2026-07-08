@@ -9,7 +9,7 @@
   },
   "HOME": {
     "HERO": {
-      "EYEBROW": "Dal 1925",
+      "EYEBROW": "Da più di un secolo",
       "TITLE": "Un secolo di musica e tradizione",
       "SUBTITLE": "La banda musicale di Casali del Manco: passione, comunità e cultura bandistica che cresce di anno in anno.",
       "CTA": "Scopri di più",
@@ -131,10 +131,8 @@
     "HEADER_DESC": "La Banda Musicale “Città di Casali del Manco” promuove cultura musicale e partecipazione. Ogni prova e ogni concerto sono un modo concreto per costruire territorio e legami.",
     "ACT_CONTACT": "Contattaci",
     "ACT_EVENTS": "Vedi eventi",
-    "STAT_CONCERTS": "Concerti / anno",
     "STAT_MEMBERS": "Componenti",
     "STAT_STUDENTS": "Allievi scuola",
-    "STAT_YEARS": "Anni di attività",
     "CTA": "Scopri di più",
     "SEC_STORIA_TAG": "Storia",
     "SEC_STORIA_TITLE": "La nostra storia",
