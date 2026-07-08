@@ -126,8 +126,11 @@
   display: grid;
   gap: 12px;
   grid-template-columns: repeat(12, minmax(0, 1fr));
+  /* L'altezza delle righe (max 8 x 70px + gap) già limita naturalmente
+     l'altezza totale (~644px). Un max-height: 70vh in più tagliava la riga
+     inferiore delle tile su schermi laptop comuni (es. 1366x768, dove
+     70vh=538px < 644px richiesti): rimosso. */
   grid-template-rows: repeat(8, minmax(0, 70px));
-  max-height: 70vh;
   overflow: hidden;
 }
 
