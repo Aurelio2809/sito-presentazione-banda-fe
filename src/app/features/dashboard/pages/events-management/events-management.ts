@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { TabItem } from '../../components/tab-switch/tab-switch';
 import { EventService } from '../../../../core/services';
-import { EventResponse, EventRequest, EventType, EventStatus } from '../../../../core/models';
+import { EventResponse, EventRequest, EventType, EventStatus, Page } from '../../../../core/models';
 
 @Component({
   selector: 'app-events-management',
@@ -31,26 +32,28 @@ export class EventsManagement implements OnInit {
     this.loadData();
   }
 
+  /**
+   * Eventi e annunci sono indipendenti: se una delle due chiamate fallisce, l'altra resta
+   * comunque visibile invece di azzerare l'intera pagina.
+   */
   loadData(): void {
     this.loading = true;
     this.error = null;
+    let anyFailed = false;
 
     forkJoin({
-      events: this.eventService.getAll(0, 100, 'EVENT'),
-      announcements: this.eventService.getAll(0, 100, 'ANNOUNCEMENT')
-    }).subscribe({
-      next: ({ events, announcements }) => {
-        this.events = events.content;
-        this.announcements = announcements.content;
-        this.loading = false;
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        this.error = 'Errore nel caricamento';
-        this.loading = false;
-        this.cdr.detectChanges();
-        console.error(err);
-      }
+      events: this.eventService.getAll(0, 100, 'EVENT').pipe(
+        catchError(() => { anyFailed = true; return of<Page<EventResponse> | null>(null); })
+      ),
+      announcements: this.eventService.getAll(0, 100, 'ANNOUNCEMENT').pipe(
+        catchError(() => { anyFailed = true; return of<Page<EventResponse> | null>(null); })
+      ),
+    }).subscribe(({ events, announcements }) => {
+      if (events) this.events = events.content;
+      if (announcements) this.announcements = announcements.content;
+      this.error = anyFailed && !events && !announcements ? 'Errore nel caricamento' : null;
+      this.loading = false;
+      this.cdr.detectChanges();
     });
   }
 

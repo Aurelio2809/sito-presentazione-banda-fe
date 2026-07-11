@@ -58,19 +58,14 @@ export class GalleryManagement implements OnInit {
   }
 
   loadPhotos(): void {
-    const startTime = performance.now();
-    console.log('[GalleryMgmt] loadPhotos() START');
     this.loading = true;
     this.error = null;
 
     this.galleryService.getAll(0, 100).subscribe({
       next: (page) => {
-        const responseTime = performance.now();
-        console.log('[GalleryMgmt] loadPhotos() RESPONSE dopo', (responseTime - startTime).toFixed(2), 'ms -', page.content.length, 'items');
         this.photos = page.content;
         this.loading = false;
         this.cdr.detectChanges();
-        console.log('[GalleryMgmt] loadPhotos() COMPLETE - tempo totale:', (performance.now() - startTime).toFixed(2), 'ms');
       },
       error: (err) => {
         this.error = 'Errore nel caricamento delle foto';
@@ -182,8 +177,6 @@ export class GalleryManagement implements OnInit {
   savePhoto(): void {
     if (!this.selectedPhoto) return;
 
-    const startTime = performance.now();
-    console.log('[GalleryMgmt] savePhoto() START - saving =', this.saving);
     this.saving = true;
     const request: GalleryPhotoRequest = {
       title: this.selectedPhoto.title,
@@ -204,14 +197,11 @@ export class GalleryManagement implements OnInit {
       })
     ).subscribe({
       next: (updated) => {
-        const responseTime = performance.now();
-        console.log('[GalleryMgmt] savePhoto() RESPONSE dopo', (responseTime - startTime).toFixed(2), 'ms');
         const index = this.photos.findIndex(p => p.id === updated.id);
         if (index >= 0) {
           this.photos[index] = updated;
         }
         this.selectedPhoto = null;
-        console.log('[GalleryMgmt] savePhoto() COMPLETE - tempo totale:', (performance.now() - startTime).toFixed(2), 'ms');
       },
       error: (err) => {
         const isTimeout = err?.name === 'TimeoutError' || err?.message?.includes('Timeout');
@@ -384,10 +374,6 @@ export class GalleryManagement implements OnInit {
     if (value == null || value === '') return null;
     const n = Number(value);
     return Number.isNaN(n) ? null : n;
-  }
-
-  private toNumberOrNull(value: number | string | null | undefined): number | null {
-    return this.ensureNumberOrNull(value);
   }
 
   formatPhotoDate(photo: GalleryPhotoResponse): string {

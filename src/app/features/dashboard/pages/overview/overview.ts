@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { GalleryService, EventService, MessageService, ActivityLogService } from '../../../../core/services';
 import { ActivityLogResponse } from '../../../../core/models';
 
@@ -32,28 +33,26 @@ export class Overview implements OnInit {
     this.loadRecentActivities();
   }
 
+  /**
+   * Ogni chiamata ha il proprio catchError: se una singola statistica non risponde (es. un
+   * hiccup di rete), le altre restano comunque visibili invece di azzerarsi tutte insieme.
+   */
   loadStats(): void {
     this.loading = true;
 
     forkJoin({
-      photos: this.galleryService.getAll(0, 1),
-      events: this.eventService.getAll(0, 1, 'EVENT', 'PUBLISHED'),
-      announcements: this.eventService.getAll(0, 1, 'ANNOUNCEMENT', 'PUBLISHED'),
-      unreadCount: this.messageService.getUnreadCount(),
-      messages: this.messageService.getAll(0, 1)
-    }).subscribe({
-      next: (data) => {
-        this.stats[0].value = data.photos.totalElements;
-        this.stats[1].value = data.events.totalElements;
-        this.stats[2].value = data.announcements.totalElements;
-        this.stats[3].value = data.messages.totalElements;
-        this.stats[3].trend = `${data.unreadCount.count} non letti`;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Errore nel caricamento statistiche', err);
-        this.loading = false;
-      }
+      photos: this.galleryService.getAll(0, 1).pipe(catchError(() => of(null))),
+      events: this.eventService.getAll(0, 1, 'EVENT', 'PUBLISHED').pipe(catchError(() => of(null))),
+      announcements: this.eventService.getAll(0, 1, 'ANNOUNCEMENT', 'PUBLISHED').pipe(catchError(() => of(null))),
+      unreadCount: this.messageService.getUnreadCount().pipe(catchError(() => of(null))),
+      messages: this.messageService.getAll(0, 1).pipe(catchError(() => of(null))),
+    }).subscribe((data) => {
+      if (data.photos) this.stats[0].value = data.photos.totalElements;
+      if (data.events) this.stats[1].value = data.events.totalElements;
+      if (data.announcements) this.stats[2].value = data.announcements.totalElements;
+      if (data.messages) this.stats[3].value = data.messages.totalElements;
+      if (data.unreadCount) this.stats[3].trend = `${data.unreadCount.count} non letti`;
+      this.loading = false;
     });
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TabItem } from '../../components/tab-switch/tab-switch';
 import { ActivityLogService } from '../../../../core/services';
-import { ActivityLogResponse, TargetType } from '../../../../core/models';
+import { ActivityLogResponse } from '../../../../core/models';
 
 @Component({
   selector: 'app-activity-log',
@@ -25,9 +25,8 @@ export class ActivityLog implements OnInit {
     this.loading = true;
     this.error = null;
 
-    const targetType = this.activeFilter !== 'all' ? this.activeFilter as TargetType : undefined;
-    
-    this.activityLogService.getAll(0, 100, targetType).subscribe({
+    // Sempre non filtrato: il filtro per tab è client-side (vedi filteredActivities/onFilterChange).
+    this.activityLogService.getAll(0, 100).subscribe({
       next: (page) => {
         this.activities = page.content;
         this.loading = false;
@@ -56,11 +55,10 @@ export class ActivityLog implements OnInit {
   }
 
   onFilterChange(tabId: string): void {
+    // Filtro puramente client-side su 'activities' (già caricato per intero): un ricaricamento
+    // dal server con targetType sostituiva l'intero array con il solo sottoinsieme filtrato,
+    // azzerando i conteggi delle ALTRE tab (che leggono da 'activities' per calcolarsi).
     this.activeFilter = tabId;
-    // Ricarica dal server per filtro specifico
-    if (tabId !== 'all') {
-      this.loadActivities();
-    }
   }
 
   getIcon(type: string): string {
