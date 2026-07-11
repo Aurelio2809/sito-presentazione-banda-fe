@@ -1,9 +1,9 @@
 <section class="schoolPage">
   <!-- HERO -->
   <app-page-header
-    tag="Scuola di musica"
-    title="Formazione, metodo e passione"
-    description="La scuola di musica della banda offre un percorso formativo completo: dalla lettura musicale alla tecnica strumentale, fino all'esperienza di suonare insieme. Un ambiente accogliente dove imparare, crescere e condividere la passione per la musica."
+    [tag]="'ABOUT_SCHOOL.HEADER_TAG' | translate"
+    [title]="'ABOUT_SCHOOL.HEADER_TITLE' | translate"
+    [description]="'ABOUT_SCHOOL.HEADER_DESC' | translate"
     [actions]="headerActions"
   ></app-page-header>
 
@@ -13,45 +13,35 @@
     <!-- INTRO -->
     <section class="intro">
       <div class="intro__text">
-        <h2 class="sectionTitle">Perché scegliere la nostra scuola</h2>
+        <h2 class="sectionTitle">{{ 'ABOUT_SCHOOL.INTRO_TITLE' | translate }}</h2>
         <p class="p">
-          La scuola di musica della banda non è solo un luogo dove imparare a suonare: è un'esperienza formativa
-          che accompagna l'allievo dalla prima nota fino all'ingresso nell'organico della banda. Il metodo si basa
-          su un approccio graduale, con attenzione alla teoria musicale, alla tecnica strumentale e soprattutto
-          alla pratica d'insieme.
+          {{ 'ABOUT_SCHOOL.INTRO_P1' | translate }}
         </p>
         <p class="p">
-          Gli insegnanti sono musicisti esperti, spesso membri attivi della banda stessa, che trasmettono non solo
-          competenze tecniche ma anche la passione per la musica e il senso di appartenenza a una comunità.
+          {{ 'ABOUT_SCHOOL.INTRO_P2' | translate }}
         </p>
       </div>
 
       <figure class="photoPlaceholder photoPlaceholder--intro">
-        <div class="photoPlaceholder__img">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <img class="photoPlaceholder__photo" src="assets/about/scuola-nuovi-allievi.jpg" [attr.alt]="'ABOUT_SCHOOL.INTRO_PHOTO_CAPTION' | translate" loading="lazy" />
         <figcaption class="photoPlaceholder__caption">
-          Lezione di musica con giovani allievi
+          {{ 'ABOUT_SCHOOL.INTRO_PHOTO_CAPTION' | translate }}
         </figcaption>
       </figure>
     </section>
 
     <!-- LIVELLI -->
     <section class="levels">
-      <h2 class="sectionTitle">Percorso formativo</h2>
-      <p class="sectionDesc">Tre livelli progressivi per accompagnare ogni allievo nel suo percorso musicale.</p>
+      <h2 class="sectionTitle">{{ 'ABOUT_SCHOOL.LEVELS_TITLE' | translate }}</h2>
+      <p class="sectionDesc">{{ 'ABOUT_SCHOOL.LEVELS_DESC' | translate }}</p>
 
       <div class="levelsGrid">
         <div class="levelCard" *ngFor="let level of levels; let i = index">
           <div class="levelCard__num">{{ i + 1 }}</div>
-          <h3 class="levelCard__title">{{ level.title }}</h3>
-          <p class="levelCard__subtitle">{{ level.subtitle }}</p>
+          <h3 class="levelCard__title">{{ level.title | translate }}</h3>
+          <p class="levelCard__subtitle">{{ level.subtitle | translate }}</p>
           <ul class="levelCard__list">
-            <li *ngFor="let item of level.items">{{ item }}</li>
+            <li *ngFor="let item of level.items">{{ item | translate }}</li>
           </ul>
         </div>
       </div>
@@ -59,35 +49,29 @@
 
     <!-- STRUMENTI -->
     <section class="instruments">
-      <h2 class="sectionTitle">Strumenti insegnati</h2>
-      <p class="sectionDesc">Una panoramica degli strumenti che puoi imparare nella nostra scuola.</p>
+      <h2 class="sectionTitle">{{ 'ABOUT_SCHOOL.INSTR_TITLE' | translate }}</h2>
+      <p class="sectionDesc">{{ 'ABOUT_SCHOOL.INSTR_DESC' | translate }}</p>
 
       <div class="instrumentsGrid">
         <div class="instrumentCard" *ngFor="let cat of instruments">
-          <h3 class="instrumentCard__title">{{ cat.category }}</h3>
+          <h3 class="instrumentCard__title">{{ cat.category | translate }}</h3>
           <ul class="instrumentCard__list">
-            <li *ngFor="let item of cat.items">{{ item }}</li>
+            <li *ngFor="let item of cat.items">{{ item | translate }}</li>
           </ul>
         </div>
       </div>
 
       <figure class="photoPlaceholder photoPlaceholder--wide">
-        <div class="photoPlaceholder__img">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <img class="photoPlaceholder__photo" src="assets/about/scuola-giovani-musicisti.jpg" [attr.alt]="'ABOUT_SCHOOL.INSTR_PHOTO_CAPTION' | translate" loading="lazy" />
         <figcaption class="photoPlaceholder__caption">
-          Alcuni strumenti della sezione ottoni
+          {{ 'ABOUT_SCHOOL.INSTR_PHOTO_CAPTION' | translate }}
         </figcaption>
       </figure>
     </section>
 
     <!-- INFO PRATICHE -->
     <section class="infoSection">
-      <h2 class="sectionTitle">Informazioni pratiche</h2>
+      <h2 class="sectionTitle">{{ 'ABOUT_SCHOOL.INFO_TITLE' | translate }}</h2>
 
       <div class="infoGrid">
         <div class="infoItem" *ngFor="let info of infoItems">
@@ -116,8 +100,8 @@
             </svg>
           </div>
           <div class="infoItem__content">
-            <div class="infoItem__label">{{ info.label }}</div>
-            <div class="infoItem__value">{{ info.value }}</div>
+            <div class="infoItem__label">{{ info.label | translate }}</div>
+            <div class="infoItem__value">{{ info.value | translate }}</div>
           </div>
         </div>
       </div>
@@ -126,14 +110,13 @@
     <!-- CTA -->
     <section class="ctaSection">
       <div class="ctaCard">
-        <h2 class="ctaCard__title">Vuoi iniziare?</h2>
+        <h2 class="ctaCard__title">{{ 'ABOUT_SCHOOL.CTA_TITLE' | translate }}</h2>
         <p class="ctaCard__desc">
-          Contattaci per un incontro conoscitivo. Potrai vedere la sede, conoscere gli insegnanti
-          e provare gli strumenti prima di iscriverti.
+          {{ 'ABOUT_SCHOOL.CTA_DESC' | translate }}
         </p>
         <div class="ctaCard__actions">
-          <a class="ctaBtn ctaBtn--primary" routerLink="/contacts">Contattaci</a>
-          <a class="ctaBtn ctaBtn--ghost" routerLink="/events">Prossimi eventi</a>
+          <a class="ctaBtn ctaBtn--primary" routerLink="/contacts">{{ 'ABOUT_SCHOOL.CTA_CONTACT' | translate }}</a>
+          <a class="ctaBtn ctaBtn--ghost" routerLink="/events">{{ 'ABOUT_SCHOOL.CTA_EVENTS' | translate }}</a>
         </div>
       </div>
     </section>

@@ -9,54 +9,54 @@ import { PageHeaderAction } from '../../components/page-header/page-header';
 })
 export class AboutSchool {
   headerActions: PageHeaderAction[] = [
-    { label: 'Torna a Chi siamo', routerLink: '/about', variant: 'ghost' },
-    { label: 'Iscriviti / Contatti', routerLink: '/contacts', variant: 'primary' },
+    { label: 'ABOUT_SCHOOL.ACT_BACK', routerLink: '/about', variant: 'ghost' },
+    { label: 'ABOUT_SCHOOL.ACT_ENROLL', routerLink: '/contacts', variant: 'primary' },
   ];
 
   levels = [
     {
-      title: 'Livello Base',
-      subtitle: 'Per chi inizia da zero',
+      title: 'ABOUT_SCHOOL.LEVEL_BASE_TITLE',
+      subtitle: 'ABOUT_SCHOOL.LEVEL_BASE_SUBTITLE',
       items: [
-        'Introduzione alla lettura musicale (note, ritmi, tempi)',
-        'Primi esercizi di respirazione e impostazione',
-        'Conoscenza dello strumento scelto',
-        'Ascolto guidato e senso del ritmo',
+        'ABOUT_SCHOOL.LEVEL_BASE_ITEM_1',
+        'ABOUT_SCHOOL.LEVEL_BASE_ITEM_2',
+        'ABOUT_SCHOOL.LEVEL_BASE_ITEM_3',
+        'ABOUT_SCHOOL.LEVEL_BASE_ITEM_4',
       ],
     },
     {
-      title: 'Livello Intermedio',
-      subtitle: 'Per chi ha già le basi',
+      title: 'ABOUT_SCHOOL.LEVEL_INTER_TITLE',
+      subtitle: 'ABOUT_SCHOOL.LEVEL_INTER_SUBTITLE',
       items: [
-        'Tecnica strumentale approfondita',
-        'Studio di brani progressivamente più complessi',
-        'Prime esperienze di musica d\'insieme',
-        'Introduzione all\'armonia e alla teoria musicale',
+        'ABOUT_SCHOOL.LEVEL_INTER_ITEM_1',
+        'ABOUT_SCHOOL.LEVEL_INTER_ITEM_2',
+        'ABOUT_SCHOOL.LEVEL_INTER_ITEM_3',
+        'ABOUT_SCHOOL.LEVEL_INTER_ITEM_4',
       ],
     },
     {
-      title: 'Livello Avanzato',
-      subtitle: 'Per musicisti con esperienza',
+      title: 'ABOUT_SCHOOL.LEVEL_ADV_TITLE',
+      subtitle: 'ABOUT_SCHOOL.LEVEL_ADV_SUBTITLE',
       items: [
-        'Perfezionamento tecnico e interpretativo',
-        'Repertorio solistico e d\'insieme',
-        'Partecipazione attiva alle esibizioni della banda',
-        'Supporto per preparazione a conservatorio o esami',
+        'ABOUT_SCHOOL.LEVEL_ADV_ITEM_1',
+        'ABOUT_SCHOOL.LEVEL_ADV_ITEM_2',
+        'ABOUT_SCHOOL.LEVEL_ADV_ITEM_3',
+        'ABOUT_SCHOOL.LEVEL_ADV_ITEM_4',
       ],
     },
   ];
 
   instruments = [
-    { category: 'Legni', items: ['Flauto traverso', 'Ottavino', 'Clarinetto', 'Sassofono (soprano, contralto, tenore, baritono)'] },
-    { category: 'Ottoni', items: ['Tromba / Cornetta', 'Corno', 'Trombone', 'Flicorno (soprano, contralto, tenore, baritono)', 'Eufonio', 'Tuba / Basso tuba'] },
-    { category: 'Percussioni', items: ['Rullante', 'Grancassa', 'Piatti', 'Accessori (triangolo, tamburo basco, ecc.)'] },
+    { category: 'ABOUT_SCHOOL.INSTR_LEGNI', items: ['ABOUT_SCHOOL.INSTR_LEGNI_1', 'ABOUT_SCHOOL.INSTR_LEGNI_2', 'ABOUT_SCHOOL.INSTR_LEGNI_3', 'ABOUT_SCHOOL.INSTR_LEGNI_4'] },
+    { category: 'ABOUT_SCHOOL.INSTR_OTTONI', items: ['ABOUT_SCHOOL.INSTR_OTTONI_1', 'ABOUT_SCHOOL.INSTR_OTTONI_2', 'ABOUT_SCHOOL.INSTR_OTTONI_3', 'ABOUT_SCHOOL.INSTR_OTTONI_4', 'ABOUT_SCHOOL.INSTR_OTTONI_5', 'ABOUT_SCHOOL.INSTR_OTTONI_6'] },
+    { category: 'ABOUT_SCHOOL.INSTR_PERCUSSIONI', items: ['ABOUT_SCHOOL.INSTR_PERCUSSIONI_1', 'ABOUT_SCHOOL.INSTR_PERCUSSIONI_2', 'ABOUT_SCHOOL.INSTR_PERCUSSIONI_3', 'ABOUT_SCHOOL.INSTR_PERCUSSIONI_4'] },
   ];
 
   infoItems = [
-    { icon: 'calendar', label: 'Quando', value: 'Da settembre a giugno, con pause per festività' },
-    { icon: 'clock', label: 'Orari', value: 'Lezioni individuali e collettive da concordare' },
-    { icon: 'location', label: 'Dove', value: 'Sede della banda a Casali del Manco' },
-    { icon: 'users', label: 'A chi', value: 'Bambini (dai 7 anni), ragazzi e adulti' },
-    { icon: 'gift', label: 'Costi', value: 'Quota associativa annuale (strumenti in comodato disponibili)' },
+    { icon: 'calendar', label: 'ABOUT_SCHOOL.INFO_WHEN_LABEL', value: 'ABOUT_SCHOOL.INFO_WHEN_VALUE' },
+    { icon: 'clock', label: 'ABOUT_SCHOOL.INFO_HOURS_LABEL', value: 'ABOUT_SCHOOL.INFO_HOURS_VALUE' },
+    { icon: 'location', label: 'ABOUT_SCHOOL.INFO_WHERE_LABEL', value: 'ABOUT_SCHOOL.INFO_WHERE_VALUE' },
+    { icon: 'users', label: 'ABOUT_SCHOOL.INFO_WHO_LABEL', value: 'ABOUT_SCHOOL.INFO_WHO_VALUE' },
+    { icon: 'gift', label: 'ABOUT_SCHOOL.INFO_COST_LABEL', value: 'ABOUT_SCHOOL.INFO_COST_VALUE' },
   ];
 }

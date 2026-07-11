@@ -1,9 +1,9 @@
 <section class="todayPage">
   <!-- HERO -->
   <app-page-header
-    tag="La banda oggi"
-    title="Un gruppo vivo, un suono condiviso"
-    description="La Banda Musicale “Città di Casali del Manco” è una realtà attiva che unisce musicisti di diverse generazioni. Prove settimanali, concerti, processioni: un impegno costante per portare musica e tradizione nel territorio."
+    [tag]="'ABOUT_TODAY.HEADER_TAG' | translate"
+    [title]="'ABOUT_TODAY.HEADER_TITLE' | translate"
+    [description]="'ABOUT_TODAY.HEADER_DESC' | translate"
     [actions]="headerActions"
   ></app-page-header>
 
@@ -13,10 +13,10 @@
     <!-- FOTO HERO -->
     <figure class="photoPlaceholder photoPlaceholder--hero">
       <div class="photoPlaceholder__img photoPlaceholder__img--photo">
-        <img src="assets/about/oggi-hero-concerto-chiesa.jpg" alt="La banda al completo durante un concerto recente" loading="lazy" />
+        <img src="assets/about/oggi-hero-concerto-chiesa.jpg" [attr.alt]="'ABOUT_TODAY.HERO_CAPTION' | translate" loading="eager" />
       </div>
       <figcaption class="photoPlaceholder__caption">
-        La banda al completo durante un concerto recente
+        {{ 'ABOUT_TODAY.HERO_CAPTION' | translate }}
       </figcaption>
     </figure>
 
@@ -45,46 +45,34 @@
           </svg>
         </div>
         <div class="sectionCard__content">
-          <h3 class="sectionCard__title">{{ section.title }}</h3>
-          <p class="sectionCard__text">{{ section.content }}</p>
+          <h3 class="sectionCard__title">{{ section.title | translate }}</h3>
+          <p class="sectionCard__text">{{ section.content | translate }}</p>
         </div>
       </div>
     </section>
 
     <!-- ATTIVITÀ -->
     <section class="activities">
-      <h2 class="sectionTitle">Le nostre attività</h2>
+      <h2 class="sectionTitle">{{ 'ABOUT_TODAY.ACTIVITIES_TITLE' | translate }}</h2>
 
       <div class="activitiesGrid">
         <div class="activityCard" *ngFor="let activity of activities">
-          <h3 class="activityCard__title">{{ activity.title }}</h3>
-          <p class="activityCard__desc">{{ activity.desc }}</p>
+          <h3 class="activityCard__title">{{ activity.title | translate }}</h3>
+          <p class="activityCard__desc">{{ activity.desc | translate }}</p>
         </div>
       </div>
 
       <div class="photoGrid">
         <figure class="photoPlaceholder">
-          <div class="photoPlaceholder__img">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+          <img class="photoPlaceholder__photo" src="assets/about/oggi-concerto-piazza.jpg" [attr.alt]="'ABOUT_TODAY.PHOTO_PIAZZA_CAPTION' | translate" loading="lazy" />
           <figcaption class="photoPlaceholder__caption">
-            Concerto in piazza
+            {{ 'ABOUT_TODAY.PHOTO_PIAZZA_CAPTION' | translate }}
           </figcaption>
         </figure>
         <figure class="photoPlaceholder">
-          <div class="photoPlaceholder__img">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+          <img class="photoPlaceholder__photo" src="assets/about/oggi-processione-patronale.jpg" [attr.alt]="'ABOUT_TODAY.PHOTO_PROCESSIONE_CAPTION' | translate" loading="lazy" />
           <figcaption class="photoPlaceholder__caption">
-            Processione patronale
+            {{ 'ABOUT_TODAY.PHOTO_PROCESSIONE_CAPTION' | translate }}
           </figcaption>
         </figure>
       </div>
@@ -94,39 +82,32 @@
     <section class="joinSection">
       <div class="joinCard">
         <div class="joinCard__content">
-          <h2 class="joinCard__title">Vuoi far parte della banda?</h2>
+          <h2 class="joinCard__title">{{ 'ABOUT_TODAY.JOIN_TITLE' | translate }}</h2>
           <p class="joinCard__desc">
-            Se sai già suonare uno strumento a fiato o a percussione, puoi entrare a far parte del nostro gruppo.
-            L'inserimento è graduale: parteciperai prima alle prove e poi, quando sarai pronto, alle esibizioni.
+            {{ 'ABOUT_TODAY.JOIN_DESC' | translate }}
           </p>
 
-          <h3 class="joinCard__subtitle">Requisiti</h3>
+          <h3 class="joinCard__subtitle">{{ 'ABOUT_TODAY.JOIN_REQ_TITLE' | translate }}</h3>
           <ul class="joinCard__list">
-            <li *ngFor="let req of requirements">{{ req }}</li>
+            <li *ngFor="let req of requirements">{{ req | translate }}</li>
           </ul>
 
           <div class="joinCard__note">
-            Non sai ancora suonare? Inizia dalla nostra <a routerLink="/about/school">scuola di musica</a>!
+            {{ 'ABOUT_TODAY.JOIN_NOTE_PREFIX' | translate }} <a routerLink="/about/school">{{ 'ABOUT_TODAY.JOIN_NOTE_LINK' | translate }}</a>!
           </div>
         </div>
 
         <figure class="photoPlaceholder joinCard__photo">
-          <div class="photoPlaceholder__img">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+          <img class="photoPlaceholder__photo" src="assets/about/oggi-prove-giovani.jpg" [attr.alt]="'ABOUT_TODAY.JOIN_PHOTO_CAPTION' | translate" loading="lazy" />
           <figcaption class="photoPlaceholder__caption">
-            Nuovi musicisti durante le prove
+            {{ 'ABOUT_TODAY.JOIN_PHOTO_CAPTION' | translate }}
           </figcaption>
         </figure>
       </div>
 
       <div class="joinCta">
-        <a class="ctaBtn ctaBtn--primary" routerLink="/contacts">Contattaci per un incontro</a>
-        <a class="ctaBtn ctaBtn--ghost" routerLink="/events">Vieni a vederci dal vivo</a>
+        <a class="ctaBtn ctaBtn--primary" routerLink="/contacts">{{ 'ABOUT_TODAY.CTA_MEETING' | translate }}</a>
+        <a class="ctaBtn ctaBtn--ghost" routerLink="/events">{{ 'ABOUT_TODAY.CTA_LIVE' | translate }}</a>
       </div>
     </section>
 

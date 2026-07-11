@@ -27,9 +27,9 @@ in **tutte e 4 le lingue**: `it.json`, `en.json`, `fr.json`, `es.json`.
 - Default app: `it`. Le 4 lingue devono avere **le stesse chiavi** (nessuna mancante/extra).
 - Quando aggiungi testo: crea la chiave (es. `HOME.HERO.TITLE`) e valorizzala in tutti e 4 i file.
 - Verifica parità chiavi prima di chiudere un task.
-- **Debito noto**: `about-history` (narrativa lunga dei capitoli), `about-today` e `about-school`
-  hanno ancora testo hardcoded in italiano da convertire a i18n. Home, about, contacts, gallery,
-  events sono già completamente tradotte (4 lingue, parità verificata).
+- **Debito noto**: `about-history` (narrativa lunga dei capitoli) ha ancora testo hardcoded in
+  italiano da convertire a i18n. Home, about, about-today, about-school, contacts, gallery, events
+  sono già completamente tradotte (4 lingue, parità verificata).
 
 ## Design system (brand) — usa SEMPRE questi token, non inventare colori
 In `src/styles.css` `@theme`:
