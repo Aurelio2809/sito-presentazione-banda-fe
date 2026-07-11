@@ -128,7 +128,12 @@ export class Home implements AfterViewInit, OnDestroy {
 
     const centerY = this.getVisibleCenterY();
     const viewH = this.getVisibleHeight();
-    const range = viewH * 0.60;
+    // Il raggio di dissolvenza è ancorato all'altezza reale delle sezioni (non allo schermo):
+    // su schermi molto grandi (4K/TV) l'altezza del viewport può superare di molto quella delle
+    // sezioni, e usare viewH direttamente rendeva il raggio così ampio che 3-4 sezioni risultavano
+    // "rivelate" (opacità piena) insieme, invece che una alla volta. Il cap alla dimensione di
+    // riferimento (1000px, tipica di laptop/desktop) riproduce il comportamento già corretto lì.
+    const range = Math.min(viewH, 1000) * 0.60;
 
     for (let i = 0; i < els.length; i++) {
       const rect = els[i].getBoundingClientRect();
