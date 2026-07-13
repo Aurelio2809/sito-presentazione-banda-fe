@@ -36,12 +36,13 @@
   transform: scale(1.05); /* Premium hover zoom effect */
 }
 
-/* 1 Image = Full Banner */
+/* 1 immagine: un 16:9 conserva meglio le fotografie originali (quasi tutte 3:2)
+   rispetto al precedente 16:7, che tagliava troppo sopra e sotto. */
 .grid-single {
   grid-template-columns: 1fr;
 }
 .grid-single .img-wrapper {
-  aspect-ratio: 16 / 7;
+  aspect-ratio: 16 / 9;
 }
 
 /* 2 Images = Split equal */
