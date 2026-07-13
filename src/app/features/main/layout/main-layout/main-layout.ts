@@ -31,4 +31,9 @@ export class MainLayout {
       this.closeMobileMenu();
     }
   }
+
+  @HostListener('document:keydown', ['$event'])
+  closeMenuOnEscape(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && this.mobileMenuOpen) this.closeMobileMenu();
+  }
 }

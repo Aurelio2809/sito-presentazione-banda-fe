@@ -11,10 +11,11 @@ import { HistoryChapter } from './components/history-chapter/history-chapter';
 import { SourcesBox } from './components/sources-box/sources-box';
 import { TransparentCard } from './components/transparent-card/transparent-card';
 import { LoadingSpinner } from './components/loading-spinner/loading-spinner';
+import { EmptyState } from './components/empty-state/empty-state';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [UiButton, UiInput, UiSimplePageNavigator, PageToc, HistoryChapter, SourcesBox, TransparentCard, LoadingSpinner],
+  declarations: [UiButton, UiInput, UiSimplePageNavigator, PageToc, HistoryChapter, SourcesBox, TransparentCard, LoadingSpinner, EmptyState],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, TranslateModule],
   exports: [
     CommonModule,
@@ -29,7 +30,8 @@ import { TranslateModule } from '@ngx-translate/core';
     HistoryChapter,
     SourcesBox,
     TransparentCard,
-    LoadingSpinner
+    LoadingSpinner,
+    EmptyState
   ],
 })
 export class SharedModule {}

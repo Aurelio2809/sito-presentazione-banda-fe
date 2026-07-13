@@ -14,24 +14,8 @@
 }
 
 /* =========================================================
-   SEZIONE TITOLI
-   ========================================================= */
-.sectionTitle {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.95);
-  margin-bottom: 8px;
-}
-
-.sectionDesc {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.60);
-  margin-bottom: 24px;
-  max-width: 60ch;
-}
-
-/* =========================================================
    INTRO
+   (.sectionTitle, .sectionDesc definiti globalmente in styles.css)
    ========================================================= */
 .intro {
   display: grid;
@@ -86,74 +70,8 @@
 }
 
 /* =========================================================
-   PHOTO PLACEHOLDER
-   ========================================================= */
-.photoPlaceholder {
-  margin: 20px 0;
-  max-width: 280px;
-}
-
-.photoPlaceholder--wide {
-  max-width: 100%;
-  margin-top: 32px;
-}
-
-.photoPlaceholder__img {
-  aspect-ratio: 4 / 3;
-  display: grid;
-  place-items: center;
-  border-radius: 16px;
-  border: 2px dashed rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.25);
-  transition: border-color 200ms ease, background 200ms ease;
-}
-
-.photoPlaceholder--wide .photoPlaceholder__img {
-  aspect-ratio: 16 / 9;
-}
-
-.photoPlaceholder__img svg {
-  width: 48px;
-  height: 48px;
-}
-
-.photoPlaceholder:hover .photoPlaceholder__img {
-  border-color: rgba(255, 215, 0, 0.30);
-  background: rgba(255, 215, 0, 0.03);
-}
-
-/* Immagine reale (sostituisce il placeholder) */
-.photoPlaceholder__photo {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  box-shadow: var(--shadow-soft, 0 14px 40px rgba(0, 0, 0, 0.35));
-  transition: transform 300ms ease, box-shadow 300ms ease;
-}
-
-.photoPlaceholder--wide .photoPlaceholder__photo {
-  aspect-ratio: 16 / 9;
-}
-
-.photoPlaceholder:hover .photoPlaceholder__photo {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
-}
-
-.photoPlaceholder__caption {
-  margin-top: 10px;
-  font-size: 13px;
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.50);
-  line-height: 1.5;
-}
-
-/* =========================================================
    LIVELLI
+   (.photoPlaceholder* definito globalmente in styles.css)
    ========================================================= */
 .levelsGrid {
   display: grid;
@@ -168,7 +86,7 @@
 }
 
 .levelCard {
-  @apply rounded-[20px] border border-white/10 p-5;
+  @apply rounded-[16px] border border-white/10 p-5;
   background: rgba(10, 10, 12, 0.45);
   backdrop-filter: blur(12px) saturate(1.10);
   -webkit-backdrop-filter: blur(12px) saturate(1.10);
@@ -185,17 +103,17 @@
   display: grid;
   place-items: center;
   border-radius: 10px;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.20), rgba(170, 0, 0, 0.15));
-  border: 1px solid rgba(255, 215, 0, 0.25);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.20), rgba(170, 0, 0, 0.15));
+  border: 1px solid rgba(251, 191, 36, 0.25);
   font-size: 14px;
-  font-weight: 900;
-  color: rgba(255, 215, 0, 0.90);
+  font-weight: 700;
+  color: rgba(251, 191, 36, 0.90);
 }
 
 .levelCard__title {
   margin-top: 8px;
   font-size: 1.1rem;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
 }
 
@@ -230,7 +148,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(255, 215, 0, 0.50);
+  background: rgba(251, 191, 36, 0.50);
 }
 
 /* =========================================================
@@ -255,10 +173,10 @@
 
 .instrumentCard__title {
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgba(255, 215, 0, 0.75);
+  color: rgba(251, 191, 36, 0.75);
   margin-bottom: 12px;
 }
 
@@ -311,9 +229,9 @@
   height: 40px;
   display: grid;
   place-items: center;
-  border-radius: 12px;
-  background: rgba(255, 215, 0, 0.10);
-  color: rgba(255, 215, 0, 0.80);
+  border-radius: 10px;
+  background: rgba(251, 191, 36, 0.10);
+  color: rgba(251, 191, 36, 0.80);
   flex-shrink: 0;
 }
 
@@ -323,7 +241,7 @@
 }
 
 .infoItem__label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -346,13 +264,13 @@
 
 .ctaCard {
   @apply rounded-[24px] border border-white/10 p-6 md:p-8;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(170, 0, 0, 0.06));
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(170, 0, 0, 0.06));
   text-align: center;
 }
 
 .ctaCard__title {
   font-size: 1.5rem;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
 }
 
@@ -373,27 +291,31 @@
   gap: 12px;
 }
 
-.ctaBtn {
-  @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-extrabold;
-  transition: transform 180ms ease, background 180ms ease;
+/* Superfici coerenti con il sistema liquid-glass e il tema automatico. */
+.schoolPage { padding-block: clamp(24px, 4vw, 40px); }
+.schoolContent { gap: clamp(30px, 4vw, 44px); }
+
+.levelCard,
+.instrumentCard,
+.infoItem,
+.ctaCard {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--glass-border);
+  background: linear-gradient(135deg, var(--glass-strong), var(--glass));
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  box-shadow: inset 0 1px 0 var(--glass-highlight), 0 14px 42px var(--shadow-color);
 }
 
-.ctaBtn--primary {
-  background: rgba(255, 255, 255, 0.95);
-  color: rgba(10, 10, 12, 0.95);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-}
+.p,
+.levelCard__subtitle,
+.levelCard__list li,
+.instrumentCard__list li { color: var(--text-body); }
 
-.ctaBtn--primary:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 1);
-}
+.levelCard__title,
+.infoItem__value,
+.ctaCard__title { color: var(--text-strong); }
 
-.ctaBtn--ghost {
-  @apply border border-white/15 bg-white/5 text-white/85;
-}
-
-.ctaBtn--ghost:hover {
-  @apply bg-white/10;
-  transform: translateY(-2px);
-}
+.infoItem__label,
+.ctaCard__desc { color: var(--text-muted); }

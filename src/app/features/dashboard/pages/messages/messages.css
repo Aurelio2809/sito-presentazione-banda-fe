@@ -22,7 +22,7 @@
 
 .pageHeader__title {
   font-size: 1.75rem;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
 }
 
@@ -45,7 +45,7 @@
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  transition: background 150ms ease, transform 150ms ease;
+  transition: background 160ms ease, transform 160ms ease;
 }
 
 .btn svg {
@@ -54,13 +54,13 @@
 }
 
 .btn--primary {
-  background: rgba(255, 215, 0, 0.90);
+  background: rgba(251, 191, 36, 0.90);
   color: rgba(10, 10, 12, 0.95);
   border: none;
 }
 
 .btn--primary:hover {
-  background: rgba(255, 215, 0, 1);
+  background: rgba(251, 191, 36, 1);
   transform: translateY(-1px);
 }
 
@@ -86,14 +86,14 @@
 
 .filterBtn {
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.10);
   background: rgba(255, 255, 255, 0.03);
   color: rgba(255, 255, 255, 0.65);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
 }
 
 .filterBtn:hover {
@@ -102,9 +102,9 @@
 }
 
 .filterBtn--active {
-  background: rgba(255, 215, 0, 0.12);
-  border-color: rgba(255, 215, 0, 0.25);
-  color: rgba(255, 215, 0, 0.95);
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.25);
+  color: rgba(251, 191, 36, 0.95);
 }
 
 /* =========================================================
@@ -128,7 +128,7 @@
    MESSAGES LIST
    ========================================================= */
 .messagesList {
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.02);
   overflow-y: auto;
@@ -140,7 +140,7 @@
   padding: 14px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   cursor: pointer;
-  transition: background 150ms ease;
+  transition: background 160ms ease;
 }
 
 .messageItem:last-child {
@@ -152,11 +152,11 @@
 }
 
 .messageItem--selected {
-  background: rgba(255, 215, 0, 0.08);
+  background: rgba(251, 191, 36, 0.08);
 }
 
 .messageItem--selected:hover {
-  background: rgba(255, 215, 0, 0.10);
+  background: rgba(251, 191, 36, 0.10);
 }
 
 .messageItem__indicator {
@@ -192,7 +192,7 @@
 }
 
 .messageItem__date {
-  font-size: 11px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.45);
   flex-shrink: 0;
 }
@@ -212,7 +212,7 @@
 }
 
 .messageItem__preview {
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.45);
   white-space: nowrap;
   overflow: hidden;
@@ -231,10 +231,10 @@
   background: none;
   border: none;
   color: rgba(59, 130, 246, 0.70);
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
   opacity: 0.6;
-  transition: opacity 150ms ease;
+  transition: opacity 160ms ease;
 }
 
 .messageItem:hover .messageItem__action {
@@ -245,7 +245,7 @@
    MESSAGE DETAIL
    ========================================================= */
 .messageDetail {
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.02);
   display: flex;
@@ -268,7 +268,7 @@
 
 .messageDetail__subject {
   font-size: 1.1rem;
-  font-weight: 800;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
   margin-bottom: 8px;
 }
@@ -289,7 +289,7 @@
 
 .messageDetail__date {
   margin-top: 6px;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.45);
 }
 
@@ -304,13 +304,13 @@
   height: 32px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
   border: none;
   color: rgba(255, 255, 255, 0.60);
   font-size: 20px;
   cursor: pointer;
-  transition: background 150ms ease;
+  transition: background 160ms ease;
 }
 
 .messageDetail__close:hover {
@@ -343,12 +343,12 @@
   height: 32px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.10);
   color: rgba(255, 255, 255, 0.60);
   cursor: pointer;
-  transition: background 150ms ease, color 150ms ease;
+  transition: background 160ms ease, color 160ms ease;
 }
 
 .actionBtn:hover {

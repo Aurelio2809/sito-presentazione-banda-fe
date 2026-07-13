@@ -3,7 +3,7 @@
     <div class="header__inner">
       <a class="brand" routerLink="/">
         <span class="brand__mark" aria-hidden="true">
-          <img class="brand__crest" src="/assets/stemma/stemma.png" alt="" />
+          <img class="brand__crest" src="/assets/stemma/stemma.png" alt="" width="1024" height="1024" />
         </span>
 
         <span class="brand__text">
@@ -30,7 +30,7 @@
       </nav>
 
       <!-- Mobile Menu Button -->
-      <button class="menuBtn" (click)="toggleMobileMenu()" [attr.aria-expanded]="mobileMenuOpen">
+      <button class="menuBtn" type="button" (click)="toggleMobileMenu()" [attr.aria-expanded]="mobileMenuOpen" [attr.aria-label]="(mobileMenuOpen ? 'NAV.CLOSE_MENU' : 'NAV.OPEN_MENU') | translate" aria-controls="mobile-navigation">
         <svg *ngIf="!mobileMenuOpen" class="menuBtn__icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -42,7 +42,7 @@
   </header>
 
   <!-- Mobile Nav Overlay -->
-  <nav class="mobileNav" [class.is-open]="mobileMenuOpen">
+  <nav id="mobile-navigation" class="mobileNav" [class.is-open]="mobileMenuOpen" [attr.aria-hidden]="!mobileMenuOpen">
     <div class="mobileNav__content">
       <div class="mobileNav__links">
         <a class="mobileNav__link" routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">
@@ -78,24 +78,36 @@
 
   <footer class="footer">
     <div class="footer__inner">
-      <div class="footer__copy">© {{ currentYear }} Banda Musicale Città di Casali del Manco</div>
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img class="footer__crest" src="/assets/stemma/stemma_clean.png" alt="" width="1024" height="1024" loading="lazy" decoding="async" />
+          <div class="footer__brandText">
+            <div class="footer__brandTitle">{{ 'FOOTER.BRAND' | translate }}</div>
+            <div class="footer__brandSubtitle">{{ 'FOOTER.PLACE' | translate }}</div>
+          </div>
+        </div>
 
-      <div class="footer__links">
-        <a class="footer__link" [href]="SOCIAL_URLS.facebook" target="_blank" rel="noopener">
-          Facebook
-        </a>
-        <span class="footer__dot">•</span>
-        <a class="footer__link" [href]="SOCIAL_URLS.instagram" target="_blank" rel="noopener">
-          Instagram
-        </a>
-        <span class="footer__dot">•</span>
-        <a class="footer__link" [href]="SOCIAL_URLS.tiktok" target="_blank" rel="noopener">
-          TikTok
-        </a>
-        <span class="footer__dot">•</span>
-        <a class="footer__link" [href]="SOCIAL_URLS.youtube" target="_blank" rel="noopener">
-          YouTube
-        </a>
+        <nav class="footer__nav">
+          <a class="footer__link" routerLink="/">{{ 'NAV.HOME' | translate }}</a>
+          <a class="footer__link" routerLink="/about">{{ 'NAV.ABOUT' | translate }}</a>
+          <a class="footer__link" routerLink="/gallery">{{ 'NAV.GALLERY' | translate }}</a>
+          <a class="footer__link" routerLink="/events">{{ 'NAV.EVENTS' | translate }}</a>
+          <a class="footer__link" routerLink="/contacts">{{ 'NAV.CONTACTS' | translate }}</a>
+        </nav>
+
+        <div class="footer__social">
+          <a class="footer__link" [href]="SOCIAL_URLS.facebook" target="_blank" rel="noopener">Facebook</a>
+          <a class="footer__link" [href]="SOCIAL_URLS.instagram" target="_blank" rel="noopener">Instagram</a>
+          <a class="footer__link" [href]="SOCIAL_URLS.tiktok" target="_blank" rel="noopener">TikTok</a>
+          <a class="footer__link" [href]="SOCIAL_URLS.youtube" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+
+      <div class="footer__meta">
+        <div class="footer__legal">{{ 'FOOTER.LEGAL' | translate: { year: currentYear } }}</div>
+        <div class="footer__credit">
+          {{ 'FOOTER.CREATED_BY' | translate }} <strong>Aurelio Marotta</strong>
+        </div>
       </div>
     </div>
   </footer>

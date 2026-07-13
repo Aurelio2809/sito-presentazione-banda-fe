@@ -1,12 +1,11 @@
 <div class="home" [attr.data-anim]="animEnabled ? 'on' : 'off'">
   <!-- ============ HERO ============ -->
   <header class="hero">
-    <div class="hero__inner">
-      <div class="hero__emblem" aria-hidden="true">
-        <span class="hero__halo"></span>
-        <img src="assets/stemma/stemma_clean.png" alt="" loading="eager" />
-      </div>
+    <div class="hero__bg" aria-hidden="true">
+      <img src="assets/about/oggi-concerto-estivo.jpg" alt="" loading="eager"  width="2000" height="1208" decoding="async" />
+    </div>
 
+    <div class="hero__inner">
       <span class="hero__eyebrow">{{ 'HOME.HERO.EYEBROW' | translate }}</span>
       <h1 class="hero__title">{{ 'HOME.HERO.TITLE' | translate }}</h1>
       <p class="hero__subtitle">{{ 'HOME.HERO.SUBTITLE' | translate }}</p>
@@ -37,7 +36,7 @@
   >
     <div class="copy-group reveal-group">
       <div class="top-crest order-0 reveal" *ngIf="s.crestImg" style="--d:0.02;">
-        <img [src]="s.crestImg" alt="Stemma Associazione" loading="lazy" />
+        <img [src]="s.crestImg" alt="" width="1024" height="1024" loading="lazy" decoding="async" />
       </div>
       <app-home-title class="order-1 reveal" style="--d:0.10;" [text]="s.title | translate"></app-home-title>
       <app-home-subtitle-text class="order-3 reveal" style="--d:0.24;" [tag]="s.tag | translate" [text]="s.text | translate"></app-home-subtitle-text>
@@ -55,7 +54,7 @@
       <div class="section-emblem" *ngIf="s.decor" aria-hidden="true">
         <span class="section-emblem__ring"></span>
         <span class="section-emblem__glow"></span>
-        <img [src]="s.images[0]" alt="" loading="lazy" />
+        <img [src]="s.images[0]" alt="" width="1024" height="1024" loading="lazy" decoding="async" />
       </div>
     </div>
   </app-home-section>

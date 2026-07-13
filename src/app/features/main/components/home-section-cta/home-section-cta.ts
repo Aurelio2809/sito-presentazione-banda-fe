@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
     <div class="actions">
       <a class="btn" [routerLink]="link" *ngIf="link; else extLink">{{ text }}</a>
       <ng-template #extLink>
-        <a class="btn" [href]="href" target="_blank">{{ text }}</a>
+        <a class="btn" [href]="href" target="_blank" rel="noopener noreferrer">{{ text }}</a>
       </ng-template>
     </div>
   `,

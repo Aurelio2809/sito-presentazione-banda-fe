@@ -1,9 +1,10 @@
 <div class="lang-selector-wrapper" [ngClass]="variant">
   <!-- Mobile: riga orizzontale compatta, sempre visibile, non spinge mai il layout
        (evita l'overflow verticale che un dropdown espandibile causerebbe su schermi piccoli). -->
-  <div class="lang-segmented" *ngIf="variant === 'mobile'" role="group" aria-label="Seleziona lingua">
+  <div class="lang-segmented" *ngIf="variant === 'mobile'" role="group" [attr.aria-label]="'NAV.SELECT_LANGUAGE' | translate">
     <button
       class="lang-segment"
+      type="button"
       *ngFor="let lang of languages"
       [class.active]="currentLang === lang.code"
       [attr.aria-pressed]="currentLang === lang.code"
@@ -16,7 +17,7 @@
 
   <!-- Desktop: toggle + dropdown classico -->
   <ng-container *ngIf="variant !== 'mobile'">
-    <button class="lang-toggle" (click)="toggle()" [attr.aria-expanded]="isOpen" aria-label="Seleziona lingua">
+    <button class="lang-toggle" type="button" (click)="toggle()" [attr.aria-expanded]="isOpen" [attr.aria-label]="'NAV.SELECT_LANGUAGE' | translate">
       <span class="lang-text">{{ currentLang | uppercase }}</span>
       <svg class="chevron" [class.rotated]="isOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -27,6 +28,7 @@
       <li *ngFor="let lang of languages">
         <button
           class="lang-option"
+          type="button"
           [class.active]="currentLang === lang.code"
           (click)="selectLang(lang.code)">
           {{ lang.label }}

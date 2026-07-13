@@ -18,7 +18,7 @@
 
 .pageHeader__title {
   font-size: 1.75rem;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
 }
 
@@ -46,7 +46,7 @@
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 150ms ease, transform 150ms ease;
+  transition: background 160ms ease, transform 160ms ease;
 }
 
 .btn svg {
@@ -55,13 +55,13 @@
 }
 
 .btn--primary {
-  background: rgba(255, 215, 0, 0.90);
+  background: rgba(251, 191, 36, 0.90);
   color: rgba(10, 10, 12, 0.95);
   border: none;
 }
 
 .btn--primary:hover {
-  background: rgba(255, 215, 0, 1);
+  background: rgba(251, 191, 36, 1);
   transform: translateY(-1px);
 }
 
@@ -86,7 +86,7 @@
    TABLE
    ========================================================= */
 .tableWrap {
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.02);
   overflow: hidden;
@@ -100,8 +100,8 @@
 .table__th {
   padding: 14px 16px;
   text-align: left;
-  font-size: 11px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.50);
@@ -175,7 +175,7 @@
 
 .itemInfo__desc {
   margin-top: 2px;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.50);
   max-width: 300px;
   white-space: nowrap;
@@ -197,7 +197,7 @@
 }
 
 .dateInfo__time {
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.50);
 }
 
@@ -207,12 +207,12 @@
 .statusBadge {
   display: inline-flex;
   padding: 5px 12px;
-  border-radius: 20px;
+  border-radius: 16px;
   border: none;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 150ms ease;
+  transition: background 160ms ease;
   background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.60);
 }
@@ -244,12 +244,12 @@
   height: 32px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.10);
   color: rgba(255, 255, 255, 0.60);
   cursor: pointer;
-  transition: background 150ms ease, color 150ms ease;
+  transition: background 160ms ease, color 160ms ease;
 }
 
 .actionBtn:hover {
@@ -317,7 +317,7 @@
 
 .modal__title {
   font-size: 1.1rem;
-  font-weight: 800;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
 }
 
@@ -326,13 +326,13 @@
   height: 32px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
   border: none;
   color: rgba(255, 255, 255, 0.60);
   font-size: 20px;
   cursor: pointer;
-  transition: background 150ms ease;
+  transition: background 160ms ease;
 }
 
 .modal__close:hover {
@@ -365,7 +365,7 @@
 .formLabel {
   display: block;
   margin-bottom: 6px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.60);
 }
@@ -380,12 +380,12 @@
   color: rgba(255, 255, 255, 0.90);
   font-size: 14px;
   outline: none;
-  transition: border-color 150ms ease, background 150ms ease;
+  transition: border-color 160ms ease, background 160ms ease;
 }
 
 .formInput:focus,
 .formTextarea:focus {
-  border-color: rgba(255, 215, 0, 0.40);
+  border-color: rgba(251, 191, 36, 0.40);
   background: rgba(255, 255, 255, 0.06);
 }
 

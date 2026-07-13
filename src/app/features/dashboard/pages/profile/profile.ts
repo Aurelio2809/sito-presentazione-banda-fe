@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services';
 import { UserResponse } from '../../../../core/models';
+import { UiFeedbackService } from '../../components/ui-feedback/ui-feedback.service';
 
 @Component({
   selector: 'app-profile',
@@ -33,7 +34,8 @@ export class Profile implements OnInit {
   
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private feedback: UiFeedbackService
   ) {}
   
   ngOnInit(): void {
@@ -98,10 +100,10 @@ export class Profile implements OnInit {
       next: (user) => {
         this.user = user;
         this.editMode = false;
-        alert('Profilo aggiornato con successo!');
+        this.feedback.toast('Profilo aggiornato con successo', 'success');
       },
       error: (err) => {
-        alert(err.error?.message || 'Errore durante l\'aggiornamento');
+        this.feedback.toast(err.error?.message || 'Errore durante l\'aggiornamento', 'error');
       }
     });
   }
@@ -137,7 +139,7 @@ export class Profile implements OnInit {
       newPassword: this.newPassword
     }).subscribe({
       next: () => {
-        alert('Password cambiata con successo!');
+        this.feedback.toast('Password cambiata con successo', 'success');
         this.togglePasswordForm();
       },
       error: (err) => {
@@ -149,7 +151,7 @@ export class Profile implements OnInit {
   saveSettings(): void {
     // Per ora salviamo solo localmente - in futuro si può estendere con un endpoint BE
     localStorage.setItem('dashboardSettings', JSON.stringify(this.settings));
-    alert('Impostazioni salvate!');
+    this.feedback.toast('Impostazioni salvate', 'success');
   }
   
   logout(): void {

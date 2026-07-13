@@ -5,7 +5,16 @@
     "GALLERY": "Galerie",
     "EVENTS": "Événements",
     "CONTACTS": "Contacts",
-    "DASHBOARD": "Tableau de bord"
+    "DASHBOARD": "Tableau de bord",
+    "OPEN_MENU": "Ouvrir le menu",
+    "CLOSE_MENU": "Fermer le menu",
+    "SELECT_LANGUAGE": "Choisir la langue"
+  },
+  "FOOTER": {
+    "BRAND": "Harmonie musicale",
+    "PLACE": "Ville de Casali del Manco",
+    "LEGAL": "© {{year}} Harmonie musicale Ville de Casali del Manco",
+    "CREATED_BY": "Créé par"
   },
   "HOME": {
     "HERO": {
@@ -97,7 +106,13 @@
     "DETAILS": "Détails",
     "META_DATE": "Date",
     "META_PLACE": "Lieu",
-    "EMPTY": "Aucune photo disponible pour le moment.",
+    "EMPTY_TITLE": "La galerie se prépare",
+    "EMPTY": "De nouvelles photographies seront publiées ici. En attendant, contactez-nous pour découvrir les activités de l'harmonie.",
+    "EMPTY_CTA": "Nous contacter",
+    "ERROR_TITLE": "La galerie est indisponible",
+    "ERROR_DESC": "Nous ne pouvons pas charger les photographies pour le moment. Réessayez bientôt ou écrivez-nous.",
+    "ERROR_CTA": "Nous écrire",
+    "CLOSE": "Fermer la photographie",
     "ERR": "Erreur lors du chargement de la galerie"
   },
   "EVENTS": {
@@ -116,13 +131,20 @@
     "META_PLACE": "Lieu",
     "META_ZONE": "Zone",
     "ATTACH": "Pièce jointe",
-    "EMPTY_UPCOMING": "Aucun événement prévu pour le moment.",
-    "EMPTY_PAST": "Aucun historique disponible.",
+    "EMPTY_UPCOMING_TITLE": "Le prochain rendez-vous arrive",
+    "EMPTY_UPCOMING": "Aucun événement n'est encore publié. Contactez-nous pour les concerts, fêtes patronales et collaborations.",
+    "EMPTY_PAST_TITLE": "Les archives sont en cours de mise à jour",
+    "EMPTY_PAST": "Les événements passés apparaîtront ici.",
+    "EMPTY_CTA": "Organiser un événement avec nous",
     "ANN_TITLE": "Annonces",
     "ANN_DESC": "Communications rapides. Cliquez pour lire le texte complet.",
     "ANN_CLOSE": "Fermer",
     "ANN_READ": "Lire",
-    "ANN_EMPTY": "Aucune annonce pour le moment.",
+    "ANN_EMPTY_TITLE": "Aucune communication récente",
+    "ANN_EMPTY": "Les informations importantes apparaîtront dans cette section.",
+    "ERROR_TITLE": "Les événements sont indisponibles",
+    "ERROR_DESC": "Nous ne pouvons pas charger le calendrier pour le moment. Réessayez bientôt ou contactez-nous.",
+    "ERROR_CTA": "Nous contacter",
     "ERR": "Erreur lors du chargement"
   },
   "ABOUT": {
@@ -220,7 +242,7 @@
     "INSTR_TITLE": "Instruments enseignés",
     "INSTR_DESC": "Un aperçu des instruments que vous pouvez apprendre dans notre école.",
     "INSTR_LEGNI": "Bois",
-    "INSTR_LEGNI_1": "Flûte traversère",
+    "INSTR_LEGNI_1": "Flûte traversière",
     "INSTR_LEGNI_2": "Piccolo",
     "INSTR_LEGNI_3": "Clarinette",
     "INSTR_LEGNI_4": "Saxophone (soprano, alto, ténor, baryton)",

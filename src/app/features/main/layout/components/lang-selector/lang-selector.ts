@@ -23,11 +23,13 @@ export class LangSelector {
     // Ensure a language is active (currentLang is undefined before the first use() call)
     const active = this.translate.currentLang || this.translate.getDefaultLang() || 'it';
     this.currentLang = active;
+    document.documentElement.lang = active;
     if (!this.translate.currentLang) {
       this.translate.use(active);
     }
     this.translate.onLangChange.subscribe(event => {
       this.currentLang = event.lang;
+      document.documentElement.lang = event.lang;
     });
   }
 

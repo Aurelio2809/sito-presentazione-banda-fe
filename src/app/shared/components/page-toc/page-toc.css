@@ -15,8 +15,8 @@
 }
 
 .toc__title {
-  font-size: 11px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: rgba(255, 255, 255, 0.50);
@@ -61,19 +61,19 @@
 
 .toc__link:hover {
   color: rgba(255, 255, 255, 0.95);
-  border-left-color: rgba(255, 215, 0, 0.60);
+  border-left-color: rgba(251, 191, 36, 0.60);
 }
 
 .toc__link:hover .toc__num {
-  color: rgba(255, 215, 0, 0.85);
+  color: rgba(251, 191, 36, 0.85);
 }
 
 /* =========================================================
    NUMERO
    ========================================================= */
 .toc__num {
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.40);
   min-width: 16px;
   transition: color 160ms ease;
@@ -95,7 +95,7 @@
   margin-top: 16px;
   padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.40);
@@ -121,6 +121,6 @@
 
   .toc__link:hover {
     border-left-color: transparent;
-    border-bottom-color: rgba(255, 215, 0, 0.60);
+    border-bottom-color: rgba(251, 191, 36, 0.60);
   }
 }

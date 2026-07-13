@@ -5,7 +5,16 @@
     "GALLERY": "Galleria",
     "EVENTS": "Eventi",
     "CONTACTS": "Contatti",
-    "DASHBOARD": "Dashboard"
+    "DASHBOARD": "Dashboard",
+    "OPEN_MENU": "Apri il menu",
+    "CLOSE_MENU": "Chiudi il menu",
+    "SELECT_LANGUAGE": "Seleziona lingua"
+  },
+  "FOOTER": {
+    "BRAND": "Banda Musicale",
+    "PLACE": "Città di Casali del Manco",
+    "LEGAL": "© {{year}} Banda Musicale Città di Casali del Manco",
+    "CREATED_BY": "Creato da"
   },
   "HOME": {
     "HERO": {
@@ -97,7 +106,13 @@
     "DETAILS": "Dettagli",
     "META_DATE": "Data",
     "META_PLACE": "Luogo",
-    "EMPTY": "Nessuna foto disponibile al momento.",
+    "EMPTY_TITLE": "La galleria si sta preparando",
+    "EMPTY": "Le nuove fotografie saranno pubblicate qui. Nel frattempo puoi contattarci per conoscere le attività della banda.",
+    "EMPTY_CTA": "Contattaci",
+    "ERROR_TITLE": "La galleria non è disponibile",
+    "ERROR_DESC": "Non riusciamo a caricare le fotografie in questo momento. Riprova tra poco oppure scrivici.",
+    "ERROR_CTA": "Scrivici",
+    "CLOSE": "Chiudi la fotografia",
     "ERR": "Errore nel caricamento della galleria"
   },
   "EVENTS": {
@@ -116,13 +131,20 @@
     "META_PLACE": "Luogo",
     "META_ZONE": "Zona",
     "ATTACH": "Allegato",
-    "EMPTY_UPCOMING": "Nessun evento in programma al momento.",
-    "EMPTY_PAST": "Nessuno storico disponibile.",
+    "EMPTY_UPCOMING_TITLE": "Il prossimo appuntamento è in arrivo",
+    "EMPTY_UPCOMING": "Non ci sono ancora eventi pubblicati. Contattaci per concerti, feste patronali e collaborazioni.",
+    "EMPTY_PAST_TITLE": "Lo storico è in aggiornamento",
+    "EMPTY_PAST": "Gli eventi passati saranno disponibili qui.",
+    "EMPTY_CTA": "Organizza un evento con noi",
     "ANN_TITLE": "Annunci",
     "ANN_DESC": "Comunicazioni rapide. Clicca per leggere il testo completo.",
     "ANN_CLOSE": "Chiudi",
     "ANN_READ": "Leggi",
-    "ANN_EMPTY": "Nessun annuncio al momento.",
+    "ANN_EMPTY_TITLE": "Nessuna comunicazione recente",
+    "ANN_EMPTY": "Le comunicazioni importanti appariranno in questa sezione.",
+    "ERROR_TITLE": "Gli eventi non sono disponibili",
+    "ERROR_DESC": "Non riusciamo a caricare il calendario in questo momento. Riprova tra poco oppure contattaci.",
+    "ERROR_CTA": "Contattaci",
     "ERR": "Errore nel caricamento"
   },
   "ABOUT": {

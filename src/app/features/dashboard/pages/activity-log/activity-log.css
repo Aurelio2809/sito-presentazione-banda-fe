@@ -18,7 +18,7 @@
 
 .pageHeader__title {
   font-size: 1.75rem;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
 }
 
@@ -42,7 +42,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.02);
   overflow: hidden;
@@ -54,7 +54,7 @@
   gap: 14px;
   padding: 16px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: background 150ms ease;
+  transition: background 160ms ease;
 }
 
 .activityItem:last-child {
@@ -95,7 +95,7 @@
 }
 
 .activityItem__icon[data-type="announcement"] {
-  background: rgba(245, 158, 11, 0.12);
+  background: rgba(251, 191, 36, 0.12);
   color: rgba(251, 191, 36, 0.90);
 }
 
@@ -141,12 +141,12 @@
 
 .activityItem__target {
   font-weight: 600;
-  color: rgba(255, 215, 0, 0.85);
+  color: rgba(251, 191, 36, 0.85);
 }
 
 .activityItem__details {
   margin-top: 4px;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.45);
 }
 
@@ -155,7 +155,7 @@
    ========================================================= */
 .activityItem__time {
   flex-shrink: 0;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.40);
   white-space: nowrap;
 }

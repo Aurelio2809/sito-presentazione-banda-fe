@@ -1,0 +1,23 @@
+# Dipendenze e output vengono ricreati nello stage di build.
+node_modules
+dist
+.angular
+coverage
+
+# Metadati locali e file che non devono entrare nel build context/cache.
+.git
+.gitignore
+.DS_Store
+.idea
+.vscode
+*.log
+
+# Evita di inviare accidentalmente segreti Docker; il frontend non ne necessita.
+.env
+.env.*
+!.env.example
+
+# Documentazione e artefatti di sviluppo non servono nell'immagine.
+CLAUDE.md
+DESIGN_TODO.md
+README.md

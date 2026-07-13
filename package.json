@@ -44,5 +44,10 @@
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
+  },
+  "overrides": {
+    "@angular/compiler-cli": {
+      "@babel/core": "^7.29.7"
+    }
   }
 }

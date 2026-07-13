@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../../../core/services';
 import { MessageResponse } from '../../../../core/models';
+import { UiFeedbackService } from '../../components/ui-feedback/ui-feedback.service';
 
 @Component({
   selector: 'app-messages',
@@ -15,7 +16,10 @@ export class Messages implements OnInit {
   loading = false;
   error: string | null = null;
 
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private messageService: MessageService,
+    private feedback: UiFeedbackService
+  ) {}
 
   ngOnInit(): void {
     this.loadMessages();
@@ -67,21 +71,28 @@ export class Messages implements OnInit {
     this.selectedMessage = null;
   }
 
-  deleteMessage(message: MessageResponse): void {
-    if (confirm('Eliminare questo messaggio?')) {
-      this.messageService.delete(message.id).subscribe({
-        next: () => {
-          this.messages = this.messages.filter(m => m.id !== message.id);
-          if (this.selectedMessage?.id === message.id) {
-            this.selectedMessage = null;
-          }
-        },
-        error: (err) => {
-          alert('Errore nell\'eliminazione del messaggio');
-          console.error(err);
+  async deleteMessage(message: MessageResponse): Promise<void> {
+    const confirmed = await this.feedback.confirm({
+      title: 'Eliminare il messaggio?',
+      message: 'Questa azione è definitiva e il messaggio non potrà essere recuperato.',
+      confirmText: 'Elimina',
+      danger: true,
+    });
+    if (!confirmed) return;
+
+    this.messageService.delete(message.id).subscribe({
+      next: () => {
+        this.messages = this.messages.filter(m => m.id !== message.id);
+        if (this.selectedMessage?.id === message.id) {
+          this.selectedMessage = null;
         }
-      });
-    }
+        this.feedback.toast('Messaggio eliminato', 'success');
+      },
+      error: (err) => {
+        this.feedback.toast('Errore nell\'eliminazione del messaggio', 'error');
+        console.error(err);
+      }
+    });
   }
 
   toggleRead(message: MessageResponse, event: Event): void {
@@ -103,8 +114,12 @@ export class Messages implements OnInit {
     this.messageService.markAllAsRead().subscribe({
       next: () => {
         this.messages.forEach(m => m.read = true);
+        this.feedback.toast('Tutti i messaggi sono stati segnati come letti', 'success');
       },
-      error: (err) => console.error('Errore', err)
+      error: (err) => {
+        this.feedback.toast('Impossibile aggiornare i messaggi', 'error');
+        console.error('Errore', err);
+      }
     });
   }
 

@@ -28,53 +28,95 @@
       <div class="statCard__content">
         <div class="statCard__value">{{ stat.value }}</div>
         <div class="statCard__label">{{ stat.label }}</div>
-        <div class="statCard__trend">{{ stat.trend }}</div>
+        <div class="statCard__trend" *ngIf="stat.trend">{{ stat.trend }}</div>
       </div>
     </div>
   </section>
 
-  <!-- QUICK ACTIONS -->
-  <section class="section">
-    <h2 class="section__title">Azioni rapide</h2>
-    <div class="actionsGrid">
-      <a class="actionCard" routerLink="/dashboard/gallery">
-        <span class="actionCard__icon">📷</span>
-        <span class="actionCard__text">Carica foto</span>
-      </a>
-      <a class="actionCard" routerLink="/dashboard/events">
-        <span class="actionCard__icon">📅</span>
-        <span class="actionCard__text">Nuovo evento</span>
-      </a>
-      <a class="actionCard" routerLink="/dashboard/events">
-        <span class="actionCard__icon">📢</span>
-        <span class="actionCard__text">Nuovo annuncio</span>
-      </a>
-      <a class="actionCard" routerLink="/dashboard/messages">
-        <span class="actionCard__icon">✉️</span>
-        <span class="actionCard__text">Vedi messaggi</span>
-      </a>
-    </div>
-  </section>
+  <div class="overviewColumns">
+    <!-- QUICK ACTIONS -->
+    <section class="section">
+      <h2 class="section__title">Azioni rapide</h2>
+      <div class="actionsGrid">
+        <a class="actionCard" routerLink="/dashboard/gallery">
+          <span class="actionCard__icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="2"/>
+              <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="actionCard__text">Carica foto</span>
+        </a>
+        <a class="actionCard" routerLink="/dashboard/events">
+          <span class="actionCard__icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18M12 13v6M9 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="actionCard__text">Nuovo evento</span>
+        </a>
+        <a class="actionCard" routerLink="/dashboard/events">
+          <span class="actionCard__icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="actionCard__text">Nuovo annuncio</span>
+        </a>
+        <a class="actionCard" routerLink="/dashboard/messages">
+          <span class="actionCard__icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="actionCard__text">Vedi messaggi</span>
+        </a>
+      </div>
+    </section>
 
-  <!-- RECENT ACTIVITY -->
-  <section class="section">
-    <h2 class="section__title">Attività recenti</h2>
-    <div class="activityList">
-      <div class="activityItem" *ngFor="let activity of recentActivities">
-        <div class="activityItem__dot" [ngClass]="{
-          'activityItem__dot--photo': activity.targetType === 'PHOTO',
-          'activityItem__dot--event': activity.targetType === 'EVENT',
-          'activityItem__dot--message': activity.targetType === 'MESSAGE',
-          'activityItem__dot--announcement': activity.targetType === 'ANNOUNCEMENT'
-        }"></div>
-        <div class="activityItem__content">
-          <div class="activityItem__text">{{ formatAction(activity.action) }} {{ activity.targetName }}</div>
-          <div class="activityItem__time">{{ getTimeAgo(activity.timestamp) }}</div>
+    <!-- RECENT ACTIVITY -->
+    <section class="section">
+      <h2 class="section__title">Attività recenti</h2>
+      <div class="activityList">
+        <div class="activityItem" *ngFor="let activity of recentActivities">
+          <div class="activityItem__badge" [ngClass]="{
+            'activityItem__badge--photo': activity.targetType === 'PHOTO',
+            'activityItem__badge--event': activity.targetType === 'EVENT',
+            'activityItem__badge--message': activity.targetType === 'MESSAGE',
+            'activityItem__badge--announcement': activity.targetType === 'ANNOUNCEMENT'
+          }">
+            <svg *ngIf="getActivityIcon(activity.targetType) === 'image'" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="2"/>
+              <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg *ngIf="getActivityIcon(activity.targetType) === 'calendar'" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <svg *ngIf="getActivityIcon(activity.targetType) === 'megaphone'" viewBox="0 0 24 24" fill="none">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg *ngIf="getActivityIcon(activity.targetType) === 'mail'" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg *ngIf="getActivityIcon(activity.targetType) === 'activity'" viewBox="0 0 24 24" fill="none">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="activityItem__content">
+            <div class="activityItem__text">{{ formatAction(activity.action) }} {{ activity.targetName }}</div>
+            <div class="activityItem__time">{{ getTimeAgo(activity.timestamp) }}</div>
+          </div>
+        </div>
+        <div class="emptyState" *ngIf="recentActivities.length === 0 && !loading">
+          <p>Nessuna attività recente</p>
         </div>
       </div>
-      <div class="emptyState" *ngIf="recentActivities.length === 0 && !loading">
-        <p>Nessuna attività recente</p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </div>

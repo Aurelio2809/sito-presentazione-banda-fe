@@ -5,7 +5,16 @@
     "GALLERY": "Gallery",
     "EVENTS": "Events",
     "CONTACTS": "Contacts",
-    "DASHBOARD": "Dashboard"
+    "DASHBOARD": "Dashboard",
+    "OPEN_MENU": "Open menu",
+    "CLOSE_MENU": "Close menu",
+    "SELECT_LANGUAGE": "Select language"
+  },
+  "FOOTER": {
+    "BRAND": "Music Band",
+    "PLACE": "City of Casali del Manco",
+    "LEGAL": "© {{year}} Music Band City of Casali del Manco",
+    "CREATED_BY": "Created by"
   },
   "HOME": {
     "HERO": {
@@ -97,7 +106,13 @@
     "DETAILS": "Details",
     "META_DATE": "Date",
     "META_PLACE": "Place",
-    "EMPTY": "No photos available at the moment.",
+    "EMPTY_TITLE": "The gallery is getting ready",
+    "EMPTY": "New photographs will be published here. In the meantime, contact us to learn more about the band.",
+    "EMPTY_CTA": "Contact us",
+    "ERROR_TITLE": "The gallery is unavailable",
+    "ERROR_DESC": "We cannot load the photographs right now. Please try again shortly or get in touch.",
+    "ERROR_CTA": "Write to us",
+    "CLOSE": "Close photograph",
     "ERR": "Error loading the gallery"
   },
   "EVENTS": {
@@ -116,13 +131,20 @@
     "META_PLACE": "Place",
     "META_ZONE": "Area",
     "ATTACH": "Attachment",
-    "EMPTY_UPCOMING": "No events scheduled at the moment.",
-    "EMPTY_PAST": "No archive available.",
+    "EMPTY_UPCOMING_TITLE": "The next event is on its way",
+    "EMPTY_UPCOMING": "There are no published events yet. Contact us about concerts, patronal festivals and collaborations.",
+    "EMPTY_PAST_TITLE": "The archive is being updated",
+    "EMPTY_PAST": "Past events will appear here.",
+    "EMPTY_CTA": "Plan an event with us",
     "ANN_TITLE": "Announcements",
     "ANN_DESC": "Quick communications. Click to read the full text.",
     "ANN_CLOSE": "Close",
     "ANN_READ": "Read",
-    "ANN_EMPTY": "No announcements at the moment.",
+    "ANN_EMPTY_TITLE": "No recent announcements",
+    "ANN_EMPTY": "Important updates will appear in this section.",
+    "ERROR_TITLE": "Events are unavailable",
+    "ERROR_DESC": "We cannot load the calendar right now. Please try again shortly or contact us.",
+    "ERROR_CTA": "Contact us",
     "ERR": "Error while loading"
   },
   "ABOUT": {

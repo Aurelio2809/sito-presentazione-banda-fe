@@ -13,7 +13,7 @@
 
 .pageHeader__title {
   font-size: 1.75rem;
-  font-weight: 900;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
 }
 
@@ -66,9 +66,9 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(255, 215, 0, 0.10);
-  border: 2px solid rgba(255, 215, 0, 0.25);
-  color: rgba(255, 215, 0, 0.70);
+  background: rgba(251, 191, 36, 0.10);
+  border: 2px solid rgba(251, 191, 36, 0.25);
+  color: rgba(251, 191, 36, 0.70);
 }
 
 .profileCard__avatar svg {
@@ -78,14 +78,14 @@
 
 .profileCard__name {
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
 }
 
 .profileCard__role {
   margin-top: 4px;
   font-size: 14px;
-  color: rgba(255, 215, 0, 0.75);
+  color: rgba(251, 191, 36, 0.75);
   font-weight: 600;
 }
 
@@ -132,7 +132,7 @@
 
 .settingsCard__title {
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.90);
   margin-bottom: 20px;
 }
@@ -165,7 +165,7 @@
 .settingItem__desc {
   display: block;
   margin-top: 2px;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.45);
 }
 
@@ -174,10 +174,10 @@
   height: 24px;
   appearance: none;
   background: rgba(255, 255, 255, 0.10);
-  border-radius: 12px;
+  border-radius: 10px;
   position: relative;
   cursor: pointer;
-  transition: background 150ms ease;
+  transition: background 160ms ease;
 }
 
 .settingItem__toggle::before {
@@ -189,16 +189,16 @@
   height: 20px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.70);
-  transition: transform 150ms ease, background 150ms ease;
+  transition: transform 160ms ease, background 160ms ease;
 }
 
 .settingItem__toggle:checked {
-  background: rgba(255, 215, 0, 0.50);
+  background: rgba(251, 191, 36, 0.50);
 }
 
 .settingItem__toggle:checked::before {
   transform: translateX(20px);
-  background: rgba(255, 215, 0, 0.95);
+  background: rgba(251, 191, 36, 0.95);
 }
 
 .settingsCard__footer {
@@ -219,7 +219,7 @@
 
 .sessionCard__title {
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.90);
   margin-bottom: 8px;
 }
@@ -242,7 +242,7 @@
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 150ms ease, transform 150ms ease;
+  transition: background 160ms ease, transform 160ms ease;
 }
 
 .btn svg {
@@ -251,13 +251,13 @@
 }
 
 .btn--primary {
-  background: rgba(255, 215, 0, 0.90);
+  background: rgba(251, 191, 36, 0.90);
   color: rgba(10, 10, 12, 0.95);
   border: none;
 }
 
 .btn--primary:hover {
-  background: rgba(255, 215, 0, 1);
+  background: rgba(251, 191, 36, 1);
   transform: translateY(-1px);
 }
 
@@ -327,12 +327,12 @@
   background: rgba(255, 255, 255, 0.04);
   color: rgba(255, 255, 255, 0.90);
   font-size: 14px;
-  transition: border-color 150ms ease, background 150ms ease;
+  transition: border-color 160ms ease, background 160ms ease;
 }
 
 .formGroup__input:focus {
   outline: none;
-  border-color: rgba(255, 215, 0, 0.50);
+  border-color: rgba(251, 191, 36, 0.50);
   background: rgba(255, 255, 255, 0.06);
 }
 
@@ -351,6 +351,6 @@
   color: rgba(248, 113, 113, 0.95);
   background: rgba(220, 38, 38, 0.10);
   padding: 10px 14px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid rgba(220, 38, 38, 0.20);
 }

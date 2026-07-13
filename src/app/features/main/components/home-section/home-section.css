@@ -13,15 +13,11 @@
 }
 
 .home-section-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  /* Effetto trasparenza che copre il background sottostante */
-  background: linear-gradient(135deg, rgba(11, 11, 13, 0.85) 0%, rgba(4, 4, 5, 0.95) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  /* Niente più pannello/gradiente proprio per sezione: su schermi grandi il bordo e il
+     gradiente leggermente diverso da sezione a sezione si vedevano come "bande" orizzontali
+     nette (bordo netto edge-to-edge su viewport larghi). Le sezioni ora condividono lo stesso
+     sfondo continuo dello shell (vedi main-layout.css), niente stacchi visibili tra una e l'altra. */
+  display: none;
 }
 
 .home-section-wrapper::before {
@@ -30,7 +26,7 @@
   inset: 0;
   background: radial-gradient(
     circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 200, 87, 0.03) 0%,
+    rgba(251, 191, 36, 0.03) 0%,
     rgba(180, 45, 45, 0.02) 30%,
     transparent 70%
   );

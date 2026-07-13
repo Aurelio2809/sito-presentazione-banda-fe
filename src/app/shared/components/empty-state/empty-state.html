@@ -1,0 +1,31 @@
+<section
+  class="emptyState"
+  [class.emptyState--error]="tone === 'error'"
+  [class.emptyState--compact]="compact"
+  [attr.role]="tone === 'error' ? 'alert' : 'status'"
+>
+  <div class="emptyState__icon" aria-hidden="true" [ngSwitch]="icon">
+    <svg *ngSwitchCase="'gallery'" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="9" cy="10" r="2" stroke="currentColor" stroke-width="1.6"/>
+      <path d="m5.5 18 4.2-4.3 3 2.7 2.4-2.4 3.4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg *ngSwitchCase="'announcement'" viewBox="0 0 24 24" fill="none">
+      <path d="M4 13.5V9.8c0-.8.6-1.4 1.4-1.4h3.1L18 5v13l-9.5-3.3H5.4c-.8 0-1.4-.5-1.4-1.2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="m8.5 14.7 1.2 4.1H7.2l-1.3-4.5M20 9v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <svg *ngSwitchDefault viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="5" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M8 3v4M16 3v4M3 10h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M8 14h3M8 17h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="emptyState__copy">
+    <h2 class="emptyState__title">{{ title }}</h2>
+    <p class="emptyState__text" *ngIf="text">{{ text }}</p>
+  </div>
+  <a class="emptyState__action" *ngIf="actionLabel && actionLink" [routerLink]="actionLink">
+    {{ actionLabel }}
+    <span aria-hidden="true">→</span>
+  </a>
+</section>

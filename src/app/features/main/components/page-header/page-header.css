@@ -1,20 +1,19 @@
 @reference "../../../../../styles.css";
 
-/* =========================================================
-   PAGE HEADER - Componente unificato per banner hero
-   ========================================================= */
+/* Hero interno: un solo pannello liquid-glass, più leggero e meno alto. */
 .pageHeader {
-  @apply relative overflow-hidden rounded-[28px] border border-white/10;
-
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-strong);
   background:
-    radial-gradient(900px 520px at 20% 10%, rgba(255, 215, 0, 0.12), rgba(0, 0, 0, 0) 60%),
-    radial-gradient(760px 420px at 80% 30%, rgba(170, 0, 0, 0.14), rgba(0, 0, 0, 0) 60%),
-    linear-gradient(135deg, rgba(12, 12, 14, 0.92), rgba(6, 6, 8, 0.92));
-
-  backdrop-filter: blur(14px) saturate(1.12);
-  -webkit-backdrop-filter: blur(14px) saturate(1.12);
-
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    radial-gradient(760px 320px at 8% -12%, rgba(251, 191, 36, 0.15), transparent 62%),
+    radial-gradient(620px 340px at 96% 0%, rgba(190, 18, 60, 0.12), transparent 64%),
+    linear-gradient(135deg, var(--glass-strong), var(--glass));
+  backdrop-filter: blur(28px) saturate(1.35);
+  -webkit-backdrop-filter: blur(28px) saturate(1.35);
+  box-shadow: inset 0 1px 0 var(--glass-highlight), 0 20px 60px var(--shadow-color);
 }
 
 .pageHeader::before {
@@ -22,123 +21,112 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
-
-  background:
-    radial-gradient(720px 320px at 30% 0%, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 55%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
-  opacity: 0.95;
+  background: linear-gradient(118deg, rgba(255, 255, 255, 0.13), transparent 25%, transparent 72%, rgba(255, 255, 255, 0.035));
 }
 
 .pageHeader__inner {
-  @apply px-6 py-10 md:px-10 md:py-14;
   position: relative;
   z-index: 1;
+  padding: clamp(28px, 4.2vw, 52px);
+}
+
+.pageHeader__tag,
+.stat {
+  border: 1px solid var(--glass-border);
+  background: var(--glass-soft);
+  backdrop-filter: blur(16px) saturate(1.22);
+  -webkit-backdrop-filter: blur(16px) saturate(1.22);
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
 }
 
 .pageHeader__tag {
-  @apply inline-flex w-fit rounded-full border border-white/10 px-3 py-1 text-xs font-semibold text-white/75;
-  background: rgba(10, 10, 12, 0.62);
-  backdrop-filter: blur(10px) saturate(1.1);
-  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--text-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 .pageHeader__title {
-  @apply mt-4 text-3xl font-extrabold tracking-tight text-white md:text-6xl;
+  margin-top: 16px;
+  max-width: 18ch;
+  color: var(--text-strong);
+  font-size: clamp(2.2rem, 6vw, 4.3rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
 }
 
 .pageHeader__desc {
-  @apply mt-4 max-w-3xl text-sm leading-relaxed text-white/65 md:text-base;
+  margin-top: 16px;
+  max-width: 65ch;
+  color: var(--text-body);
+  font-size: clamp(0.94rem, 1.4vw, 1.05rem);
+  line-height: 1.7;
 }
 
-.pageHeader__actions {
-  @apply mt-6 flex flex-wrap gap-3;
-}
-
-/* =========================================================
-   STATS
-   (flex, non grid: con poche voci (oggi 2) resta compatto invece di
-   stirarsi su colonne vuote di una griglia a 4)
-   ========================================================= */
+.pageHeader__actions,
 .pageHeader__stats {
-  @apply mt-8 flex flex-wrap gap-3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
+
+.pageHeader__actions { margin-top: 24px; }
+.pageHeader__stats { margin-top: 28px; }
 
 .stat {
-  @apply rounded-2xl border border-white/10 px-5 py-4;
-  min-width: 132px;
-  background: rgba(10, 10, 12, 0.70);
-  backdrop-filter: blur(12px) saturate(1.1);
-  -webkit-backdrop-filter: blur(12px) saturate(1.1);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  min-width: 128px;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
 }
 
 .stat__value {
-  @apply text-2xl font-extrabold text-white;
+  color: var(--text-strong);
+  font-size: 1.45rem;
+  font-weight: 750;
 }
 
 .stat__label {
-  @apply mt-1 text-xs font-semibold text-white/60;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 650;
 }
 
-/* =========================================================
-   BUTTONS
-   ========================================================= */
 .btn {
-  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-extrabold transition;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-size: 0.875rem;
+  font-weight: 750;
+  transition: transform var(--dur-fast) var(--ease-brand), box-shadow var(--dur-fast) var(--ease-brand), background var(--dur-fast) var(--ease-brand);
 }
 
 .btn--primary {
-  position: relative;
-  color: rgba(255, 255, 255, 0.95);
-  background: rgba(10, 10, 12, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-
-  backdrop-filter: blur(12px) saturate(1.12);
-  -webkit-backdrop-filter: blur(12px) saturate(1.12);
-
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
-  transform: translateZ(0);
-}
-
-.btn--primary::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: 1rem;
-  pointer-events: none;
-  opacity: 0.65;
-  transition: opacity 180ms ease, transform 400ms ease;
-}
-
-.btn--primary:hover {
-  transform: translateY(-2px);
-  background: rgba(14, 14, 16, 0.78);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.40);
-}
-
-.btn--primary:hover::after {
-  opacity: 0.95;
-  transform: translate3d(2px, -2px, 0);
-}
-
-.btn--primary:active {
-  transform: translateY(0px);
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-banda-red-500), var(--color-banda-red-700));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 10px 26px rgba(190, 18, 60, 0.22);
 }
 
 .btn--ghost {
-  @apply border border-white/10 text-white/85;
-  background: rgba(10, 10, 12, 0.56);
-  backdrop-filter: blur(12px) saturate(1.1);
-  -webkit-backdrop-filter: blur(12px) saturate(1.1);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  color: var(--text-strong);
+  background: var(--glass-soft);
+  border: 1px solid var(--glass-border);
 }
 
-.btn--ghost:hover {
-  background: rgba(14, 14, 16, 0.64);
-  transform: translateY(-2px);
-}
+.btn:hover { transform: translateY(-2px); }
+.btn--primary:hover { box-shadow: 0 14px 34px rgba(190, 18, 60, 0.28); }
+.btn--ghost:hover { background: var(--glass); }
+.btn:active { transform: translateY(0); }
 
-.btn--ghost:active {
-  transform: translateY(0px);
+@media (max-width: 480px) {
+  .pageHeader__inner { padding: 26px 22px; }
+  .stat { flex: 1 1 120px; }
 }

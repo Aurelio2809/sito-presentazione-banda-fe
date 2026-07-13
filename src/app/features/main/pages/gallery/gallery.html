@@ -18,9 +18,15 @@
   <app-loading-spinner *ngIf="loading" [message]="'GALLERY.LOADING' | translate"></app-loading-spinner>
 
   <!-- Error state -->
-  <div class="gallery__error" *ngIf="error">
-    <p>{{ error }}</p>
-  </div>
+  <app-empty-state
+    *ngIf="!loading && error"
+    icon="gallery"
+    tone="error"
+    [title]="'GALLERY.ERROR_TITLE' | translate"
+    [text]="'GALLERY.ERROR_DESC' | translate"
+    [actionLabel]="'GALLERY.ERROR_CTA' | translate"
+    actionLink="/contacts"
+  ></app-empty-state>
 
   <!-- Mosaic (foto preferite) - mostra se ci sono almeno 1 preferita -->
   <div class="mosaic" *ngIf="!loading && heroMain && favorites.length >= 1" 
@@ -76,7 +82,7 @@
     </button>
   </div>
 
-  <div class="gallery__spacer"></div>
+  <div class="gallery__spacer" *ngIf="heroMain || items.length > 0"></div>
 
   <!-- GRID (paginata) - usa foto originale per qualità nitida -->
   <div class="grid" *ngIf="!loading && items.length > 0">
@@ -91,9 +97,14 @@
   </div>
 
   <!-- Empty state -->
-  <div class="gallery__empty" *ngIf="!loading && items.length === 0 && !error">
-    <p>{{ 'GALLERY.EMPTY' | translate }}</p>
-  </div>
+  <app-empty-state
+    *ngIf="!loading && items.length === 0 && !error"
+    icon="gallery"
+    [title]="'GALLERY.EMPTY_TITLE' | translate"
+    [text]="'GALLERY.EMPTY' | translate"
+    [actionLabel]="'GALLERY.EMPTY_CTA' | translate"
+    actionLink="/contacts"
+  ></app-empty-state>
 
   <!-- NAVIGATORE PAGINE -->
   <app-ui-simple-page-navigator
@@ -111,7 +122,7 @@
 <!-- VIEWER -->
 <div class="viewer" *ngIf="viewerOpen" (click)="close()">
   <div class="viewer__panel" (click)="$event.stopPropagation()">
-    <button class="viewer__close" type="button" (click)="close()" aria-label="Chiudi">✕</button>
+    <button class="viewer__close" type="button" (click)="close()" [attr.aria-label]="'GALLERY.CLOSE' | translate">✕</button>
 
     <div class="viewer__content" *ngIf="selected as s">
       <div class="viewer__media">

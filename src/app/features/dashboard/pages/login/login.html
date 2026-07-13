@@ -1,88 +1,88 @@
-<div class="loginPage">
-  <!-- Filigrana musicale come nel main -->
-  <div class="loginPage__watermark"></div>
-  
-  <div class="loginCard">
-    <div class="loginCard__header">
-      <div class="loginCard__logo">
-        <span class="loginCard__halo" aria-hidden="true"></span>
-        <img src="/assets/stemma/stemma_clean.png" alt="Stemma Banda" class="loginCard__crest" />
+<main class="loginPage">
+  <section class="loginShell" aria-labelledby="login-title">
+    <div class="loginVisual" aria-hidden="true">
+      <img
+        class="loginVisual__image"
+        src="/assets/about/oggi-concerto-estivo.jpg"
+        alt=""
+        width="1600"
+        height="1067"
+      />
+      <div class="loginVisual__shade"></div>
+
+      <div class="loginVisual__brand">
+        <img src="/assets/stemma/stemma_clean.png" alt="" width="1024" height="1024" />
+        <span>Banda Musicale</span>
       </div>
-      <h1 class="loginCard__title loginCard__title--ornament">Area Riservata</h1>
-      <p class="loginCard__subtitle">Banda Musicale Città di Casali del Manco</p>
+
+      <div class="loginVisual__copy">
+        <p class="loginVisual__eyebrow">Città di Casali del Manco</p>
+        <p class="loginVisual__quote">La musica unisce persone, memoria e territorio.</p>
+      </div>
     </div>
 
-    <form class="loginForm" (submit)="onSubmit($event)">
-      <div class="alert alert--error" *ngIf="error">
-        <svg class="alert__icon" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-          <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        {{ error }}
-      </div>
-
-      <div class="formGroup">
-        <label class="formLabel" for="username">Username</label>
-        <div class="formInputWrapper">
-          <svg class="formInput__icon" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
-            <path d="M4 21v-1a4 4 0 014-4h8a4 4 0 014 4v1" stroke="currentColor" stroke-width="2"/>
+    <div class="loginPanel">
+      <div class="loginPanel__inner">
+        <a routerLink="/" class="backLink backLink--top" aria-label="Torna al sito principale">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <input
-            class="formInput"
-            type="text"
-            id="username"
-            name="username"
-            [(ngModel)]="username"
-            placeholder="Inserisci username"
-            autocomplete="username"
-            [disabled]="loading"
-          />
-        </div>
+          Torna al sito
+        </a>
+
+        <header class="loginHeader">
+          <div class="loginHeader__mark">
+            <img src="/assets/stemma/stemma_clean.png" alt="" width="1024" height="1024" />
+          </div>
+          <p class="loginHeader__eyebrow">Dashboard amministrativa</p>
+          <h1 id="login-title" class="loginHeader__title">Bentornato</h1>
+          <p class="loginHeader__subtitle">Accedi per gestire galleria, eventi e contenuti del sito.</p>
+        </header>
+
+        <form class="loginForm" (submit)="onSubmit($event)">
+          <div class="alert alert--error" *ngIf="error" role="alert" aria-live="polite">
+            <svg class="alert__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            {{ error }}
+          </div>
+
+          <div class="formGroup">
+            <label class="formLabel" for="username">Username</label>
+            <div class="formInputWrapper">
+              <svg class="formInput__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 21v-1a4 4 0 014-4h8a4 4 0 014 4v1" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <input class="formInput" type="text" id="username" name="username" [(ngModel)]="username" placeholder="Il tuo username" autocomplete="username" [disabled]="loading" required />
+            </div>
+          </div>
+
+          <div class="formGroup">
+            <label class="formLabel" for="password">Password</label>
+            <div class="formInputWrapper">
+              <svg class="formInput__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+                <path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <input class="formInput" type="password" id="password" name="password" [(ngModel)]="password" placeholder="La tua password" autocomplete="current-password" [disabled]="loading" required />
+            </div>
+          </div>
+
+          <button class="loginBtn" type="submit" [disabled]="loading">
+            <span *ngIf="!loading">Accedi</span>
+            <span *ngIf="loading" class="loginBtn__loading">
+              <svg class="loginBtn__spinner" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="32" stroke-linecap="round"/>
+              </svg>
+              Accesso in corso…
+            </span>
+          </button>
+        </form>
+
+        <p class="loginPanel__legal">© {{ currentYear }} Banda Musicale Città di Casali del Manco</p>
       </div>
-
-      <div class="formGroup">
-        <label class="formLabel" for="password">Password</label>
-        <div class="formInputWrapper">
-          <svg class="formInput__icon" viewBox="0 0 24 24" fill="none">
-            <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2"/>
-            <path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"/>
-          </svg>
-          <input
-            class="formInput"
-            type="password"
-            id="password"
-            name="password"
-            [(ngModel)]="password"
-            placeholder="Inserisci password"
-            autocomplete="current-password"
-            [disabled]="loading"
-          />
-        </div>
-      </div>
-
-      <button class="loginBtn" type="submit" [disabled]="loading">
-        <span *ngIf="!loading">Accedi alla Dashboard</span>
-        <span *ngIf="loading" class="loginBtn__loading">
-          <svg class="loginBtn__spinner" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="32" stroke-linecap="round"/>
-          </svg>
-          Accesso in corso...
-        </span>
-      </button>
-    </form>
-
-    <div class="loginCard__footer">
-      <a routerLink="/" class="backLink">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Torna al sito principale
-      </a>
     </div>
-  </div>
-  
-  <div class="loginPage__footer">
-    © {{ currentYear }} Banda Musicale Città di Casali del Manco
-  </div>
-</div>
+  </section>
+</main>

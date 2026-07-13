@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { TabItem } from '../../components/tab-switch/tab-switch';
 import { EventService } from '../../../../core/services';
 import { EventResponse, EventRequest, EventType, EventStatus, Page } from '../../../../core/models';
+import { UiFeedbackService } from '../../components/ui-feedback/ui-feedback.service';
 
 @Component({
   selector: 'app-events-management',
@@ -25,7 +26,8 @@ export class EventsManagement implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private feedback: UiFeedbackService
   ) {}
 
   ngOnInit(): void {
@@ -82,7 +84,13 @@ export class EventsManagement implements OnInit {
 
   deleteItem(item: EventResponse): void {
     const label = item.type === 'EVENT' ? 'evento' : 'annuncio';
-    if (confirm(`Eliminare l'${label} "${item.title}"?`)) {
+    this.feedback.confirm({
+      title: `Eliminare l'${label}?`,
+      message: `"${item.title}" verrà eliminato definitivamente.`,
+      confirmText: 'Elimina',
+      danger: true,
+    }).then((ok) => {
+      if (!ok) return;
       this.eventService.delete(item.id).subscribe({
         next: () => {
           if (item.type === 'EVENT') {
@@ -93,14 +101,15 @@ export class EventsManagement implements OnInit {
           if (this.selectedItem?.id === item.id) {
             this.selectedItem = null;
           }
+          this.feedback.toast(`${label[0].toUpperCase()}${label.slice(1)} eliminato`, 'success');
           this.cdr.detectChanges();
         },
         error: (err) => {
-          alert('Errore nell\'eliminazione');
+          this.feedback.toast('Errore nell\'eliminazione', 'error');
           console.error(err);
         }
       });
-    }
+    });
   }
 
   toggleStatus(item: EventResponse): void {
@@ -118,7 +127,7 @@ export class EventsManagement implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        alert('Errore nel cambio stato');
+        this.feedback.toast('Errore nel cambio stato', 'error');
         console.error(err);
       }
     });
@@ -154,7 +163,7 @@ export class EventsManagement implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        alert('Errore nel salvataggio');
+        this.feedback.toast('Errore nel salvataggio', 'error');
         console.error(err);
       }
     });
@@ -197,7 +206,7 @@ export class EventsManagement implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        alert('Errore nella creazione');
+        this.feedback.toast('Errore nella creazione', 'error');
         console.error(err);
       }
     });

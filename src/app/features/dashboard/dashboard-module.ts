@@ -11,6 +11,7 @@ import { DashboardLayout } from './layout/dashboard-layout/dashboard-layout';
 // Components
 import { DashboardSidebar } from './components/sidebar/sidebar';
 import { TabSwitch } from './components/tab-switch/tab-switch';
+import { UiFeedback } from './components/ui-feedback/ui-feedback';
 
 // Pages
 import { Overview } from './pages/overview/overview';
@@ -33,6 +34,6 @@ import { ActivityLog } from './pages/activity-log/activity-log';
     Profile,
     ActivityLog,
   ],
-  imports: [CommonModule, FormsModule, SharedModule, DashboardRoutingModule],
+  imports: [CommonModule, FormsModule, SharedModule, DashboardRoutingModule, UiFeedback],
 })
 export class DashboardModule { }

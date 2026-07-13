@@ -1,4 +1,4 @@
-<div class="desktop-gallery" *ngIf="images?.length">
+<div class="desktop-gallery" *ngIf="images.length">
   <div class="gallery-grid" [ngClass]="gridLayoutClass">
     <div class="img-wrapper" *ngFor="let source of displayImages; let i = index" [class]="'img-item-' + i">
       <img [src]="source" alt="Galleria Sezione" class="gallery-image" loading="lazy">

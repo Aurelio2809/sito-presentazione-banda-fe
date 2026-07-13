@@ -13,7 +13,7 @@
   border: 1px solid rgba(255,255,255,0.10);
   background: rgba(255,255,255,0.05);
   padding: 4px 12px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: rgba(255,255,255,0.75);
 }
@@ -47,7 +47,7 @@
 
 .sourcesItemLabel{
   color: rgba(255,255,255,0.88);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .sourcesItemDesc{
@@ -64,8 +64,8 @@
 }
 
 .srcLink{
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 700;
   color: rgba(255,255,255,0.78);
   text-decoration: none;
   padding: 6px 10px;
@@ -77,5 +77,5 @@
 .srcLink:hover{
   background: rgba(255,255,255,0.09);
   transform: translateY(-1px);
-  transition: transform 200ms ease, background 200ms ease;
+  transition: transform 160ms ease, background 160ms ease;
 }

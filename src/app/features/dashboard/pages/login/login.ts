@@ -45,7 +45,6 @@ export class Login {
         } else {
           this.error = 'Errore durante il login. Riprova.';
         }
-        console.error('Login error:', err);
       }
     });
   }

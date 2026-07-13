@@ -13,13 +13,90 @@
   --color-banda-gold-600: #d97706;
   --color-banda-gold-700: #b45309;
   --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.35);
+  --font-display: 'Fraunces', 'Georgia', serif;
+
+  /* Scala raggi (usare SOLO questi tre + 999px per le pill) */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Motion system: due durate standard + easing di brand */
+  --dur-fast: 160ms;
+  --dur: 240ms;
+  --dur-slow: 400ms;
+  --ease-brand: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Elevazione dark: superfici progressivamente più chiare al salire dello z */
+  --surface-1: rgba(255, 255, 255, 0.03);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --surface-3: rgba(30, 30, 36, 0.98);
+
+  /* Colori semantici (stato), coerenti col tema scuro */
+  --color-ok: #4ade80;
+  --color-info: #60a5fa;
+  --color-warn: #fbbf24;
+  --color-danger: #f87171;
 }
 
-html, body { 
-  height: 100%; 
+/* =========================================================
+   TEMA DI SISTEMA
+   Il sito segue automaticamente prefers-color-scheme del browser/OS.
+   I componenti usano questi token, così il tema chiaro non è una semplice
+   inversione ma una variante calda e coerente con stemma, oro e rosso banda.
+   ========================================================= */
+:root {
+  color-scheme: dark;
+  --page-bg: #151318;
+  --page-bg-soft: #1c181e;
+  --text-strong: rgba(255, 255, 255, 0.96);
+  --text-body: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(255, 255, 255, 0.54);
+  --text-faint: rgba(255, 255, 255, 0.38);
+  --glass: rgba(30, 27, 33, 0.48);
+  --glass-strong: rgba(24, 21, 27, 0.68);
+  --glass-soft: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(255, 255, 255, 0.13);
+  --glass-highlight: rgba(255, 255, 255, 0.10);
+  --field-bg: rgba(255, 255, 255, 0.055);
+  --header-bg: rgba(17, 15, 20, 0.76);
+  --header-text: rgba(255, 255, 255, 0.94);
+  --shadow-color: rgba(0, 0, 0, 0.32);
+  --watermark-opacity: 0.11;
+  --watermark-blend: screen;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --page-bg: #f4efe7;
+    --page-bg-soft: #eae1d5;
+    --text-strong: #211b20;
+    --text-body: rgba(33, 27, 32, 0.76);
+    --text-muted: rgba(33, 27, 32, 0.58);
+    --text-faint: rgba(33, 27, 32, 0.42);
+    --glass: rgba(255, 255, 255, 0.48);
+    --glass-strong: rgba(255, 255, 255, 0.70);
+    --glass-soft: rgba(255, 255, 255, 0.32);
+    --glass-border: rgba(86, 59, 41, 0.15);
+    --glass-highlight: rgba(255, 255, 255, 0.82);
+    --field-bg: rgba(255, 255, 255, 0.62);
+    --header-bg: rgba(255, 250, 243, 0.78);
+    --header-text: #2a2126;
+    --shadow-color: rgba(72, 47, 35, 0.14);
+    --watermark-opacity: 0.075;
+    --watermark-blend: multiply;
+  }
+}
+
+html, body {
+  height: 100%;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
-body { background: var(--color-banda-black); }
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--text-strong);
+}
 
 *, *::before, *::after {
   font-family: inherit;
@@ -28,29 +105,41 @@ button, input, select, textarea {
   font-family: inherit;
 }
 
+/* =========================================================
+   Identità tipografica: serif elegante per i titoli (Fraunces),
+   Inter per tutto il resto — coppia editoriale, non stravolge
+   il linguaggio esistente ma dà al sito un carattere riconoscibile.
+   ========================================================= */
+h1, h2 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  /* I serif display rendono meglio con pesi medi: le classi possono fare override */
+  font-weight: 600;
+}
+
 /* Selezione testo on-brand (oro) */
 ::selection {
-  background: rgba(255, 200, 87, 0.28);
-  color: #fff;
+  background: rgba(251, 191, 36, 0.28);
+  color: var(--text-strong);
 }
 
 /* Scrollbar discreta e coerente col tema scuro */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 200, 87, 0.35) transparent;
+  scrollbar-color: rgba(251, 191, 36, 0.35) transparent;
 }
 *::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-thumb {
-  background: rgba(255, 200, 87, 0.28);
+  background: rgba(251, 191, 36, 0.28);
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
-*::-webkit-scrollbar-thumb:hover { background: rgba(255, 200, 87, 0.45); background-clip: padding-box; }
+*::-webkit-scrollbar-thumb:hover { background: rgba(251, 191, 36, 0.45); background-clip: padding-box; }
 
 /* Focus visibile per accessibilità (tastiera) */
 a:focus-visible, button:focus-visible {
-  outline: 2px solid rgba(255, 200, 87, 0.7);
+  outline: 2px solid rgba(251, 191, 36, 0.7);
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -73,3 +162,175 @@ img, svg, video, canvas, iframe { max-width: 100%; }
 @media (min-width: 2200px) { html { font-size: 19px; } }
 @media (min-width: 2800px) { html { font-size: 21px; } }
 @media (min-width: 3400px) { html { font-size: 23.5px; } }
+
+/* =========================================================
+   COMPONENTI GLOBALI CONDIVISI
+   Pattern usati identicamente in più pagine (about-today, about-school,
+   about-history, ...): definiti UNA volta qui invece che ripetuti/duplicati
+   per pagina, cosi' restano coerenti di default e un fix vale per tutti.
+   Le pagine possono ancora fare override locali quando serve un layout
+   diverso (es. grid-template-columns), ma il "default" vive qui.
+   ========================================================= */
+
+/* --- Titoli/descrizioni di sezione ricorrenti nelle pagine interne --- */
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  margin-bottom: 20px;
+}
+
+.sectionDesc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  max-width: 60ch;
+}
+
+/* --- Foto reali / placeholder in figure --- */
+.photoPlaceholder {
+  margin: 20px 0;
+  max-width: 280px;
+}
+
+.photoPlaceholder--wide,
+.photoPlaceholder--hero {
+  max-width: 100%;
+}
+
+.photoPlaceholder--float {
+  float: right;
+  margin: 4px 0 16px 20px;
+  max-width: 200px;
+}
+
+@media (max-width: 600px) {
+  .photoPlaceholder--float {
+    float: none;
+    margin: 16px 0;
+    max-width: 100%;
+  }
+}
+
+.photoPlaceholder__img {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  border: 2px dashed var(--glass-border);
+  background: var(--glass-soft);
+  color: var(--text-faint);
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.photoPlaceholder--wide .photoPlaceholder__img {
+  aspect-ratio: 16 / 9;
+}
+
+.photoPlaceholder--hero .photoPlaceholder__img {
+  aspect-ratio: 21 / 9;
+  border-radius: 16px;
+}
+
+.photoPlaceholder__img svg {
+  width: 48px;
+  height: 48px;
+}
+
+.photoPlaceholder:hover .photoPlaceholder__img {
+  border-color: rgba(251, 191, 36, 0.30);
+  background: rgba(251, 191, 36, 0.03);
+}
+
+/* Immagine reale (sostituisce il placeholder SVG) */
+.photoPlaceholder__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 14px 40px var(--shadow-color);
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+.photoPlaceholder--wide .photoPlaceholder__photo {
+  aspect-ratio: 16 / 9;
+}
+
+/* Hero: formato cinematografico corto (non deve mai risultare "gigante" in altezza) */
+.photoPlaceholder--hero .photoPlaceholder__photo {
+  aspect-ratio: 21 / 9;
+  border-radius: 16px;
+  max-height: 60vh;
+}
+
+.photoGrid .photoPlaceholder__photo,
+.photoGrid .photoPlaceholder__img {
+  aspect-ratio: 4 / 3;
+}
+
+.photoPlaceholder:hover .photoPlaceholder__photo {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
+.photoPlaceholder__caption {
+  margin-top: 10px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+@media (min-width: 540px) {
+  .photoGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.photoGrid .photoPlaceholder {
+  margin: 0;
+  max-width: none;
+}
+
+/* --- Pulsante CTA condiviso nelle pagine interne (about-today, about-school, ...) --- */
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.ctaBtn--primary {
+  background: var(--text-strong);
+  color: var(--page-bg);
+  box-shadow: 0 12px 32px var(--shadow-color);
+}
+
+.ctaBtn--primary:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 1);
+}
+
+.ctaBtn--ghost {
+  border: 1px solid var(--glass-border);
+  background: var(--glass-soft);
+  color: var(--text-body);
+}
+
+.ctaBtn--ghost:hover {
+  background: rgba(255, 255, 255, 0.10);
+  transform: translateY(-2px);
+}

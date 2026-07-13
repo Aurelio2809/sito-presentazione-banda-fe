@@ -11,15 +11,15 @@
   justify-content: center;
   gap: 8px;
   padding: 14px 28px;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-decoration: none;
   text-transform: uppercase;
   color: #fff;
-  background: linear-gradient(135deg, rgba(255, 200, 87, 0.15) 0%, rgba(180, 45, 45, 0.12) 100%);
-  border: 1px solid rgba(255, 200, 87, 0.3);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(180, 45, 45, 0.12) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -34,7 +34,7 @@
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 200, 87, 0.35) 0%, rgba(180, 45, 45, 0.25) 100%);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.35) 0%, rgba(180, 45, 45, 0.25) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
@@ -43,15 +43,15 @@
 @media (max-width: 599px) {
   .btn {
     padding: 12px 24px;
-    font-size: 12px;
-    border-radius: 14px;
+    font-size: 13px;
+    border-radius: 16px;
   }
 }
 
 .btn:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 200, 87, 0.6);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 12px 44px rgba(255, 200, 87, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 12px 44px rgba(251, 191, 36, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .btn:active {

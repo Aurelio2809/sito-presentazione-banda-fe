@@ -9,12 +9,18 @@
   <app-loading-spinner *ngIf="loading" [message]="'EVENTS.LOADING' | translate"></app-loading-spinner>
 
   <!-- Error state -->
-  <div class="events__error" *ngIf="error">
-    <p>{{ error }}</p>
-  </div>
+  <app-empty-state
+    *ngIf="!loading && error"
+    icon="calendar"
+    tone="error"
+    [title]="'EVENTS.ERROR_TITLE' | translate"
+    [text]="'EVENTS.ERROR_DESC' | translate"
+    [actionLabel]="'EVENTS.ERROR_CTA' | translate"
+    actionLink="/contacts"
+  ></app-empty-state>
 
   <!-- Tabs -->
-  <div class="tabs" *ngIf="!loading">
+  <div class="tabs" *ngIf="!loading && !error">
     <button
       class="tab"
       type="button"
@@ -22,7 +28,7 @@
       (click)="setTab('upcoming')"
     >
       {{ 'EVENTS.TAB_UPCOMING' | translate }}
-      <span class="tab__badge">{{ upcomingEvents.length }}</span>
+      <span class="tab__badge" *ngIf="upcomingEvents.length > 0">{{ upcomingEvents.length }}</span>
     </button>
 
     <button
@@ -32,11 +38,11 @@
       (click)="setTab('past')"
     >
       {{ 'EVENTS.TAB_PAST' | translate }}
-      <span class="tab__badge">{{ pastEvents.length }}</span>
+      <span class="tab__badge" *ngIf="pastEvents.length > 0">{{ pastEvents.length }}</span>
     </button>
   </div>
 
-  <div class="layout" *ngIf="!loading">
+  <div class="layout" *ngIf="!loading && !error">
     <!-- LEFT: Events list -->
     <div class="col">
       <div class="sectionHead">
@@ -194,13 +200,23 @@
         </button>
       </div>
 
-      <div class="empty" *ngIf="tab === 'upcoming' && upcomingEvents.length === 0">
-        {{ 'EVENTS.EMPTY_UPCOMING' | translate }}
-      </div>
+      <app-empty-state
+        *ngIf="tab === 'upcoming' && upcomingEvents.length === 0"
+        icon="calendar"
+        [compact]="true"
+        [title]="'EVENTS.EMPTY_UPCOMING_TITLE' | translate"
+        [text]="'EVENTS.EMPTY_UPCOMING' | translate"
+        [actionLabel]="'EVENTS.EMPTY_CTA' | translate"
+        actionLink="/contacts"
+      ></app-empty-state>
 
-      <div class="empty" *ngIf="tab === 'past' && pastEvents.length === 0">
-        {{ 'EVENTS.EMPTY_PAST' | translate }}
-      </div>
+      <app-empty-state
+        *ngIf="tab === 'past' && pastEvents.length === 0"
+        icon="calendar"
+        [compact]="true"
+        [title]="'EVENTS.EMPTY_PAST_TITLE' | translate"
+        [text]="'EVENTS.EMPTY_PAST' | translate"
+      ></app-empty-state>
     </div>
 
     <!-- RIGHT: Announcements -->
@@ -235,9 +251,13 @@
           </button>
         </div>
 
-        <div class="empty" *ngIf="announcements.length === 0">
-          {{ 'EVENTS.ANN_EMPTY' | translate }}
-        </div>
+        <app-empty-state
+          *ngIf="announcements.length === 0"
+          icon="announcement"
+          [compact]="true"
+          [title]="'EVENTS.ANN_EMPTY_TITLE' | translate"
+          [text]="'EVENTS.ANN_EMPTY' | translate"
+        ></app-empty-state>
       </div>
     </aside>
   </div>

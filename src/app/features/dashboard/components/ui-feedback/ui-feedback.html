@@ -1,0 +1,48 @@
+<!-- MODALE DI CONFERMA -->
+<div class="confirmOverlay" *ngIf="feedback.confirmState() as state" (click)="feedback.closeConfirm(false)">
+  <div class="confirmCard" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-message" (click)="$event.stopPropagation()">
+    <h2 id="confirm-title" class="confirmCard__title">{{ state.title }}</h2>
+    <p id="confirm-message" class="confirmCard__message">{{ state.message }}</p>
+    <div class="confirmCard__actions">
+      <button type="button" class="confirmBtn confirmBtn--ghost" autofocus (click)="feedback.closeConfirm(false)">
+        {{ state.cancelText }}
+      </button>
+      <button
+        type="button"
+        class="confirmBtn"
+        [class.confirmBtn--danger]="state.danger"
+        [class.confirmBtn--primary]="!state.danger"
+        (click)="feedback.closeConfirm(true)"
+      >
+        {{ state.confirmText }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toastStack" aria-live="polite">
+  <button
+    type="button"
+    class="toast"
+    *ngFor="let t of feedback.toasts()"
+    [class.toast--success]="t.kind === 'success'"
+    [class.toast--error]="t.kind === 'error'"
+    [attr.aria-label]="t.text + '. Chiudi notifica'"
+    (click)="feedback.dismiss(t.id)"
+  >
+    <svg *ngIf="t.kind === 'success'" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+      <path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg *ngIf="t.kind === 'error'" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+      <path d="M12 8v5M12 16.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <svg *ngIf="t.kind === 'info'" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+      <path d="M12 11v5M12 7.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span>{{ t.text }}</span>
+  </button>
+</div>

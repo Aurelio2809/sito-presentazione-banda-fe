@@ -5,7 +5,16 @@
     "GALLERY": "Galería",
     "EVENTS": "Eventos",
     "CONTACTS": "Contactos",
-    "DASHBOARD": "Panel"
+    "DASHBOARD": "Panel",
+    "OPEN_MENU": "Abrir el menú",
+    "CLOSE_MENU": "Cerrar el menú",
+    "SELECT_LANGUAGE": "Seleccionar idioma"
+  },
+  "FOOTER": {
+    "BRAND": "Banda Musical",
+    "PLACE": "Ciudad de Casali del Manco",
+    "LEGAL": "© {{year}} Banda Musical Ciudad de Casali del Manco",
+    "CREATED_BY": "Creado por"
   },
   "HOME": {
     "HERO": {
@@ -97,7 +106,13 @@
     "DETAILS": "Detalles",
     "META_DATE": "Fecha",
     "META_PLACE": "Lugar",
-    "EMPTY": "No hay fotos disponibles por el momento.",
+    "EMPTY_TITLE": "La galería se está preparando",
+    "EMPTY": "Aquí se publicarán nuevas fotografías. Mientras tanto, contáctanos para conocer las actividades de la banda.",
+    "EMPTY_CTA": "Contáctanos",
+    "ERROR_TITLE": "La galería no está disponible",
+    "ERROR_DESC": "No podemos cargar las fotografías en este momento. Inténtalo de nuevo en breve o escríbenos.",
+    "ERROR_CTA": "Escríbenos",
+    "CLOSE": "Cerrar la fotografía",
     "ERR": "Error al cargar la galería"
   },
   "EVENTS": {
@@ -116,13 +131,20 @@
     "META_PLACE": "Lugar",
     "META_ZONE": "Zona",
     "ATTACH": "Adjunto",
-    "EMPTY_UPCOMING": "No hay eventos programados por el momento.",
-    "EMPTY_PAST": "No hay histórico disponible.",
+    "EMPTY_UPCOMING_TITLE": "La próxima cita está en camino",
+    "EMPTY_UPCOMING": "Todavía no hay eventos publicados. Contáctanos para conciertos, fiestas patronales y colaboraciones.",
+    "EMPTY_PAST_TITLE": "El archivo se está actualizando",
+    "EMPTY_PAST": "Los eventos pasados aparecerán aquí.",
+    "EMPTY_CTA": "Organiza un evento con nosotros",
     "ANN_TITLE": "Anuncios",
     "ANN_DESC": "Comunicaciones rápidas. Haz clic para leer el texto completo.",
     "ANN_CLOSE": "Cerrar",
     "ANN_READ": "Leer",
-    "ANN_EMPTY": "No hay anuncios por el momento.",
+    "ANN_EMPTY_TITLE": "No hay comunicaciones recientes",
+    "ANN_EMPTY": "Las comunicaciones importantes aparecerán en esta sección.",
+    "ERROR_TITLE": "Los eventos no están disponibles",
+    "ERROR_DESC": "No podemos cargar el calendario en este momento. Inténtalo de nuevo en breve o contáctanos.",
+    "ERROR_CTA": "Contáctanos",
     "ERR": "Error al cargar"
   },
   "ABOUT": {
@@ -192,7 +214,7 @@
     "HEADER_TITLE": "Formación, método y pasión",
     "HEADER_DESC": "La escuela de música de la banda ofrece un recorrido formativo completo: desde la lectura musical hasta la técnica instrumental, hasta la experiencia de tocar juntos. Un ambiente acogedor donde aprender, crecer y compartir la pasión por la música.",
     "ACT_BACK": "Volver a Quiénes somos",
-    "ACT_ENROLL": "Inscíbete / Contacto",
+    "ACT_ENROLL": "Inscríbete / Contacto",
     "INTRO_TITLE": "Por qué elegir nuestra escuela",
     "INTRO_P1": "La escuela de música de la banda no es solo un lugar donde aprender a tocar: es una experiencia formativa que acompaña al alumno desde la primera nota hasta su incorporación a la formación de la banda. El método se basa en un enfoque gradual, con atención a la teoría musical, a la técnica instrumental y, sobre todo, a la práctica de conjunto.",
     "INTRO_P2": "Los profesores son músicos expertos, a menudo miembros activos de la propia banda, que transmiten no solo competencias técnicas sino también la pasión por la música y el sentido de pertenencia a una comunidad.",
@@ -227,7 +249,7 @@
     "INSTR_OTTONI": "Metal",
     "INSTR_OTTONI_1": "Trompeta / Corneta",
     "INSTR_OTTONI_2": "Trompa",
-    "INSTR_OTTONI_3": "Trombon",
+    "INSTR_OTTONI_3": "Trombón",
     "INSTR_OTTONI_4": "Fliscorno (soprano, alto, tenor, barítono)",
     "INSTR_OTTONI_5": "Bombardino",
     "INSTR_OTTONI_6": "Tuba / Tuba baja",

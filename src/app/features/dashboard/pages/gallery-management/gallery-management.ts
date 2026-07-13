@@ -5,6 +5,7 @@ import { TabItem } from '../../components/tab-switch/tab-switch';
 import { GalleryService } from '../../../../core/services';
 import { GalleryPhotoResponse, GalleryPhotoRequest } from '../../../../core/models';
 import { environment } from '../../../../../environments/environment';
+import { UiFeedbackService } from '../../components/ui-feedback/ui-feedback.service';
 
 @Component({
   selector: 'app-gallery-management',
@@ -48,7 +49,8 @@ export class GalleryManagement implements OnInit {
 
   constructor(
     private galleryService: GalleryService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private feedback: UiFeedbackService
   ) {}
 
   ngOnInit(): void {
@@ -132,7 +134,7 @@ export class GalleryManagement implements OnInit {
   toggleFavorite(photo: GalleryPhotoResponse): void {
     // Verifica limite 7 preferite
     if (!photo.favorite && this.favoritePhotos.length >= this.MAX_FAVORITES) {
-      alert(`Massimo ${this.MAX_FAVORITES} foto preferite consentite`);
+      this.feedback.toast(`Massimo ${this.MAX_FAVORITES} foto preferite consentite`, 'info');
       return;
     }
 
@@ -146,32 +148,39 @@ export class GalleryManagement implements OnInit {
       },
       error: (err) => {
         const errorMsg = err.error?.message || 'Errore nel toggle preferito';
-        alert(errorMsg);
+        this.feedback.toast(errorMsg, 'error');
         console.error(err);
       }
     });
   }
 
-  deletePhoto(photo: GalleryPhotoResponse): void {
-    if (confirm(`Eliminare la foto "${photo.title}"?`)) {
-      this.deleting = true;
-      this.galleryService.delete(photo.id).subscribe({
-        next: () => {
-          this.photos = this.photos.filter(p => p.id !== photo.id);
-          if (this.selectedPhoto?.id === photo.id) {
-            this.selectedPhoto = null;
-          }
-          this.deleting = false;
-          this.cdr.detectChanges();
-        },
-        error: (err) => {
-          alert('Errore nell\'eliminazione della foto');
-          console.error(err);
-          this.deleting = false;
-          this.cdr.detectChanges();
+  async deletePhoto(photo: GalleryPhotoResponse): Promise<void> {
+    const confirmed = await this.feedback.confirm({
+      title: 'Eliminare la foto?',
+      message: `“${photo.title}” verrà rimossa definitivamente dalla galleria.`,
+      confirmText: 'Elimina',
+      danger: true,
+    });
+    if (!confirmed) return;
+
+    this.deleting = true;
+    this.galleryService.delete(photo.id).subscribe({
+      next: () => {
+        this.photos = this.photos.filter(p => p.id !== photo.id);
+        if (this.selectedPhoto?.id === photo.id) {
+          this.selectedPhoto = null;
         }
-      });
-    }
+        this.deleting = false;
+        this.feedback.toast('Foto eliminata', 'success');
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        this.feedback.toast('Errore nell\'eliminazione della foto', 'error');
+        console.error(err);
+        this.deleting = false;
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   savePhoto(): void {
@@ -212,7 +221,7 @@ export class GalleryManagement implements OnInit {
         const fullMsg = details
           ? `${msg}\n${Object.entries(details).map(([k, v]) => `${k}: ${v}`).join('\n')}`
           : msg;
-        alert(fullMsg);
+        this.feedback.toast(fullMsg, 'error');
         console.error('[GalleryMgmt] savePhoto() ERROR:', err);
       }
     });
@@ -239,13 +248,13 @@ export class GalleryManagement implements OnInit {
 
   uploadPhoto(): void {
     if (!this.uploadFile) {
-      alert('Seleziona un file');
+      this.feedback.toast('Seleziona un file da caricare', 'info');
       return;
     }
 
     // Verifica limite preferite se si sta caricando come preferita
     if (this.uploadMetadata.favorite && this.favoritePhotos.length >= this.MAX_FAVORITES) {
-      alert(`Massimo ${this.MAX_FAVORITES} foto preferite consentite`);
+      this.feedback.toast(`Massimo ${this.MAX_FAVORITES} foto preferite consentite`, 'info');
       return;
     }
 
@@ -265,11 +274,12 @@ export class GalleryManagement implements OnInit {
         this.photos = [created, ...this.photos];
         this.uploading = false;
         this.closeUpload();
+        this.feedback.toast('Foto caricata', 'success');
         this.cdr.detectChanges();
       },
       error: (err) => {
         const errorMsg = err.error?.message ?? err.error?.error ?? err.message ?? 'Errore nell\'upload della foto';
-        alert(errorMsg);
+        this.feedback.toast(errorMsg, 'error');
         console.error('[GalleryMgmt] uploadPhoto() ERROR:', err);
         this.uploading = false;
         this.cdr.detectChanges();
@@ -334,8 +344,9 @@ export class GalleryManagement implements OnInit {
       await Promise.all(updates);
       this.orderChanged = false;
       this.savedOrderSnapshot = [];
+      this.feedback.toast('Ordine della galleria salvato', 'success');
     } catch (err) {
-      alert('Errore nel salvataggio dell\'ordine');
+      this.feedback.toast('Errore nel salvataggio dell\'ordine', 'error');
       console.error(err);
     } finally {
       this.savingOrder = false;

@@ -74,6 +74,24 @@ Tap target ≥44px. Niente overflow orizzontale. Rispetta `prefers-reduced-motio
   sfocata quando ingrandita. La qualità JPEG delle thumbnail è impostata lato backend
   (`app.storage.thumbnail-jpeg-quality`, vedi wiki BE): non serve altro intervento FE per la nitidezza.
 
+## Piano di rimedio estetico
+In **`DESIGN_TODO.md`** (root repo) vive il piano operativo nato dall'audit grafico del
+2026-07-12: difetti di sito e dashboard, rimedi, file coinvolti, priorità e ordine di
+esecuzione. Consultarlo prima di lavorare sull'estetica e spuntare le voci completate.
+
+## Sicurezza frontend e deploy
+- Prima di un rilascio eseguire `npm audit --audit-level=low`, `npx tsc --noEmit` e `npm run build`.
+- L'override Babel in `package.json` mantiene sicura la dipendenza transitiva del compilatore
+  Angular: rimuoverlo solo quando `@angular/compiler-cli` incorpora una versione corretta.
+- Non lasciare log con oggetti utente, credenziali, risposte di autenticazione o errori HTTP grezzi.
+- Ogni link con `target="_blank"` deve usare almeno `rel="noopener"` (preferire
+  `noopener noreferrer` per link esterni generici).
+- Gli header di produzione e la Content Security Policy vivono in `nginx.conf`: quando si aggiunge
+  un'origine esterna (font, iframe, API), aggiornare la direttiva minima necessaria e validare con
+  `nginx -t`; non usare wildcard.
+- Non rimuovere `.dockerignore`: impedisce che `.env`, `.git`, dipendenze e output locali entrino
+  nel build context e nei layer/cache intermedi.
+
 ## Agenti disponibili (`.claude/agents/`)
 - `designer` — estetica/UX/styling. `security-auditor` — audit sicurezza FE.
 - `wiki-curator` — analizza un commit e aggiorna questo file se una convenzione è cambiata.
