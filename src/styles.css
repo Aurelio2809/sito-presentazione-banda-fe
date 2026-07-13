@@ -63,6 +63,7 @@
   --shadow-color: rgba(0, 0, 0, 0.32);
   --watermark-opacity: 0.11;
   --watermark-blend: screen;
+  --watermark-filter: none;
   --footer-bg-top: rgba(32, 32, 36, 0.97);
   --footer-bg-bottom: rgba(20, 20, 24, 0.98);
   --footer-text-strong: rgba(255, 255, 255, 0.92);
@@ -97,8 +98,9 @@
   --header-bg: rgba(255, 250, 243, 0.78);
   --header-text: #2a2126;
   --shadow-color: rgba(72, 47, 35, 0.14);
-  --watermark-opacity: 0.075;
+  --watermark-opacity: 0.42;
   --watermark-blend: multiply;
+  --watermark-filter: invert(1) sepia(0.22) saturate(0.8);
   --footer-bg-top: rgba(255, 250, 243, 0.96);
   --footer-bg-bottom: rgba(235, 224, 210, 0.98);
   --footer-text-strong: #2a2126;
@@ -135,8 +137,9 @@
     --header-bg: rgba(255, 250, 243, 0.78);
     --header-text: #2a2126;
     --shadow-color: rgba(72, 47, 35, 0.14);
-    --watermark-opacity: 0.075;
+    --watermark-opacity: 0.42;
     --watermark-blend: multiply;
+    --watermark-filter: invert(1) sepia(0.22) saturate(0.8);
     --footer-bg-top: rgba(255, 250, 243, 0.96);
     --footer-bg-bottom: rgba(235, 224, 210, 0.98);
     --footer-text-strong: #2a2126;

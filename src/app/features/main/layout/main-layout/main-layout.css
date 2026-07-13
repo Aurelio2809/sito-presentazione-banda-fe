@@ -38,6 +38,7 @@
 
   opacity: var(--watermark-opacity);
   mix-blend-mode: var(--watermark-blend);
+  filter: var(--watermark-filter);
   mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.82) 58%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.82) 58%, transparent 100%);
 }
@@ -727,8 +728,8 @@
 
 @media (prefers-color-scheme: light){
   :host-context(html[data-theme='auto']) .shell::after{
-    opacity: 0.045;
-    filter: grayscale(1) sepia(0.55);
+    opacity: 0.085;
+    filter: grayscale(1) sepia(0.7) saturate(1.35) contrast(1.1);
   }
 
   :host-context(html[data-theme='auto']) .brand__mark{
@@ -744,8 +745,8 @@
 }
 
 :host-context(html[data-theme='light']) .shell::after {
-  opacity: 0.045;
-  filter: grayscale(1) sepia(0.55);
+  opacity: 0.085;
+  filter: grayscale(1) sepia(0.7) saturate(1.35) contrast(1.1);
 }
 
 :host-context(html[data-theme='light']) .brand__mark {
