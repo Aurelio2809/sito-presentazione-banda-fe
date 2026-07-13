@@ -123,6 +123,13 @@
 .brand{
   @apply flex items-center select-none;
   gap: 8px;
+  text-decoration: none;
+}
+
+.brand:hover,
+.brand:focus-visible,
+.brand:visited{
+  text-decoration: none;
 }
 
 /* Tablet e superiori */
@@ -365,6 +372,13 @@
   padding: 8px 12px;
   border-radius: 10px;
   font-size: 13px;
+  text-decoration: none;
+}
+
+.nav__link:hover,
+.nav__link:focus-visible,
+.nav__link:visited{
+  text-decoration: none;
 }
 
 /* Desktop e superiori */
