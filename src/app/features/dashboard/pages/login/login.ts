@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { finalize, TimeoutError, timeout } from 'rxjs';
 import { AuthService } from '../../../../core/services';
 
 @Component({
@@ -9,9 +10,11 @@ import { AuthService } from '../../../../core/services';
   templateUrl: './login.html',
   styleUrl: './login.css',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule],
 })
 export class Login {
+  private static readonly LOGIN_TIMEOUT_MS = 15_000;
+
   username = '';
   password = '';
   loading = false;
@@ -34,13 +37,25 @@ export class Login {
     this.loading = true;
     this.error = null;
 
-    this.authService.login(this.username, this.password).subscribe({
+    this.authService.login(this.username, this.password).pipe(
+      timeout(Login.LOGIN_TIMEOUT_MS),
+      finalize(() => {
+        this.loading = false;
+      }),
+    ).subscribe({
       next: () => {
-        this.router.navigate(['/dashboard']);
+        void this.router.navigate(['/dashboard']).then((navigated) => {
+          if (!navigated) {
+            this.error = 'Accesso riuscito, ma non è stato possibile aprire la dashboard. Riprova.';
+          }
+        }).catch(() => {
+          this.error = 'Accesso riuscito, ma non è stato possibile aprire la dashboard. Riprova.';
+        });
       },
       error: (err) => {
-        this.loading = false;
-        if (err.status === 401) {
+        if (err instanceof TimeoutError) {
+          this.error = 'Il server sta impiegando troppo tempo a rispondere. Riprova.';
+        } else if (err.status === 401) {
           this.error = 'Credenziali non valide';
         } else {
           this.error = 'Errore durante il login. Riprova.';

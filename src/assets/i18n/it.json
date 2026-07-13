@@ -8,7 +8,11 @@
     "DASHBOARD": "Dashboard",
     "OPEN_MENU": "Apri il menu",
     "CLOSE_MENU": "Chiudi il menu",
-    "SELECT_LANGUAGE": "Seleziona lingua"
+    "SELECT_LANGUAGE": "Seleziona lingua",
+    "SELECT_THEME": "Seleziona tema",
+    "THEME_AUTO": "Automatico",
+    "THEME_LIGHT": "Chiaro",
+    "THEME_DARK": "Scuro"
   },
   "FOOTER": {
     "BRAND": "Banda Musicale",

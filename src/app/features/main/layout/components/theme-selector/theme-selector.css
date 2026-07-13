@@ -1,0 +1,89 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+.themeSelector {
+  position: relative;
+}
+
+.themeSelector__toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  color: var(--header-text);
+  background: var(--glass-soft);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-brand), border-color var(--dur-fast) var(--ease-brand), transform var(--dur-fast) var(--ease-brand);
+}
+
+.themeSelector__toggle:hover {
+  background: var(--glass);
+  border-color: color-mix(in srgb, var(--header-text) 24%, transparent);
+}
+
+.themeSelector__toggle:active { transform: scale(0.96); }
+.themeSelector__toggle:focus-visible { outline: 2px solid var(--color-banda-gold-400); outline-offset: 2px; }
+.themeSelector__toggle svg { width: 20px; height: 20px; }
+
+.themeSelector--mobile .themeSelector__toggle {
+  width: 44px;
+  height: 44px;
+}
+
+.themeSelector__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 110;
+  width: 178px;
+  padding: 6px;
+  visibility: hidden;
+  opacity: 0;
+  color: var(--text-strong);
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px var(--shadow-color);
+  backdrop-filter: blur(24px) saturate(1.25);
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top right;
+  transition: opacity var(--dur-fast) var(--ease-brand), transform var(--dur-fast) var(--ease-brand), visibility 0ms var(--dur-fast);
+}
+
+.themeSelector__menu.is-open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0ms;
+}
+
+.themeSelector__option {
+  display: grid;
+  grid-template-columns: 24px 1fr 18px;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 10px;
+  color: var(--text-body);
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.themeSelector__option:hover { color: var(--text-strong); background: var(--glass-soft); }
+.themeSelector__option.is-active { color: var(--color-banda-gold-400); background: rgba(251, 191, 36, 0.11); }
+.themeSelector__optionIcon { display: grid; place-items: center; font-size: 16px; }
+.themeSelector__check { width: 17px; height: 17px; }
+
+@media (min-width: 1200px) {
+  .themeSelector__toggle { width: 40px; height: 40px; }
+}

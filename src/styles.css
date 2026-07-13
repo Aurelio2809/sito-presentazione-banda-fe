@@ -65,8 +65,30 @@
   --watermark-blend: screen;
 }
 
+:root[data-theme='light'] {
+  color-scheme: light;
+  --page-bg: #f4efe7;
+  --page-bg-soft: #eae1d5;
+  --text-strong: #211b20;
+  --text-body: rgba(33, 27, 32, 0.76);
+  --text-muted: rgba(33, 27, 32, 0.58);
+  --text-faint: rgba(33, 27, 32, 0.42);
+  --glass: rgba(255, 255, 255, 0.48);
+  --glass-strong: rgba(255, 255, 255, 0.70);
+  --glass-soft: rgba(255, 255, 255, 0.32);
+  --glass-border: rgba(86, 59, 41, 0.15);
+  --glass-highlight: rgba(255, 255, 255, 0.82);
+  --field-bg: rgba(255, 255, 255, 0.62);
+  --header-bg: rgba(255, 250, 243, 0.78);
+  --header-text: #2a2126;
+  --shadow-color: rgba(72, 47, 35, 0.14);
+  --watermark-opacity: 0.075;
+  --watermark-blend: multiply;
+}
+
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme]),
+  :root[data-theme='auto'] {
     color-scheme: light;
     --page-bg: #f4efe7;
     --page-bg-soft: #eae1d5;

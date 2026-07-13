@@ -410,6 +410,12 @@
 /* =========================================================
    MOBILE MENU BUTTON
    ========================================================= */
+.mobileHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .menuBtn{
   display: flex;
   align-items: center;
@@ -445,7 +451,7 @@
 
 /* Nascosto su laptop e superiori */
 @media (min-width: 900px){
-  .menuBtn{
+  .mobileHeaderActions{
     display: none;
   }
 }

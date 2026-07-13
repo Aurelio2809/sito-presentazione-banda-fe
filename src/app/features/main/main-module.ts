@@ -23,11 +23,13 @@ import { HomeImage } from './components/home-image/home-image';
 import { HomeImageDesktop } from './components/home-image-desktop/home-image-desktop';
 import { HomeSectionCta } from './components/home-section-cta/home-section-cta';
 import { LangSelector } from './layout/components/lang-selector/lang-selector';
+import { ThemeSelector } from './layout/components/theme-selector/theme-selector';
 
 @NgModule({
   declarations: [
     MainLayout,
     LangSelector,
+    ThemeSelector,
     Home,
     About,
     Events,

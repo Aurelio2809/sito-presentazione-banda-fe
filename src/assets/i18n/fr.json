@@ -8,7 +8,11 @@
     "DASHBOARD": "Tableau de bord",
     "OPEN_MENU": "Ouvrir le menu",
     "CLOSE_MENU": "Fermer le menu",
-    "SELECT_LANGUAGE": "Choisir la langue"
+    "SELECT_LANGUAGE": "Choisir la langue",
+    "SELECT_THEME": "Choisir le thème",
+    "THEME_AUTO": "Automatique",
+    "THEME_LIGHT": "Clair",
+    "THEME_DARK": "Sombre"
   },
   "FOOTER": {
     "BRAND": "Harmonie musicale",
