@@ -17,8 +17,8 @@
   letter-spacing: 0.06em;
   text-decoration: none;
   text-transform: uppercase;
-  color: #fff;
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(180, 45, 45, 0.12) 100%);
+  color: var(--text-strong);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, var(--glass) 100%);
   border: 1px solid rgba(251, 191, 36, 0.3);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);

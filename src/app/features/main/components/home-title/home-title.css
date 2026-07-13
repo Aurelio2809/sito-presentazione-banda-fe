@@ -5,11 +5,11 @@
   letter-spacing: -0.01em;
   line-height: 1.08;
   text-align: left; /* Tutta la Home Mobile è Justificato a Sinistra */
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.78) 100%);
+  background: linear-gradient(180deg, var(--text-strong) 0%, var(--text-body) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 4px 30px var(--shadow-color);
 }
 
 .title--ornament {

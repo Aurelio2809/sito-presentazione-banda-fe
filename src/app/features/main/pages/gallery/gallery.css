@@ -413,8 +413,10 @@
 }
 
 .gridCard{
-  @apply overflow-hidden rounded-3xl border border-white/10 bg-white/5 text-left;
-  box-shadow: 0 18px 50px rgba(0,0,0,0.32);
+  @apply overflow-hidden rounded-3xl border text-left;
+  border-color: var(--glass-border);
+  background: var(--glass-strong);
+  box-shadow: 0 18px 50px var(--shadow-color);
 
   transform: translate3d(0,0,0) scale(1);
   transition:
@@ -448,7 +450,10 @@
 
 .gridCard__meta{ @apply px-4 py-3; }
 
-.gridCard__title{ @apply text-sm font-bold text-white/85; }
+.gridCard__title{
+  @apply text-sm font-bold;
+  color: var(--text-strong);
+}
 
 /* ✅ HOVER "focus mode" sulla griglia */
 .grid:hover .gridCard{
