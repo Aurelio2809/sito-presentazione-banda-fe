@@ -91,4 +91,8 @@ export class Events implements OnInit {
     const d = new Date(dateStr + 'T00:00:00');
     return d.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' });
   }
+
+  formatTime(timeStr?: string): string {
+    return timeStr?.slice(0, 5) ?? '';
+  }
 }

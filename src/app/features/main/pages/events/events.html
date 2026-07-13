@@ -60,6 +60,7 @@
           type="button"
           *ngFor="let e of upcomingEvents"
           [class.is-open]="openEventId === e.id"
+          [class.ticket--no-banner]="!e.bannerSrc"
           (click)="toggleEvent(e.id)"
         >
           <div class="ticket__banner" *ngIf="e.bannerSrc">
@@ -79,10 +80,10 @@
 
                 <span class="metaPill" *ngIf="e.eventTime">
                   <span class="metaPill__label">{{ 'EVENTS.META_TIME' | translate }}</span>
-                  <span class="metaPill__value">{{ e.eventTime }}</span>
+                  <span class="metaPill__value">{{ formatTime(e.eventTime) }}</span>
                 </span>
 
-                <span class="metaPill" *ngIf="e.location">
+                <span class="metaPill metaPill--place" *ngIf="e.location">
                   <span class="metaPill__label">{{ 'EVENTS.META_PLACE' | translate }}</span>
                   <span class="metaPill__value">{{ e.location }}</span>
                 </span>
@@ -133,6 +134,7 @@
           type="button"
           *ngFor="let e of pastEvents"
           [class.is-open]="openEventId === e.id"
+          [class.ticket--no-banner]="!e.bannerSrc"
           (click)="toggleEvent(e.id)"
         >
           <div class="ticket__banner" *ngIf="e.bannerSrc">
@@ -152,10 +154,10 @@
 
                 <span class="metaPill" *ngIf="e.eventTime">
                   <span class="metaPill__label">{{ 'EVENTS.META_TIME' | translate }}</span>
-                  <span class="metaPill__value">{{ e.eventTime }}</span>
+                  <span class="metaPill__value">{{ formatTime(e.eventTime) }}</span>
                 </span>
 
-                <span class="metaPill" *ngIf="e.location">
+                <span class="metaPill metaPill--place" *ngIf="e.location">
                   <span class="metaPill__label">{{ 'EVENTS.META_PLACE' | translate }}</span>
                   <span class="metaPill__value">{{ e.location }}</span>
                 </span>

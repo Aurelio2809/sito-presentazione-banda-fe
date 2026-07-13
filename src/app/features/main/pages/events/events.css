@@ -243,6 +243,12 @@
     border-color 220ms ease;
 }
 
+/* In assenza di locandina il contenuto occupa tutta la card: la colonna da
+   160px esiste solo quando viene renderizzata davvero un'immagine. */
+.ticket--no-banner {
+  grid-template-columns: minmax(0, 1fr) 34px;
+}
+
 .ticket::before {
   content: "";
   position: absolute;
@@ -317,6 +323,7 @@
 
 /* body */
 .ticket__body {
+  min-width: 0;
   padding: 16px 18px;
   display: grid;
   gap: 10px;
@@ -343,6 +350,8 @@
 /* pill più opache */
 .metaPill {
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   gap: 8px;
   align-items: baseline;
   padding: 8px 10px;
@@ -354,6 +363,10 @@
   -webkit-backdrop-filter: blur(10px) saturate(1.12);
 }
 
+.metaPill--place {
+  flex: 1 1 250px;
+}
+
 .metaPill__label {
   font-size: 13px;
   font-weight: 700;
@@ -363,6 +376,8 @@
 }
 
 .metaPill__value {
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-size: 13px;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.86);
