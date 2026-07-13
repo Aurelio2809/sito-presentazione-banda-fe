@@ -5,7 +5,6 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 
 type PageToken = number | '…';
@@ -31,7 +30,7 @@ export class UiSimplePageNavigator implements OnChanges {
   pageCount = 1;
   tokens: PageToken[] = [];
 
-  ngOnChanges(_changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.recompute();
   }
 

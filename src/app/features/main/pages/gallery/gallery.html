@@ -142,7 +142,7 @@
             <div class="metaItem__value">{{ s.location }}</div>
           </div>
 
-          <div class="metaItem" *ngIf="s.photoYear != null || s.photoMonth != null || s.photoDay != null">
+          <div class="metaItem" *ngIf="s.photoYear !== null || s.photoMonth !== null || s.photoDay !== null">
             <div class="metaItem__label">{{ 'GALLERY.META_DATE' | translate }}</div>
             <div class="metaItem__value">{{ formatPhotoDate(s) }}</div>
           </div>

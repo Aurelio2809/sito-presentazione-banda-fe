@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild, NgZone } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
             class="indicator-dot" 
             [class.active]="i === currentIndex"
             (click)="scrollTo(i)"
-            [attr.aria-label]="'Vai all\\'immagine ' + (i+1)"
+            [attr.aria-label]="'Vai all’immagine ' + (i + 1)"
           ></button>
         </div>
       </ng-container>

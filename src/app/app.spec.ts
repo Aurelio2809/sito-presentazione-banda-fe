@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { Title } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 import { App } from './app';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter([])],
     }).compileComponents();
   });
 
@@ -14,10 +17,12 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('sets the public site title on initialization', () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, fe');
+    fixture.detectChanges();
+
+    expect(TestBed.inject(Title).getTitle()).toBe(
+      'Banda Musicale Casali del Manco | Sito Ufficiale',
+    );
   });
 });

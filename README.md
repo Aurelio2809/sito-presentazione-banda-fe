@@ -1,13 +1,14 @@
-# Fe
+# Frontend — Banda Musicale Città di Casali del Manco
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
 
 ## Development server
 
-To start a local development server, run:
+Install the locked dependencies and start the local development server:
 
 ```bash
-ng serve
+npm ci
+npm start
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
@@ -36,23 +37,23 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+## Quality checks
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+The project uses ESLint with Angular rules and Vitest. Before opening a pull request, run the same quality gate used by CI:
 
 ```bash
-ng e2e
+npm run ci
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Individual commands are also available:
+
+- `npm run lint` checks TypeScript and Angular templates.
+- `npm run lint:fix` applies safe automatic fixes.
+- `npm run test` runs Vitest in watch mode locally.
+- `npm run test:ci` runs the test suite once.
+- `npm run build` creates the production build.
+
+GitHub Actions runs lint, tests and build for pull requests and pushes to `integrazione`. Deployment is allowed only after this quality job succeeds.
 
 ## Additional Resources
 

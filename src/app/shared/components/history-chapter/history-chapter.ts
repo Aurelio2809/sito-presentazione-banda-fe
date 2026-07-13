@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 export type ChapterImage = { src: string; alt: string };
 
@@ -8,7 +8,7 @@ export type ChapterImage = { src: string; alt: string };
   styleUrls: ['./history-chapter.css'],
   standalone: false,
 })
-export class HistoryChapter {
+export class HistoryChapter implements OnInit {
   @Input() id!: string;                 // anchor id
   @Input() kicker: string = '';         // es: "Capitolo 1"
   @Input() title: string = '';          // es: "Ottocento"

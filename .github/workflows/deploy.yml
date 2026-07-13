@@ -4,11 +4,49 @@ on:
   push:
     branches:
       - integrazione
+  pull_request:
+    branches:
+      - integrazione
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frontend-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
+  quality:
+    name: Lint, test and build FE
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Lint TypeScript and Angular templates
+        run: npm run lint
+
+      - name: Run frontend tests
+        run: npm run test:ci
+
+      - name: Build production frontend
+        run: npm run build
+
   deploy:
     name: Deploy FE
     runs-on: self-hosted
+    needs: quality
+    if: github.event_name == 'push'
 
     steps:
       - name: Pull latest code and rebuild frontend

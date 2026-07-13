@@ -9,15 +9,19 @@ describe('UiButton', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UiButton]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UiButton);
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('renders its variant, content and disabled state', () => {
+    component.variant = 'secondary';
+    component.disabled = true;
+    fixture.detectChanges();
+
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
+    expect(button.className).toContain('bg-white');
   });
 });
