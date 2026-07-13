@@ -60,6 +60,9 @@
   --field-bg: rgba(255, 255, 255, 0.055);
   --header-bg: rgba(17, 15, 20, 0.76);
   --header-text: rgba(255, 255, 255, 0.94);
+  --nav-active-bg: linear-gradient(135deg, rgba(225, 29, 72, 0.42), rgba(190, 18, 60, 0.22));
+  --nav-active-text: var(--header-text);
+  --nav-active-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
   --shadow-color: rgba(0, 0, 0, 0.32);
   --watermark-opacity: 0.11;
   --watermark-blend: screen;
@@ -99,6 +102,9 @@
   --field-bg: rgba(255, 255, 255, 0.62);
   --header-bg: rgba(255, 250, 243, 0.78);
   --header-text: #2a2126;
+  --nav-active-bg: linear-gradient(135deg, rgba(190, 18, 60, 0.94), rgba(125, 20, 50, 0.88));
+  --nav-active-text: #ffffff;
+  --nav-active-shadow: 0 10px 26px rgba(190, 18, 60, 0.24);
   --shadow-color: rgba(72, 47, 35, 0.14);
   --watermark-opacity: 0.28;
   --watermark-blend: multiply;
@@ -140,6 +146,9 @@
     --field-bg: rgba(255, 255, 255, 0.62);
     --header-bg: rgba(255, 250, 243, 0.78);
     --header-text: #2a2126;
+    --nav-active-bg: linear-gradient(135deg, rgba(190, 18, 60, 0.94), rgba(125, 20, 50, 0.88));
+    --nav-active-text: #ffffff;
+    --nav-active-shadow: 0 10px 26px rgba(190, 18, 60, 0.24);
     --shadow-color: rgba(72, 47, 35, 0.14);
     --watermark-opacity: 0.28;
     --watermark-blend: multiply;

@@ -369,6 +369,7 @@
 
 .nav__link{
   @apply relative transition;
+  isolation: isolate;
   color: color-mix(in srgb, var(--header-text) 88%, transparent);
   padding: 8px 12px;
   border-radius: 10px;
@@ -394,17 +395,18 @@
 .nav__link::before{
   content: "";
   @apply absolute inset-0 opacity-0 transition;
+  z-index: -1;
   border-radius: inherit;
   background: rgba(255, 255, 255, 0.12);
 }
 
 .nav__link:hover::before{ @apply opacity-100; }
-.nav__link.is-active{ color: var(--header-text); }
+.nav__link.is-active{ color: var(--nav-active-text); }
 
 .nav__link.is-active::before{
   opacity: 1;
-  background: linear-gradient(135deg, rgba(225, 29, 72, 0.42), rgba(190, 18, 60, 0.22));
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  background: var(--nav-active-bg);
+  box-shadow: var(--nav-active-shadow);
 }
 
 
@@ -532,9 +534,10 @@
 }
 
 .mobileNav__link.is-active{
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--text-strong);
+  background: var(--nav-active-bg);
+  border-color: color-mix(in srgb, var(--color-banda-red-500) 45%, transparent);
+  color: var(--nav-active-text);
+  box-shadow: var(--nav-active-shadow);
   font-weight: 600;
 }
 
@@ -732,7 +735,7 @@
     box-shadow: 0 6px 18px rgba(72, 47, 35, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   }
 
-  :host-context(html[data-theme='auto']) .nav__link::before,
+  :host-context(html[data-theme='auto']) .nav__link:not(.is-active)::before,
   :host-context(html[data-theme='auto']) .menuBtn:hover,
   :host-context(html[data-theme='auto']) .menuBtn:active{
     background: rgba(90, 60, 45, 0.08);
@@ -744,7 +747,7 @@
   box-shadow: 0 6px 18px rgba(72, 47, 35, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-:host-context(html[data-theme='light']) .nav__link::before,
+:host-context(html[data-theme='light']) .nav__link:not(.is-active)::before,
 :host-context(html[data-theme='light']) .menuBtn:hover,
 :host-context(html[data-theme='light']) .menuBtn:active {
   background: rgba(90, 60, 45, 0.08);
