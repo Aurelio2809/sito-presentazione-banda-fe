@@ -43,7 +43,7 @@ export class About {
       tag: 'ABOUT.SEC_OGGI_TAG',
       title: 'ABOUT.SEC_OGGI_TITLE',
       text: 'ABOUT.SEC_OGGI_TEXT',
-      img: 'assets/about/oggi-concerto-estivo.jpg',
+      img: 'assets/home/associazione.jpg',
       link: '/about/today',
       cta: 'ABOUT.CTA',
       side: 'right',
