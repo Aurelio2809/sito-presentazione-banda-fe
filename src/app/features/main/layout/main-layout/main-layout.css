@@ -55,8 +55,8 @@
   pointer-events: none;
   z-index: -1;
   background: url("/assets/stemma/stemma_clean.png") center / contain no-repeat;
-  opacity: 0.035;
-  filter: grayscale(1) sepia(0.25);
+  opacity: var(--crest-watermark-opacity);
+  filter: var(--crest-watermark-filter);
 }
 
 
@@ -727,11 +727,6 @@
 }
 
 @media (prefers-color-scheme: light){
-  :host-context(html[data-theme='auto']) .shell::after{
-    opacity: 0.085;
-    filter: grayscale(1) sepia(0.7) saturate(1.35) contrast(1.1);
-  }
-
   :host-context(html[data-theme='auto']) .brand__mark{
     background: rgba(255, 255, 255, 0.46);
     box-shadow: 0 6px 18px rgba(72, 47, 35, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -742,11 +737,6 @@
   :host-context(html[data-theme='auto']) .menuBtn:active{
     background: rgba(90, 60, 45, 0.08);
   }
-}
-
-:host-context(html[data-theme='light']) .shell::after {
-  opacity: 0.085;
-  filter: grayscale(1) sepia(0.7) saturate(1.35) contrast(1.1);
 }
 
 :host-context(html[data-theme='light']) .brand__mark {
