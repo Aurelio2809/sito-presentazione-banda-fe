@@ -5,10 +5,8 @@
     [description]="'EVENTS.DESC' | translate"
   ></app-page-header>
 
-  <!-- Loading state -->
   <app-loading-spinner *ngIf="loading" [message]="'EVENTS.LOADING' | translate"></app-loading-spinner>
 
-  <!-- Error state -->
   <app-empty-state
     *ngIf="!loading && error"
     icon="calendar"
@@ -19,11 +17,12 @@
     actionLink="/contacts"
   ></app-empty-state>
 
-  <!-- Tabs -->
-  <div class="tabs" *ngIf="!loading && !error">
+  <div class="tabs" *ngIf="!loading && !error" role="tablist" [attr.aria-label]="'EVENTS.TITLE' | translate">
     <button
       class="tab"
       type="button"
+      role="tab"
+      [attr.aria-selected]="tab === 'upcoming'"
       [class.is-active]="tab === 'upcoming'"
       (click)="setTab('upcoming')"
     >
@@ -34,6 +33,8 @@
     <button
       class="tab"
       type="button"
+      role="tab"
+      [attr.aria-selected]="tab === 'past'"
       [class.is-active]="tab === 'past'"
       (click)="setTab('past')"
     >
@@ -42,164 +43,123 @@
     </button>
   </div>
 
-  <div class="layout" *ngIf="!loading && !error">
-    <!-- LEFT: Events list -->
-    <div class="col">
-      <div class="sectionHead">
-        <h2 class="sectionHead__title">
-          {{ (tab === 'upcoming' ? 'EVENTS.HEAD_UPCOMING' : 'EVENTS.HEAD_PAST') | translate }}
-        </h2>
-        <p class="sectionHead__desc">
-          {{ (tab === 'upcoming' ? 'EVENTS.HEAD_UPCOMING_DESC' : 'EVENTS.HEAD_PAST_DESC') | translate }}
-        </p>
-      </div>
+  <div class="layout" [class.layout--split]="announcements.length > 0" *ngIf="!loading && !error">
+    <main class="eventsColumn">
+      <header class="sectionHead">
+        <div>
+          <h2 class="sectionHead__title">
+            {{ (tab === 'upcoming' ? 'EVENTS.HEAD_UPCOMING' : 'EVENTS.HEAD_PAST') | translate }}
+          </h2>
+          <p class="sectionHead__desc">
+            {{ (tab === 'upcoming' ? 'EVENTS.HEAD_UPCOMING_DESC' : 'EVENTS.HEAD_PAST_DESC') | translate }}
+          </p>
+        </div>
+        <span class="sectionHead__count" *ngIf="visibleEvents.length > 0">{{ visibleEvents.length }}</span>
+      </header>
 
-      <div class="ticketList" *ngIf="tab === 'upcoming'">
-        <button
-          class="ticket"
-          type="button"
-          *ngFor="let e of upcomingEvents"
+      <div class="eventList" *ngIf="visibleEvents.length > 0">
+        <article
+          class="eventCard"
+          *ngFor="let e of visibleEvents"
           [class.is-open]="openEventId === e.id"
-          [class.ticket--no-banner]="!e.bannerSrc"
-          (click)="toggleEvent(e.id)"
+          [class.eventCard--with-media]="!!e.bannerSrc"
         >
-          <div class="ticket__banner" *ngIf="e.bannerSrc">
-            <img class="ticket__img" [src]="e.bannerSrc" [alt]="e.title" />
-            <div class="ticket__shade"></div>
+          <div class="eventCard__media" *ngIf="e.bannerSrc">
+            <img [src]="e.bannerSrc" [alt]="e.title" loading="lazy" decoding="async" />
           </div>
 
-          <div class="ticket__body">
-            <div class="ticket__top">
-              <div class="ticket__title">{{ e.title }}</div>
+          <button
+            class="eventCard__summary"
+            type="button"
+            [attr.aria-expanded]="openEventId === e.id"
+            [attr.aria-controls]="'event-details-' + e.id"
+            [attr.aria-label]="((openEventId === e.id ? 'EVENTS.HIDE_DETAILS' : 'EVENTS.SHOW_DETAILS') | translate) + ': ' + e.title"
+            (click)="toggleEvent(e.id)"
+          >
+            <time class="dateBadge" [attr.datetime]="e.eventDate">
+              <span class="dateBadge__day">{{ formatDay(e.eventDate) }}</span>
+              <span class="dateBadge__month">{{ formatMonth(e.eventDate) }}</span>
+              <span class="dateBadge__year">{{ formatYear(e.eventDate) }}</span>
+            </time>
 
-              <div class="ticket__meta">
-                <span class="metaPill">
-                  <span class="metaPill__label">{{ 'EVENTS.META_DATE' | translate }}</span>
-                  <span class="metaPill__value">{{ formatDate(e.eventDate) }}</span>
+            <div class="eventCard__content">
+              <span class="eventCard__kicker">
+                {{ (tab === 'upcoming' ? 'EVENTS.CARD_UPCOMING' : 'EVENTS.CARD_PAST') | translate }}
+              </span>
+              <h3 class="eventCard__title">{{ e.title }}</h3>
+              <p class="eventCard__description" *ngIf="e.shortDescription">{{ e.shortDescription }}</p>
+
+              <div class="eventCard__meta">
+                <span class="metaItem" *ngIf="e.eventTime">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M12 7v5l3 2"></path>
+                  </svg>
+                  <span>{{ formatTime(e.eventTime) }}</span>
                 </span>
 
-                <span class="metaPill" *ngIf="e.eventTime">
-                  <span class="metaPill__label">{{ 'EVENTS.META_TIME' | translate }}</span>
-                  <span class="metaPill__value">{{ formatTime(e.eventTime) }}</span>
+                <span class="metaItem metaItem--place" *ngIf="e.location">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1116 0z"></path>
+                    <circle cx="12" cy="10" r="2.5"></circle>
+                  </svg>
+                  <span>{{ e.location }}</span>
                 </span>
+              </div>
 
-                <span class="metaPill metaPill--place" *ngIf="e.location">
-                  <span class="metaPill__label">{{ 'EVENTS.META_PLACE' | translate }}</span>
-                  <span class="metaPill__value">{{ e.location }}</span>
-                </span>
+              <div class="eventCard__tags" *ngIf="e.tags?.length">
+                <span class="tag" *ngFor="let eventTag of e.tags">{{ eventTag }}</span>
               </div>
             </div>
 
-            <div class="ticket__desc">{{ e.shortDescription }}</div>
+            <span class="eventCard__toggle" aria-hidden="true">
+              <span class="eventCard__actionText">
+                {{ (openEventId === e.id ? 'EVENTS.HIDE_DETAILS' : 'EVENTS.SHOW_DETAILS') | translate }}
+              </span>
+              <svg viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6"></path>
+              </svg>
+            </span>
+          </button>
 
-            <div class="ticket__tags" *ngIf="e.tags?.length">
-              <span class="tag" *ngFor="let t of e.tags">{{ t }}</span>
+          <div
+            class="eventCard__details"
+            [id]="'event-details-' + e.id"
+            *ngIf="openEventId === e.id"
+          >
+            <div class="detailsCopy" *ngIf="e.fullDescription">
+              <span class="detailsCopy__label">{{ 'EVENTS.DETAILS' | translate }}</span>
+              <p>{{ e.fullDescription }}</p>
             </div>
 
-            <div class="ticket__details" *ngIf="openEventId === e.id">
-              <div class="details__text">{{ e.fullDescription }}</div>
-
-              <div class="details__row">
-                <div class="details__place" *ngIf="e.cityLine">
-                  <span class="details__k">{{ 'EVENTS.META_ZONE' | translate }}</span>
-                  <span class="details__v">{{ e.cityLine }}</span>
+            <div class="detailsFooter" *ngIf="e.cityLine || e.attachmentHref">
+              <div class="venue" *ngIf="e.cityLine">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1116 0z"></path>
+                  <circle cx="12" cy="10" r="2.5"></circle>
+                </svg>
+                <div>
+                  <span class="venue__label">{{ 'EVENTS.META_ZONE' | translate }}</span>
+                  <span class="venue__value">{{ e.cityLine }}</span>
                 </div>
-
-                <a
-                  class="attach"
-                  *ngIf="e.attachmentHref"
-                  [href]="e.attachmentHref"
-                  target="_blank"
-                  rel="noopener"
-                  (click)="$event.stopPropagation()"
-                >
-                  <span class="attach__dot" aria-hidden="true"></span>
-                  <span class="attach__label">{{ e.attachmentLabel || ('EVENTS.ATTACH' | translate) }}</span>
-                  <span class="attach__chev" aria-hidden="true">↗</span>
-                </a>
               </div>
+
+              <a
+                class="directionsLink"
+                *ngIf="e.attachmentHref"
+                [href]="e.attachmentHref"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 11.5L21 3l-8.5 18-2-7.5L3 11.5z"></path>
+                </svg>
+                <span>{{ e.attachmentLabel || ('EVENTS.ATTACH' | translate) }}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
             </div>
           </div>
-
-          <div class="ticket__rail" aria-hidden="true">
-            <div class="ticket__cut ticket__cut--top"></div>
-            <div class="ticket__cut ticket__cut--bottom"></div>
-          </div>
-        </button>
-      </div>
-
-      <div class="ticketList" *ngIf="tab === 'past'">
-        <button
-          class="ticket"
-          type="button"
-          *ngFor="let e of pastEvents"
-          [class.is-open]="openEventId === e.id"
-          [class.ticket--no-banner]="!e.bannerSrc"
-          (click)="toggleEvent(e.id)"
-        >
-          <div class="ticket__banner" *ngIf="e.bannerSrc">
-            <img class="ticket__img" [src]="e.bannerSrc" [alt]="e.title" />
-            <div class="ticket__shade"></div>
-          </div>
-
-          <div class="ticket__body">
-            <div class="ticket__top">
-              <div class="ticket__title">{{ e.title }}</div>
-
-              <div class="ticket__meta">
-                <span class="metaPill">
-                  <span class="metaPill__label">{{ 'EVENTS.META_DATE' | translate }}</span>
-                  <span class="metaPill__value">{{ formatDate(e.eventDate) }}</span>
-                </span>
-
-                <span class="metaPill" *ngIf="e.eventTime">
-                  <span class="metaPill__label">{{ 'EVENTS.META_TIME' | translate }}</span>
-                  <span class="metaPill__value">{{ formatTime(e.eventTime) }}</span>
-                </span>
-
-                <span class="metaPill metaPill--place" *ngIf="e.location">
-                  <span class="metaPill__label">{{ 'EVENTS.META_PLACE' | translate }}</span>
-                  <span class="metaPill__value">{{ e.location }}</span>
-                </span>
-              </div>
-            </div>
-
-            <div class="ticket__desc">{{ e.shortDescription }}</div>
-
-            <div class="ticket__tags" *ngIf="e.tags?.length">
-              <span class="tag" *ngFor="let t of e.tags">{{ t }}</span>
-            </div>
-
-            <div class="ticket__details" *ngIf="openEventId === e.id">
-              <div class="details__text">{{ e.fullDescription }}</div>
-
-              <div class="details__row">
-                <div class="details__place" *ngIf="e.cityLine">
-                  <span class="details__k">{{ 'EVENTS.META_ZONE' | translate }}</span>
-                  <span class="details__v">{{ e.cityLine }}</span>
-                </div>
-
-                <a
-                  class="attach"
-                  *ngIf="e.attachmentHref"
-                  [href]="e.attachmentHref"
-                  target="_blank"
-                  rel="noopener"
-                  (click)="$event.stopPropagation()"
-                >
-                  <span class="attach__dot" aria-hidden="true"></span>
-                  <span class="attach__label">{{ e.attachmentLabel || ('EVENTS.ATTACH' | translate) }}</span>
-                  <span class="attach__chev" aria-hidden="true">↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="ticket__rail" aria-hidden="true">
-            <div class="ticket__cut ticket__cut--top"></div>
-            <div class="ticket__cut ticket__cut--bottom"></div>
-          </div>
-        </button>
+        </article>
       </div>
 
       <app-empty-state
@@ -219,50 +179,32 @@
         [title]="'EVENTS.EMPTY_PAST_TITLE' | translate"
         [text]="'EVENTS.EMPTY_PAST' | translate"
       ></app-empty-state>
-    </div>
+    </main>
 
-    <!-- RIGHT: Announcements -->
-    <aside class="col">
-      <div class="card card--soft">
-        <h2 class="card__title">{{ 'EVENTS.ANN_TITLE' | translate }}</h2>
-        <p class="card__desc">
-          {{ 'EVENTS.ANN_DESC' | translate }}
-        </p>
+    <aside class="announcementsCard" *ngIf="announcements.length > 0">
+      <span class="announcementsCard__eyebrow">{{ 'EVENTS.TAG' | translate }}</span>
+      <h2 class="announcementsCard__title">{{ 'EVENTS.ANN_TITLE' | translate }}</h2>
+      <p class="announcementsCard__description">{{ 'EVENTS.ANN_DESC' | translate }}</p>
 
-        <div class="annList">
-          <button
-            class="ann"
-            type="button"
-            *ngFor="let a of announcements"
-            [class.is-open]="openAnnouncementId === a.id"
-            (click)="toggleAnnouncement(a.id)"
-          >
-            <div class="ann__top">
-              <div class="ann__title">{{ a.title }}</div>
-              <div class="ann__date">{{ formatDate(a.eventDate) }}</div>
-            </div>
-
-            <div class="ann__short" *ngIf="openAnnouncementId !== a.id">{{ a.shortDescription }}</div>
-            <div class="ann__full" *ngIf="openAnnouncementId === a.id">{{ a.fullDescription || a.shortDescription }}</div>
-
-            <div class="ann__cta">
-              <span class="ann__btn">
-                {{ (openAnnouncementId === a.id ? 'EVENTS.ANN_CLOSE' : 'EVENTS.ANN_READ') | translate }}
-              </span>
-            </div>
-          </button>
-        </div>
-
-        <app-empty-state
-          *ngIf="announcements.length === 0"
-          icon="announcement"
-          [compact]="true"
-          [title]="'EVENTS.ANN_EMPTY_TITLE' | translate"
-          [text]="'EVENTS.ANN_EMPTY' | translate"
-        ></app-empty-state>
+      <div class="announcementList">
+        <button
+          class="announcement"
+          type="button"
+          *ngFor="let a of announcements"
+          [class.is-open]="openAnnouncementId === a.id"
+          [attr.aria-expanded]="openAnnouncementId === a.id"
+          (click)="toggleAnnouncement(a.id)"
+        >
+          <span class="announcement__date">{{ formatDate(a.eventDate) }}</span>
+          <strong class="announcement__title">{{ a.title }}</strong>
+          <span class="announcement__text">
+            {{ openAnnouncementId === a.id ? (a.fullDescription || a.shortDescription) : a.shortDescription }}
+          </span>
+          <span class="announcement__action">
+            {{ (openAnnouncementId === a.id ? 'EVENTS.ANN_CLOSE' : 'EVENTS.ANN_READ') | translate }}
+          </span>
+        </button>
       </div>
     </aside>
   </div>
-
-  <div class="eventsSpacer" aria-hidden="true"></div>
 </section>

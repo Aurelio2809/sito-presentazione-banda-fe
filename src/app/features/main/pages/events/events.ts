@@ -85,14 +85,44 @@ export class Events implements OnInit {
     this.openAnnouncementId = this.openAnnouncementId === id ? null : id;
   }
 
+  get visibleEvents(): EventResponse[] {
+    return this.tab === 'upcoming' ? this.upcomingEvents : this.pastEvents;
+  }
+
   // Helpers
   formatDate(dateStr: string): string {
     if (!dateStr) return '';
-    const d = new Date(dateStr + 'T00:00:00');
-    return d.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' });
+    return this.parseDate(dateStr).toLocaleDateString(this.currentLocale, {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
   }
 
   formatTime(timeStr?: string): string {
     return timeStr?.slice(0, 5) ?? '';
+  }
+
+  formatDay(dateStr: string): string {
+    return this.parseDate(dateStr).toLocaleDateString(this.currentLocale, { day: '2-digit' });
+  }
+
+  formatMonth(dateStr: string): string {
+    return this.parseDate(dateStr)
+      .toLocaleDateString(this.currentLocale, { month: 'short' })
+      .replace('.', '')
+      .toLocaleUpperCase(this.currentLocale);
+  }
+
+  formatYear(dateStr: string): string {
+    return this.parseDate(dateStr).toLocaleDateString(this.currentLocale, { year: 'numeric' });
+  }
+
+  private get currentLocale(): string {
+    return this.translate.currentLang || 'it';
+  }
+
+  private parseDate(dateStr: string): Date {
+    return new Date(`${dateStr}T00:00:00`);
   }
 }
