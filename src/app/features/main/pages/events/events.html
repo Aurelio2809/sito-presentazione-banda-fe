@@ -43,7 +43,7 @@
     </button>
   </div>
 
-  <div class="layout" [class.layout--split]="announcements.length > 0" *ngIf="!loading && !error">
+  <div class="layout layout--split" *ngIf="!loading && !error">
     <main class="eventsColumn">
       <header class="sectionHead">
         <div>
@@ -81,6 +81,8 @@
               <span class="dateBadge__month">{{ formatMonth(e.eventDate) }}</span>
               <span class="dateBadge__year">{{ formatYear(e.eventDate) }}</span>
             </time>
+
+            <span class="ticketPerforation" aria-hidden="true"></span>
 
             <div class="eventCard__content">
               <span class="eventCard__kicker">
@@ -181,12 +183,12 @@
       ></app-empty-state>
     </main>
 
-    <aside class="announcementsCard" *ngIf="announcements.length > 0">
+    <aside class="announcementsCard">
       <span class="announcementsCard__eyebrow">{{ 'EVENTS.TAG' | translate }}</span>
       <h2 class="announcementsCard__title">{{ 'EVENTS.ANN_TITLE' | translate }}</h2>
       <p class="announcementsCard__description">{{ 'EVENTS.ANN_DESC' | translate }}</p>
 
-      <div class="announcementList">
+      <div class="announcementList" *ngIf="announcements.length > 0">
         <button
           class="announcement"
           type="button"
@@ -205,6 +207,14 @@
           </span>
         </button>
       </div>
+
+      <app-empty-state
+        *ngIf="announcements.length === 0"
+        icon="announcement"
+        [compact]="true"
+        [title]="'EVENTS.ANN_EMPTY_TITLE' | translate"
+        [text]="'EVENTS.ANN_EMPTY' | translate"
+      ></app-empty-state>
     </aside>
   </div>
 </section>

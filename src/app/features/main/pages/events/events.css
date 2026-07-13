@@ -150,19 +150,45 @@
 .eventCard__media img { width: 100%; height: 100%; object-fit: cover; }
 
 .eventCard__summary {
+  --event-padding: clamp(20px, 3vw, 30px);
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr) minmax(112px, auto);
+  grid-template-columns: 92px 1px minmax(0, 1fr) minmax(112px, auto);
   align-items: center;
   width: 100%;
   gap: clamp(18px, 3vw, 30px);
   border: 0;
-  padding: clamp(20px, 3vw, 30px);
+  padding: var(--event-padding);
   color: inherit;
   background: transparent;
   text-align: left;
 }
+
+.ticketPerforation {
+  position: relative;
+  align-self: stretch;
+  width: 1px;
+  margin-block: calc(0px - var(--event-padding));
+  border-left: 1px dashed rgba(251, 191, 36, 0.38);
+  pointer-events: none;
+}
+
+.ticketPerforation::before,
+.ticketPerforation::after {
+  content: "";
+  position: absolute;
+  left: -9px;
+  width: 17px;
+  height: 17px;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: var(--page-bg);
+  box-shadow: inset 0 0 0 3px var(--page-bg), 0 0 14px var(--shadow-color);
+}
+
+.ticketPerforation::before { top: -9px; }
+.ticketPerforation::after { bottom: -9px; }
 
 .dateBadge {
   display: flex;
@@ -365,11 +391,13 @@
   box-shadow: inset 0 1px 0 var(--glass-highlight), 0 18px 50px var(--shadow-color);
   backdrop-filter: blur(24px) saturate(1.25);
   -webkit-backdrop-filter: blur(24px) saturate(1.25);
+  align-self: start;
 }
 
 .announcementsCard__title { margin-top: 8px; color: var(--text-strong); font-size: 1.45rem; font-weight: 720; }
 .announcementsCard__description { margin-top: 8px; color: var(--text-body); font-size: 0.9rem; line-height: 1.6; }
 .announcementList { display: grid; gap: 10px; margin-top: 20px; }
+.announcementsCard app-empty-state { display: block; margin-top: 20px; }
 
 .announcement {
   display: flex;
@@ -394,7 +422,7 @@
 
 @media (max-width: 760px) {
   .eventCard__summary {
-    grid-template-columns: 72px minmax(0, 1fr) 36px;
+    grid-template-columns: 72px 1px minmax(0, 1fr) 36px;
     align-items: start;
     gap: 14px;
   }
@@ -410,7 +438,11 @@
   .events { padding-inline: 14px; }
   .tabs { display: flex; width: 100%; }
   .tab { flex: 1 1 0; padding-inline: 10px; }
-  .eventCard__summary { grid-template-columns: 64px minmax(0, 1fr); padding: 18px; }
+  .eventCard__summary {
+    --event-padding: 18px;
+    grid-template-columns: 64px 1px minmax(0, 1fr);
+    padding: var(--event-padding);
+  }
   .dateBadge { width: 64px; min-height: 84px; }
   .dateBadge__day { font-size: 1.65rem; }
   .eventCard__toggle { position: absolute; top: 16px; right: 16px; }
