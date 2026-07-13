@@ -8,9 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --watch=false",
+    "test:theme-build": "node scripts/check-theme-build.mjs",
     "lint": "eslint \"src/**/*.{ts,html}\"",
     "lint:fix": "npm run lint -- --fix",
-    "ci": "npm run lint && npm run test:ci && npm run build"
+    "ci": "npm run lint && npm run test:ci && npm run build && npm run test:theme-build"
   },
   "prettier": {
     "printWidth": 100,

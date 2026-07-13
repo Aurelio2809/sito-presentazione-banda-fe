@@ -42,6 +42,9 @@ jobs:
       - name: Build production frontend
         run: npm run build
 
+      - name: Verify production theme stylesheet
+        run: npm run test:theme-build
+
   deploy:
     name: Deploy FE
     runs-on: self-hosted
