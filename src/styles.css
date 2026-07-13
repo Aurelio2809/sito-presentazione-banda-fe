@@ -63,6 +63,21 @@
   --shadow-color: rgba(0, 0, 0, 0.32);
   --watermark-opacity: 0.11;
   --watermark-blend: screen;
+  --footer-bg-top: rgba(32, 32, 36, 0.97);
+  --footer-bg-bottom: rgba(20, 20, 24, 0.98);
+  --footer-text-strong: rgba(255, 255, 255, 0.92);
+  --footer-text: rgba(255, 255, 255, 0.64);
+  --footer-text-muted: rgba(255, 255, 255, 0.46);
+  --hero-overlay: radial-gradient(120% 90% at 50% 38%, rgba(11, 11, 13, 0.55) 0%, rgba(11, 11, 13, 0.86) 62%, rgba(11, 11, 13, 0.97) 100%), linear-gradient(180deg, rgba(11, 11, 13, 0.55) 0%, rgba(11, 11, 13, 0.55) 40%, rgba(11, 11, 13, 0.94) 100%);
+  --hero-title-start: #ffffff;
+  --hero-title-end: rgba(255, 255, 255, 0.74);
+  --hero-text: rgba(255, 255, 255, 0.74);
+  --hero-control-text: rgba(255, 255, 255, 0.92);
+  --hero-control-muted: rgba(255, 255, 255, 0.50);
+  --hero-control-bg: rgba(255, 255, 255, 0.04);
+  --hero-control-hover-bg: rgba(255, 255, 255, 0.08);
+  --hero-control-border: rgba(255, 255, 255, 0.18);
+  --hero-control-hover-border: rgba(255, 255, 255, 0.34);
 }
 
 :root[data-theme='light'] {
@@ -84,6 +99,21 @@
   --shadow-color: rgba(72, 47, 35, 0.14);
   --watermark-opacity: 0.075;
   --watermark-blend: multiply;
+  --footer-bg-top: rgba(255, 250, 243, 0.96);
+  --footer-bg-bottom: rgba(235, 224, 210, 0.98);
+  --footer-text-strong: #2a2126;
+  --footer-text: rgba(42, 33, 38, 0.70);
+  --footer-text-muted: rgba(42, 33, 38, 0.50);
+  --hero-overlay: radial-gradient(120% 90% at 50% 36%, rgba(255, 250, 243, 0.50) 0%, rgba(244, 239, 231, 0.70) 58%, rgba(234, 225, 213, 0.94) 100%), linear-gradient(180deg, rgba(255, 250, 243, 0.38) 0%, rgba(244, 239, 231, 0.58) 45%, rgba(234, 225, 213, 0.94) 100%);
+  --hero-title-start: #211b20;
+  --hero-title-end: rgba(33, 27, 32, 0.76);
+  --hero-text: rgba(33, 27, 32, 0.76);
+  --hero-control-text: #2a2126;
+  --hero-control-muted: rgba(42, 33, 38, 0.58);
+  --hero-control-bg: rgba(255, 255, 255, 0.46);
+  --hero-control-hover-bg: rgba(255, 255, 255, 0.68);
+  --hero-control-border: rgba(86, 59, 41, 0.20);
+  --hero-control-hover-border: rgba(86, 59, 41, 0.34);
 }
 
 @media (prefers-color-scheme: light) {
@@ -107,6 +137,21 @@
     --shadow-color: rgba(72, 47, 35, 0.14);
     --watermark-opacity: 0.075;
     --watermark-blend: multiply;
+    --footer-bg-top: rgba(255, 250, 243, 0.96);
+    --footer-bg-bottom: rgba(235, 224, 210, 0.98);
+    --footer-text-strong: #2a2126;
+    --footer-text: rgba(42, 33, 38, 0.70);
+    --footer-text-muted: rgba(42, 33, 38, 0.50);
+    --hero-overlay: radial-gradient(120% 90% at 50% 36%, rgba(255, 250, 243, 0.50) 0%, rgba(244, 239, 231, 0.70) 58%, rgba(234, 225, 213, 0.94) 100%), linear-gradient(180deg, rgba(255, 250, 243, 0.38) 0%, rgba(244, 239, 231, 0.58) 45%, rgba(234, 225, 213, 0.94) 100%);
+    --hero-title-start: #211b20;
+    --hero-title-end: rgba(33, 27, 32, 0.76);
+    --hero-text: rgba(33, 27, 32, 0.76);
+    --hero-control-text: #2a2126;
+    --hero-control-muted: rgba(42, 33, 38, 0.58);
+    --hero-control-bg: rgba(255, 255, 255, 0.46);
+    --hero-control-hover-bg: rgba(255, 255, 255, 0.68);
+    --hero-control-border: rgba(86, 59, 41, 0.20);
+    --hero-control-hover-border: rgba(86, 59, 41, 0.34);
   }
 }
 
@@ -118,6 +163,7 @@ body {
   margin: 0;
   background: var(--page-bg);
   color: var(--text-strong);
+  transition: background-color var(--dur) var(--ease-brand), color var(--dur) var(--ease-brand);
 }
 
 *, *::before, *::after {
