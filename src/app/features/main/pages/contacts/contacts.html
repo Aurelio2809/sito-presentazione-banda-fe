@@ -180,15 +180,17 @@
           </label>
         </div>
 
-        <div class="formActions">
-          <button class="btn btn--primary" type="submit" [disabled]="sending">
-            {{ (sending ? 'CONTACTS.SENDING' : 'CONTACTS.SEND') | translate }}
-          </button>
+        <div class="formFooter">
+          <p class="privacyNotice">
+            {{ 'CONTACTS.PRIVACY_PREFIX' | translate }}
+            <a routerLink="/privacy">{{ 'CONTACTS.PRIVACY_LINK' | translate }}</a>{{ 'CONTACTS.PRIVACY_SUFFIX' | translate }}
+          </p>
+          <div class="formActions">
+            <button class="btn btn--primary" type="submit" [disabled]="sending">
+              {{ (sending ? 'CONTACTS.SENDING' : 'CONTACTS.SEND') | translate }}
+            </button>
+          </div>
         </div>
-        <p class="privacyNotice">
-          {{ 'CONTACTS.PRIVACY_PREFIX' | translate }}
-          <a routerLink="/privacy">{{ 'CONTACTS.PRIVACY_LINK' | translate }}</a>{{ 'CONTACTS.PRIVACY_SUFFIX' | translate }}
-        </p>
       </form>
     </div>
   </div>

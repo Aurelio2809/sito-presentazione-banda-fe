@@ -299,6 +299,13 @@
   @apply mt-4 flex;
 }
 
+@media (min-width: 900px) {
+  /* Sul desktop la mappa deve essere visibile subito, non dopo la lunga card social. */
+  .mapCard {
+    order: -1;
+  }
+}
+
 /* =========================================================
    FORM
    ========================================================= */
@@ -356,21 +363,42 @@
     0 0 40px rgba(251, 191, 36, 0.10);
 }
 
+.formFooter {
+  margin-top: 18px;
+  display: grid;
+  gap: 16px;
+}
+
 .formActions {
-  @apply mt-4 flex flex-wrap gap-3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .privacyNotice {
-  margin: 14px 0 0;
+  margin: 0;
+  max-width: 72ch;
   color: var(--text-muted);
-  font-size: 0.78rem;
-  line-height: 1.55;
+  font-size: 0.82rem;
+  line-height: 1.65;
 }
 
 .privacyNotice a {
   color: var(--color-banda-gold-600);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+@media (min-width: 900px) {
+  .formFooter {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 28px;
+  }
+
+  .formActions {
+    justify-content: flex-end;
+  }
 }
 
 /* =========================================================
