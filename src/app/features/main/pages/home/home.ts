@@ -85,7 +85,7 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.SCUOLA.TEXT',
       ctaText: 'HOME.SCUOLA.CTA',
       ctaLink: '/about/school',
-      images: ['assets/about/scuola-lezione-clarinetti-2026-anon.jpg'],
+      images: ['assets/about/scuola-lezione-clarinetti-2026-anon-v2.jpg'],
     },
     {
       key: 'direttivo',

@@ -41,3 +41,6 @@ copie che anonimizzano direttamente nei pixel i volti degli allievi minorenni o 
 minorenni. Gli asset anonimizzati usano il suffisso `-anon` per evitare che la cache del browser
 continui a servire le versioni precedenti. Eventuali nuove fotografie con minori riconoscibili non
 vanno pubblicate senza liberatoria: in assenza di conferma devono essere anonimizzate allo stesso modo.
+
+Nella fotografia della lezione di clarinetto Mario Zicarelli, docente adulto in piedi con lo
+strumento, rimane riconoscibile; l'anonimizzazione riguarda esclusivamente gli allievi.
