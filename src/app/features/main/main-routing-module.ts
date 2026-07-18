@@ -10,6 +10,7 @@ import { Gallery } from './pages/gallery/gallery';
 import { AboutHistory } from './pages/about-history/about-history';
 import { AboutToday } from './pages/about-today/about-today';
 import { AboutSchool } from './pages/about-school/about-school';
+import { Privacy } from './pages/privacy/privacy';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'about/school', component: AboutSchool },
       { path: 'events', component: Events },
       { path: 'contacts', component: Contacts },
+      { path: 'privacy', component: Privacy },
     ],
   },
 ];

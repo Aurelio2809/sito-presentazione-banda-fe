@@ -45,7 +45,6 @@ export class ActivityLog implements OnInit {
       { id: 'PHOTO', label: 'Galleria', count: this.activities.filter(a => a.targetType === 'PHOTO').length },
       { id: 'EVENT', label: 'Eventi', count: this.activities.filter(a => a.targetType === 'EVENT').length },
       { id: 'ANNOUNCEMENT', label: 'Annunci', count: this.activities.filter(a => a.targetType === 'ANNOUNCEMENT').length },
-      { id: 'MESSAGE', label: 'Messaggi', count: this.activities.filter(a => a.targetType === 'MESSAGE').length },
     ];
   }
 

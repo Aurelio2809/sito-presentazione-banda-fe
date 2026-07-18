@@ -18,7 +18,21 @@
     "BRAND": "Music Band",
     "PLACE": "City of Casali del Manco",
     "LEGAL": "© {{year}} Music Band City of Casali del Manco",
-    "CREATED_BY": "Created by"
+    "CREATED_BY": "Created by",
+    "PRIVACY": "Privacy"
+  },
+  "PRIVACY": {
+    "TAG": "Legal information", "TITLE": "Privacy notice", "UPDATED": "Last updated: 18 July 2026",
+    "CONTROLLER_TITLE": "Data controller", "CONTROLLER_TEXT": "Banda Musicale Città di Casali del Manco, registered office at 31 Via Traversa Campanile, Pedace, Casali del Manco (CS), Italy. Contact: <a href=\"mailto:bandamusicalecasalidelmanco@gmail.com\">bandamusicalecasalidelmanco@gmail.com</a>.",
+    "DATA_TITLE": "Data processed", "DATA_TEXT": "We process the data you voluntarily send through the contact form: name, email address, subject and message. The server may also record essential technical data, such as IP address, date, time and request, for security and service operation.",
+    "PURPOSE_TITLE": "Purposes", "PURPOSE_TEXT": "We use data only to receive, manage and reply to your request, prevent abuse and keep the site secure. We do not use contact messages for newsletters or marketing without separate consent.",
+    "BASIS_TITLE": "Legal basis", "BASIS_TEXT": "Processing is necessary to respond to your request and take pre-contractual steps where relevant, or is based on the association's legitimate interest in managing communications and protecting the site.",
+    "RECIPIENTS_TITLE": "Recipients and providers", "RECIPIENTS_TEXT": "Data is accessible only to authorised association members and strictly necessary technical providers. Form messages are not stored in the application database: they are forwarded to the association mailbox, currently provided by Google. Google may process data outside the European Economic Area using the safeguards required by law.",
+    "RETENTION_TITLE": "Retention", "RETENTION_TEXT": "Email messages are kept only as long as needed to handle the request and normally no longer than 12 months after it is closed, unless legal obligations or legal claims require otherwise. Technical security data is normally retained for no more than 30 days, except when investigating anomalies or abuse.",
+    "MAPS_TITLE": "Google Maps and external content", "MAPS_TEXT": "The map is not loaded automatically. Only after your explicit action will the browser connect to Google Maps; Google may receive technical data and apply its own privacy notice. The external “Open in Maps” link takes you directly to Google's service.",
+    "LOGS_TITLE": "Cookies and local technologies", "LOGS_TEXT": "The site does not use advertising or profiling cookies. It may use strictly necessary cookies or local storage, for example for dashboard sessions, security and theme or language preferences.",
+    "RIGHTS_TITLE": "Your rights", "RIGHTS_TEXT": "You may request access, rectification, erasure, restriction or object to processing and, where applicable, data portability. Contact the controller to exercise these rights. You may also lodge a complaint with the Italian Data Protection Authority.",
+    "REQUIRED_TITLE": "Providing data", "REQUIRED_TEXT": "Providing data is optional, but your name, email and message are required so that we can reply. No automated decision-making or profiling is carried out."
   },
   "HOME": {
     "HERO": {
@@ -96,7 +110,13 @@
     "SEND": "Send message",
     "ERR_REQUIRED": "Please fill in all required fields",
     "ERR_SEND": "Error sending the message. Please try again later.",
-    "DEFAULT_SUBJECT": "Message from the website"
+    "DEFAULT_SUBJECT": "Message from the website",
+    "MAPS_PRIVACY_TITLE": "The map is disabled to protect your privacy",
+    "MAPS_PRIVACY_DESC": "Loading it will establish a connection with Google Maps.",
+    "MAPS_LOAD": "Load Google Maps",
+    "PRIVACY_PREFIX": "By sending the message, you confirm that you have read the ",
+    "PRIVACY_LINK": "privacy notice",
+    "PRIVACY_SUFFIX": ". Data will only be used to reply and forwarded to the association mailbox."
   },
   "GALLERY": {
     "TAG": "Gallery",

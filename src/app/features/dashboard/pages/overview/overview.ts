@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { GalleryService, EventService, MessageService, ActivityLogService } from '../../../../core/services';
+import { GalleryService, EventService, ActivityLogService } from '../../../../core/services';
 import { ActivityLogResponse } from '../../../../core/models';
 
 @Component({
@@ -15,7 +15,6 @@ export class Overview implements OnInit {
     { label: 'Foto in galleria', value: 0, icon: 'image', trend: '' },
     { label: 'Eventi pubblicati', value: 0, icon: 'calendar', trend: '' },
     { label: 'Annunci attivi', value: 0, icon: 'megaphone', trend: '' },
-    { label: 'Messaggi', value: 0, icon: 'mail', trend: '' },
   ];
 
   recentActivities: ActivityLogResponse[] = [];
@@ -24,7 +23,6 @@ export class Overview implements OnInit {
   constructor(
     private galleryService: GalleryService,
     private eventService: EventService,
-    private messageService: MessageService,
     private activityLogService: ActivityLogService
   ) {}
 
@@ -44,14 +42,10 @@ export class Overview implements OnInit {
       photos: this.galleryService.getAll(0, 1).pipe(catchError(() => of(null))),
       events: this.eventService.getAll(0, 1, 'EVENT', 'PUBLISHED').pipe(catchError(() => of(null))),
       announcements: this.eventService.getAll(0, 1, 'ANNOUNCEMENT', 'PUBLISHED').pipe(catchError(() => of(null))),
-      unreadCount: this.messageService.getUnreadCount().pipe(catchError(() => of(null))),
-      messages: this.messageService.getAll(0, 1).pipe(catchError(() => of(null))),
     }).subscribe((data) => {
       if (data.photos) this.stats[0].value = data.photos.totalElements;
       if (data.events) this.stats[1].value = data.events.totalElements;
       if (data.announcements) this.stats[2].value = data.announcements.totalElements;
-      if (data.messages) this.stats[3].value = data.messages.totalElements;
-      if (data.unreadCount) this.stats[3].trend = `${data.unreadCount.count} non letti`;
       this.loading = false;
     });
   }
@@ -70,7 +64,6 @@ export class Overview implements OnInit {
       case 'PHOTO': return 'image';
       case 'EVENT': return 'calendar';
       case 'ANNOUNCEMENT': return 'megaphone';
-      case 'MESSAGE': return 'mail';
       default: return 'activity';
     }
   }

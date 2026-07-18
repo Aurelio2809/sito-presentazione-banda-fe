@@ -13,7 +13,7 @@
   --color-banda-gold-600: #d97706;
   --color-banda-gold-700: #b45309;
   --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.35);
-  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-display: Georgia, 'Times New Roman', serif;
 
   /* Scala raggi (usare SOLO questi tre + 999px per le pill) */
   --radius-sm: 10px;
@@ -178,7 +178,7 @@
 
 html, body {
   height: 100%;
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 body {
   margin: 0;
@@ -195,9 +195,8 @@ button, input, select, textarea {
 }
 
 /* =========================================================
-   Identità tipografica: serif elegante per i titoli (Fraunces),
-   Inter per tutto il resto — coppia editoriale, non stravolge
-   il linguaggio esistente ma dà al sito un carattere riconoscibile.
+   Identità tipografica senza dipendenze esterne: serif di sistema per
+   i titoli e sans-serif di sistema per il testo.
    ========================================================= */
 h1, h2 {
   font-family: var(--font-display);

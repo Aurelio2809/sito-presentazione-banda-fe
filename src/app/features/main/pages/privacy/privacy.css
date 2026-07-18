@@ -1,0 +1,15 @@
+.privacyPage { padding-bottom: clamp(64px, 8vw, 120px); }
+.privacyCard {
+  width: min(900px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: clamp(22px, 4vw, 44px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--glass-strong), var(--glass));
+  box-shadow: inset 0 1px 0 var(--glass-highlight), 0 18px 50px var(--shadow-color);
+  backdrop-filter: blur(24px) saturate(1.2);
+}
+.privacyCard section + section { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--glass-border); }
+.privacyCard h2 { margin: 0 0 10px; color: var(--text-strong); font-size: clamp(1.15rem, 2vw, 1.45rem); }
+.privacyCard p { margin: 0; color: var(--text-body); line-height: 1.75; }
+.privacyCard a { color: var(--color-banda-gold-600); }

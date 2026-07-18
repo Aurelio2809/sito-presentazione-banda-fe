@@ -109,8 +109,15 @@
 
       <div class="footer__meta">
         <div class="footer__legal">{{ 'FOOTER.LEGAL' | translate: { year: currentYear } }}</div>
+        <a class="footer__link footer__privacy" routerLink="/privacy">{{ 'FOOTER.PRIVACY' | translate }}</a>
         <div class="footer__credit">
-          {{ 'FOOTER.CREATED_BY' | translate }} <strong>Aurelio Marotta</strong>
+          {{ 'FOOTER.CREATED_BY' | translate }}
+          <a
+            class="footer__creditLink"
+            [href]="DEVELOPER_LINKEDIN_URL"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Aurelio Marotta <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </div>

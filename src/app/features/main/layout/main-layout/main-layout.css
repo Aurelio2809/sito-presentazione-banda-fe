@@ -717,10 +717,17 @@
   color: var(--footer-text-muted);
 }
 
-.footer__credit strong{
+.footer__creditLink{
   color: var(--footer-text-strong);
   font-weight: 650;
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-brand);
 }
+
+.footer__creditLink:hover,
+.footer__creditLink:focus-visible { color: var(--color-banda-gold-600); }
+
+.footer__privacy { font-size: 13px; }
 
 @media (min-width: 700px){
   .footer__meta{

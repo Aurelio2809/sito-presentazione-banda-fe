@@ -12,6 +12,7 @@ export class MainLayout {
   mobileMenuOpen = false;
 
   readonly SOCIAL_URLS = SOCIAL_URLS;
+  readonly DEVELOPER_LINKEDIN_URL = 'https://www.linkedin.com/in/aurelio-marotta-a91605320';
 
   toggleMobileMenu(): void {
     this.mobileMenuOpen = !this.mobileMenuOpen;

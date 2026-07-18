@@ -31,7 +31,7 @@ export class Contacts {
   readonly BAND_ADDRESS_FULL = BAND_ADDRESS_FULL;
   readonly MAPS_URL = MAPS_URL;
 
-  readonly mapEmbedSafeUrl: SafeResourceUrl;
+  mapEmbedSafeUrl: SafeResourceUrl | null = null;
 
   form: ContactForm = {
     name: '',
@@ -48,7 +48,9 @@ export class Contacts {
     private sanitizer: DomSanitizer,
     private messageService: MessageService,
     private translate: TranslateService
-  ) {
+  ) {}
+
+  loadMap(): void {
     this.mapEmbedSafeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(MAPS_EMBED_URL);
   }
 
@@ -78,10 +80,10 @@ export class Contacts {
         this.form = { name: '', email: '', subject: '', message: '' };
         setTimeout(() => this.success = false, 5000);
       },
-      error: (err) => {
+      error: () => {
         this.error = this.translate.instant('CONTACTS.ERR_SEND');
         this.sending = false;
-        console.error(err);
+        // Non stampare payload o dati personali nei log del browser.
       }
     });
   }

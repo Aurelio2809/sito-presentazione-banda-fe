@@ -13,6 +13,7 @@ import { Gallery } from './pages/gallery/gallery';
 import { AboutHistory } from './pages/about-history/about-history';
 import { AboutToday } from './pages/about-today/about-today';
 import { AboutSchool } from './pages/about-school/about-school';
+import { Privacy } from './pages/privacy/privacy';
 
 // Components
 import { PageHeader } from './components/page-header/page-header';
@@ -38,6 +39,7 @@ import { ThemeSelector } from './layout/components/theme-selector/theme-selector
     AboutHistory,
     AboutToday,
     AboutSchool,
+    Privacy,
     PageHeader,
   ],
   imports: [

@@ -85,7 +85,7 @@ export interface EventResponse {
   tags?: string[];
 }
 
-// Messages
+// Contact form
 export interface MessageRequest {
   senderName: string;
   senderEmail: string;
@@ -93,20 +93,9 @@ export interface MessageRequest {
   content: string;
 }
 
-export interface MessageResponse {
-  id: number;
-  senderName: string;
-  senderEmail: string;
-  subject: string;
-  content: string;
-  read: boolean;
-  receivedAt: string;
-  readAt?: string;
-}
-
 // Activity Log
 export type ActionType = 'CREATE' | 'UPDATE' | 'DELETE' | 'PUBLISH' | 'UNPUBLISH' | 'ARCHIVE' | 'READ' | 'UPLOAD' | 'LOGIN' | 'LOGOUT';
-export type TargetType = 'PHOTO' | 'EVENT' | 'ANNOUNCEMENT' | 'MESSAGE' | 'USER' | 'SETTINGS';
+export type TargetType = 'PHOTO' | 'EVENT' | 'ANNOUNCEMENT' | 'USER' | 'SETTINGS';
 
 export interface ActivityLogResponse {
   id: number;

@@ -281,6 +281,20 @@
   filter: saturate(1.05) contrast(1.02);
 }
 
+.mapConsent {
+  min-height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-body);
+}
+
+.mapConsent strong { color: var(--text-strong); }
+.mapConsent p { margin: 0; font-size: 0.875rem; line-height: 1.55; }
+
 .mapActions {
   @apply mt-4 flex;
 }
@@ -344,6 +358,19 @@
 
 .formActions {
   @apply mt-4 flex flex-wrap gap-3;
+}
+
+.privacyNotice {
+  margin: 14px 0 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.privacyNotice a {
+  color: var(--color-banda-gold-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* =========================================================

@@ -83,11 +83,21 @@
 
         <div class="mapFrame">
           <iframe
+            *ngIf="mapEmbedSafeUrl; else mapConsent"
             class="mapFrame__iframe"
             [src]="mapEmbedSafeUrl"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
+          <ng-template #mapConsent>
+            <div class="mapConsent">
+              <strong>{{ 'CONTACTS.MAPS_PRIVACY_TITLE' | translate }}</strong>
+              <p>{{ 'CONTACTS.MAPS_PRIVACY_DESC' | translate }}</p>
+              <button class="btn btn--ghost" type="button" (click)="loadMap()">
+                {{ 'CONTACTS.MAPS_LOAD' | translate }}
+              </button>
+            </div>
+          </ng-template>
         </div>
 
         <div class="mapActions">
@@ -124,6 +134,7 @@
               [placeholder]="'CONTACTS.PH_NAME' | translate"
               [(ngModel)]="form.name"
               autocomplete="name"
+              maxlength="100"
               required
             />
           </label>
@@ -137,6 +148,7 @@
               [placeholder]="'CONTACTS.PH_EMAIL' | translate"
               [(ngModel)]="form.email"
               autocomplete="email"
+              maxlength="100"
               required
             />
           </label>
@@ -150,6 +162,7 @@
               [placeholder]="'CONTACTS.PH_SUBJECT' | translate"
               [(ngModel)]="form.subject"
               autocomplete="off"
+              maxlength="200"
             />
           </label>
 
@@ -161,6 +174,7 @@
               [placeholder]="'CONTACTS.PH_MESSAGE' | translate"
               [(ngModel)]="form.message"
               rows="10"
+              maxlength="5000"
               required
             ></textarea>
           </label>
@@ -171,6 +185,10 @@
             {{ (sending ? 'CONTACTS.SENDING' : 'CONTACTS.SEND') | translate }}
           </button>
         </div>
+        <p class="privacyNotice">
+          {{ 'CONTACTS.PRIVACY_PREFIX' | translate }}
+          <a routerLink="/privacy">{{ 'CONTACTS.PRIVACY_LINK' | translate }}</a>{{ 'CONTACTS.PRIVACY_SUFFIX' | translate }}
+        </p>
       </form>
     </div>
   </div>

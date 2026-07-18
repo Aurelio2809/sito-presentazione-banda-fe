@@ -18,7 +18,21 @@
     "BRAND": "Harmonie musicale",
     "PLACE": "Ville de Casali del Manco",
     "LEGAL": "© {{year}} Harmonie musicale Ville de Casali del Manco",
-    "CREATED_BY": "Créé par"
+    "CREATED_BY": "Créé par",
+    "PRIVACY": "Confidentialité"
+  },
+  "PRIVACY": {
+    "TAG": "Informations légales", "TITLE": "Politique de confidentialité", "UPDATED": "Dernière mise à jour : 18 juillet 2026",
+    "CONTROLLER_TITLE": "Responsable du traitement", "CONTROLLER_TEXT": "Banda Musicale Città di Casali del Manco, siège Via Traversa Campanile 31, Pedace, Casali del Manco (CS), Italie. Contact : <a href=\"mailto:bandamusicalecasalidelmanco@gmail.com\">bandamusicalecasalidelmanco@gmail.com</a>.",
+    "DATA_TITLE": "Données traitées", "DATA_TEXT": "Nous traitons les données que vous envoyez volontairement via le formulaire : nom, adresse e-mail, objet et message. Le serveur peut aussi enregistrer des données techniques essentielles, telles que l'adresse IP, la date, l'heure et la requête, pour la sécurité et le fonctionnement du service.",
+    "PURPOSE_TITLE": "Finalités", "PURPOSE_TEXT": "Nous utilisons les données uniquement pour recevoir, gérer et répondre à votre demande, prévenir les abus et sécuriser le site. Les messages ne sont pas utilisés à des fins de newsletter ou de marketing sans consentement séparé.",
+    "BASIS_TITLE": "Base juridique", "BASIS_TEXT": "Le traitement est nécessaire pour répondre à votre demande et prendre, le cas échéant, des mesures précontractuelles, ou repose sur l'intérêt légitime de l'association à gérer ses communications et protéger le site.",
+    "RECIPIENTS_TITLE": "Destinataires et prestataires", "RECIPIENTS_TEXT": "Les données sont accessibles uniquement aux membres autorisés et aux prestataires techniques strictement nécessaires. Les messages ne sont pas enregistrés dans la base de données de l'application : ils sont transmis à la boîte e-mail de l'association, actuellement fournie par Google. Google peut traiter des données hors de l'Espace économique européen avec les garanties prévues par la loi.",
+    "RETENTION_TITLE": "Conservation", "RETENTION_TEXT": "Les e-mails sont conservés le temps nécessaire au traitement de la demande et normalement au maximum 12 mois après sa clôture, sauf obligation légale ou nécessité de défense. Les données techniques de sécurité sont normalement conservées au maximum 30 jours, sauf enquête sur une anomalie ou un abus.",
+    "MAPS_TITLE": "Google Maps et contenus externes", "MAPS_TEXT": "La carte n'est pas chargée automatiquement. Le navigateur ne se connecte à Google Maps qu'après votre action explicite ; Google peut alors recevoir des données techniques et appliquer sa propre politique. Le lien externe « Ouvrir dans Maps » mène directement au service Google.",
+    "LOGS_TITLE": "Cookies et technologies locales", "LOGS_TEXT": "Le site n'utilise pas de cookies publicitaires ou de profilage. Il peut utiliser des cookies ou mémoires strictement nécessaires, notamment pour la session du tableau de bord, la sécurité et les préférences de thème ou de langue.",
+    "RIGHTS_TITLE": "Vos droits", "RIGHTS_TEXT": "Vous pouvez demander l'accès, la rectification, l'effacement, la limitation ou vous opposer au traitement et, le cas échéant, demander la portabilité. Contactez le responsable pour exercer ces droits. Vous pouvez aussi saisir l'autorité italienne de protection des données.",
+    "REQUIRED_TITLE": "Fourniture des données", "REQUIRED_TEXT": "La fourniture des données est facultative, mais le nom, l'e-mail et le message sont nécessaires pour vous répondre. Aucune décision automatisée ni profilage n'est effectué."
   },
   "HOME": {
     "HERO": {
@@ -96,7 +110,13 @@
     "SEND": "Envoyer le message",
     "ERR_REQUIRED": "Veuillez remplir tous les champs obligatoires",
     "ERR_SEND": "Erreur lors de l'envoi du message. Réessayez plus tard.",
-    "DEFAULT_SUBJECT": "Message du site"
+    "DEFAULT_SUBJECT": "Message du site",
+    "MAPS_PRIVACY_TITLE": "La carte est désactivée pour protéger votre vie privée",
+    "MAPS_PRIVACY_DESC": "Son chargement établira une connexion avec Google Maps.",
+    "MAPS_LOAD": "Charger Google Maps",
+    "PRIVACY_PREFIX": "En envoyant le message, vous confirmez avoir lu la ",
+    "PRIVACY_LINK": "politique de confidentialité",
+    "PRIVACY_SUFFIX": ". Les données servent uniquement à répondre et sont transmises à la boîte e-mail de l'association."
   },
   "GALLERY": {
     "TAG": "Galerie",

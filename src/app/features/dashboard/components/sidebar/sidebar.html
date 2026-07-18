@@ -38,11 +38,6 @@
           <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
           <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <!-- Mail -->
-        <svg *ngIf="item.icon === 'mail'" viewBox="0 0 24 24" fill="none">
-          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-          <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
         <!-- Activity -->
         <svg *ngIf="item.icon === 'activity'" viewBox="0 0 24 24" fill="none">
           <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -54,7 +49,6 @@
         </svg>
       </span>
       <span class="sidebar__label" *ngIf="!collapsed">{{ item.label }}</span>
-      <span class="sidebar__badge" *ngIf="item.badge && item.badge > 0 && !collapsed">{{ item.badge }}</span>
     </a>
   </nav>
 

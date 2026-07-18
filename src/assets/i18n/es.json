@@ -18,7 +18,21 @@
     "BRAND": "Banda Musical",
     "PLACE": "Ciudad de Casali del Manco",
     "LEGAL": "© {{year}} Banda Musical Ciudad de Casali del Manco",
-    "CREATED_BY": "Creado por"
+    "CREATED_BY": "Creado por",
+    "PRIVACY": "Privacidad"
+  },
+  "PRIVACY": {
+    "TAG": "Información legal", "TITLE": "Política de privacidad", "UPDATED": "Última actualización: 18 de julio de 2026",
+    "CONTROLLER_TITLE": "Responsable del tratamiento", "CONTROLLER_TEXT": "Banda Musicale Città di Casali del Manco, con sede en Via Traversa Campanile 31, Pedace, Casali del Manco (CS), Italia. Contacto: <a href=\"mailto:bandamusicalecasalidelmanco@gmail.com\">bandamusicalecasalidelmanco@gmail.com</a>.",
+    "DATA_TITLE": "Datos tratados", "DATA_TEXT": "Tratamos los datos que envías voluntariamente mediante el formulario: nombre, correo electrónico, asunto y mensaje. El servidor también puede registrar datos técnicos esenciales, como dirección IP, fecha, hora y solicitud, por seguridad y funcionamiento del servicio.",
+    "PURPOSE_TITLE": "Finalidades", "PURPOSE_TEXT": "Usamos los datos únicamente para recibir, gestionar y responder a tu solicitud, prevenir abusos y proteger el sitio. No usamos los mensajes para boletines o marketing sin un consentimiento separado.",
+    "BASIS_TITLE": "Base jurídica", "BASIS_TEXT": "El tratamiento es necesario para responder a tu solicitud y adoptar medidas precontractuales cuando proceda, o se basa en el interés legítimo de la asociación en gestionar sus comunicaciones y proteger el sitio.",
+    "RECIPIENTS_TITLE": "Destinatarios y proveedores", "RECIPIENTS_TEXT": "Los datos solo son accesibles a miembros autorizados y proveedores técnicos estrictamente necesarios. Los mensajes no se guardan en la base de datos de la aplicación: se reenvían al buzón de la asociación, actualmente proporcionado por Google. Google puede tratar datos fuera del Espacio Económico Europeo con las garantías previstas por la ley.",
+    "RETENTION_TITLE": "Conservación", "RETENTION_TEXT": "Los correos se conservan durante el tiempo necesario para gestionar la solicitud y normalmente no más de 12 meses después de cerrarla, salvo obligaciones legales o necesidad de defensa. Los datos técnicos de seguridad se conservan normalmente no más de 30 días, salvo investigaciones sobre anomalías o abusos.",
+    "MAPS_TITLE": "Google Maps y contenido externo", "MAPS_TEXT": "El mapa no se carga automáticamente. El navegador solo se conecta a Google Maps tras una acción explícita; Google podrá recibir datos técnicos y aplicar su propia política. El enlace externo «Abrir en Maps» lleva directamente al servicio de Google.",
+    "LOGS_TITLE": "Cookies y tecnologías locales", "LOGS_TEXT": "El sitio no usa cookies publicitarias ni de perfilado. Puede usar cookies o almacenamiento estrictamente necesarios, por ejemplo para la sesión del panel, la seguridad y las preferencias de tema o idioma.",
+    "RIGHTS_TITLE": "Tus derechos", "RIGHTS_TEXT": "Puedes solicitar acceso, rectificación, supresión, limitación u oposición al tratamiento y, cuando corresponda, portabilidad. Contacta con el responsable para ejercerlos. También puedes reclamar ante la autoridad italiana de protección de datos.",
+    "REQUIRED_TITLE": "Aportación de datos", "REQUIRED_TEXT": "Aportar datos es opcional, pero el nombre, el correo y el mensaje son necesarios para responder. No se realizan decisiones automatizadas ni perfilado."
   },
   "HOME": {
     "HERO": {
@@ -96,7 +110,13 @@
     "SEND": "Enviar mensaje",
     "ERR_REQUIRED": "Rellena todos los campos obligatorios",
     "ERR_SEND": "Error al enviar el mensaje. Inténtalo más tarde.",
-    "DEFAULT_SUBJECT": "Mensaje desde el sitio"
+    "DEFAULT_SUBJECT": "Mensaje desde el sitio",
+    "MAPS_PRIVACY_TITLE": "El mapa está desactivado para proteger tu privacidad",
+    "MAPS_PRIVACY_DESC": "Al cargarlo se establecerá una conexión con Google Maps.",
+    "MAPS_LOAD": "Cargar Google Maps",
+    "PRIVACY_PREFIX": "Al enviar el mensaje confirmas que has leído la ",
+    "PRIVACY_LINK": "política de privacidad",
+    "PRIVACY_SUFFIX": ". Los datos solo se usarán para responder y se enviarán al buzón de la asociación."
   },
   "GALLERY": {
     "TAG": "Galería",

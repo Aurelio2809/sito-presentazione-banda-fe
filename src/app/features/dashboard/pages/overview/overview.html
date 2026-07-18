@@ -20,10 +20,6 @@
         <svg *ngIf="stat.icon === 'megaphone'" viewBox="0 0 24 24" fill="none">
           <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <svg *ngIf="stat.icon === 'mail'" viewBox="0 0 24 24" fill="none">
-          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-          <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
       </div>
       <div class="statCard__content">
         <div class="statCard__value">{{ stat.value }}</div>
@@ -65,15 +61,6 @@
           </span>
           <span class="actionCard__text">Nuovo annuncio</span>
         </a>
-        <a class="actionCard" routerLink="/dashboard/messages">
-          <span class="actionCard__icon">
-            <svg viewBox="0 0 24 24" fill="none">
-              <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-              <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <span class="actionCard__text">Vedi messaggi</span>
-        </a>
       </div>
     </section>
 
@@ -85,7 +72,6 @@
           <div class="activityItem__badge" [ngClass]="{
             'activityItem__badge--photo': activity.targetType === 'PHOTO',
             'activityItem__badge--event': activity.targetType === 'EVENT',
-            'activityItem__badge--message': activity.targetType === 'MESSAGE',
             'activityItem__badge--announcement': activity.targetType === 'ANNOUNCEMENT'
           }">
             <svg *ngIf="getActivityIcon(activity.targetType) === 'image'" viewBox="0 0 24 24" fill="none">
@@ -99,10 +85,6 @@
             </svg>
             <svg *ngIf="getActivityIcon(activity.targetType) === 'megaphone'" viewBox="0 0 24 24" fill="none">
               <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <svg *ngIf="getActivityIcon(activity.targetType) === 'mail'" viewBox="0 0 24 24" fill="none">
-              <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-              <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <svg *ngIf="getActivityIcon(activity.targetType) === 'activity'" viewBox="0 0 24 24" fill="none">
               <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
