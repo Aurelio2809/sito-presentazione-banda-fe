@@ -52,7 +52,7 @@ export class About {
       tag: 'ABOUT.SEC_SCUOLA_TAG',
       title: 'ABOUT.SEC_SCUOLA_TITLE',
       text: 'ABOUT.SEC_SCUOLA_TEXT',
-      img: 'assets/about/scuola-lezione-giovanissimi.jpg',
+      img: 'assets/about/scuola-lezione-giovanissimi-anon.jpg',
       link: '/about/school',
       cta: 'ABOUT.CTA',
       side: 'left',

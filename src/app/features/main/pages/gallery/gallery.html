@@ -132,17 +132,17 @@
       <aside class="viewer__info">
         <div class="viewer__tag">{{ 'GALLERY.DETAILS' | translate }}</div>
         <h2 class="viewer__title">{{ s.title }}</h2>
-        <p class="viewer__desc">{{ s.description }}</p>
+        <p class="viewer__desc">{{ s.description || '—' }}</p>
 
         <div class="viewer__spacer" aria-hidden="true"></div>
 
         <div class="viewer__meta">
-          <div class="metaItem" *ngIf="s.location">
+          <div class="metaItem">
             <div class="metaItem__label">{{ 'GALLERY.META_PLACE' | translate }}</div>
-            <div class="metaItem__value">{{ s.location }}</div>
+            <div class="metaItem__value">{{ s.location || '—' }}</div>
           </div>
 
-          <div class="metaItem" *ngIf="s.photoYear !== null || s.photoMonth !== null || s.photoDay !== null">
+          <div class="metaItem">
             <div class="metaItem__label">{{ 'GALLERY.META_DATE' | translate }}</div>
             <div class="metaItem__value">{{ formatPhotoDate(s) }}</div>
           </div>

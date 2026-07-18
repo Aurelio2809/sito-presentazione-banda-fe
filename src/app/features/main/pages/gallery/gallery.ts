@@ -152,7 +152,7 @@ export class Gallery implements OnInit {
     const y = photo?.photoYear;
     const m = photo?.photoMonth;
     const d = photo?.photoDay;
-    if (y == null && m == null && d == null) return '';
+    if (y == null && m == null && d == null) return '—';
     const monthNames = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
       'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
     if (d != null && m != null && y != null) {

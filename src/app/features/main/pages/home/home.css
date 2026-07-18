@@ -71,7 +71,7 @@
   .heroSectionHost {
     display: flex; /* Even though internally home-section is a block, this behaves as a block holding the section */
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 0;
   }
 
   /* Su Desktop annulliamo display: contents e ricreiamo la griglia con flex: 1 */

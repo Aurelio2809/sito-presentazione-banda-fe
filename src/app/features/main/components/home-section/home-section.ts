@@ -6,9 +6,6 @@ import { Component, Input } from '@angular/core';
   imports: [],
   template: `
     <section class="home-section-wrapper" [attr.data-key]="key">
-      <!-- Sfondo con effetto trasparenza/sfumatura / glassmorfismo leggero -->
-      <div class="home-section-bg"></div>
-      
       <div class="home-section-inner">
         <div class="home-section-content">
           <ng-content></ng-content>
