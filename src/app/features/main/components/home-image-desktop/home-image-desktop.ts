@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeImageDesktop {
   @Input() images: string[] = [];
+  @Input() alt = '';
   
   get gridLayoutClass(): string {
     if (this.images.length === 1) return 'grid-single';

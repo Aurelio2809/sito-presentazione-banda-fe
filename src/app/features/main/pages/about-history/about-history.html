@@ -1,9 +1,9 @@
 <section class="historyPage">
   <!-- HERO -->
   <app-page-header
-    tag="Storia"
-    title="La nostra storia"
-    description="Dalla tradizione di Pedace alla Banda Musicale “Città di Casali del Manco”: un percorso fatto di persone, repertori, feste di paese e ripartenze dopo momenti difficili."
+    [tag]="'ABOUT_HISTORY.HEADER_TAG' | translate"
+    [title]="'ABOUT_HISTORY.HEADER_TITLE' | translate"
+    [description]="'ABOUT_HISTORY.HEADER_DESC' | translate"
     [actions]="headerActions"
   ></app-page-header>
 
@@ -12,24 +12,24 @@
     <div class="layout">
 
       <!-- INDICE -->
-      <aside class="tocWrap" aria-label="Indice dei contenuti">
+      <aside class="tocWrap" [attr.aria-label]="'ABOUT_HISTORY.TOC_ARIA' | translate">
         <app-page-toc
-          title="Indice"
+          title="ABOUT_HISTORY.TOC_TITLE"
           [items]="tocItems"
           [headerOffset]="100"
           (itemClick)="onTocItemClick($event)"
-          hint="Clicca su un capitolo per espanderlo."
+          hint="ABOUT_HISTORY.TOC_HINT"
         ></app-page-toc>
 
         <!-- Controlli espandi/comprimi -->
         <div class="tocControls">
           <button class="tocControl" type="button" (click)="expandAll()">
             <span class="tocControl__icon">+</span>
-            Espandi tutti
+            {{ 'ABOUT_HISTORY.EXPAND_ALL' | translate }}
           </button>
           <button class="tocControl" type="button" (click)="collapseAll()">
             <span class="tocControl__icon">−</span>
-            Comprimi tutti
+            {{ 'ABOUT_HISTORY.COLLAPSE_ALL' | translate }}
           </button>
         </div>
       </aside>
@@ -38,31 +38,31 @@
       <div class="rightCol">
 
         <!-- RIEPILOGO -->
-        <section class="infobox" aria-label="Riepilogo">
+        <section class="infobox" [attr.aria-label]="'ABOUT_HISTORY.SUMMARY_TITLE' | translate">
           <div class="infobox__head">
             <div class="infobox__icon">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-            <div class="infobox__title">Riepilogo</div>
+            <div class="infobox__title">{{ 'ABOUT_HISTORY.SUMMARY_TITLE' | translate }}</div>
           </div>
           <dl class="infobox__grid">
             <div class="infobox__row">
-              <dt>Territorio</dt>
-              <dd>Pedace / Casali del Manco (CS)</dd>
+              <dt>{{ 'ABOUT_HISTORY.SUMMARY_TERRITORY_LABEL' | translate }}</dt>
+              <dd>{{ 'ABOUT_HISTORY.SUMMARY_TERRITORY_VALUE' | translate }}</dd>
             </div>
             <div class="infobox__row">
-              <dt>Nucleo storico</dt>
-              <dd>Banda “Città di Pedace” (tradizione locale)</dd>
+              <dt>{{ 'ABOUT_HISTORY.SUMMARY_ROOTS_LABEL' | translate }}</dt>
+              <dd>{{ 'ABOUT_HISTORY.SUMMARY_ROOTS_VALUE' | translate }}</dd>
             </div>
             <div class="infobox__row">
-              <dt>Snodi ricorrenti</dt>
-              <dd>Guerre, ripartenze, scuola musicale, concerti anni '80–'90</dd>
+              <dt>{{ 'ABOUT_HISTORY.SUMMARY_MILESTONES_LABEL' | translate }}</dt>
+              <dd>{{ 'ABOUT_HISTORY.SUMMARY_MILESTONES_VALUE' | translate }}</dd>
             </div>
             <div class="infobox__row">
-              <dt>Identità attuale</dt>
-              <dd>Banda Musicale “Città di Casali del Manco” (dal 2019)</dd>
+              <dt>{{ 'ABOUT_HISTORY.SUMMARY_TODAY_LABEL' | translate }}</dt>
+              <dd>{{ 'ABOUT_HISTORY.SUMMARY_TODAY_VALUE' | translate }}</dd>
             </div>
           </dl>
         </section>
@@ -72,180 +72,158 @@
           <app-history-chapter
             #chapter
             id="ottocento"
-            kicker="Capitolo 1"
-            title="Ottocento"
+            [kicker]="'ABOUT_HISTORY.CHAPTER_1' | translate"
+            [title]="'ABOUT_HISTORY.C1_TITLE' | translate"
             [open]="true"
           >
             <p class="p">
-              Le bande musicali, in Italia, non nascono come semplice “ornamento”: per oltre un secolo hanno rappresentato
-              uno dei principali strumenti di diffusione della cultura musicale tra la popolazione. Nell'Ottocento questi complessi
-              si affermano e si diffondono capillarmente, portando musica marciabile di tradizione militare e trascrizioni di opere liriche
-              negli spazi pubblici, durante cerimonie civili e religiose.
+              {{ 'ABOUT_HISTORY.C1_P1' | translate }}
             </p>
 
             <p class="p">
-              La musica operistica era spesso legata ai teatri ed era più accessibile a pochi; le bande contribuirono a diffonderla
-              tramite arrangiamenti per organici di fiati e percussioni: legni (flauti/ottavini, clarinetti, sassofoni), ottoni
-              (trombe/cornette, corni, tromboni, flicorni, eufoni, tube) e percussioni (rullante, grancassa, piatti e accessori).
+              {{ 'ABOUT_HISTORY.C1_P2' | translate }}
             </p>
 
             <figure class="photoPlaceholder photoPlaceholder--float">
-              <img class="photoPlaceholder__photo" src="assets/history/pedace-storica.jpg" alt="La banda di Pedace in una foto storica" loading="lazy"  width="1800" height="1012" decoding="async" />
+              <img class="photoPlaceholder__photo" src="assets/history/pedace-storica.jpg" [attr.alt]="'ABOUT_HISTORY.C1_CAPTION' | translate" loading="lazy"  width="1800" height="1012" decoding="async" />
               <figcaption class="photoPlaceholder__caption">
-                La banda di Pedace in una foto storica
+                {{ 'ABOUT_HISTORY.C1_CAPTION' | translate }}
               </figcaption>
             </figure>
 
             <p class="p">
-              Oltre al servizio musicale, la banda ha una funzione educativa e sociale: disciplina condivisa, lettura musicale, tecnica
-              strumentale, cooperazione e identità comunitaria.
+              {{ 'ABOUT_HISTORY.C1_P3' | translate }}
             </p>
 
             <div class="note">
-              Nota: per Pedace si tramanda un'origine “antica” (ipotesi anche attorno al 1860, legata a datazioni di strumenti),
-              ma i punti cronologici più solidi arrivano con testimonianze e ricostruzioni del Novecento.
+              {{ 'ABOUT_HISTORY.C1_NOTE' | translate }}
             </div>
           </app-history-chapter>
 
           <app-history-chapter
             #chapter
             id="primo-novecento"
-            kicker="Capitolo 2"
-            title="Primo Novecento"
+            [kicker]="'ABOUT_HISTORY.CHAPTER_2' | translate"
+            [title]="'ABOUT_HISTORY.C2_TITLE' | translate"
             [open]="true"
           >
             <figure class="photoPlaceholder photoPlaceholder--wide">
-              <img class="photoPlaceholder__photo" src="assets/history/gruppo-storico-bn.jpg" alt="Foto di gruppo storica della banda di Pedace" loading="lazy"  width="1800" height="1323" decoding="async" />
+              <img class="photoPlaceholder__photo" src="assets/history/gruppo-storico-bn.jpg" [attr.alt]="'ABOUT_HISTORY.C2_CAPTION_1' | translate" loading="lazy"  width="1800" height="1323" decoding="async" />
               <figcaption class="photoPlaceholder__caption">
-                Foto di gruppo storica della banda di Pedace
+                {{ 'ABOUT_HISTORY.C2_CAPTION_1' | translate }}
               </figcaption>
             </figure>
 
             <p class="p">
-              Le prime tracce “forti” indicano una banda già attiva nei primi anni del Novecento, con interruzione dovuta al contesto
-              della Prima guerra mondiale e successiva ripresa sotto la direzione del Maestro Adamo Nachira (ricostruzioni locali).
+              {{ 'ABOUT_HISTORY.C2_P1' | translate }}
             </p>
 
             <p class="p">
-              Negli anni Venti la banda diventa un punto di socialità e formazione in una comunità rurale: artigiani, reduci, contadini,
-              giovani si ritrovano nella musica come spazio di relazione e crescita. In questo periodo si collocano episodi identitari
-              legati a concorsi tra bande e alla tensione politica dell'epoca.
+              {{ 'ABOUT_HISTORY.C2_P2' | translate }}
             </p>
 
             <figure class="photoPlaceholder photoPlaceholder--float">
-              <img class="photoPlaceholder__photo" src="assets/history/concerto-chiesa.jpg" alt="Concerto della banda in una chiesa del territorio" loading="lazy"  width="1800" height="1350" decoding="async" />
+              <img class="photoPlaceholder__photo" src="assets/history/concerto-chiesa.jpg" [attr.alt]="'ABOUT_HISTORY.C2_CAPTION_2' | translate" loading="lazy"  width="1800" height="1350" decoding="async" />
               <figcaption class="photoPlaceholder__caption">
-                Concerto della banda in una chiesa del territorio
+                {{ 'ABOUT_HISTORY.C2_CAPTION_2' | translate }}
               </figcaption>
             </figure>
 
             <p class="p">
-              Un episodio rimasto nella memoria collettiva riguarda una gara bandistica al Teatro Rendano di Cosenza (anni Venti),
-              con contestazioni e conseguenze per alcuni musicanti (ricostruzioni locali e fonti biografiche).
+              {{ 'ABOUT_HISTORY.C2_P3' | translate }}
             </p>
           </app-history-chapter>
 
           <app-history-chapter
             #chapter
             id="secondo-dopoguerra"
-            kicker="Capitolo 3"
-            title="Secondo Dopoguerra"
+            [kicker]="'ABOUT_HISTORY.CHAPTER_3' | translate"
+            [title]="'ABOUT_HISTORY.C3_TITLE' | translate"
             [open]="true"
           >
             <p class="p">
-              La Seconda guerra mondiale segna un nuovo stop. Nel dopoguerra la banda riparte: tra fine anni Quaranta e anni Cinquanta
-              si alternano direzioni e fasi di rifioritura, con un progressivo ricambio generazionale e un lavoro importante sul tessuto
-              sociale (scuola, formazione, repertorio).
+              {{ 'ABOUT_HISTORY.C3_P1' | translate }}
             </p>
 
             <figure class="photoPlaceholder photoPlaceholder--float">
-              <img class="photoPlaceholder__photo" src="assets/history/banda-epoca-70.jpg" alt="La banda di Pedace in una foto d'epoca" loading="lazy"  width="1800" height="1265" decoding="async" />
+              <img class="photoPlaceholder__photo" src="assets/history/banda-epoca-70.jpg" [attr.alt]="'ABOUT_HISTORY.C3_CAPTION' | translate" loading="lazy"  width="1800" height="1265" decoding="async" />
               <figcaption class="photoPlaceholder__caption">
-                La banda di Pedace in una foto d'epoca
+                {{ 'ABOUT_HISTORY.C3_CAPTION' | translate }}
               </figcaption>
             </figure>
 
             <p class="p">
-              Una fase significativa è associata alla direzione del Maestro Archimede Michienzi (con continuità per più anni secondo
-              le ricostruzioni locali), prima di una nuova disgregazione legata anche ai flussi migratori e alla trasformazione sociale
-              del territorio.
+              {{ 'ABOUT_HISTORY.C3_P2' | translate }}
             </p>
           </app-history-chapter>
 
           <app-history-chapter
             #chapter
             id="fine-novecento"
-            kicker="Capitolo 4"
-            title="Fine '900 e inizio anni 2000"
+            [kicker]="'ABOUT_HISTORY.CHAPTER_4' | translate"
+            [title]="'ABOUT_HISTORY.C4_TITLE' | translate"
             [open]="true"
           >
             <p class="p">
-              Tra la seconda metà degli anni Sessanta e gli anni Settanta la banda conosce una nuova rinascita: si rafforza l'idea della
-              “scuola musicale” e l'organizzazione interna, con figure di riferimento che tengono insieme formazione e attività pubblica.
+              {{ 'ABOUT_HISTORY.C4_P1' | translate }}
             </p>
 
             <figure class="photoPlaceholder photoPlaceholder--float">
-              <img class="photoPlaceholder__photo" src="assets/history/scuola-lezione.jpg" alt="Lezione alla scuola di musica della banda" loading="lazy"  width="1800" height="977" decoding="async" />
+              <img class="photoPlaceholder__photo" src="assets/history/scuola-lezione.jpg" [attr.alt]="'ABOUT_HISTORY.C4_CAPTION_1' | translate" loading="lazy"  width="1800" height="977" decoding="async" />
               <figcaption class="photoPlaceholder__caption">
-                Lezione alla scuola di musica della banda
+                {{ 'ABOUT_HISTORY.C4_CAPTION_1' | translate }}
               </figcaption>
             </figure>
 
             <p class="p">
-              Negli anni Ottanta e Novanta la banda amplia il profilo concertistico (lirico e sinfonico, servizio di palco) e costruisce
-              reti e collaborazioni anche con musicisti di paesi vicini. Per alcuni giovani diventa un ponte verso studi musicali
-              strutturati e percorsi professionali.
+              {{ 'ABOUT_HISTORY.C4_P2' | translate }}
             </p>
 
             <figure class="photoPlaceholder photoPlaceholder--wide">
-              <img class="photoPlaceholder__photo" src="assets/history/concerto-completo.jpg" alt="La banda al completo durante un concerto" loading="lazy"  width="1800" height="1087" decoding="async" />
+              <img class="photoPlaceholder__photo" src="assets/history/concerto-completo.jpg" [attr.alt]="'ABOUT_HISTORY.C4_CAPTION_2' | translate" loading="lazy"  width="1800" height="1087" decoding="async" />
               <figcaption class="photoPlaceholder__caption">
-                La banda al completo durante un concerto
+                {{ 'ABOUT_HISTORY.C4_CAPTION_2' | translate }}
               </figcaption>
             </figure>
 
             <p class="p">
-              All'inizio del nuovo millennio compaiono iniziative simboliche come gemellaggi e riconoscimenti, che testimoniano la
-              continuità della banda come istituzione culturale del territorio.
+              {{ 'ABOUT_HISTORY.C4_P3' | translate }}
             </p>
           </app-history-chapter>
 
           <app-history-chapter
             #chapter
             id="tempi-recenti"
-            kicker="Capitolo 5"
-            title="Tempi recenti (dal 2019)"
+            [kicker]="'ABOUT_HISTORY.CHAPTER_5' | translate"
+            [title]="'ABOUT_HISTORY.C5_TITLE' | translate"
             [open]="true"
           >
             <p class="p">
-              Con la nascita del Comune di Casali del Manco (fusione di più comuni avviata nel 2017), l'identità della banda si aggiorna:
-              nelle ricostruzioni locali, il nominativo “Banda Musicale Casali del Manco” si colloca intorno al 2019.
+              {{ 'ABOUT_HISTORY.C5_P1' | translate }}
             </p>
 
             <figure class="photoPlaceholder photoPlaceholder--wide">
-              <img class="photoPlaceholder__photo" src="assets/history/oggi-ufficiale.jpg" alt="La Banda Musicale “Città di Casali del Manco” oggi" loading="lazy"  width="1800" height="1251" decoding="async" />
+              <img class="photoPlaceholder__photo" src="assets/history/oggi-ufficiale.jpg" [attr.alt]="'ABOUT_HISTORY.C5_CAPTION_MAIN' | translate" loading="lazy"  width="1800" height="1251" decoding="async" />
               <figcaption class="photoPlaceholder__caption">
-                La Banda Musicale “Città di Casali del Manco” oggi
+                {{ 'ABOUT_HISTORY.C5_CAPTION_MAIN' | translate }}
               </figcaption>
             </figure>
 
             <p class="p">
-              In questa fase recente convivono due forze: da un lato le difficoltà organizzative ed economiche tipiche delle associazioni
-              culturali; dall'altro la presenza di giovani musicisti e la continuità della direzione artistica, che mantiene un legame
-              tra tradizione, formazione e attività pubblica.
+              {{ 'ABOUT_HISTORY.C5_P2' | translate }}
             </p>
 
             <div class="photoGrid">
               <figure class="photoPlaceholder">
-                <img class="photoPlaceholder__photo" src="assets/history/prove-giovani.jpg" alt="Giovani musicisti durante le prove" loading="lazy"  width="1800" height="1350" decoding="async" />
+                <img class="photoPlaceholder__photo" src="assets/history/prove-giovani.jpg" [attr.alt]="'ABOUT_HISTORY.C5_CAPTION_1' | translate" loading="lazy"  width="1800" height="1350" decoding="async" />
                 <figcaption class="photoPlaceholder__caption">
-                  Giovani musicisti durante le prove
+                  {{ 'ABOUT_HISTORY.C5_CAPTION_1' | translate }}
                 </figcaption>
               </figure>
               <figure class="photoPlaceholder">
-                <img class="photoPlaceholder__photo" src="assets/history/processione.jpg" alt="Processione patronale" loading="lazy"  width="1800" height="1012" decoding="async" />
+                <img class="photoPlaceholder__photo" src="assets/history/processione.jpg" [attr.alt]="'ABOUT_HISTORY.C5_CAPTION_2' | translate" loading="lazy"  width="1800" height="1012" decoding="async" />
                 <figcaption class="photoPlaceholder__caption">
-                  Processione patronale
+                  {{ 'ABOUT_HISTORY.C5_CAPTION_2' | translate }}
                 </figcaption>
               </figure>
             </div>
@@ -255,9 +233,9 @@
         <!-- FONTI -->
         <app-sources-box
           id="fonti"
-          tag="Fonti"
-          title="Fonti principali"
-          description="Riferimenti usati per le date e le ricostruzioni citate nella pagina."
+          tag="ABOUT_HISTORY.SOURCES_TAG"
+          title="ABOUT_HISTORY.SOURCES_TITLE"
+          description="ABOUT_HISTORY.SOURCES_DESC"
           [items]="sourcesItems"
           [links]="sourcesLinks"
         ></app-sources-box>

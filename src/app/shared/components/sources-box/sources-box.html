@@ -1,18 +1,18 @@
-<app-transparent-card ariaLabel="Fonti">
+<app-transparent-card [ariaLabel]="'ABOUT_HISTORY.SOURCES_ARIA' | translate">
   <header class="sourcesHead">
-    <div class="sourcesTag">{{ tag }}</div>
+    <div class="sourcesTag">{{ tag | translate }}</div>
 
-    <div class="sourcesTitle">{{ title }}</div>
+    <div class="sourcesTitle">{{ title | translate }}</div>
 
     <p class="sourcesDesc" *ngIf="description">
-      {{ description }}
+      {{ description | translate }}
     </p>
   </header>
 
   <ol class="sourcesList" *ngIf="items.length">
     <li *ngFor="let it of items">
       <strong class="sourcesItemLabel">{{ it.label }}</strong>
-      <span class="sourcesItemDesc"> — {{ it.description }}</span>
+      <span class="sourcesItemDesc"> — {{ it.description | translate }}</span>
     </li>
   </ol>
 

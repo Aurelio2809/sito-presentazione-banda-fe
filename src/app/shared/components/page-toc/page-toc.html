@@ -1,7 +1,7 @@
-<nav class="toc" aria-label="Indice pagina">
+<nav class="toc" [attr.aria-label]="'ABOUT_HISTORY.TOC_ARIA' | translate">
   <!-- Header -->
   <div class="toc__head">
-    <span class="toc__title">{{ title }}</span>
+    <span class="toc__title">{{ title | translate }}</span>
   </div>
 
   <!-- Lista capitoli -->
@@ -9,11 +9,11 @@
     <li class="toc__item" *ngFor="let it of items; let i = index">
       <button type="button" class="toc__link" (click)="onItemClick(it.id)">
         <span class="toc__num">{{ i + 1 }}</span>
-        <span class="toc__label">{{ it.label }}</span>
+        <span class="toc__label">{{ it.label | translate }}</span>
       </button>
     </li>
   </ol>
 
   <!-- Hint opzionale -->
-  <p class="toc__hint" *ngIf="hint">{{ hint }}</p>
+  <p class="toc__hint" *ngIf="hint">{{ hint | translate }}</p>
 </nav>

@@ -14,44 +14,39 @@ export class AboutHistory {
   @ViewChildren('chapter') chapterRefs!: QueryList<HistoryChapter>;
 
   headerActions: PageHeaderAction[] = [
-    { label: 'Torna a Chi siamo', routerLink: '/about', variant: 'ghost' },
-    { label: 'Eventi', routerLink: '/events', variant: 'primary' },
+    { label: 'ABOUT_HISTORY.ACT_BACK', routerLink: '/about', variant: 'ghost' },
+    { label: 'ABOUT_HISTORY.ACT_EVENTS', routerLink: '/events', variant: 'primary' },
   ];
 
   tocItems: TocItem[] = [
-    { id: 'ottocento', label: '1. Ottocento' },
-    { id: 'primo-novecento', label: '2. Primo Novecento' },
-    { id: 'secondo-dopoguerra', label: '3. Secondo Dopoguerra' },
-    { id: 'fine-novecento', label: "4. Fine '900 e inizio 2000" },
-    { id: 'tempi-recenti', label: '5. Tempi recenti (dal 2019)' },
-    { id: 'fonti', label: 'Fonti principali' },
+    { id: 'ottocento', label: 'ABOUT_HISTORY.TOC_1' },
+    { id: 'primo-novecento', label: 'ABOUT_HISTORY.TOC_2' },
+    { id: 'secondo-dopoguerra', label: 'ABOUT_HISTORY.TOC_3' },
+    { id: 'fine-novecento', label: 'ABOUT_HISTORY.TOC_4' },
+    { id: 'tempi-recenti', label: 'ABOUT_HISTORY.TOC_5' },
+    { id: 'fonti', label: 'ABOUT_HISTORY.TOC_SOURCES' },
   ];
 
   sourcesItems: SourceItem[] = [
     {
       label: '[1]',
-      description:
-        'ISSM “V. Bellini”, Creux — “Il mondo della banda musicale nell\'Italia di oggi” (PDF).',
+      description: 'ABOUT_HISTORY.SOURCE_1',
     },
     {
       label: '[2]',
-      description:
-        'U Campanaro Web — ricostruzione locale “Banda Città di Pedace” (timeline e date principali).',
+      description: 'ABOUT_HISTORY.SOURCE_2',
     },
     {
       label: '[3]',
-      description:
-        'ICSAIC — biografia di Filippo Martire (contesto storico, episodi e riferimenti).',
+      description: 'ABOUT_HISTORY.SOURCE_3',
     },
     {
       label: '[4]',
-      description:
-        'ANCI / Legge regionale Calabria n. 11/2017 — istituzione Comune di Casali del Manco.',
+      description: 'ABOUT_HISTORY.SOURCE_4',
     },
     {
       label: '[5]',
-      description:
-        'Pedace (contesto storico e tradizioni locali: legame festa/musica di comunità).',
+      description: 'ABOUT_HISTORY.SOURCE_5',
     },
   ];
 

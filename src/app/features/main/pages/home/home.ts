@@ -67,7 +67,7 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.STORIA.TEXT',
       ctaText: 'HOME.STORIA.CTA',
       ctaLink: '/about/history',
-      images: ['assets/home/storia.jpg'],
+      images: ['assets/about/storia-medaglia-oro.jpg'],
     },
     {
       key: 'banda',
@@ -85,7 +85,7 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.SCUOLA.TEXT',
       ctaText: 'HOME.SCUOLA.CTA',
       ctaLink: '/about/school',
-      images: ['assets/home/scuola.jpg'],
+      images: ['assets/about/scuola-lezione-clarinetti-2026.jpg'],
     },
     {
       key: 'direttivo',
@@ -94,7 +94,8 @@ export class Home implements AfterViewInit, OnDestroy {
       text: 'HOME.DIRETTIVO.TEXT',
       ctaText: 'HOME.DIRETTIVO.CTA',
       ctaLink: '/contacts',
-      images: ['assets/home/direttivo.jpg'],
+      images: ['assets/stemma/stemma_clean.png'],
+      decor: true,
     },
   ];
 

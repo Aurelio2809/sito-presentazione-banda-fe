@@ -52,6 +52,11 @@
 
 @media (min-width: 768px) {
   .block__grid { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); }
+  /* Nella card “La banda oggi” la foto occupa il primo binario: le diamo
+     leggermente più respiro senza sbilanciare le altre sezioni. */
+  .block[data-side="right"] .block__grid {
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  }
   .block[data-side="left"] .block__text { order: 1; }
   .block[data-side="left"] .block__media { order: 2; }
   .block[data-side="right"] .block__text { order: 2; }

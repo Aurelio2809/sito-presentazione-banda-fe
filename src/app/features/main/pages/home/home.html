@@ -46,8 +46,8 @@
     <div class="media-group order-2 reveal" style="--d:0.16;">
       <!-- Sezioni con foto reali -->
       <ng-container *ngIf="!s.decor">
-        <app-home-image class="mobile-only" [images]="s.images" [alt]="s.title"></app-home-image>
-        <app-home-image-desktop class="desktop-only" [images]="s.images"></app-home-image-desktop>
+        <app-home-image class="mobile-only" [images]="s.images" [alt]="s.title | translate"></app-home-image>
+        <app-home-image-desktop class="desktop-only" [images]="s.images" [alt]="s.title | translate"></app-home-image-desktop>
       </ng-container>
 
       <!-- Sezioni senza foto: emblema decorativo on-brand -->
