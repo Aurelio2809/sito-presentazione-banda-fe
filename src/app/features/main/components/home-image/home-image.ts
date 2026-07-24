@@ -1,23 +1,24 @@
 import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ResponsiveImage } from '../../../../shared/components/responsive-image/responsive-image';
 
 @Component({
   selector: 'app-home-image',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ResponsiveImage],
   template: `
     <div class="media-wrapper">
       
       <!-- Se c'è solo un'immagine -->
       <div class="frame frame--hero" *ngIf="images.length === 1">
-        <img class="img img--hero" [src]="images[0]" [alt]="alt" loading="lazy" />
+        <img class="img img--hero" [appResponsiveImage]="images[0]" [alt]="alt" loading="lazy" decoding="async" />
       </div>
 
       <!-- Se c'è un carosello -->
       <ng-container *ngIf="images.length > 1">
         <div class="carousel-container" #scrollContainer (scroll)="onScroll()">
           <div class="carousel-slide frame frame--hero" *ngFor="let img of images; let i = index">
-             <img class="img img--hero" [src]="img" [alt]="alt + ' ' + (i+1)" loading="lazy" />
+             <img class="img img--hero" [appResponsiveImage]="img" [alt]="alt + ' ' + (i+1)" loading="lazy" decoding="async" />
           </div>
         </div>
         

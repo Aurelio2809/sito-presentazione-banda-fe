@@ -3,7 +3,7 @@
     <div class="header__inner">
       <a class="brand" routerLink="/">
         <span class="brand__mark" aria-hidden="true">
-          <img class="brand__crest" src="/assets/stemma/stemma.png" alt="" width="1024" height="1024" />
+          <img class="brand__crest" appResponsiveImage="assets/stemma/stemma.png" [responsiveWidths]="[256, 512]" responsiveSizes="56px" alt="" width="1024" height="1024" />
         </span>
 
         <span class="brand__text">
@@ -84,7 +84,7 @@
     <div class="footer__inner">
       <div class="footer__grid">
         <div class="footer__brand">
-          <img class="footer__crest" src="/assets/stemma/stemma_clean.png" alt="" width="1024" height="1024" loading="lazy" decoding="async" />
+          <img class="footer__crest" appResponsiveImage="assets/stemma/stemma_clean.png" [responsiveWidths]="[256, 512]" responsiveSizes="44px" alt="" width="1024" height="1024" loading="lazy" decoding="async" />
           <div class="footer__brandText">
             <div class="footer__brandTitle">{{ 'FOOTER.BRAND' | translate }}</div>
             <div class="footer__brandSubtitle">{{ 'FOOTER.PLACE' | translate }}</div>

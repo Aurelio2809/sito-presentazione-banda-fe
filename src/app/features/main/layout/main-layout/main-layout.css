@@ -31,7 +31,7 @@
   pointer-events: none;
   z-index: -1;
 
-  background-image: url("/assets/bg/bg-musica.png");
+  background-image: url("/assets/responsive/bg/bg-musica-512.webp");
   background-repeat: repeat;
   background-size: min(1024px, 100vw) auto;
   background-position: center top;
@@ -54,7 +54,7 @@
   aspect-ratio: 1;
   pointer-events: none;
   z-index: -1;
-  background: url("/assets/stemma/stemma_clean.png") center / contain no-repeat;
+  background: url("/assets/responsive/stemma/stemma_clean-512.webp") center / contain no-repeat;
   opacity: var(--crest-watermark-opacity);
   filter: var(--crest-watermark-filter);
 }

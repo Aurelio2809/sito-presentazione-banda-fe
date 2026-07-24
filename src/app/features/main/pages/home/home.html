@@ -2,7 +2,7 @@
   <!-- ============ HERO ============ -->
   <header class="hero">
     <div class="hero__bg" aria-hidden="true">
-      <img src="assets/about/oggi-concerto-estivo.jpg" alt="" loading="eager"  width="2000" height="1208" decoding="async" />
+      <img appResponsiveImage="assets/about/oggi-concerto-estivo.jpg" [responsiveWidths]="[640, 960, 1920]" responsiveSizes="100vw" alt="" loading="eager" fetchpriority="high" width="2000" height="1208" decoding="async" />
     </div>
 
     <div class="hero__inner">
@@ -54,7 +54,7 @@
       <div class="section-emblem" *ngIf="s.decor" aria-hidden="true">
         <span class="section-emblem__ring"></span>
         <span class="section-emblem__glow"></span>
-        <img [src]="s.images[0]" alt="" width="1024" height="1024" loading="lazy" decoding="async" />
+        <img [appResponsiveImage]="s.images[0]" [responsiveWidths]="[256, 512]" responsiveSizes="min(72vw, 512px)" alt="" width="1024" height="1024" loading="lazy" decoding="async" />
       </div>
     </div>
   </app-home-section>

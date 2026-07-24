@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ResponsiveImage } from '../../../../shared/components/responsive-image/responsive-image';
 
 @Component({
   selector: 'app-home-image-desktop',
   templateUrl: './home-image-desktop.html',
   styleUrls: ['./home-image-desktop.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, ResponsiveImage]
 })
 export class HomeImageDesktop {
   @Input() images: string[] = [];
